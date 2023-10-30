@@ -4,3 +4,4 @@ CU002;Kudo;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer
 VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor
 VD004;Valen;valen@tuCafeteria.edu.co;0156789234;valen123;Vendor
 VD005;Nathan Western Food;nathanfood@tuCaferia.edu.co;0167892345;nathan123;Vendor
+fgfdgfd
