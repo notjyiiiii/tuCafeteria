@@ -18,9 +18,9 @@ public class fileManager {
     public fileManager(){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
-        System.out.println(mainFolderPath);
+//        System.out.println(mainFolderPath);
         configFilePath = mainFolderPath + configDirectory;
-        System.out.println(configFilePath);
+//        System.out.println(configFilePath);
     }
     
     
