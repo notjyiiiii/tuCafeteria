@@ -93,6 +93,7 @@ public class fileManager {
 //        return false;
 //    }
 //    
+    
 //    //put the data into the variables
 //    private void LoadData(String[] dataArray)
 //    {
