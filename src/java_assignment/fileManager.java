@@ -2,6 +2,7 @@ package java_assignment;
 
 import java.io.*;
 import java.util.*;
+import java.io.FileWriter;
 
 public class fileManager {
     
@@ -12,7 +13,8 @@ public class fileManager {
     private final String delimiter = ";";
     private static boolean check;
     private String configVal;
-    private boolean append_to_file = false;
+    private String userid;
+    private String pw;
     
     //all the paths
     public fileManager(){
@@ -23,6 +25,11 @@ public class fileManager {
 //        System.out.println(configFilePath);
     }
     
+    public fileManager(String userid, String pw){
+        String currentDirectory = System.getProperty(userDirectory);
+        mainFolderPath = currentDirectory+baseDirectory;
+        configFilePath = mainFolderPath + configDirectory;
+    }
     
     //get config path's values
     public String getConfigVar(String configVar, boolean filePath){
@@ -62,12 +69,38 @@ public class fileManager {
     }
     
     //write data into file
-    public void writeFile(String filePath, String data) {
-        try {
-            PrintWriter out = new PrintWriter(new FileWriter(filePath, append_to_file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void writeFile(String filePath, String data) throws IOException { //if something goes wrong, io is input output (so like file
+        FileWriter writer = new FileWriter(filePath);
+        writer.write(data + System.lineSeparator());
+        writer.close();
     }
+    
+    // I'M ACTUALLY CONFUSED I THINK THIS CAN BE SOMETHING TO CALL SINCE EVERYTIME WE HAVE A CLASS WE GOTTA USE THIS
+//    public boolean getDetails(String fileName){
+//        fileManager fm = new fileManager();
+//        String key = fileName;
+//        String configVar = fm.getConfigVar(key, true);
+//        ArrayList<String[]> recordList = fm.readFile(configVar);
+//        
+//        //check userid and password
+//        for(int i = 0; i<recordList.size(); i++){
+//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(pw)){
+//                LoadData(recordList.get(i));
+//                return true;
+//            }
+//        }
+//        
+//        return false;
+//    }
+//    
+//    //put the data into the variables
+//    private void LoadData(String[] dataArray)
+//    {
+//        this.username = dataArray[1];
+//        this.password = dataArray[4];
+//        this.email = dataArray[2];
+//        this.role = dataArray[5];
+//        this.hpnum = dataArray [3];
+//    }
     
 }

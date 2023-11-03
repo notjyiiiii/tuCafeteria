@@ -63,9 +63,6 @@ public class Users {
     
     //to get user details
     public boolean getDetails(){
-        if(checkIfExist() == false){
-            return false;
-        }
         fileManager fm = new fileManager();
         String key = "User";
         String configVar = fm.getConfigVar(key, true);
@@ -98,5 +95,22 @@ public class Users {
             return false;
         }
         return true;
+    }
+    
+    public boolean writeDetails(){
+        fileManager fm = new fileManager();
+        String key = "User";
+        String configVar = fm.getConfigVar(key, true);
+        ArrayList<String[]> recordList = fm.readFile(configVar);
+        
+        //check userid and password
+        for(int i = 0; i<recordList.size(); i++){
+            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(password)){
+                LoadData(recordList.get(i));
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
