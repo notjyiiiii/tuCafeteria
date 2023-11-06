@@ -1,6 +1,6 @@
-UserID;UserName;UserEmail;UserHP;Userpw;UserRole
-VD001;Amy;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor
-CU002;Kudo;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer
-VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor
-VD004;Valen;valen@tuCafeteria.edu.co;0156789234;valen123;Vendor
-VD005;Nathan Western Food;nathanfood@tuCaferia.edu.co;0167892345;nathan123;Vendor
+OrderID;CustomerID;VendorID;Status;OrderType #Vendor and Customer are both UserID
+O001;CS002;VD001;Completed;Dine-In
+O002;CS006;VD003;Paid;Delivery
+O003;CS007;VD004;Paid;Dine-In
+O004;CS006;VD005;Delivering;Takeaway
+O005;CS002;VD003;Delivering;Dine-In
