@@ -2,3 +2,20 @@ userid;foodid;foodpic;foodname;fooddesc;foodtype;foodprice
 VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;RM3.80
 VD001;MD002;null;Kuih Bahulu;Cake similar in concept to the madeleine cake but round in shape and composed of different ingredients;Dessert;RM1.00
 VD001;MD003;null;Nasi Kandar;Steamed rice combined with an array of distinct curries, sides dishes, and gravies;Main Dish;RM8.00
+VD001;MD004;null;Ayam Percik;Barbecued chicken slathered in spicy chili, garlic and ginger sauce mixed with coconut milk ;Main Dish;RM8.00
+VD001;MD005;null;Kaya Toast;A sweet and fragrant coconut custard jam, slathered onto thin slices of warm toast;Dessert;RM4.00
+VD003;MD006;null;Kopi Hailam Cold;Coffee that is named after the region it comes from, with a unique preparatino method;Drink;RM3.50
+VD003;MD007;null;Croissant;A buttery, flaky, viennoiserie pastry;Dessert;RM4.00
+VD003;MD008;null;Polo Bun;A Hong Kong style sweet bun cover with a topping that tastes like butter cookies;Dessert;RM3.00
+VD003;MD009;null;Chicken Floss Bun;This soft bread is topped with tasty chicken floss and mayonnaise;Appetiser;RM3.00
+VD003;MD010;null;Red Bean Pao;A leavened dough wrapper that's pillowy soft and fluffy filled with a creamy, sweet paste made of adzuki beans;Dessert;RM2.00
+VD004;MD011;null;White Rice;Cooked white rice;Main Dish;RM2.00
+VD004;MD012;null;Fried Rice; Stir-fried rice mixed with egg and mixed vegetables;Main Dish;RM4.00
+VD004;MD013;null;Mapo Tofu;Tofu set in a spicy sauce, with minced beef;Side Dish;RM4.00
+VD004;MD014;null;Beef and Potatoes;Braised beef with pan-fired potatoes;Side Dish;RM5.00
+VD004;MD015;null;Dry Chilli Chicken;Crispy fried chicken tossed in a spicy tangy chilli sauce;Side Dish;Rm5.00
+VD005;MD016;null;Fried Chicken Chop;Deboned chicken leg cured and coated in spice then fried;Main Dish;RM7.00 
+VD005;MD017;null;Grilled Chicken Chop;Deboned chicken leg cured and coated in spice then grilled;Main Dish;RM7.00 
+VD005;MD018;null;Chocolate Milkshake;Beverage made by blending together a combination of milk, chocolate ice cream, and chocolate syrup;Drink;RM4.00
+VD005;MD019;null;Spaghetti Bolognaise;Flavorful meat sauce served over cooked spaghetti noodles;Main Dish;RM8.00
+VD005;MD020;null;Mac and Cheese;Cooked macaroni pasta mixed with a creamy cheese sauce;Main Dish;RM6.00
