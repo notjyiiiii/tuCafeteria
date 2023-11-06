@@ -1,2 +1,4 @@
 userid;foodid;foodpic;foodname;fooddesc;foodtype;foodprice
 VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;RM3.80
+VD001;MD002;null;Kuih Bahulu;Cake similar in concept to the madeleine cake but round in shape and composed of different ingredients;Dessert;RM1.00
+VD001;MD003;null;
