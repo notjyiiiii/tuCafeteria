@@ -9,6 +9,6 @@ US007;Will;will@tuCafeteria.edu.co;08123456;will123;Customer
 US008;Jonas;jonas@tuCafeteria.edu.co;091234567;jonas123;Admin
 US009;Yeslav;yeslav@tuCafeteria.edu.co;010235648;yeslav123;Admin
 US010;Islam;islam@tuCafeteria.edu.co;011234567;islam123;Admin
-US011;Frank;frank@tuCafeteria.edu.co;012234567;frank123;DeliveryRunner
-US012;Ben;ben@tuCafeteria.edu.co;013234567;ben123;DeliveryRunner
-US013;Paul;paul@tuCafeteria.edu.co;014234567;paul123;DeliveryRunner
+US011;Frank;frank@tuCafeteria.edu.co;012234567;frank123;Runner
+US012;Ben;ben@tuCafeteria.edu.co;013234567;ben123;Runner
+US013;Paul;paul@tuCafeteria.edu.co;014234567;paul123;Runner
