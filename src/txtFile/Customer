@@ -1,2 +1,4 @@
 UserID;UserName;UserEmail;UserHP;Userpw;Credit
 CU002;Kudo;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer;10.00
+US006;Brian;brain@tuCafeteria.edu.co;0171234568;brian123;Customer;7.00
+US007;Will;will@tuCafeteria.edu.co;08123456;will123;Customer;6.66
