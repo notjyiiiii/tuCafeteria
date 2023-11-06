@@ -1,5 +1,5 @@
-UserID;UserName;UserEmail;UserHP;Userpw;UserRole;OperationHours
-VD001;Amy;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor;7-10
-VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor;10-5
-VD004;Valen;valen@tuCafeteria.edu.co;0156789234;valen123;Vendor;7-10
-VD005;Nathan Western Food;nathanfood@tuCaferia.edu.co;0167892345;nathan123;Vendor;10-5
+UserID;OperatingHours
+VD001;7-10
+VD003;10-5
+VD004;7-10
+VD005;10-5
