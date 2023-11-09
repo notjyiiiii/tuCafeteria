@@ -1,6 +1,6 @@
 OrderID;CustomerID;VendorID;Status;OrderType;DeliveryLocation #Vendor and Customer are both UserID
 O001;CS002;VD001;Completed;Dine-In;NULL
-O002;CS006;VD003;Paid;Delivery;
+O002;CS006;VD003;Paid;Delivery;L001
 O003;CS007;VD004;Paid;Dine-In;NULL
 O004;CS006;VD005;Delivering;Takeaway;NULL
 O005;CS002;VD003;Delivering;Dine-In;NULL
