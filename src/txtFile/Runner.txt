@@ -1,4 +1,4 @@
-UserID;
-DR011;
-DR012;
-DR013;
+UserID;Status
+DR011;Standby
+DR012;Busy
+DR013;Away
