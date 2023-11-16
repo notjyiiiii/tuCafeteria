@@ -51,6 +51,13 @@ public class Menu {
         return itemType;
     }
     
+    public void addMenuItem(){
+        
+    }
+    
+    public void getAllMenu(){
+        
+    }
     
     // to get the menu from the text file
     public void getMenu(){

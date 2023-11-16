@@ -17,12 +17,13 @@ public class Java_assignment {
 //        
         String key = "User";
 //        String configVar = 
-        fm.getConfigVar(key, true);
+        String haha = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
 //        System.out.println(user);
 //        System.out.println("------");
 //        System.out.println(fm.readFile(configVar).get(2)[2]);
        // ArrayList<String[]> loginRecords = fm.readFile(configVar);
+       fm.readFile(haha);
         
 
         
