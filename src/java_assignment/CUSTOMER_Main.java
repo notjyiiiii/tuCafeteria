@@ -329,6 +329,11 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         btn_Profile1.setLabel("Profile");
 
         btn_Settings1.setLabel("Settings");
+        btn_Settings1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Settings1MouseClicked(evt);
+            }
+        });
 
         lb_dailyEarningstxt3.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -467,6 +472,14 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private void btn_notiCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiCusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_notiCusActionPerformed
+
+    private void btn_Settings1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Settings1MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        CUSTOMER_Setting orderHis = new CUSTOMER_Setting();
+        orderHis.setVisible(true);
+                               
+    }//GEN-LAST:event_btn_Settings1MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

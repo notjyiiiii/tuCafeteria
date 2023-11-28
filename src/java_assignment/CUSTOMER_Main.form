@@ -510,6 +510,9 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Settings"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_Settings1MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_dailyEarningstxt3">
           <Properties>
