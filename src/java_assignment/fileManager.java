@@ -104,4 +104,7 @@ public class fileManager {
 //        this.hpnum = dataArray [3];
 //    }
     
+    
+    
+    
 }

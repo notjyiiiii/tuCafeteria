@@ -107,6 +107,11 @@ public class LogIn extends javax.swing.JFrame {
                 bt_logInMouseClicked(evt);
             }
         });
+        bt_logIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_logInActionPerformed(evt);
+            }
+        });
 
         lb_forgotpw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_forgotpw.setForeground(new java.awt.Color(0, 153, 255));
@@ -215,12 +220,16 @@ public class LogIn extends javax.swing.JFrame {
             
             case "Customer":
                 this.dispose();
-                VendorRegister vr = new VendorRegister();
+                CUSTOMER_Main vr = new CUSTOMER_Main(userid, password);
                 vr.setVisible(true);
                 break;
             
         }
     }//GEN-LAST:event_bt_logInMouseClicked
+
+    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_logInActionPerformed
 
     public static void main(String args[]) {
 
