@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package java_assignment;
+
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-/**
- *
- * @author sharkie
- */
 public class BaseHandler<T extends IDataContainer> {
     
     public ArrayList<T> collection = new ArrayList<T>();
