@@ -189,7 +189,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable4);
 
         lb_dailyEarnings.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_dailyEarnings.setText("Daily Earnings");
+        lb_dailyEarnings.setText("Total Earnings");
 
         lb_dailyEarningstxt1.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -199,7 +199,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         lb_totalmenutxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         lb_totalmenu1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_totalmenu1.setText("Total Orders (Daily)");
+        lb_totalmenu1.setText("Total Orders");
 
         lb_totalmenutxt1.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
