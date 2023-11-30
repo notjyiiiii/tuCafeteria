@@ -69,7 +69,7 @@ public class fileManager {
     
     
     //write data into file
-    public void writeFile(String filePath, ArrayList<String> data) throws IOException { //if something goes wrong, io is input output (so like file
+    public void writeFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
         try{
             FileWriter fw = new FileWriter(filePath, true);
             BufferedWriter bw = new BufferedWriter(fw);
