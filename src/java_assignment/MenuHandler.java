@@ -5,28 +5,30 @@ import java.util.ArrayList;
 
 public class MenuHandler extends BaseHandler<Menu>{
 
-    public MenuHandler(String filePath, Class<Menu> clazz) {
-        super(filePath, clazz);
+    public MenuHandler(String filePath, Class<Menu> clazz, String pathKey) {
+        super(filePath, clazz, pathKey);
     }
 
-
-//    
-//    public ArrayList<Menu> GetVendorMenu(String vendorID)
-//    {
-//        ArrayList<Menu> vendorMenu = new ArrayList<Menu>();
-//        
-//        for(int i = 0; i<this.menuList.size(); i++)
-//        {
-//            Menu menu = menuList.get(i);
-//            
-//            if (menu.getUserid().equals(vendorID))
-//            {
-//                vendorMenu.add(menu);
-//            }
-//        }
-//        
-//        return vendorMenu;
-//    }
+    
+    public ArrayList<Menu> GetVendorMenu(String vendorID)
+    {
+        ArrayList<Menu> vendorMenu = new ArrayList<Menu>();
+        
+        for(int i = 0; i<this.collection.size(); i++)
+        {
+            Menu menu = collection.get(i);
+            
+            if (menu.getUserid().equals(vendorID))
+            {
+                vendorMenu.add(menu);
+            }
+        }
+        
+        return vendorMenu;
+    }
+    
+    // Or can return custom error
+//    public boolean AddNewitem
     
     public void addItem(){
         

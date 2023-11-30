@@ -46,8 +46,12 @@ public class Java_assignment {
 //            }
 //        }
 
-        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
-//        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
+        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class, "Menu");
+        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
+        Menu menu = new Menu();
+        menu.SetItemid("MD022");
+        menuHandler.AddNewItem(menu);
+        
 
         // ArrayList<String[]> dataList = fm.readFile(get);
          // dataList.get(2)[1] = "nyanyaaaaaa";

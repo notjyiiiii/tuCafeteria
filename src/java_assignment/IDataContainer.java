@@ -4,10 +4,13 @@
  */
 package java_assignment;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sharkie
  */
 public interface IDataContainer {
-    public void SerializeData(String[] dataArray);
+    public String[] SerializeData();
+    public void DeserializeData(String[] dataArray);
 }
