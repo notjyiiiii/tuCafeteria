@@ -17,7 +17,7 @@ public class Menu implements IDataContainer {
     
     public Menu()
     {
-        itemid = "Empty Test";
+        
     }
     
     // No setters here
