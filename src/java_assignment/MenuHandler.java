@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class MenuHandler extends BaseHandler<Menu>{
 
-    public MenuHandler(String filePath, Class<Menu> clazz, String pathKey) {
-        super(filePath, clazz, pathKey);
+    public MenuHandler(String filePath, Class<Menu> clazz) {
+        super(filePath, clazz);
     }
 
     

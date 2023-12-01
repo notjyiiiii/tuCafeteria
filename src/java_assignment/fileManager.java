@@ -98,16 +98,8 @@ public class fileManager {
             FileOutputStream fos = new FileOutputStream(filePath);
             //BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            
-//            String textData = "";
-//            for (String string: data)
-//            {
-//                textData += string;
-//                textData += ";";
-//            }
-//            
-//            textData += "\n";
-            
+           
+//            System.out.println(filePath);
             oos.writeObject(data);
             //bos.close();
             oos.close();

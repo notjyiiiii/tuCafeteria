@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class BaseHandler<T extends IDataContainer> {
     
     public ArrayList<T> collection = new ArrayList<T>();
-    public String pathKey;
+    public String filePath;
     
-    public BaseHandler(String filePath, Class<T> clazz, String pathkey)
+    public BaseHandler(String filePath, Class<T> clazz)
     {
-        this.pathKey = pathkey;
+        this.filePath = filePath;
         
         fileManager fm = new fileManager();
         String configVar = fm.getConfigVar(filePath, true);
@@ -50,7 +50,7 @@ public class BaseHandler<T extends IDataContainer> {
         
         try {
             fileManager fm = new fileManager();
-            String get = fm.getConfigVar(this.pathKey, true);
+            String get = fm.getConfigVar(this.filePath, true);
             fm.writeFile(get, item.SerializeData());
 
         }
@@ -69,7 +69,7 @@ public class BaseHandler<T extends IDataContainer> {
         
         try {
             fileManager fm = new fileManager();
-            String get = fm.getConfigVar(this.pathKey, true);
+            String get = fm.getConfigVar(this.filePath, true);
             fm.writeObjFile(get, item);
 
         }

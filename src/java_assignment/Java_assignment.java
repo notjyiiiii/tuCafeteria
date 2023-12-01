@@ -15,7 +15,7 @@ public class Java_assignment {
 //        
      //  LogIn lg = new LogIn();
 //        
-        String key = "User_1";
+        String key = "ObjUser";
 //        String configVar = 
         String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
@@ -51,7 +51,7 @@ public class Java_assignment {
 //        Menu menu = new Menu();
 //        menu.SetItemid("MD022");
 //        menuHandler.AddNewItem(menu);
-        MenuHandler menuHandler = new MenuHandler("ObjUser", Menu.class, "Menu");
+        MenuHandler menuHandler = new MenuHandler("ObjUser", Menu.class);
         ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
         Menu menu = new Menu();
         menu.SetItemid("MD022");
