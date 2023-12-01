@@ -1,0 +1,14 @@
+UserID;UserName;UserEmail;UserHP;Userpw;UserRole;
+VD001;Amy;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor;
+CS002;nyanyaaaaaa;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer;
+VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor;
+VD004;Valen;valen@tuCafeteria.edu.co;0156789234;valen123;Vendor;
+VD005;Nathan;nathanfood@tuCaferia.edu.co;0167892345;nathan123;Vendor;
+CS006;Brian;brain@tuCafeteria.edu.co;0171234568;brian123;Customer;
+CS007;Will;will@tuCafeteria.edu.co;08123456;will123;Customer;
+AD008;Jonas;jonas@tuCafeteria.edu.co;091234567;jonas123;Admin;
+AD009;Yeslav;yeslav@tuCafeteria.edu.co;010235648;yeslav123;Admin;
+AD010;Islam;islam@tuCafeteria.edu.co;011234567;islam123;Admin;
+DR011;Frank;frank@tuCafeteria.edu.co;012234567;frank123;Runner;
+DR012;Ben;ben@tuCafeteria.edu.co;013234567;ben123;Runner;
+DR013;Paul;paul@tuCafeteria.edu.co;014234567;paul123;Runner;

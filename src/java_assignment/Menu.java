@@ -3,9 +3,10 @@ package java_assignment;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Menu {
+public class Menu implements IDataContainer, Serializable {
     
     private String itemid;
     private String itemName;
@@ -14,15 +15,14 @@ public class Menu {
     private String userid;
     private String itemPic;
     private String itemType;
-    private Vendor vendor;
     
-    
-    public Menu(Vendor v){
-        this.vendor = v;
-        this.userid = vendor.getUserid();
-        getMenu();
+    public Menu()
+    {
+        itemid = "Empty Test";
     }
-
+    
+    // No setters here
+    
     public String getItemid() {
         return itemid;
     }
@@ -51,35 +51,9 @@ public class Menu {
         return itemType;
     }
     
-    
-    // to get the menu from the text file
-    public void getMenu(){
-        fileManager fm = new fileManager();
-        String key = "Menu";
-        String configVar = fm.getConfigVar(key, true);
-        
-        ArrayList<String[]> recordList = fm.readFile(configVar);
-        
-        
-        
-        for(int i = 0; i<recordList.size(); i++){
-            if (recordList.get(i)[0].equals(userid)){
-                LoadData(recordList.get(i));
-            }
-        }
-        
-    }
-    
-    private void LoadData(String[] dataArray){
-        this.itemid = dataArray[1];
-        this.itemDesc = dataArray[4];
-        this.itemPic = dataArray[2];
-        this.itemType = dataArray[5];
-        this.itemName = dataArray [3];
-        
-        // Remove non-numeric characters and then parse the double ; 
-        String itemPriceString = dataArray[6].replaceAll("[^0-9.]", "");
-        this.itemPrice = Double.parseDouble(itemPriceString);
+    public void SetItemid(String itemid)
+    {
+        this.itemid = itemid;
     }
     
     // don't know where i will use but just in case
@@ -87,33 +61,34 @@ public class Menu {
 		return String.format("%1s %-10s %1s  %-20s %1s  %.2f %1s ", "|",getItemName(),"|",getItemDesc(),"|",getItemPrice(),"|");
 	}
     
-    
-    
-    //for getting the next primary key ? ( itemID )
-    public int getNextPK(){
-        int nextItemID = Integer.parseInt(itemid) + 1;
-        return nextItemID;
+    @Override
+    public String[] SerializeData() {
+        String[] dataString = new String[7];
+        dataString[0] = this.userid;
+        dataString[1] = this.itemid;
+        dataString[2] = this.itemPic;
+        dataString[3] = this.itemName;
+        dataString[4] = this.itemDesc;
+        dataString[5] = this.itemType;
+        dataString[6] = Double.toString(this.itemPrice);
+        
+        return dataString;
         
     }
-    
-    public void addItem(){
+
+
+    @Override
+    public void DeserializeData(String[] dataArray) {
+        this.userid = dataArray[0];
+        this.itemid = dataArray[1];
+        this.itemPic = dataArray[2];
+        this.itemName = dataArray[3];
+        this.itemDesc = dataArray[4];
+        this.itemType = dataArray[5];
         
-    }
-    
-    public void updatItem(){
-        
-    }
-    
-    public void deleteItem(){
-        
-    }
-    
-    public void filterMenu(){
-        
-    }
-      
-    public void searchMenu(){
-        
+        // Remove non-numeric characters and then parse the double ; 
+        //        String itemPriceString = dataArray[6].replaceAll("[^0-9.]", "");
+        this.itemPrice = Double.parseDouble(dataArray[6]);    
     }
     
 }

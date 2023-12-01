@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.io.FileWriter;
 
-public class fileManager {
+public class ObjectFileManager {
     
     private final String userDirectory = "user.dir";
     private final String baseDirectory = "";
@@ -17,13 +17,15 @@ public class fileManager {
     private String pw;
     
     //all the paths
-    public fileManager(){
+    public ObjectFileManager(){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
+//        System.out.println(mainFolderPath);
         configFilePath = mainFolderPath + configDirectory;
+//        System.out.println(configFilePath);
     }
     
-    public fileManager(String userid, String pw){
+    public ObjectFileManager(String userid, String pw){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
         configFilePath = mainFolderPath + configDirectory;
@@ -66,104 +68,47 @@ public class fileManager {
         return dataList;
     }
     
+    public ArrayList<String[]> readObjectsFromFile(String filePath) {
+        ArrayList<String[]> objectList = new ArrayList<>();
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            while (true) {
+                try {
+                    String[] obj = (String[]) ois.readObject();
+                    objectList.add(obj);
+                } catch (EOFException e) {
+                    break; // End of file reached
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return objectList;
+    }
+    
     
     
     //write data into file
-    public void writeFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
-        try{
-            FileWriter fw = new FileWriter(filePath, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            
-            String textData = "";
-            for (String string: data)
-            {
-                textData += string;
-                textData += ";";
+    public void writeFile(String filePath, String data) throws IOException { //if something goes wrong, io is input output (so like file
+        FileWriter writer = new FileWriter(filePath);
+        writer.write(data + System.lineSeparator());
+        writer.close();
+    }
+    
+    public void writeObjectFile(String filePath, String data) throws IOException{
+        FileOutputStream fos = new FileOutputStream(filePath);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        
+        oos.writeObject(data + System.lineSeparator());
+    }
+    
+    public void writeObjectsToFile(String filePath, List<String[]> dataList) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            for (String[] data : dataList) {
+                oos.writeObject(data);
             }
-            
-            textData += "\n";
-            
-            bw.write(textData);
-            bw.close();
-            
-        } catch (FileNotFoundException e){
-            System.out.println(e);
-        }
-        
-    }
-    
-    
-    public void writeObjFile(String filePath, Object data) throws IOException { //if something goes wrong, io is input output (so like file
-        try{
-            FileOutputStream fos = new FileOutputStream(filePath);
-            //BufferedOutputStream bos = new BufferedOutputStream(fos);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            
-//            String textData = "";
-//            for (String string: data)
-//            {
-//                textData += string;
-//                textData += ";";
-//            }
-//            
-//            textData += "\n";
-            
-            oos.writeObject(data);
-            //bos.close();
-            oos.close();
-            fos.close();
-            
-            
-        } catch (FileNotFoundException e){
-            System.out.println(e);
-        }
-        
-    }
-    
-    
-    
-    public void readObjFile(String filePath, ArrayList<String[]> data) throws IOException{
-        FileInputStream fis = new FileInputStream(filePath);
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        ObjectInputStream dis = new ObjectInputStream(bis);
-        
-        
-        System.out.println(dis.readLine());
-        
-        bis.close();
-        fis.close();
-    }
-    
-    
-    
-    
-    
-    
-    
-    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
-        try{
-            FileWriter fw = new FileWriter(filePath, false);
-            BufferedWriter bw = new BufferedWriter(fw);
-            
-            
-            String textItem = "";
-            for (String[] row: data)
-            {
-                for (String item: row)
-                {
-                    
-                    textItem += item;
-                    textItem += ";";
-                }
-                textItem += "\n";
-                
-            }
-            
-            bw.write(textItem);
-            bw.close();
-            
-        } catch (FileNotFoundException e){
-            System.out.println(e);
         }
     }
     

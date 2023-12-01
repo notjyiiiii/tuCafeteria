@@ -97,7 +97,7 @@ public class Users {
         return true;
     }
     
-    public boolean writeDetails(){
+    public boolean writeDetails(){ //not done
         fileManager fm = new fileManager();
         String key = "User";
         String configVar = fm.getConfigVar(key, true);
