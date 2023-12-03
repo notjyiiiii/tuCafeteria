@@ -96,12 +96,12 @@ public class fileManager {
     public void writeObjFile(String filePath, Object data) throws IOException { //if something goes wrong, io is input output (so like file
         try{
             FileOutputStream fos = new FileOutputStream(filePath);
-            //BufferedOutputStream bos = new BufferedOutputStream(fos);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
            
 //            System.out.println(filePath);
             oos.writeObject(data);
-            //bos.close();
+            bos.close();
             oos.close();
             fos.close();
             
@@ -114,17 +114,22 @@ public class fileManager {
     
     
     
-    public void readObjFile(String filePath, ArrayList<String[]> data) throws IOException{
+    public Object readObjFile(String filePath) throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(filePath);
         BufferedInputStream bis = new BufferedInputStream(fis);
-        ObjectInputStream dis = new ObjectInputStream(bis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        Object obj = ois.readObject();
         
-        
-        System.out.println(dis.readLine());
-        
-        bis.close();
-        fis.close();
-    }
+        //if hard code then can lorh
+//        Menu m1 = (Menu)ois.readObject();
+//        System.out.println(m1.getItemid());
+//        System.out.println(m1.getUserid());
+        //System.out.println(ois.readLine());
+
+       return obj;
+       
+}
     
     
     

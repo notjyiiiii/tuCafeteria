@@ -1,11 +1,12 @@
 package java_assignment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class MenuHandler extends BaseHandler<Menu>{
 
-    public MenuHandler(String filePath, Class<Menu> clazz) {
+    public MenuHandler(String filePath, Class<Menu> clazz) throws IOException, ClassNotFoundException {
         super(filePath, clazz);
     }
 
