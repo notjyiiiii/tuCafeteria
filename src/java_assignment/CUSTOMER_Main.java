@@ -1,17 +1,46 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 public class CUSTOMER_Main extends javax.swing.JFrame {
 
     private String userid, password;
+    private Customer customer;
     
     public CUSTOMER_Main(){}
     
-    public CUSTOMER_Main(String userid, String password) {
+    public CUSTOMER_Main(Customer customer) throws IOException, ClassNotFoundException {
         initComponents();
         setVisible(true); 
-        this.userid = userid;
-        this.password = password;
+        lb_Cname.setText(customer.getUsername());
         
+        if (customer.userid != null) {
+        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+        double x = customerHandler.getCredit(customer.userid);
+        lb_cCredit.setText("RM: "+String.valueOf(x));
+        }
+        else {
+        // Handle the case where userid is null (perhaps display an error message)
+        System.err.println("Userid is null");
+        }
+        
+//        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+//        String x = customerHandler.getCredit(userid);
+//        lb_cCredit.setText(x);
+        
+        //CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+        //Customer cs = new Customer();
+//        String x = Double.toString(customer.getCredit());
+//        System.out.println(x);
+//        lb_cCredit.setText(x);
+        
+//        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+//        ArrayList<Customer> credit = customerHandler.getCredit(userid);
+//        
+//        Customer getCredit = credit.get(1);
+//        System.out.println(getCredit);
         
     }
 
@@ -27,7 +56,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         lb_quit1 = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
         lb_welcome = new javax.swing.JLabel();
-        lb_Vname = new javax.swing.JLabel();
+        lb_Cname = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lb_totalmenu1 = new javax.swing.JLabel();
@@ -47,8 +76,8 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         lb_tuName5 = new javax.swing.JLabel();
         btn_Profile1 = new java.awt.Button();
         btn_Settings1 = new java.awt.Button();
-        lb_dailyEarningstxt3 = new javax.swing.JLabel();
         lb_dailyEarnings3 = new javax.swing.JLabel();
+        lb_cCredit = new javax.swing.JLabel();
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,7 +145,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         lb_welcome.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_welcome.setText("Welcome");
 
-        lb_Vname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_Cname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         jButton2.setText("jButton1");
         jButton2.setMaximumSize(new java.awt.Dimension(78, 16));
@@ -203,7 +232,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_welcome)
-                    .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_Cname, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(rightPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -231,7 +260,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lb_welcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Cname, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -335,8 +364,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        lb_dailyEarningstxt3.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
-
         lb_dailyEarnings3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_dailyEarnings3.setText("TU - E Credits:");
 
@@ -347,14 +374,13 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             .addGroup(leftPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(leftPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_cCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_dailyEarnings3)
                     .addComponent(btn_Settings1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_tuName4)
                     .addComponent(lb_tuName5)
-                    .addGroup(leftPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_cafeName2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lb_cafeName2)
+                    .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         leftPanel2Layout.setVerticalGroup(
@@ -369,8 +395,8 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lb_dailyEarnings3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_cCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(btn_Settings1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,10 +517,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
-    private java.awt.Button btn_Credits;
-    private java.awt.Button btn_Profile;
     private java.awt.Button btn_Profile1;
-    private java.awt.Button btn_Settings;
     private java.awt.Button btn_Settings1;
     private javax.swing.JButton btn_dashCus;
     private javax.swing.JButton btn_dashb1;
@@ -509,23 +532,17 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lb_Vname;
-    private javax.swing.JLabel lb_cafeName;
+    private javax.swing.JLabel lb_Cname;
+    private javax.swing.JLabel lb_cCredit;
     private javax.swing.JLabel lb_cafeName2;
-    private javax.swing.JLabel lb_dailyEarnings1;
     private javax.swing.JLabel lb_dailyEarnings3;
-    private javax.swing.JLabel lb_dailyEarningstxt;
-    private javax.swing.JLabel lb_dailyEarningstxt3;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_totalmenu1;
-    private javax.swing.JLabel lb_tuName;
-    private javax.swing.JLabel lb_tuName1;
     private javax.swing.JLabel lb_tuName4;
     private javax.swing.JLabel lb_tuName5;
     private javax.swing.JLabel lb_welcome;
-    private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel leftPanel2;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;

@@ -100,6 +100,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 189, 49));
 
         lb_Vname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_Vname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_VnameMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -351,6 +356,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
+
+    private void lb_VnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_VnameMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lb_VnameMouseClicked
 
     public static void main(String args[]) {
 

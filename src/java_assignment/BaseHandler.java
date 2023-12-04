@@ -135,15 +135,15 @@ public class BaseHandler<T extends IDataContainer> {
 //        }
 //    }
     
-    public void readNewObjItems(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException {
-        this.filePath = filePath;
-        fileManager fm = new fileManager();
-        String get = fm.getConfigVar(this.filePath, true);
-
-       // Object obj1 = fm.readObjFile(get);
-        
-        //return obj1;
-    }
+//    public void readNewObjItems(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException {
+//        this.filePath = filePath;
+//        fileManager fm = new fileManager();
+//        String get = fm.getConfigVar(this.filePath, true);
+//
+//       // Object obj1 = fm.readObjFile(get);
+//        
+//        //return obj1;
+//    }
         
     
     

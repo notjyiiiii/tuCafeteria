@@ -13,9 +13,9 @@ public class Java_assignment {
         
         fileManager fm = new fileManager();
 //        
-     //  LogIn lg = new LogIn();
+       LogIn lg = new LogIn();
 //        
-        String key = "Menu";
+       // String key = "User";
 //        String configVar = 
         //String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
@@ -34,17 +34,25 @@ public class Java_assignment {
 //        data.add("DR14");   
 //        fm.writeFile(get, data);
 // VD001;MD021;null;TomYum Soup;Thai cooked soup spicy and hot;Main Dish;12.00null;MD022;null;null;null;null;0.0;
-        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
-        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
-        Menu menu = new Menu();
-        menu.setUserid("VD001");
-        menu.setItemid("MD022");
-        menu.setItemPic("null");
-        menu.setItemPrice(8);
-        menu.setItemType("Main Dish");
-        menu.setItemName("Tom Yam Soup");
-        menu.setItemDesc("Spicy and Sour soup made in Thailand");
-        menuHandler.AddNewItem(menu);
+//        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
+//        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
+//        Menu menu = new Menu();
+//        menu.setUserid("VD001");
+//        menu.setItemid("MD022");
+//        menu.setItemPic("null");
+//        menu.setItemPrice(8);
+//        menu.setItemType("Main Dish");
+//        menu.setItemName("Tom Yam Soup");
+//        menu.setItemDesc("Spicy and Sour soup made in Thailand");
+//        menuHandler.AddNewItem(menu);
+//        
+//        
+//        Menu abs = menuList.get(5);
+//        
+//        //System.out.print(abs);
+//        System.out.println(abs.getItemName()+"\n");
+//        System.out.println(menuList);
+        
         
 //        ArrayList<String[]> data = fm.readFile(get);
 //        for(String[] string : data)
@@ -100,6 +108,20 @@ public class Java_assignment {
 //        data.add("DR14");  
 //        fm.writeFile(get, data);
         //String abc = "sdf";
+        
+        
+        
+//        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+//        ArrayList<Customer> customer = customerHandler.GetCustomer("CS006");
+//        Customer cs = customer.get(0);
+//        Customer getCredit = credit.get(1);
+//        System.out.println(getCredit);
+//        
+        
+        
+        
+        
     }
+    
     
 }

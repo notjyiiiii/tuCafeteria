@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -198,32 +200,39 @@ public class LogIn extends javax.swing.JFrame {
 
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
-        String password = pwf_pw.getText();
-        String userid = tf_userID.getText();
-        
-        Users user = new Users(userid, password);
-        if(user.valid == false){
-            int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        
-        String userRole = user.getRole();
-        switch(userRole){
-            case "Vendor":
-                this.dispose(); 
-                Vendor v = new Vendor(userid, password);
-                //v.getDetails();
-                VendorMainPage vmp = new VendorMainPage(v);
-                vmp.setVisible(true);
-                break;
+        try {
+            String password = pwf_pw.getText();
+            String userid = tf_userID.getText();
             
-            case "Customer":
-                this.dispose();
-                CUSTOMER_Main vr = new CUSTOMER_Main(userid, password);
-                vr.setVisible(true);
-                break;
+            Users user = new Users(userid, password);
+            if(user.valid == false){
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+                return;
+            }
             
+            
+            String userRole = user.getRole();
+            switch(userRole){
+                case "Vendor":
+                    this.dispose();
+                    Vendor v = new Vendor(userid, password);
+                    //v.getDetails();
+                    VendorMainPage vmp = new VendorMainPage(v);
+                    vmp.setVisible(true);
+                    break;
+                    
+                case "Customer":
+                    this.dispose();
+                    Customer c = new Customer(userid,password);
+                    CUSTOMER_Main vr = new CUSTOMER_Main(c);
+                    vr.setVisible(true);
+                    break;
+                    
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_logInMouseClicked
 

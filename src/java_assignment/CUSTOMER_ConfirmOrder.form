@@ -283,6 +283,9 @@
                   <Font name="Malayalam MN" size="25" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lb_VnameMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

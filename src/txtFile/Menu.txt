@@ -18,4 +18,3 @@ VD005;MD017;null;Grilled Chicken Chop;Deboned chicken leg cured and coated in sp
 VD005;MD018;null;Chocolate Milkshake;Beverage made by blending together a combination of milk, chocolate ice cream, and chocolate syrup;Drink;4.00
 VD005;MD019;null;Spaghetti Bolognaise;Flavorful meat sauce served over cooked spaghetti noodles;Main Dish;8.00
 VD005;MD020;null;Mac and Cheese;Cooked macaroni pasta mixed with a creamy cheese sauce;Main Dish;6.00
-VD001;MD022;null;Tom Yam Soup;Spicy and Sour soup made in Thailand;Main Dish;8.0;

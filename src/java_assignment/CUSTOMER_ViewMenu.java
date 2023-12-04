@@ -1,9 +1,16 @@
 package java_assignment;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
+    private DefaultTableModel model = new DefaultTableModel();
+//    MenuHandler menuHandler = new MenuHandler("ObjUser",Menu.class);
+//    ArrayList<Menu> menu = menuHandler.GetVendorMenu("VD001");
+    
+    
     public CUSTOMER_ViewMenu() {
         initComponents();
     }
@@ -174,12 +181,15 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
     private void btnOrderBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderBckMouseClicked
         this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        CUSTOMER_Main CusMain = new CUSTOMER_Main();
+        CusMain.setVisible(true);
     }//GEN-LAST:event_btnOrderBckMouseClicked
 
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
         // TODO add your handling code here:
+        this.dispose();
+        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
+        order.setVisible(true); 
     }//GEN-LAST:event_btnOrderMouseClicked
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
