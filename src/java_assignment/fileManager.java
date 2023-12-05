@@ -93,7 +93,37 @@ public class fileManager {
     }
     
     
+    public void writeObjFile(String filePath, Object data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileOutputStream fos = new FileOutputStream(filePath);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+           
+//            System.out.println(filePath);
+            oos.writeObject(data);
+            bos.close();
+            oos.close();
+            fos.close();
+            
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }
     
+    
+    
+    public Object readObjFile(String filePath) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filePath);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        Object obj = ois.readObject();
+
+       return obj;
+       
+}
     
     
     public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
@@ -122,34 +152,5 @@ public class fileManager {
             System.out.println(e);
         }
     }
-    
-    // I'M ACTUALLY CONFUSED I THINK THIS CAN BE SOMETHING TO CALL SINCE EVERYTIME WE HAVE A CLASS WE GOTTA USE THIS
-//    public boolean getDetails(String fileName){
-//        fileManager fm = new fileManager();
-//        String key = fileName;
-//        String configVar = fm.getConfigVar(key, true);
-//        ArrayList<String[]> recordList = fm.readFile(configVar);
-//        
-//        //check userid and password
-//        for(int i = 0; i<recordList.size(); i++){
-//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(pw)){
-//                LoadData(recordList.get(i));
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
-//    
-    
-//    //put the data into the variables
-//    private void LoadData(String[] dataArray)
-//    {
-//        this.username = dataArray[1];
-//        this.password = dataArray[4];
-//        this.email = dataArray[2];
-//        this.role = dataArray[5];
-//        this.hpnum = dataArray [3];
-//    }
     
 }

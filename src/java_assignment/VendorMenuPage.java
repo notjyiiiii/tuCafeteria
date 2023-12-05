@@ -17,11 +17,11 @@ public class VendorMenuPage extends javax.swing.JFrame {
     public VendorMenuPage(Vendor v) {
         initComponents();
         this.vendor = v;
-        Menu menu = new Menu(v);
-        lb_dailyEarningstxt.setText(menu.getItemName());
-        System.out.println(menu.toString());
-        System.out.println(menu.toString());
-        System.out.println(menu.toString());
+//        Menu menu = new Menu(v);
+//        lb_dailyEarningstxt.setText(menu.getItemName());
+//        System.out.println(menu.toString());
+//        System.out.println(menu.toString());
+//        System.out.println(menu.toString());
     }
 
     @SuppressWarnings("unchecked")
@@ -375,10 +375,10 @@ public class VendorMenuPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void btn_AddItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AddItemMouseClicked
-        Menu menu = new Menu(vendor);
-        this.setVisible(false);
-        MenuAdd ma = new MenuAdd(vendor);
-        ma.setVisible(true);
+//        Menu menu = new Menu(vendor);
+//        this.setVisible(false);
+//        MenuAdd ma = new MenuAdd(vendor);
+//        ma.setVisible(true);
     }//GEN-LAST:event_btn_AddItemMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

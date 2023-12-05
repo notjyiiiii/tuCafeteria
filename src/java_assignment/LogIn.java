@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -107,6 +109,11 @@ public class LogIn extends javax.swing.JFrame {
                 bt_logInMouseClicked(evt);
             }
         });
+        bt_logIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_logInActionPerformed(evt);
+            }
+        });
 
         lb_forgotpw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_forgotpw.setForeground(new java.awt.Color(0, 153, 255));
@@ -193,34 +200,45 @@ public class LogIn extends javax.swing.JFrame {
 
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
-        String password = pwf_pw.getText();
-        String userid = tf_userID.getText();
-        
-        Users user = new Users(userid, password);
-        if(user.valid == false){
-            int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        
-        String userRole = user.getRole();
-        switch(userRole){
-            case "Vendor":
-                this.dispose(); 
-                Vendor v = new Vendor(userid, password);
-                //v.getDetails();
-                VendorMainPage vmp = new VendorMainPage(v);
-                vmp.setVisible(true);
-                break;
+        try {
+            String password = pwf_pw.getText();
+            String userid = tf_userID.getText();
             
-            case "Customer":
-                this.dispose();
-                VendorRegister vr = new VendorRegister();
-                vr.setVisible(true);
-                break;
+            UsersHandler handler = new UsersHandler("User", Users.class);
+            Users user = handler.getusers(userid);
+       
+            if(user==null){
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+                return;
+            }
             
+            String userRole = user.getRole();
+            switch(userRole){
+                case "Vendor":
+                    this.dispose();
+                    Vendor v = new Vendor(user);
+                    VendorMainPage vmp = new VendorMainPage(v);
+                    vmp.setVisible(true);
+                    break;
+                    
+                case "Customer":
+                    this.dispose();
+                    Customer cs = new Customer(user);
+                    CUSTOMER_Main vr = new CUSTOMER_Main(cs);
+                    vr.setVisible(true);
+                    break;
+                    
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_logInMouseClicked
+
+    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_logInActionPerformed
 
     public static void main(String args[]) {
 

@@ -3,9 +3,10 @@ package java_assignment;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Menu implements IDataContainer {
+public class Menu implements IDataContainer, Serializable {
     
     private String itemid;
     private String itemName;
@@ -21,40 +22,64 @@ public class Menu implements IDataContainer {
     }
     
     // No setters here
-    
+
     public String getItemid() {
         return itemid;
+    }
+
+    public void setItemid(String itemid) {
+        this.itemid = itemid;
     }
 
     public String getItemName() {
         return itemName;
     }
 
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     public double getItemPrice() {
         return itemPrice;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public String getItemDesc() {
         return itemDesc;
     }
 
+    public void setItemDesc(String itemDesc) {
+        this.itemDesc = itemDesc;
+    }
+
     public String getUserid() {
         return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getItemPic() {
         return itemPic;
     }
 
+    public void setItemPic(String itemPic) {
+        this.itemPic = itemPic;
+    }
+
     public String getItemType() {
         return itemType;
     }
-    
-    public void SetItemid(String itemid)
-    {
-        this.itemid = itemid;
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
     
+   
     // don't know where i will use but just in case
     public String toString(){
 		return String.format("%1s %-10s %1s  %-20s %1s  %.2f %1s ", "|",getItemName(),"|",getItemDesc(),"|",getItemPrice(),"|");
