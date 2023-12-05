@@ -331,8 +331,8 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
     private void btn_dashCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashCusMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        CUSTOMER_Main CusMain = new CUSTOMER_Main();
-        CusMain.setVisible(true);
+//        CUSTOMER_Main CusMain = new CUSTOMER_Main();
+//        CusMain.setVisible(true);
     }//GEN-LAST:event_btn_dashCusMouseClicked
 
     public static void main(String args[]) {
