@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package java_assignment;
 
 import java.awt.event.ActionEvent;
@@ -15,14 +11,14 @@ public class MenuAdd extends javax.swing.JFrame implements ActionListener {
     public MenuAdd(Vendor vendor) {
         initComponents();
         this.vendor = vendor;
-        Menu menu = new Menu(vendor);
-        //lb_totalmenutxt1.setText(menu.getItemid());
-        
-        //combobox de selection
-        jComboBox1.addActionListener(this);
-        updateLabelBasedOnSelection();
-        
-        lb_totalmenutxt1.setText("");
+//        Menu menu = new Menu(vendor);
+//        //lb_totalmenutxt1.setText(menu.getItemid());
+//        
+//        //combobox de selection
+//        jComboBox1.addActionListener(this);
+//        updateLabelBasedOnSelection();
+//        
+//        lb_totalmenutxt1.setText("");
     }
     
     @SuppressWarnings("unchecked")

@@ -20,9 +20,7 @@ public class fileManager {
     public fileManager(){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
-//        System.out.println(mainFolderPath);
         configFilePath = mainFolderPath + configDirectory;
-//        System.out.println(configFilePath);
     }
     
     public fileManager(String userid, String pw){
@@ -68,11 +66,102 @@ public class fileManager {
         return dataList;
     }
     
+    
+    
     //write data into file
-    public void writeFile(String filePath, String data) throws IOException { //if something goes wrong, io is input output (so like file
-        FileWriter writer = new FileWriter(filePath);
-        writer.write(data + System.lineSeparator());
-        writer.close();
+    public void writeFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            String textData = "";
+            for (String string: data)
+            {
+                textData += string;
+                textData += ";";
+            }
+            
+            textData += "\n";
+            
+            bw.write(textData);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    
+    public void writeObjFile(String filePath, Object data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileOutputStream fos = new FileOutputStream(filePath);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+           
+//            System.out.println(filePath);
+            oos.writeObject(data);
+            bos.close();
+            oos.close();
+            fos.close();
+            
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    
+    
+    public Object readObjFile(String filePath) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filePath);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        Object obj = ois.readObject();
+        
+        //if hard code then can lorh
+//        Menu m1 = (Menu)ois.readObject();
+//        System.out.println(m1.getItemid());
+//        System.out.println(m1.getUserid());
+        //System.out.println(ois.readLine());
+
+       return obj;
+       
+}
+    
+    
+    
+    
+    
+    
+    
+    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+        try{
+            FileWriter fw = new FileWriter(filePath, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            
+            String textItem = "";
+            for (String[] row: data)
+            {
+                for (String item: row)
+                {
+                    
+                    textItem += item;
+                    textItem += ";";
+                }
+                textItem += "\n";
+                
+            }
+            
+            bw.write(textItem);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
     }
     
     // I'M ACTUALLY CONFUSED I THINK THIS CAN BE SOMETHING TO CALL SINCE EVERYTIME WE HAVE A CLASS WE GOTTA USE THIS
@@ -103,5 +192,8 @@ public class fileManager {
 //        this.role = dataArray[5];
 //        this.hpnum = dataArray [3];
 //    }
+    
+    
+    
     
 }
