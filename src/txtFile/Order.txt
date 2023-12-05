@@ -1,6 +1,6 @@
-OrderID;CustomerID;VendorID;Status;OrderType;DeliveryLocation #Vendor and Customer are both UserID
-O001;CS002;VD001;Completed;Dine-In;NULL
-O002;CS006;VD003;Paid;Delivery;L001
-O003;CS007;VD004;Paid;Dine-In;NULL
-O004;CS006;VD005;Delivering;Takeaway;NULL
-O005;CS002;VD003;Delivering;Dine-In;NULL
+OrderID;CustomerID;VendorID;Status;OrderType;OrderDate;DeliveryLocation;OrderAmount;DeliveryFees; #Vendor and Customer are both UserID
+O001;CS002;VD001;Completed;Dine-In;999999999-01-01T00:00:00;NULL
+O002;CS006;VD003;Paid;Delivery;999999999-01-01T00:00:00;L001
+O003;CS007;VD004;Paid;Dine-In;999999999-01-01T00:00:00;NULL
+O004;CS006;VD005;Delivering;Takeaway;999999999-01-01T00:00:00;NULL
+O005;CS002;VD003;Delivering;Dine-In;999999999-01-01T00:00:00;NULL

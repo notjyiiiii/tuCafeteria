@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
 
-public class Customer extends Users implements IDataContainer, Serializable{
+public class Customer extends User implements IDataContainer, Serializable{
     //private double credit; 
     private String credit;
     
     public Customer(){}
     
-    public Customer(String id, String pw){
-        super(id,pw);
-    }
     
     
     
-    public Customer(Users user){
+    public Customer(User user){
         this.userid = user.getUserid();
         this.username = user.getUsername();
     }

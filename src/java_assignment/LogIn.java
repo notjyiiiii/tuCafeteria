@@ -204,20 +204,21 @@ public class LogIn extends javax.swing.JFrame {
             String password = pwf_pw.getText();
             String userid = tf_userID.getText();
             
-            UsersHandler handler = new UsersHandler("User", Users.class);
-            Users user = handler.getusers(userid);
+            UserHandler handler = new UserHandler("User", User.class);
+            User user = handler.ValidateUserCredential(userid, password);
        
             if(user==null){
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
+            Java_assignment.LoggedInUserID = userid;
             
             String userRole = user.getRole();
             switch(userRole){
                 case "Vendor":
-                    this.dispose();
-                    Vendor v = new Vendor(user);
-                    VendorMainPage vmp = new VendorMainPage(v);
+                    this.dispose(); 
+                    VendorMainPage vmp = new VendorMainPage();
                     vmp.setVisible(true);
                     break;
                     
@@ -227,6 +228,7 @@ public class LogIn extends javax.swing.JFrame {
                     CUSTOMER_Main vr = new CUSTOMER_Main(cs);
                     vr.setVisible(true);
                     break;
+                // TODO: More switch case for each role
                     
             }
         } catch (IOException ex) {

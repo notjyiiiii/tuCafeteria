@@ -134,7 +134,7 @@
                       <Component id="lb_tuName" min="-2" max="-2" attributes="0"/>
                       <Component id="lb_tuName1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lb_dailyEarningstxt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lb_ecredittxt" alignment="0" max="32767" attributes="0"/>
                           <Component id="lb_cafeName" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -154,7 +154,7 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="lb_dailyEarnings1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lb_dailyEarningstxt" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="lb_ecredittxt" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="btn_Credits" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -210,7 +210,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_SettingsMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_dailyEarningstxt">
+        <Component class="javax.swing.JLabel" name="lb_ecredittxt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Malayalam MN" size="25" style="1"/>
@@ -257,14 +257,14 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lb_totalmenu1" min="-2" max="-2" attributes="0"/>
-                              <Component id="lb_totalmenutxt1" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Component id="lb_totalordersdailytxt" min="-2" pref="162" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lb_dailyEarnings" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lb_dailyEarningstxt1" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
+                              <Component id="lb_dailyEarningTxt" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
                               <Component id="lb_welcome" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lb_Vname" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
                           </Group>
@@ -284,7 +284,7 @@
                   <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   <Component id="lb_dailyEarnings" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lb_dailyEarningstxt1" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="lb_dailyEarningTxt" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -295,7 +295,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lb_totalmenu1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lb_totalmenutxt1" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Component id="lb_totalordersdailytxt" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -350,14 +350,14 @@
             <Property name="text" type="java.lang.String" value="Total Orders (Daily)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_totalmenutxt1">
+        <Component class="javax.swing.JLabel" name="lb_totalordersdailytxt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Malayalam MN" size="25" style="1"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_dailyEarningstxt1">
+        <Component class="javax.swing.JLabel" name="lb_dailyEarningTxt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Malayalam MN" size="25" style="1"/>
