@@ -596,7 +596,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
         this.dispose();
-        Notification noti = new Notification();
+        Notification_Page noti = new Notification_Page();
         noti.setVisible(true);
     }//GEN-LAST:event_btn_notiCusMouseClicked
 

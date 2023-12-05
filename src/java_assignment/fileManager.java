@@ -132,11 +132,6 @@ public class fileManager {
 }
     
     
-    
-    
-    
-    
-    
     public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
         try{
             FileWriter fw = new FileWriter(filePath, false);

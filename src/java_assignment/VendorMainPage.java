@@ -368,7 +368,7 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_notiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiMouseClicked
         this.dispose();
-        Notification noti = new Notification();
+        Notification_Page noti = new Notification_Page();
         noti.setVisible(true);
     }//GEN-LAST:event_btn_notiMouseClicked
 

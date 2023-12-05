@@ -98,24 +98,49 @@ public class BaseHandler<T extends IDataContainer> {
         }
     }
     
-    
-    public void AddNewObjItem(T item)
+    public void UpdateItem(T item)
     {
         collection.add(item); 
         
         try {
             fileManager fm = new fileManager();
             String get = fm.getConfigVar(this.filePath, true);
-            fm.writeObjFile(get, item);
+            ArrayList<String[]> data = new ArrayList<>();
+            String[] itemArray = (String[]) item;
+            data.add(itemArray);
+            fm.updateFile(get, item.);
 
         }
         catch(Exception e)
         {
             System.out.println("Error: Unable to add new item");
             // TODO: Look at how you want to handle error exception
-            // Maybe to put a popup stating the error? don't want lah
+            // Maybe to put a popup stating the error?
         }
     }
+    
+    
+    
+    
+    
+    
+//    public void AddNewObjItem(T item)
+//    {
+//        collection.add(item); 
+//        
+//        try {
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//            fm.writeObjFile(get, item);
+//
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to add new item");
+//            // TODO: Look at how you want to handle error exception
+//            // Maybe to put a popup stating the error? don't want lah
+//        }
+//    }
     
 //    public T ReadNewObjItem(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException
 //    {
@@ -134,17 +159,7 @@ public class BaseHandler<T extends IDataContainer> {
 //
 //        }
 //    }
-    
-    public void readNewObjItems(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException {
-        this.filePath = filePath;
-        fileManager fm = new fileManager();
-        String get = fm.getConfigVar(this.filePath, true);
-
-       // Object obj1 = fm.readObjFile(get);
-        
-        //return obj1;
-    }
-        
+ 
     
     
 }
