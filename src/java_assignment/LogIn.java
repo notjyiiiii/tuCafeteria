@@ -201,28 +201,16 @@ public class LogIn extends javax.swing.JFrame {
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
         try {
-            String password = new String(pwf_pw.getPassword());
+            String password = pwf_pw.getText();
             String userid = tf_userID.getText();
             
-//            Users user = new Users(userid, password);
-//            if(user.valid == false){
-//                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-//                return;
-//            }
-            
-            if (password == null || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter a password.", "Error", JOptionPane.OK_OPTION);
+            UsersHandler handler = new UsersHandler("User", Users.class);
+            Users user = handler.getusers(userid);
+       
+            if(user==null){
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
                 return;
             }
-
-            UsersHandler usersHandler = new UsersHandler("User",Users.class);
-            Users user = usersHandler.getAuthenticatedUser(userid, password);
-            
-            if (user == null) {
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.", "Error", JOptionPane.OK_OPTION);
-                return;
-            }
-            
             
             String userRole = user.getRole();
             switch(userRole){
@@ -236,8 +224,9 @@ public class LogIn extends javax.swing.JFrame {
                     
                 case "Customer":
                     this.dispose();
-                    Customer c = new Customer(userid,password);
-                    CUSTOMER_Main vr = new CUSTOMER_Main(c);
+                    Customer cs = new Customer(user);
+                    System.out.println(cs.getEmail());
+                    CUSTOMER_Main vr = new CUSTOMER_Main(user);
                     vr.setVisible(true);
                     break;
                     

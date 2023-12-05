@@ -11,13 +11,14 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     
     public CUSTOMER_Main(){}
     
-    public CUSTOMER_Main(Customer customer) throws IOException, ClassNotFoundException {
+    public CUSTOMER_Main(Users user) throws IOException, ClassNotFoundException {
         initComponents();
         setVisible(true); 
+        CustomerHandler customerHandler = new CustomerHandler("Customer",Customer.class);
         lb_Cname.setText(customer.getUsername());
         
         if (customer.userid != null) {
-        CustomerHandler customerHandler = new CustomerHandler("Customer");
+        
         double x = customerHandler.getCredit(customer.userid);
         lb_cCredit.setText("RM: "+String.valueOf(x));
         }

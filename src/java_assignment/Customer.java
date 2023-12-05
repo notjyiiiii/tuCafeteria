@@ -14,6 +14,11 @@ public class Customer extends Users implements IDataContainer, Serializable{
         super(id,pw);
     }
     
+    
+    
+    public Customer(Users user){
+        
+    }
 
 //    public void setCredit(double credit) {
 //        this.credit = credit;
