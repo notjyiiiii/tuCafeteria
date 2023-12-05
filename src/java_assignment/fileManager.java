@@ -120,21 +120,10 @@ public class fileManager {
         ObjectInputStream ois = new ObjectInputStream(bis);
 
         Object obj = ois.readObject();
-        
-        //if hard code then can lorh
-//        Menu m1 = (Menu)ois.readObject();
-//        System.out.println(m1.getItemid());
-//        System.out.println(m1.getUserid());
-        //System.out.println(ois.readLine());
 
        return obj;
        
 }
-    
-    
-    
-    
-    
     
     
     public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
@@ -163,37 +152,5 @@ public class fileManager {
             System.out.println(e);
         }
     }
-    
-    // I'M ACTUALLY CONFUSED I THINK THIS CAN BE SOMETHING TO CALL SINCE EVERYTIME WE HAVE A CLASS WE GOTTA USE THIS
-//    public boolean getDetails(String fileName){
-//        fileManager fm = new fileManager();
-//        String key = fileName;
-//        String configVar = fm.getConfigVar(key, true);
-//        ArrayList<String[]> recordList = fm.readFile(configVar);
-//        
-//        //check userid and password
-//        for(int i = 0; i<recordList.size(); i++){
-//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(pw)){
-//                LoadData(recordList.get(i));
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
-//    
-    
-//    //put the data into the variables
-//    private void LoadData(String[] dataArray)
-//    {
-//        this.username = dataArray[1];
-//        this.password = dataArray[4];
-//        this.email = dataArray[2];
-//        this.role = dataArray[5];
-//        this.hpnum = dataArray [3];
-//    }
-    
-    
-    
     
 }

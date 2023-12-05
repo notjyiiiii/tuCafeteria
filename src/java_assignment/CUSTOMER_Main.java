@@ -9,23 +9,22 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     //private String userid, password;
     private Customer customer;
     
-    public CUSTOMER_Main(){}
-    
-    public CUSTOMER_Main(Users user) throws IOException, ClassNotFoundException {
+    public CUSTOMER_Main(Customer customer) {
         initComponents();
         setVisible(true); 
-        CustomerHandler customerHandler = new CustomerHandler("Customer",Customer.class);
+        this.customer = customer;
+        //Vendor vendor = new Vendor();
         lb_Cname.setText(customer.getUsername());
         
-        if (customer.userid != null) {
-        
-        double x = customerHandler.getCredit(customer.userid);
-        lb_cCredit.setText("RM: "+String.valueOf(x));
-        }
-        else {
-        // Handle the case where userid is null (perhaps display an error message)
-        System.err.println("Userid is null");
-        }
+//        if (customer.userid != null) {
+//        
+//        //double x = customerHandler.getCredit(customer.userid);
+//      //  lb_cCredit.setText("RM: "+String.valueOf(x));
+//        }
+//        else {
+//        // Handle the case where userid is null (perhaps display an error message)
+//        System.err.println("Userid is null");
+//        }
         
 //        CustomerHandler testing = new CustomerHandler("Customer", Customer.class);
 //        testing.AddNewItem(customer);

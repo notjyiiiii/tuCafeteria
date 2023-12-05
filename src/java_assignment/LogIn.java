@@ -216,8 +216,7 @@ public class LogIn extends javax.swing.JFrame {
             switch(userRole){
                 case "Vendor":
                     this.dispose();
-                    Vendor v = new Vendor(userid, password);
-                    //v.getDetails();
+                    Vendor v = new Vendor(user);
                     VendorMainPage vmp = new VendorMainPage(v);
                     vmp.setVisible(true);
                     break;
@@ -225,8 +224,7 @@ public class LogIn extends javax.swing.JFrame {
                 case "Customer":
                     this.dispose();
                     Customer cs = new Customer(user);
-                    System.out.println(cs.getEmail());
-                    CUSTOMER_Main vr = new CUSTOMER_Main(user);
+                    CUSTOMER_Main vr = new CUSTOMER_Main(cs);
                     vr.setVisible(true);
                     break;
                     

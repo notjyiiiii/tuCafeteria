@@ -17,7 +17,8 @@ public class Customer extends Users implements IDataContainer, Serializable{
     
     
     public Customer(Users user){
-        
+        this.userid = user.getUserid();
+        this.username = user.getUsername();
     }
 
 //    public void setCredit(double credit) {
