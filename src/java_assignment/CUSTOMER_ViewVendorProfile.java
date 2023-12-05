@@ -1,5 +1,9 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
     private Vendor vendor;
@@ -580,10 +584,16 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnVendorMenuCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVendorMenuCusMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-        CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu();
-        viewMenu.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu();
+            viewMenu.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVendorMenuCusMouseClicked
 
     public static void main(String args[]) {

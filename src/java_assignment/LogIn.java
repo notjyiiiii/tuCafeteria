@@ -201,12 +201,25 @@ public class LogIn extends javax.swing.JFrame {
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
         try {
-            String password = pwf_pw.getText();
+            String password = new String(pwf_pw.getPassword());
             String userid = tf_userID.getText();
             
-            Users user = new Users(userid, password);
-            if(user.valid == false){
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+//            Users user = new Users(userid, password);
+//            if(user.valid == false){
+//                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+//                return;
+//            }
+            
+            if (password == null || password.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter a password.", "Error", JOptionPane.OK_OPTION);
+                return;
+            }
+
+            UsersHandler usersHandler = new UsersHandler("User",Users.class);
+            Users user = usersHandler.getAuthenticatedUser(userid, password);
+            
+            if (user == null) {
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.", "Error", JOptionPane.OK_OPTION);
                 return;
             }
             

@@ -1,4 +1,4 @@
-package java_assignment;
+ package java_assignment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class CUSTOMER_Main extends javax.swing.JFrame {
 
-    private String userid, password;
+    //private String userid, password;
     private Customer customer;
     
     public CUSTOMER_Main(){}
@@ -17,7 +17,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         lb_Cname.setText(customer.getUsername());
         
         if (customer.userid != null) {
-        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+        CustomerHandler customerHandler = new CustomerHandler("Customer");
         double x = customerHandler.getCredit(customer.userid);
         lb_cCredit.setText("RM: "+String.valueOf(x));
         }
@@ -25,6 +25,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         // Handle the case where userid is null (perhaps display an error message)
         System.err.println("Userid is null");
         }
+        
+//        CustomerHandler testing = new CustomerHandler("Customer", Customer.class);
+//        testing.AddNewItem(customer);
         
 //        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
 //        String x = customerHandler.getCredit(userid);
@@ -147,9 +150,14 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
         lb_Cname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
-        jButton2.setText("jButton1");
+        jButton2.setText("Western");
         jButton2.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton2.setMinimumSize(new java.awt.Dimension(78, 16));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -179,7 +187,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton8.setText("jButton1");
+        jButton8.setText("Chinese");
         jButton8.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton8.setMinimumSize(new java.awt.Dimension(78, 16));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +196,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setText("jButton1");
+        jButton9.setText("Malay");
         jButton9.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton9.setMinimumSize(new java.awt.Dimension(78, 16));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +205,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setText("jButton1");
+        jButton10.setText("Indian");
         jButton10.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton10.setMinimumSize(new java.awt.Dimension(78, 16));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +214,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setText("jButton1");
+        jButton11.setText("Korean");
         jButton11.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton11.setMinimumSize(new java.awt.Dimension(78, 16));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +223,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setText("jButton1");
+        jButton12.setText("Japanese");
         jButton12.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton12.setMinimumSize(new java.awt.Dimension(78, 16));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -506,6 +514,11 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         orderHis.setVisible(true);
                                
     }//GEN-LAST:event_btn_Settings1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

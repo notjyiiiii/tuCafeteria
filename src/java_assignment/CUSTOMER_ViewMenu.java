@@ -1,18 +1,29 @@
 package java_assignment;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
-//    MenuHandler menuHandler = new MenuHandler("ObjUser",Menu.class);
-//    ArrayList<Menu> menu = menuHandler.GetVendorMenu("VD001");
+    private String[] columnName = {"Food", "Food Description", "Food Type", "Price"};
+    private int row = -1;
     
     
-    public CUSTOMER_ViewMenu() {
+    
+    public CUSTOMER_ViewMenu() throws IOException, ClassNotFoundException {
         initComponents();
+        model.setColumnIdentifiers(columnName);
+        
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menuList = mh.GetVendorMenu(vendor.userid);
+//
+//        System.out.print(menuList);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -200,7 +211,13 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CUSTOMER_ViewMenu().setVisible(true);
+                try {
+                    new CUSTOMER_ViewMenu().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -3,10 +3,10 @@ package java_assignment;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CustomerHandler extends BaseHandler<Customer>{
+public class CustomerHandler extends UsersHandler<Customer>{
     
-    public CustomerHandler(String filePath, Class<Customer> clazz) throws IOException, ClassNotFoundException{
-        super(filePath, clazz);
+    public CustomerHandler(String filePath) throws IOException, ClassNotFoundException{
+        super(filePath, Customer.class);
         //readCreditFromFile(filePath);
     }
     
