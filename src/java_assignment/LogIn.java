@@ -208,7 +208,7 @@ public class LogIn extends javax.swing.JFrame {
             User user = handler.ValidateUserCredential(userid, password);
        
             if(user==null){
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE);
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
                 return;
             }
             

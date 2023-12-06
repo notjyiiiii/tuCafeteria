@@ -17,7 +17,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, e,"Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(null, e,"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
             return;
         }
         
