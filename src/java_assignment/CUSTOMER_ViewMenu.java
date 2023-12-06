@@ -10,19 +10,38 @@ import javax.swing.table.DefaultTableModel;
 public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
-    private String[] columnName = {"Food", "Food Description", "Food Type", "Price"};
-    private int row = -1;
+    private String[] columnName = {"Food", "Food Description", "Price"};
+    private int row=-1;
+    private String vendorName;
+    
+    public CUSTOMER_ViewMenu(){}
     
     
-    
-    public CUSTOMER_ViewMenu() throws IOException, ClassNotFoundException {
+    public CUSTOMER_ViewMenu(String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
+        this.vendorName = vendorName;
+        //VendorHandler vendorHandler = new VendorHandler();
+//        this.vendorIDObj = vendorHandler.GetVendorByVendorID(Java_assignment.LoggedInUser.userid);
+//        System.out.println(this.vendorIDObj);
+             
+//        String vendorID = String.valueOf(vendorIDObj);
+//        System.out.println(vendorID);
+        
+        
         model.setColumnIdentifiers(columnName);
         
-//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
-//        ArrayList<Menu> menuList = mh.GetVendorMenu(vendor.userid);
-//
-//        System.out.print(menuList);
+        ViewMenu.setModel(model);
+        
+        ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
+        ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
+        ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
+        
+        MenuHandler menuHandler = new MenuHandler("Menu",Menu.class);
+        ArrayList<Menu> menu = menuHandler.GetVendorMenu(vendorName);
+        
+        for (Menu menuItem : menu) {
+            model.addRow(new Object[]{menuItem.getItemName(), menuItem.getItemDesc(), menuItem.getItemPrice()});
+        }
         
     }
 
@@ -87,25 +106,12 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Search");
 
-        ViewMenu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"#2768", "Dine In", "Food1 , Food 2", "Pending", null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+        ViewMenu.setModel(model);
+        ViewMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ViewMenuMouseReleased(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(ViewMenu);
 
         jButton3.setText("Search");
@@ -137,19 +143,18 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
-                                .addGap(271, 271, 271))))
+                                .addComponent(jButton3))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
+                        .addGap(315, 315, 315)
                         .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(btnOrderBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,11 +165,11 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -172,7 +177,9 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,33 +198,57 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnOrderBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderBckMouseClicked
-        this.dispose();
-        CUSTOMER_Main CusMain = new CUSTOMER_Main(new Customer());
-        CusMain.setVisible(true);
+        try {
+            this.dispose();
+            CUSTOMER_Main CusMain = new CUSTOMER_Main();
+            CusMain.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnOrderBckMouseClicked
 
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
-        order.setVisible(true); 
+//        this.dispose();
+//        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
+//        order.setVisible(true); 
+        row = ViewMenu.getSelectedRow();
+        if (row != -1) {
+            String food = String.valueOf(model.getValueAt(row, 0));
+            String foodDesc = String.valueOf(model.getValueAt(row, 1));
+            String foodPrice = String.valueOf(model.getValueAt(row, 2));
+
+            
+            this.dispose();
+            CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorName);
+            confirmorder.setVisible(true);
+        } 
+        else {
+        // Display a message or handle the case where no item is selected
+            JOptionPane.showMessageDialog(this, "Please select an item before placing an order.");
+        }
+        
     }//GEN-LAST:event_btnOrderMouseClicked
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOrderActionPerformed
 
+    private void ViewMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewMenuMouseReleased
+         //TODO add your handling code here:
+        row = ViewMenu.getSelectedRow();
+        String Food = String.valueOf(model.getValueAt(row, 0));
+        String FoodDesc = String.valueOf(model.getValueAt(row, 1));
+        String FoodPrice = String.valueOf(model.getValueAt(row, 2));
+    }//GEN-LAST:event_ViewMenuMouseReleased
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new CUSTOMER_ViewMenu().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new CUSTOMER_ViewMenu().setVisible(true);
             }
         });
     }

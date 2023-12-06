@@ -6,15 +6,29 @@ import java.util.logging.Logger;
 
 public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
-    private Vendor vendor;
+    //private Vendor vendor;
+    private String vendorName;
     
-    public CUSTOMER_ViewVendorProfile(Vendor vendor) {
+//    public CUSTOMER_ViewVendorProfile(Vendor vendor){
+//        initComponents();
+//        this.vendor = vendor;
+//    }
+    
+    public CUSTOMER_ViewVendorProfile(String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
-        this.vendor= vendor;
-//        jLabel1.setText(vendor.getUsername());
-//        jLabel2.setText(vendor.getUserid());
-////        jLabel29.setText(vendor.getHP());
-//        jLabel31.setText(vendor.getEmail());
+        this.vendorName = vendorName;
+        lblvdName.setText(this.vendorName);
+        
+        if (Java_assignment.LoggedInUser.userid != null) {
+        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+        double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
+        lb_Credit.setText("RM: "+String.valueOf(x));
+        }
+        else {
+        // Handle the case where userid is null (perhaps display an error message)
+        System.err.println("Userid is null");
+        }
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,8 +45,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         btn_dashb1 = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         btnVendorMenuCus = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblvdName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -66,7 +79,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         lb_tuName4 = new javax.swing.JLabel();
         lb_cafeName2 = new javax.swing.JLabel();
         lb_dailyEarnings3 = new javax.swing.JLabel();
-        lb_dailyEarningstxt3 = new javax.swing.JLabel();
+        lb_Credit = new javax.swing.JLabel();
         btn_Profile1 = new java.awt.Button();
         btn_Settings1 = new java.awt.Button();
 
@@ -183,11 +196,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
-        jLabel1.setText("Vendor Name");
-
-        jLabel2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jLabel2.setText("VendorID");
+        lblvdName.setFont(new java.awt.Font("Malayalam MN", 3, 36)); // NOI18N
+        lblvdName.setText("Vendor Name");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Rectangle 1835.png"))); // NOI18N
 
@@ -416,7 +426,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(rightPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblvdName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVendorMenuCus)
                         .addGap(24, 24, 24))
@@ -424,12 +434,9 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton4)
                             .addGroup(rightPanelLayout.createSequentialGroup()
-                                .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(rightPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
-                                    .addComponent(jLabel2))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -446,11 +453,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVendorMenuCus)
-                            .addGroup(rightPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
-                        .addGap(18, 18, 18)
+                            .addComponent(lblvdName))
+                        .addGap(44, 44, 44)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)))
@@ -480,7 +484,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         lb_dailyEarnings3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_dailyEarnings3.setText("TU - E Credits:");
 
-        lb_dailyEarningstxt3.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_Credit.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         btn_Profile1.setLabel("Profile");
 
@@ -499,7 +503,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                     .addComponent(lb_tuName4)
                     .addComponent(lb_tuName5)
                     .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_Credit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lb_cafeName2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -515,7 +519,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lb_dailyEarnings3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Credit, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
@@ -585,15 +589,46 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
     private void btnVendorMenuCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVendorMenuCusMouseClicked
         try {
-            // TODO add your handling code here:
-            this.dispose();
-            CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu();
-            viewMenu.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+//            VendorHandler vd = new VendorHandler();
+//            vendor = vd.GetVendorByVendorID("VD001");
+//            String vdName = vendor.getVendorName();
+//            System.out.println(vdName);
+            
+
+            if("Western".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD001");
+                viewMenu.setVisible(true);
+            }
+            else if("Chinese".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD002");
+                viewMenu.setVisible(true);
+            }
+            else if("Malay".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD003");
+                viewMenu.setVisible(true);
+            }
+            else if("Indian".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD004");
+                viewMenu.setVisible(true);
+            }
+            else if("Korean".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD005");
+                viewMenu.setVisible(true);
+            }
+            else if("Japanese".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD006");
+                viewMenu.setVisible(true);
+            }
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btnVendorMenuCusMouseClicked
 
     public static void main(String args[]) {
@@ -615,7 +650,6 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -626,7 +660,6 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -644,14 +677,15 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lb_Credit;
     private javax.swing.JLabel lb_cafeName2;
     private javax.swing.JLabel lb_dailyEarnings3;
-    private javax.swing.JLabel lb_dailyEarningstxt3;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_tuName4;
     private javax.swing.JLabel lb_tuName5;
+    private javax.swing.JLabel lblvdName;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;

@@ -6,6 +6,7 @@ public class VendorMainPage extends javax.swing.JFrame {
     
     private Vendor currentVendor;
     private User user;
+    
     public VendorMainPage(User user){
         this.user = user;
     }

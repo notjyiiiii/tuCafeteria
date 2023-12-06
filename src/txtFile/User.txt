@@ -12,3 +12,5 @@ AD010;Islam;islam@tuCafeteria.edu.co;011234567;islam123;Admin;
 DR011;Frank;frank@tuCafeteria.edu.co;012234567;frank123;Runner;
 DR012;Ben;ben@tuCafeteria.edu.co;013234567;ben123;Runner;
 DR013;Paul;paul@tuCafeteria.edu.co;014234567;paul123;Runner;
+VD002;Talia;talia@tuCafeteria.edu.co;0129304395;talia123;Vendor;
+VD006;Bornet;bornet@tuCafeteria.edu.co;0192345829;bornet123;Vendor;

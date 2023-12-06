@@ -1,6 +1,8 @@
  package java_assignment;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,7 +20,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         if (Java_assignment.LoggedInUser.userid != null) {
         CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
         double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
-        lb_cCredit.setText("RM: "+String.valueOf(x));
+        lb_Credit.setText("RM: "+String.valueOf(x));
         }
         else {
         // Handle the case where userid is null (perhaps display an error message)
@@ -59,14 +61,14 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
         lb_welcome = new javax.swing.JLabel();
         lb_Cname = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        westernFood = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lb_totalmenu1 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        chineseFood = new javax.swing.JButton();
+        malayFood = new javax.swing.JButton();
+        indianFood = new javax.swing.JButton();
+        koreanFood = new javax.swing.JButton();
+        japaneseFood = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         btn_notiCus = new javax.swing.JButton();
         btn_orderHis = new javax.swing.JButton();
@@ -79,7 +81,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         btn_Profile1 = new java.awt.Button();
         btn_Settings1 = new java.awt.Button();
         lb_dailyEarnings3 = new javax.swing.JLabel();
-        lb_cCredit = new javax.swing.JLabel();
+        lb_Credit = new javax.swing.JLabel();
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,17 +151,17 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
         lb_Cname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
-        jButton2.setText("Western");
-        jButton2.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton2.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        westernFood.setText("Western");
+        westernFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        westernFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        westernFood.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                westernFoodMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        westernFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                westernFoodActionPerformed(evt);
             }
         });
 
@@ -186,48 +188,73 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton8.setText("Chinese");
-        jButton8.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton8.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        chineseFood.setText("Chinese");
+        chineseFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        chineseFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        chineseFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chineseFoodMouseClicked(evt);
+            }
+        });
+        chineseFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                chineseFoodActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Malay");
-        jButton9.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton9.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        malayFood.setText("Malay");
+        malayFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        malayFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        malayFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                malayFoodMouseClicked(evt);
+            }
+        });
+        malayFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                malayFoodActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Indian");
-        jButton10.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton10.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        indianFood.setText("Indian");
+        indianFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        indianFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        indianFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                indianFoodMouseClicked(evt);
+            }
+        });
+        indianFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                indianFoodActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Korean");
-        jButton11.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton11.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        koreanFood.setText("Korean");
+        koreanFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        koreanFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        koreanFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                koreanFoodMouseClicked(evt);
+            }
+        });
+        koreanFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                koreanFoodActionPerformed(evt);
             }
         });
 
-        jButton12.setText("Japanese");
-        jButton12.setMaximumSize(new java.awt.Dimension(78, 16));
-        jButton12.setMinimumSize(new java.awt.Dimension(78, 16));
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        japaneseFood.setText("Japanese");
+        japaneseFood.setMaximumSize(new java.awt.Dimension(78, 16));
+        japaneseFood.setMinimumSize(new java.awt.Dimension(78, 16));
+        japaneseFood.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                japaneseFoodMouseClicked(evt);
+            }
+        });
+        japaneseFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                japaneseFoodActionPerformed(evt);
             }
         });
 
@@ -248,16 +275,16 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                     .addGroup(rightPanelLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(indianFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(westernFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(koreanFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chineseFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(japaneseFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(malayFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -272,14 +299,14 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(westernFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chineseFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(malayFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(indianFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(koreanFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(japaneseFood, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -374,6 +401,8 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         lb_dailyEarnings3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_dailyEarnings3.setText("TU - E Credits:");
 
+        lb_Credit.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+
         javax.swing.GroupLayout leftPanel2Layout = new javax.swing.GroupLayout(leftPanel2);
         leftPanel2.setLayout(leftPanel2Layout);
         leftPanel2Layout.setHorizontalGroup(
@@ -381,7 +410,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             .addGroup(leftPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(leftPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_cCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_Credit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_dailyEarnings3)
                     .addComponent(btn_Settings1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_tuName4)
@@ -402,7 +431,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lb_dailyEarnings3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_cCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Credit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
@@ -478,29 +507,29 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_dashb1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void westernFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_westernFoodActionPerformed
+        
+    }//GEN-LAST:event_westernFoodActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void chineseFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chineseFoodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_chineseFoodActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void malayFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malayFoodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_malayFoodActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void indianFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indianFoodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_indianFoodActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void koreanFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_koreanFoodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_koreanFoodActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void japaneseFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_japaneseFoodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_japaneseFoodActionPerformed
 
     private void btn_notiCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiCusActionPerformed
         // TODO add your handling code here:
@@ -514,10 +543,103 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                                
     }//GEN-LAST:event_btn_Settings1MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
+    private void westernFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_westernFoodMouseClicked
         
-    }//GEN-LAST:event_jButton2MouseClicked
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            //VendorHandler vdHandler = new VendorHandler();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Western");
+            vdProfile.setVisible(true);
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_westernFoodMouseClicked
+
+    private void chineseFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chineseFoodMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            this.dispose();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Chinese");
+            vdProfile.setVisible(true);
+            
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_chineseFoodMouseClicked
+
+    private void malayFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_malayFoodMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            this.dispose();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Malay");
+            vdProfile.setVisible(true);
+            
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_malayFoodMouseClicked
+
+    private void indianFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_indianFoodMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            this.dispose();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Indian");
+            vdProfile.setVisible(true);
+            
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_indianFoodMouseClicked
+
+    private void koreanFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_koreanFoodMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            this.dispose();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Korean");
+            vdProfile.setVisible(true);
+            
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_koreanFoodMouseClicked
+
+    private void japaneseFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_japaneseFoodMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            this.dispose();
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Japanese");
+            vdProfile.setVisible(true);
+            
+            
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_japaneseFoodMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -537,15 +659,13 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton chineseFood;
+    private javax.swing.JButton indianFood;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton japaneseFood;
+    private javax.swing.JButton koreanFood;
     private javax.swing.JLabel lb_Cname;
-    private javax.swing.JLabel lb_cCredit;
+    private javax.swing.JLabel lb_Credit;
     private javax.swing.JLabel lb_cafeName2;
     private javax.swing.JLabel lb_dailyEarnings3;
     private javax.swing.JLabel lb_logoName1;
@@ -556,7 +676,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private javax.swing.JLabel lb_tuName5;
     private javax.swing.JLabel lb_welcome;
     private javax.swing.JPanel leftPanel2;
+    private javax.swing.JButton malayFood;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;
+    private javax.swing.JButton westernFood;
     // End of variables declaration//GEN-END:variables
 }
