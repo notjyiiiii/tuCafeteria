@@ -2,6 +2,8 @@ package java_assignment;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CUSTOMER_Main extends javax.swing.JFrame {
@@ -150,6 +152,11 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         jButton2.setText("jButton1");
         jButton2.setMaximumSize(new java.awt.Dimension(78, 16));
         jButton2.setMinimumSize(new java.awt.Dimension(78, 16));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -506,6 +513,21 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         orderHis.setVisible(true);
                                
     }//GEN-LAST:event_btn_Settings1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu();
+            viewMenu.setVisible(true);
+            MenuHandler menuHandler = new MenuHandler("Menu",Menu.class);
+            ArrayList<Menu> menu = menuHandler.GetVendorMenu("VD001");
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
