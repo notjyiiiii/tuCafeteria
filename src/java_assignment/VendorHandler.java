@@ -10,18 +10,16 @@ public class VendorHandler extends BaseHandler<Vendor>{
         super("Vendor");
         
         UserHandler userHandler = new UserHandler("User", User.class);
-        ArrayList<User> userArr = userHandler.GetUsersOfRole("Vendor");  
-        ArrayList<Vendor> vendorInfoArr = this.LoadCollection("Vendor", Vendor.class);
+        collection = this.LoadCollection("Vendor", Vendor.class);
         
-        String abc = "abc";
         
     }
     
-    public Vendor GetVendorByUserID(String userid)
+    public Vendor GetVendorByVendorID(String vendorid)
     {
         for (int i = 0; i<collection.size(); i++)
         {
-            if (collection.get(i).userid.equals(userid))
+            if (collection.get(i).getVendorid().equals(vendorid))
             {
                 return collection.get(i);
             }

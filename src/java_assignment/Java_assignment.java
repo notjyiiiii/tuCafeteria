@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Java_assignment {
     
-    public static String LoggedInUserID = null;
+    public static User LoggedInUser = null;
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         

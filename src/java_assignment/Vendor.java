@@ -4,13 +4,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java_assignment.Enums.OperatingDay;
 
-public class Vendor extends User implements IDataContainer, Serializable{
 
-    private OperatingDay[] operatingDays;
+// Note: No longer extending from User. User info all saved to Java_assignment static var
+public class Vendor implements IDataContainer, Serializable{
+
+    private String vendorid;
+    private String vendorName;
+    private ArrayList<OperatingDay> operatingDays;
+    private String operatingHours;
     
     // Interface Methods
     
-    public OperatingDay[] DeserializeOperatingDay(String dayString)
+    public ArrayList<OperatingDay> DeserializeOperatingDay(String dayString)
     {
         String[] dayStringArr = dayString.strip().split(",");
         ArrayList<OperatingDay> dayArr = new ArrayList<OperatingDay>();
@@ -20,16 +25,16 @@ public class Vendor extends User implements IDataContainer, Serializable{
             dayArr.add(OperatingDay.valueOf(dayStringArr[i]));
         }
         
-        return (OperatingDay[]) dayArr.toArray();
+        return dayArr;
     }
     
     public String SerializeOperatingDay()
     {
         String dayString = "";
         
-        for (int i = 0; i < operatingDays.length; i++)
+        for (int i = 0; i < operatingDays.size(); i++)
         {
-            dayString += operatingDays[i].toString();
+            dayString += operatingDays.get(i).toString();
         }  
         return dayString;
     }
@@ -37,28 +42,58 @@ public class Vendor extends User implements IDataContainer, Serializable{
     
     @Override
      public String[] SerializeData(){
-        String[] dataString = new String[6];
-        dataString[0] = this.userid;
-        dataString[1] = this.username;
-        dataString[2] = this.email;
-        dataString[3] = this.hpnum;
-        dataString[4] = this.password;
-        dataString[5] = this.role;
-        dataString[6] = this.SerializeOperatingDay();
+        String[] dataString = new String[4];
+        dataString[0] = this.vendorid;
+        dataString[1] = this.vendorName;
+        dataString[2] = SerializeOperatingDay();
+        dataString[3] = this.operatingHours;
         
         return dataString;
     }
     
     @Override
     public void DeserializeData(String[] dataArray){
-        super.DeserializeData(dataArray);
 //        UserHandler userHandler = new UserHandler();
-
-        this.operatingDays = DeserializeOperatingDay(dataArray[6]);
+        this.vendorid = dataArray[0];
+        this.vendorName = dataArray[1];
+        this.operatingDays = DeserializeOperatingDay(dataArray[2]);
+        this.operatingHours = dataArray[3];
     }
 //    private double ratings; //might be another class
 //    private int totalpratings; //might be another class
   
      
+    public String getVendorid() {
+        return vendorid;
+    }
+
+    public void setVendorid(String vendorid) {
+        this.vendorid = vendorid;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public ArrayList<OperatingDay> getOperatingDays() {
+        return operatingDays;
+    }
+
+    public void setOperatingDays(ArrayList<OperatingDay> operatingDays) {
+        this.operatingDays = operatingDays;
+    }
+
+    public String getOperatingHours() {
+        return operatingHours;
+    }
+
+    public void setOperatingHours(String operatingHours) {
+        this.operatingHours = operatingHours;
+    }
+
     
 }

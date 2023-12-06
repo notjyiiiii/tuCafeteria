@@ -225,7 +225,7 @@ public class LogIn extends javax.swing.JFrame {
                 return;
             }
             
-            Java_assignment.LoggedInUserID = userid;
+            Java_assignment.LoggedInUser = user;
             
             String userRole = user.getRole();
             switch(userRole){

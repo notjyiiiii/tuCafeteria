@@ -12,7 +12,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         
         try {
             VendorHandler vendorHandler = new VendorHandler();
-            this.currentVendor = vendorHandler.GetVendorByUserID(Java_assignment.LoggedInUserID);
+            this.currentVendor = vendorHandler.GetVendorByVendorID(Java_assignment.LoggedInUser.userid);
 
         }
         catch(Exception e)
@@ -22,7 +22,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         }
         
         // Set labels
-        lb_Vname.setText(currentVendor.username);
+        lb_Vname.setText(currentVendor.getVendorName());
         
         CalculateStats();
 //        lb_ecreditstxt.setText(currentVendor.cre)
@@ -390,7 +390,7 @@ public class VendorMainPage extends javax.swing.JFrame {
     
     private void CalculateStats() {
         // Calculate from Order Handler
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
