@@ -19,6 +19,9 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         setVisible(true);
+        
+        Login("VD001", "amy123");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -200,24 +203,35 @@ public class LogIn extends javax.swing.JFrame {
 
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
-        try {
-            String password = pwf_pw.getText();
-            String userid = tf_userID.getText();
+        String password = pwf_pw.getText();
+        String userid = tf_userID.getText();
             
-            UsersHandler handler = new UsersHandler("User", Users.class);
-            Users user = handler.getusers(userid);
+        Login(userid, password);
+            
+    }//GEN-LAST:event_bt_logInMouseClicked
+
+    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_logInActionPerformed
+
+    private void Login(String userid, String password)
+    {
+        try {
+            UserHandler handler = new UserHandler("User", User.class);
+            User user = handler.ValidateUserCredential(userid, password);
        
             if(user==null){
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
+            Java_assignment.LoggedInUserID = userid;
             
             String userRole = user.getRole();
             switch(userRole){
                 case "Vendor":
-                    this.dispose();
-                    Vendor v = new Vendor(user);
-                    VendorMainPage vmp = new VendorMainPage(v);
+                    this.dispose(); 
+                    VendorMainPage vmp = new VendorMainPage();
                     vmp.setVisible(true);
                     break;
                     
@@ -227,28 +241,15 @@ public class LogIn extends javax.swing.JFrame {
                     CUSTOMER_Main vr = new CUSTOMER_Main(cs);
                     vr.setVisible(true);
                     break;
+                // TODO: More switch case for each role
                     
-            }
+        }
         } catch (IOException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_bt_logInMouseClicked
-
-    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_logInActionPerformed
-
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogIn().setVisible(true);
-            }
-        });
     }
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

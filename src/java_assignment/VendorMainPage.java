@@ -1,17 +1,31 @@
 package java_assignment;
 
-public class VendorMainPage extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
 
-    private Vendor vendor;
+public class VendorMainPage extends javax.swing.JFrame {
     
-    public VendorMainPage(Vendor vendor) {
+    private Vendor currentVendor;
+    
+    public VendorMainPage() {
         initComponents();
         setVisible(true); 
-        this.vendor = vendor;
-        //Vendor vendor = new Vendor();
-        lb_Vname.setText(vendor.getUsername());
-        System.out.println(vendor.getUsername());
         
+        try {
+            VendorHandler vendorHandler = new VendorHandler();
+            this.currentVendor = vendorHandler.GetVendorByUserID(Java_assignment.LoggedInUserID);
+
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showConfirmDialog(null, e,"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Set labels
+        lb_Vname.setText(currentVendor.username);
+        
+        CalculateStats();
+//        lb_ecreditstxt.setText(currentVendor.cre)
     }
 
     @SuppressWarnings("unchecked")
@@ -28,7 +42,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         lb_tuName1 = new javax.swing.JLabel();
         btn_Profile = new java.awt.Button();
         btn_Settings = new java.awt.Button();
-        lb_dailyEarningstxt = new javax.swing.JLabel();
+        lb_ecredittxt = new javax.swing.JLabel();
         lb_dailyEarnings1 = new javax.swing.JLabel();
         btn_Credits = new java.awt.Button();
         rightPanel = new javax.swing.JPanel();
@@ -38,8 +52,8 @@ public class VendorMainPage extends javax.swing.JFrame {
         lb_totalmenu = new javax.swing.JLabel();
         lb_totalmenutxt = new javax.swing.JLabel();
         lb_totalmenu1 = new javax.swing.JLabel();
-        lb_totalmenutxt1 = new javax.swing.JLabel();
-        lb_dailyEarningstxt1 = new javax.swing.JLabel();
+        lb_totalordersdailytxt = new javax.swing.JLabel();
+        lb_dailyEarningTxt = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         btn_noti = new javax.swing.JButton();
         btn_orders = new javax.swing.JButton();
@@ -115,7 +129,7 @@ public class VendorMainPage extends javax.swing.JFrame {
             }
         });
 
-        lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_ecredittxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         lb_dailyEarnings1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_dailyEarnings1.setText("TU - E Credits:");
@@ -142,7 +156,7 @@ public class VendorMainPage extends javax.swing.JFrame {
                     .addComponent(lb_tuName)
                     .addComponent(lb_tuName1)
                     .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lb_dailyEarningstxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_ecredittxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lb_cafeName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -158,7 +172,7 @@ public class VendorMainPage extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lb_dailyEarnings1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_dailyEarningstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_ecredittxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(btn_Credits, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
@@ -186,9 +200,9 @@ public class VendorMainPage extends javax.swing.JFrame {
         lb_totalmenu1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_totalmenu1.setText("Total Orders (Daily)");
 
-        lb_totalmenutxt1.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_totalordersdailytxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
-        lb_dailyEarningstxt1.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_dailyEarningTxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
         rightPanel.setLayout(rightPanelLayout);
@@ -204,12 +218,12 @@ public class VendorMainPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_totalmenu1)
-                            .addComponent(lb_totalmenutxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lb_totalordersdailytxt, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49))
                     .addGroup(rightPanelLayout.createSequentialGroup()
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_dailyEarnings)
-                            .addComponent(lb_dailyEarningstxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_dailyEarningTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lb_welcome)
                             .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -224,7 +238,7 @@ public class VendorMainPage extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(lb_dailyEarnings)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_dailyEarningstxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_dailyEarningTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(rightPanelLayout.createSequentialGroup()
@@ -234,7 +248,7 @@ public class VendorMainPage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
                         .addComponent(lb_totalmenu1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lb_totalmenutxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lb_totalordersdailytxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -332,13 +346,13 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
         this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
+        VendorInsightsPage vip = new VendorInsightsPage(currentVendor);
         vip.setVisible(true);
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
             this.dispose();
-            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            VendorMenuPage vmenup = new VendorMenuPage(currentVendor);
             vmenup.setVisible(true);
     }//GEN-LAST:event_btn_menuMouseClicked
 
@@ -356,7 +370,7 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_ProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProfileMouseClicked
         this.dispose();
-        VendorProfilePage vpp = new VendorProfilePage(vendor);
+        VendorProfilePage vpp = new VendorProfilePage(currentVendor);
         vpp.setVisible(true);
     }//GEN-LAST:event_btn_ProfileMouseClicked
 
@@ -372,13 +386,13 @@ public class VendorMainPage extends javax.swing.JFrame {
         noti.setVisible(true);
     }//GEN-LAST:event_btn_notiMouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new VendorMainPage().setVisible(true);
-            }
-        });
+    // Custom code
+    
+    private void CalculateStats() {
+        // Calculate from Order Handler
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
@@ -392,17 +406,17 @@ public class VendorMainPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_orders;
     private javax.swing.JLabel lb_Vname;
     private javax.swing.JLabel lb_cafeName;
+    private javax.swing.JLabel lb_dailyEarningTxt;
     private javax.swing.JLabel lb_dailyEarnings;
     private javax.swing.JLabel lb_dailyEarnings1;
-    private javax.swing.JLabel lb_dailyEarningstxt;
-    private javax.swing.JLabel lb_dailyEarningstxt1;
+    private javax.swing.JLabel lb_ecredittxt;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_totalmenu;
     private javax.swing.JLabel lb_totalmenu1;
     private javax.swing.JLabel lb_totalmenutxt;
-    private javax.swing.JLabel lb_totalmenutxt1;
+    private javax.swing.JLabel lb_totalordersdailytxt;
     private javax.swing.JLabel lb_tuName;
     private javax.swing.JLabel lb_tuName1;
     private javax.swing.JLabel lb_welcome;
@@ -410,4 +424,6 @@ public class VendorMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

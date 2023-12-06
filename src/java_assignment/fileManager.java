@@ -10,11 +10,7 @@ public class fileManager {
     private final String baseDirectory = "";
     private final String configDirectory = "/src/java_assignment/Config.properties";
     private final String mainFolderPath, configFilePath;
-    private final String delimiter = ";";
-    private static boolean check;
     private String configVal;
-    private String userid;
-    private String pw;
     
     //all the paths
     public fileManager(){

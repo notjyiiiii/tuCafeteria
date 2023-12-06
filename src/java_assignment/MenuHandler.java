@@ -28,12 +28,6 @@ public class MenuHandler extends BaseHandler<Menu>{
         return vendorMenu;
     }
     
-    // Or can return custom error
-//    public boolean AddNewitem
-    
-    public void addItem(){
-        
-    }
     
     public void updateItem(){
         

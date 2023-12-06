@@ -13,7 +13,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         this.vendor= vendor;
         jLabel1.setText(vendor.getUsername());
         jLabel2.setText(vendor.getUserid());
-        jLabel29.setText(vendor.getHP());
+//        jLabel29.setText(vendor.getHP());
         jLabel31.setText(vendor.getEmail());
     }
     @SuppressWarnings("unchecked")

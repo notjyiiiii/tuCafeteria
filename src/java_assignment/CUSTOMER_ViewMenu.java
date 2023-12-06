@@ -192,7 +192,7 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
     private void btnOrderBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderBckMouseClicked
         this.dispose();
-        CUSTOMER_Main CusMain = new CUSTOMER_Main();
+        CUSTOMER_Main CusMain = new CUSTOMER_Main(new Customer());
         CusMain.setVisible(true);
     }//GEN-LAST:event_btnOrderBckMouseClicked
 

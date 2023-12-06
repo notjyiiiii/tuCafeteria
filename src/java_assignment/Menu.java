@@ -18,7 +18,7 @@ public class Menu implements IDataContainer, Serializable {
     
     public Menu()
     {
-       // itemid = "Empty Test";
+        
     }
     
     // No setters here

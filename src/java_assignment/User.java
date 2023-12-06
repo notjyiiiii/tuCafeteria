@@ -6,60 +6,89 @@ import java.util.*;
 
 
 
-public class Users implements IDataContainer, Serializable{
+public class User implements IDataContainer{
     
-    //declaration
-    protected String password;
     protected String userid;
     protected String username;
     protected String email;
-    protected String role;
     protected String hpnum;
-    protected boolean valid = false;
+    protected String password; 
+    protected String role; 
     
-    //getter & setter
-
-    public String getPassword() {
-        return password;
+    // Interface Methods
+    public String[] SerializeData(){
+        String[] dataString = new String[6];
+        dataString[0] = this.userid;
+        dataString[1] = this.username;
+        dataString[2] = this.email;
+        dataString[3] = this.hpnum;
+        dataString[4] = this.password;
+        dataString[5] = this.role;
+        
+        return dataString;
     }
-
+    
+    public void DeserializeData(String[] dataArray){
+        this.userid = dataArray[0];
+        this.username = dataArray[1];
+        this.email = dataArray[2];
+        this.hpnum = dataArray[3];
+        this.password = dataArray[4];
+        this.role = dataArray[5];
+    }
+    
+    
+    
+    // Getters and setters
+    
     public String getUserid() {
         return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHpnum() {
+        return hpnum;
+    }
+
+    public void setHpnum(String hpnum) {
+        this.hpnum = hpnum;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
         return role;
     }
-    
-    public String getHP() {
-        return hpnum;
+
+    // Variables
+    public void setRole(String role) {
+        this.role = role;
     }
-    
-    
-    
-    
-    //empty constructor because why not
-    public Users(){
-        
-    }
-    
-    
-    //constructor with parameters
-    public Users(String id, String pw){
-        this.userid = id;
-        this.password = pw;
-//        valid = checkIdPass();
-    }
-    
-    
     
     
     //to get user details
@@ -114,26 +143,6 @@ public class Users implements IDataContainer, Serializable{
 //        
 //        return false;
 //    }
-    
-    public String[] SerializeData(){
-        String[] dataString = new String[6];
-        dataString[0] = this.userid;
-        dataString[1] = this.username;
-        dataString[2] = this.email;
-        dataString[3] = this.hpnum;
-        dataString[4] = this.password;
-        dataString[5] = this.role;
-        
-        return dataString;
-    }
-    
-    public void DeserializeData(String[] dataArray){
-        this.userid = dataArray[0];
-        this.username = dataArray[1];
-        this.email = dataArray[2];
-        this.hpnum = dataArray[3];
-        this.password = dataArray[4];
-        this.role = dataArray[5];
-    }
+
     
 }

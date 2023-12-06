@@ -5,16 +5,21 @@ import java.util.*;
 
 public class Java_assignment {
     
-//    public static Users currentUser;
-
+    public static String LoggedInUserID = null;
+    
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-//        currentUser = new Users();
         
-        fileManager fm = new fileManager();
-//        
        LogIn lg = new LogIn();
-//        
+       
+       
+       
+       
+       
+       
+       // ARCHIVE CODE
+       // ---------------------------------------
+       
        // String key = "User";
 //        String configVar = 
         //String get = fm.getConfigVar(key, true);
