@@ -20,7 +20,7 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         
-        Login("VD001", "amy123");
+        
 
     }
 
@@ -237,8 +237,7 @@ public class LogIn extends javax.swing.JFrame {
                     
                 case "Customer":
                     this.dispose();
-                    Customer cs = new Customer(user);
-                    CUSTOMER_Main vr = new CUSTOMER_Main(cs);
+                    CUSTOMER_Main vr = new CUSTOMER_Main();
                     vr.setVisible(true);
                     break;
                 // TODO: More switch case for each role

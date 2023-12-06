@@ -11,14 +11,13 @@ public class CustomerHandler extends BaseHandler<Customer>{
 
     
     public double getCredit(String customerID) throws IOException, ClassNotFoundException {
-        for (Customer cs : this.collection) {
-            if (cs.getUserid().equals(customerID)) {
-                // If customer found, convert the String credit to double
-                return Double.parseDouble(cs.getCredit());
-            }
+    for (Customer cs : this.collection) {
+        if (cs.getUserid().equals(customerID)) {
+            // If customer found, convert the String credit to double
+            return Double.parseDouble(cs.getCredit());
         }
-
-        throw new RuntimeException("Customer not found with ID: " + customerID);
     }
-    
+
+    throw new RuntimeException("Customer not found with ID: " + customerID);
+    }
 }

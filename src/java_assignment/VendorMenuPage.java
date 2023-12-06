@@ -366,8 +366,8 @@ public class VendorMenuPage extends javax.swing.JFrame {
 
     private void btn_dashbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashbMouseClicked
         this.dispose();
-        VendorMainPage vip = new VendorMainPage(vendor);
-        vip.setVisible(true);
+        //VendorMainPage vip = new VendorMainPage(vendor);
+        //vip.setVisible(true);
     }//GEN-LAST:event_btn_dashbMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked

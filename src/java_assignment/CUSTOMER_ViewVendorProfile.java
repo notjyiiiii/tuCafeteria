@@ -11,10 +11,10 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     public CUSTOMER_ViewVendorProfile(Vendor vendor) {
         initComponents();
         this.vendor= vendor;
-        jLabel1.setText(vendor.getUsername());
-        jLabel2.setText(vendor.getUserid());
-//        jLabel29.setText(vendor.getHP());
-        jLabel31.setText(vendor.getEmail());
+//        jLabel1.setText(vendor.getUsername());
+//        jLabel2.setText(vendor.getUserid());
+////        jLabel29.setText(vendor.getHP());
+//        jLabel31.setText(vendor.getEmail());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -557,7 +557,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
         this.dispose();
-        Notification noti = new Notification();
+        Notification_Page noti = new Notification_Page();
         noti.setVisible(true);
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
