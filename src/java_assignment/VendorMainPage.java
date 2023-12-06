@@ -11,7 +11,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         setVisible(true); 
         
         try {
-            VendorHandler vendorHandler = new VendorHandler("Vendor", Vendor.class);
+            VendorHandler vendorHandler = new VendorHandler();
             this.currentVendor = vendorHandler.GetVendorByUserID(Java_assignment.LoggedInUserID);
 
         }

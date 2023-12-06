@@ -14,15 +14,27 @@ public class BaseHandler<T extends IDataContainer> {
     public ArrayList<T> collection = new ArrayList<T>();
     public String filePath;
     
+    public BaseHandler(){}
     
-    public BaseHandler(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException
+    public BaseHandler(String filePath) 
     {
         this.filePath = filePath;
-        
+    }
+    
+    // Used to auto load
+    public BaseHandler(String filePath, Class<T> clazz) 
+    {
+        this.filePath = filePath;
+        collection = LoadCollection(filePath, clazz);    
+    }
+    
+    public ArrayList<T> LoadCollection(String filePath, Class<T> clazz)
+    {
         fileManager fm = new fileManager();
         String configVar = fm.getConfigVar(filePath, true);
         
         ArrayList<String[]> recordList = fm.readFile(configVar);
+        ArrayList<T> tList = new ArrayList<T>();
 
         for(int i = 0; i<recordList.size(); i++){
             String[] record = recordList.get(i);
@@ -30,11 +42,12 @@ public class BaseHandler<T extends IDataContainer> {
             // Validate if use other overriden blank class params will it work
             T classRecord = InstantiateHandler(clazz);
             classRecord.DeserializeData(record); 
-            collection.add(classRecord);
+            tList.add(classRecord);
 
         }
+        
+        return tList;
     }
-    
     
     private T InstantiateHandler(Class<T> clazz) {
         try {

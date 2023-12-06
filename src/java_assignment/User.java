@@ -12,7 +12,7 @@ public class User implements IDataContainer{
     protected String username;
     protected String email;
     protected String hpnum;
-    protected String password;
+    protected String password; 
     protected String role; 
     
     // Interface Methods

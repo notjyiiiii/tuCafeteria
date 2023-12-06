@@ -5,9 +5,15 @@ import java.util.ArrayList;
 
 public class VendorHandler extends BaseHandler<Vendor>{
 
-    public VendorHandler(String filePath, Class<Vendor> clazz) throws IOException, ClassNotFoundException{
-        super(filePath, clazz);
+    public VendorHandler() throws IOException, ClassNotFoundException
+    {
+        super("Vendor");
         
+        UserHandler userHandler = new UserHandler("User", User.class);
+        ArrayList<User> userArr = userHandler.GetUsersOfRole("Vendor");  
+        ArrayList<Vendor> vendorInfoArr = this.LoadCollection("Vendor", Vendor.class);
+        
+        String abc = "abc";
         
     }
     

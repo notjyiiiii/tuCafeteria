@@ -26,6 +26,21 @@ public class UserHandler extends BaseHandler<User>{
         return null;
     }
     
+    public ArrayList<User> GetUsersOfRole(String role)
+    {
+        ArrayList<User> userArr = new ArrayList<User>();
+        
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if (collection.get(i).getRole().equals(role))
+            {
+                userArr.add(collection.get(i));
+            }
+        }
+        
+        return userArr;
+    }
+    
     public User ValidateUserCredential(String userid, String password)
     {
          for (int i = 0; i<collection.size(); i++)
