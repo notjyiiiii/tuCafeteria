@@ -1,0 +1,3 @@
+VendorID;CustomerName;Review;Rating
+VD001;Brian;All Good, fast delivery;5
+VD001;Will;Food not really nice;3

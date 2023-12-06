@@ -7,18 +7,18 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
+public class CUSTOMER_ViewReview extends javax.swing.JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
-    private String[] columnName = {"Food", "Food Description", "Price"};
+    private String[] columnName = {"Name", "Review", "Rating"};
     private int row=-1;
     private String vendorID;
     private String vendorName;
     
-    public CUSTOMER_ViewMenu(){initComponents();}
+    public CUSTOMER_ViewReview(){initComponents();}
     
     
-    public CUSTOMER_ViewMenu(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
+    public CUSTOMER_ViewReview(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
         this.vendorID = vendorID;
         this.vendorName = vendorName;
@@ -38,11 +38,11 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
         ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
         
-        MenuHandler menuHandler = new MenuHandler("Menu",Menu.class);
-        ArrayList<Menu> menu = menuHandler.GetVendorMenu(vendorID);
+        ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+        ArrayList<Review> review = reviewHandler.GetVendorMenu(vendorID);
         
-        for (Menu menuItem : menu) {
-            model.addRow(new Object[]{menuItem.getItemName(), menuItem.getItemDesc(), menuItem.getItemPrice()});
+        for (Review reviewList : review) {
+            model.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
         }
         
     }
@@ -60,8 +60,8 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ViewMenu = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        btnOrderBck = new javax.swing.JButton();
-        btnOrder = new javax.swing.JButton();
+        btnReviewBck = new javax.swing.JButton();
+        btnWrite = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,22 +118,22 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 
         jButton3.setText("Search");
 
-        btnOrderBck.setText("Back");
-        btnOrderBck.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReviewBck.setText("Back");
+        btnReviewBck.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOrderBckMouseClicked(evt);
+                btnReviewBckMouseClicked(evt);
             }
         });
 
-        btnOrder.setText("Order");
-        btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnWrite.setText("Write Review");
+        btnWrite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOrderMouseClicked(evt);
+                btnWriteMouseClicked(evt);
             }
         });
-        btnOrder.addActionListener(new java.awt.event.ActionListener() {
+        btnWrite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrderActionPerformed(evt);
+                btnWriteActionPerformed(evt);
             }
         });
 
@@ -153,9 +153,9 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
                                 .addComponent(jButton3))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(315, 315, 315)
-                        .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(btnOrderBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnReviewBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,12 +165,12 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrderBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReviewBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -199,51 +199,23 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
 
-    private void btnOrderBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderBckMouseClicked
+    private void btnReviewBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReviewBckMouseClicked
         try {
             this.dispose();
             CUSTOMER_Main CusMain = new CUSTOMER_Main();
             CusMain.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CUSTOMER_ViewReview.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CUSTOMER_ViewReview.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnOrderBckMouseClicked
-
-    private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
-        // TODO add your handling code here:
-//        this.dispose();
-//        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
-//        order.setVisible(true); 
-        row = ViewMenu.getSelectedRow();
-        if (row != -1) {
-            String food = String.valueOf(model.getValueAt(row, 0));
-            String foodDesc = String.valueOf(model.getValueAt(row, 1));
-            String foodPrice = String.valueOf(model.getValueAt(row, 2));
-
-            
-            this.dispose();
-            CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorName);
-            confirmorder.setVisible(true);
-        } 
-        else {
-        // Display a message or handle the case where no item is selected
-            JOptionPane.showMessageDialog(this, "Please select an item before placing an order.");
-        }
-         
-    }//GEN-LAST:event_btnOrderMouseClicked
+    }//GEN-LAST:event_btnReviewBckMouseClicked
     
     public void updateViewOrderTable(String food, String foodDesc, String foodPrice) {
-            CUSTOMER_ConfirmOrder confirmorder2 = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorName);
-            confirmorder2.updateViewOrderTable(food, foodPrice);
+            
         }
     
     
-    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnOrderActionPerformed
-
     private void ViewMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewMenuMouseReleased
          //TODO add your handling code here:
         row = ViewMenu.getSelectedRow();
@@ -252,19 +224,45 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         String FoodPrice = String.valueOf(model.getValueAt(row, 2));
     }//GEN-LAST:event_ViewMenuMouseReleased
 
+    private void btnWriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnWriteActionPerformed
+
+    private void btnWriteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWriteMouseClicked
+        // TODO add your handling code here:
+        //        this.dispose();
+        //        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
+        //        order.setVisible(true);
+        row = ViewMenu.getSelectedRow();
+        if (row != -1) {
+            String food = String.valueOf(model.getValueAt(row, 0));
+            String foodDesc = String.valueOf(model.getValueAt(row, 1));
+            String foodPrice = String.valueOf(model.getValueAt(row, 2));
+
+            this.dispose();
+            CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorName);
+            confirmorder.setVisible(true);
+        }
+        else {
+            // Display a message or handle the case where no item is selected
+            JOptionPane.showMessageDialog(this, "Please select an item before placing an order.");
+        }
+
+    }//GEN-LAST:event_btnWriteMouseClicked
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CUSTOMER_ViewMenu().setVisible(true);
+                new CUSTOMER_ViewReview().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ViewMenu;
-    private javax.swing.JButton btnOrder;
-    private javax.swing.JButton btnOrderBck;
+    private javax.swing.JButton btnReviewBck;
+    private javax.swing.JButton btnWrite;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
