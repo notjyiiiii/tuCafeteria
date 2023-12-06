@@ -13,8 +13,7 @@ public class Java_assignment {
         
         fileManager fm = new fileManager();
 //        
-      // LogIn lg = new LogIn();
-      
+       LogIn lg = new LogIn();
 //        
        // String key = "User";
 //        String configVar = 
