@@ -11,13 +11,27 @@ public class Java_assignment {
         
 //        currentUser = new Users();
         
-        fileManager fm = new fileManager();
+      // fileManager fm = new fileManager();
 //        
-       LogIn lg = new LogIn();
-//        
-       // String key = "User";
+  //     LogIn lg = new LogIn();
+    //  fileManager fm = new fileManager();
+        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+        ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
+        Menu del = menu.get(0);
+        Menu upd = new Menu();
+//        mh.DeleteItem(del);
+//        System.out.println(del);
+        
+       upd.setUserid("VD001");
+        upd.setItemid("MD022");
+        upd.setItemPic("-");
+        upd.setItemPrice(8.00);
+        upd.setItemName("Tom Yam Soup");
+        upd.setItemDesc("Spicy and Sour soup made in Thailand");
+        mh.UpdateItem(del,upd);
+        //String key = "Menu";
 //        String configVar = 
-        //String get = fm.getConfigVar(key, true);
+//        String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
 //        System.out.println(user);
 //        System.out.println("------");
@@ -37,7 +51,7 @@ public class Java_assignment {
 //        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
 //        Menu menu = new Menu();
-//        menu.setUserid("VD001");
+//       menu.setUserid("VD001");
 //        menu.setItemid("MD022");
 //        menu.setItemPic("null");
 //        menu.setItemPrice(8);
@@ -45,9 +59,9 @@ public class Java_assignment {
 //        menu.setItemName("Tom Yam Soup");
 //        menu.setItemDesc("Spicy and Sour soup made in Thailand");
 //        menuHandler.AddNewItem(menu);
-//        
-//        
-//        Menu abs = menuList.get(5);
+////        
+////        
+//        Menu abs = menuList.get(0);
 //        
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName()+"\n");
