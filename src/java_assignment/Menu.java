@@ -82,7 +82,7 @@ public class Menu implements IDataContainer, Serializable {
    
     // don't know where i will use but just in case
     public String toString(){
-		return getUserid()+";"+getItemid()+";"+getItemPic()+";"+getItemName()+";"+getItemDesc()+";"+getItemPrice();
+		return getUserid()+";"+getItemid()+";"+getItemPic()+";"+getItemName()+";"+getItemDesc()+";"+getItemType()+";"+getItemPrice();
 	}
     
     @Override
