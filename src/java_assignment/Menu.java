@@ -110,7 +110,7 @@ public class Menu implements IDataContainer, Serializable {
    
     // don't know where i will use but just in case
     public String toString(){
-		return String.format("%-5s%1s%-5s%1s%1s%1s%-10s%1s%-20s%1s%.2f",getUserid(),";",getItemid(),";",getItemPic(),";",getItemName(),";",getItemDesc(),";",getItemPrice());
+		return getUserid()+";"+getItemid()+";"+getItemPic()+";"+getItemName()+";"+getItemDesc()+";"+getItemPrice();
 	}
     
     @Override

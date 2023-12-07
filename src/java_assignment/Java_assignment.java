@@ -18,17 +18,11 @@ public class Java_assignment {
         MenuHandler mh = new MenuHandler("Menu", Menu.class);
         ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
         Menu del = menu.get(0);
-        Menu upd = new Menu();
 //        mh.DeleteItem(del);
 //        System.out.println(del);
-        
-       upd.setUserid("VD001");
-        upd.setItemid("MD022");
-        upd.setItemPic("-");
-        upd.setItemPrice(8.00);
-        upd.setItemName("Tom Yam Soup");
-        upd.setItemDesc("Spicy and Sour soup made in Thailand");
-        mh.UpdateItem(del,upd);
+
+        del.setItemDesc("Fat ric ony mah");
+        mh.UpdateItem(del,del);
         //String key = "Menu";
 //        String configVar = 
 //        String get = fm.getConfigVar(key, true);

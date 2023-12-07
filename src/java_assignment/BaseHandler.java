@@ -113,7 +113,7 @@ public class BaseHandler<T extends IDataContainer> {
         for (int i = 0; i < objArray.length; i++) {
             strarr[i] = objArray[i].toString() + "\n";
         }
-            fm.writeFile2(get,strarr);
+            fm.updateFile(get,strarr);
         }
 
         catch(Exception e)
@@ -136,7 +136,7 @@ public class BaseHandler<T extends IDataContainer> {
         for (int i = 0; i < objArray.length; i++) {
             strarr[i] = objArray[i].toString() + "\n";
         }
-            fm.writeFile2(get,strarr);
+            fm.updateFile(get,strarr);
         }
 
         catch(Exception e)
