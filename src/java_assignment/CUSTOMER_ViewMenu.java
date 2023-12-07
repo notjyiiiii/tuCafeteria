@@ -264,15 +264,14 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 //            itemsArray[i][0] = food;
 //            itemsArray[i][1] = foodPrice;
 //        }
-//        this.dispose();
-//        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(itemsArray);
-//        confirmorder.setVisible(true);
+        this.dispose();
+        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(vendorID,vendorName);
+        confirmorder.setVisible(true);
+
+        
     }//GEN-LAST:event_btnOrderMouseClicked
     
-    public void updateViewOrderTable(String food, String foodDesc, String foodPrice) {
-            CUSTOMER_ConfirmOrder confirmorder2 = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorID,vendorName);
-            
-        }
+    
     
     
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
@@ -311,9 +310,9 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
             OrderSummaryHandler ordersummaryHandler;
             try{
                 ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-                System.out.println(food+foodPrice);
+                //System.out.println(food+foodPrice);
                 ordersummaryHandler.WriteOrderSummary(cusID,food,foodPrice);
-                System.out.println(food+foodPrice);
+                //System.out.println(food+foodPrice);
                 
             } catch(IOException | ClassNotFoundException ex){
                 Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);

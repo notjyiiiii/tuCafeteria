@@ -1,6 +1,7 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,25 +22,79 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     
     public CUSTOMER_ConfirmOrder() {
         initComponents();
+        
+        if (Java_assignment.LoggedInUser.userid != null) {
+            try {
+                CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+                double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
+                lbAvailableCredit.setText("RM: "+String.valueOf(x));
+            } catch (IOException ex) {
+                Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+        // Handle the case where userid is null (perhaps display an error message)
+        System.err.println("Userid is null");
+        }        
+                
     }
     
-    public CUSTOMER_ConfirmOrder(String selFood, String selFoodDesc, String selFoodPrice, String vendorId, String vendorName ) {
+    public CUSTOMER_ConfirmOrder(String vendorId, String vendorName ) {
         initComponents();
-        this.selFood = selFood;
-        this.selFoodDesc = selFoodDesc;
-        this.selFoodPrice = selFoodPrice;
-        this.vendorID = vendorID;
-        this.vendorName = vendorName;
         
-        lb_Vname.setText(vendorName);
-        
+        try {
+            initComponents();
+            this.selFood = selFood;
+            this.selFoodDesc = selFoodDesc;
+            this.selFoodPrice = selFoodPrice;
+            this.vendorID = vendorID;
+            this.vendorName = vendorName;
+            
+            lb_Vname.setText(vendorName);
+            
+//        modelFood.setColumnIdentifiers(columnName);
+//        Object[] rowData = {selFood, selFoodPrice};
+//        modelFood.addRow(rowData);
+//        ViewOrder.setModel(modelFood);
+
+
         modelFood.setColumnIdentifiers(columnName);
-        Object[] rowData = {selFood, selFoodPrice};
-        modelFood.addRow(rowData);
+
         ViewOrder.setModel(modelFood);
+
+        modelFood.setColumnIdentifiers(columnName);
+
+        ViewOrder.setModel(modelFood);
+
+//        ViewOrder.getColumnModel().getColumn(0).setPreferredWidth(50);
+//        ViewOrder.getColumnModel().getColumn(1).setPreferredWidth(50);
+//        ViewOrder.getColumnModel().getColumn(2).setPreferredWidth(50);
+
+        OrderSummaryHandler ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+        ArrayList<OrderSummary> ordersummary = ordersummaryHandler.GetCusOrderSummary(cusID);
+
+        double totalFoodPrice = 0.0;
         
+        for (OrderSummary ordersummaryItem : ordersummary) {
+            modelFood.addRow(new Object[]{ordersummaryItem.getFoodName(), ordersummaryItem.getFoodPrice()});
+            totalFoodPrice += Double.parseDouble(ordersummaryItem.getFoodPrice());
+            
+           
+            
+        }
+        txtSubtotal.setText("");
+        txtSubtotal.setText("RM "+String.valueOf(totalFoodPrice));
         
+        System.out.println(totalFoodPrice+"Hi");
         
+                } catch (IOException ex) {
+                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
     }
 
     public CUSTOMER_ConfirmOrder(String[][] itemsArray) {
@@ -75,22 +130,21 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         txtLocation = new javax.swing.JTextField();
         lb_checkout3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnAddItem = new javax.swing.JButton();
         lb_checkout4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ViewOrder = new javax.swing.JTable();
         lb_checkout2 = new javax.swing.JLabel();
-        lblSubtotalCus = new javax.swing.JLabel();
         lb_checkout6 = new javax.swing.JLabel();
-        lblTotalCus = new javax.swing.JLabel();
         lb_checkout8 = new javax.swing.JLabel();
-        lblDeliveryFeeCus1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lb_checkout7 = new javax.swing.JLabel();
-        lb_checkout9 = new javax.swing.JLabel();
+        lbAvailableCredit = new javax.swing.JLabel();
         btnCancelOrder = new javax.swing.JButton();
         btnPlaceOrder = new javax.swing.JButton();
         comboOrderType = new javax.swing.JComboBox<>();
+        DeliveryFeeCus = new javax.swing.JTextField();
+        TotalCus = new javax.swing.JTextField();
+        txtSubtotal = new javax.swing.JTextField();
 
         OrderBack.setText("Back");
         OrderBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,18 +236,6 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         lb_checkout3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout3.setText("Delivery Option");
 
-        btnAddItem.setText("Add Items");
-        btnAddItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddItemMouseClicked(evt);
-            }
-        });
-        btnAddItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddItemActionPerformed(evt);
-            }
-        });
-
         lb_checkout4.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout4.setText("Order Summary");
 
@@ -206,21 +248,16 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lb_checkout4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddItem)))
+                    .addComponent(lb_checkout4))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_checkout4)
-                    .addComponent(btnAddItem))
+                .addComponent(lb_checkout4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -229,31 +266,19 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         lb_checkout2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout2.setText("Subtotal");
 
-        lblSubtotalCus.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lblSubtotalCus.setText("RM");
-        lblSubtotalCus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         lb_checkout6.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout6.setText("Delivery Fee");
 
-        lblTotalCus.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lblTotalCus.setText("RM");
-        lblTotalCus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         lb_checkout8.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout8.setText("Total");
-
-        lblDeliveryFeeCus1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lblDeliveryFeeCus1.setText("RM");
-        lblDeliveryFeeCus1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lb_checkout7.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout7.setText("Available Credits");
 
-        lb_checkout9.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_checkout9.setText("RM");
+        lbAvailableCredit.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        lbAvailableCredit.setText("RM");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -263,7 +288,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(lb_checkout7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_checkout9, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbAvailableCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
         jPanel4Layout.setVerticalGroup(
@@ -273,7 +298,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 .addComponent(lb_checkout7)
                 .addGap(15, 15, 15))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(lb_checkout9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbAvailableCredit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -301,7 +326,24 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             }
         });
 
-        comboOrderType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Delivery", "Dine-In", "Takeaway" }));
+        comboOrderType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dine-In", "Takeaway", "Delivery" }));
+        comboOrderType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboOrderTypeMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                comboOrderTypeMouseReleased(evt);
+            }
+        });
+
+        DeliveryFeeCus.setEditable(false);
+        DeliveryFeeCus.setText("RM");
+
+        TotalCus.setEditable(false);
+        TotalCus.setText("RM");
+
+        txtSubtotal.setEditable(false);
+        txtSubtotal.setText("RM");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -344,18 +386,23 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lb_checkout2)
-                                    .addComponent(lb_checkout6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSubtotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDeliveryFeeCus1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lb_checkout8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(TotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lb_checkout2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lb_checkout6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(432, 432, 432)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(DeliveryFeeCus, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                                    .addComponent(txtSubtotal))
+                                .addGap(6, 6, 6)))))
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -376,24 +423,28 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_checkout2)
-                    .addComponent(lblSubtotalCus))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_checkout6)
-                    .addComponent(lblDeliveryFeeCus1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_checkout8)
-                    .addComponent(lblTotalCus))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlaceOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_checkout2)
+                            .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(lb_checkout6)
+                        .addGap(16, 16, 16)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_checkout8)
+                            .addComponent(TotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPlaceOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(DeliveryFeeCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -411,7 +462,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 .addComponent(topPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -426,10 +477,6 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         VendorOrdersPage vop = new VendorOrdersPage();
         vop.setVisible(true);
     }//GEN-LAST:event_OrderBackMouseClicked
-
-    private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddItemActionPerformed
 
     private void OrderBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBackActionPerformed
         // TODO add your handling code here:
@@ -470,17 +517,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         String[] orders = {food,foodPrice};
         modelFood.addRow(orders);
         
-        //ReviewHandler reviewHandler;
-//        OrderHandler orderHandler;
-//        try {
-//            orderHandler = new OrderHandler("Order", Order.class);
-//            orderHandler.WritePlaceOrder(cusID,vendorID, orders);
-//            
-//        } catch (IOException | ClassNotFoundException ex) {
-//            // Handle exceptions as needed
-//            Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(this, "Error writing review to file.");
-//        }
+        
         
     }//GEN-LAST:event_btnPlaceOrderMouseClicked
 
@@ -488,51 +525,30 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
-    private void btnAddItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddItemMouseClicked
+    private void comboOrderTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboOrderTypeMouseClicked
         // TODO add your handling code here:
-//        try {
-////            VendorHandler vd = new VendorHandler();
-////            vendor = vd.GetVendorByVendorID("VD001");
-////            String vdName = vendor.getVendorName();
-////            System.out.println(vdName);
-//            
-//
-//            if("Western".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD001",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//            else if("Chinese".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD002",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//            else if("Malay".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD003",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//            else if("Indian".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD004",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//            else if("Korean".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD005",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//            else if("Japanese".equals(this.vendorName)){
-//                //this.dispose();
-//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD006",vendorName);
-//                viewMenu.setVisible(true);
-//            }
-//        } catch (IOException | ClassNotFoundException ex) {
-//            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        //String deliveryType = String.valueOf(comboOrderType.getSelectedItem());
+        Object selectedItem = comboOrderType.getSelectedItem();
+        if (selectedItem != null && selectedItem.toString().equals("Dine_In")) {
+            System.out.println("RM 3.00");
+            DeliveryFeeCus.setText("3.00");
+            System.out.println("Rm 3.00");
+        } else {
+            DeliveryFeeCus.setText("0");
+    }
+    }//GEN-LAST:event_comboOrderTypeMouseClicked
+
+    private void comboOrderTypeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboOrderTypeMouseReleased
+        // TODO add your handling code here:
+//        String deliveryType = String.valueOf(comboOrderType.getSelectedItem());
+//        if(deliveryType.equals("Delivery")){
+//            System.out.println("RM 3.00");
+//            DeliveryFeeCus.setText("3.00");
 //        }
-        
-        
-    }//GEN-LAST:event_btnAddItemMouseClicked
+//        else{
+//            DeliveryFeeCus.setText("0");
+//        }
+    }//GEN-LAST:event_comboOrderTypeMouseReleased
 
     public static void main(String args[]) {
 
@@ -544,9 +560,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DeliveryFeeCus;
     private javax.swing.JButton OrderBack;
+    private javax.swing.JTextField TotalCus;
     private javax.swing.JTable ViewOrder;
-    private javax.swing.JButton btnAddItem;
     private javax.swing.JButton btnCancelOrder;
     private javax.swing.JButton btnPlaceOrder;
     private javax.swing.JComboBox<String> comboOrderType;
@@ -555,6 +572,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbAvailableCredit;
     private javax.swing.JLabel lb_Vname;
     private javax.swing.JLabel lb_checkout;
     private javax.swing.JLabel lb_checkout1;
@@ -564,14 +582,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lb_checkout6;
     private javax.swing.JLabel lb_checkout7;
     private javax.swing.JLabel lb_checkout8;
-    private javax.swing.JLabel lb_checkout9;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
-    private javax.swing.JLabel lblDeliveryFeeCus1;
-    private javax.swing.JLabel lblSubtotalCus;
-    private javax.swing.JLabel lblTotalCus;
     private javax.swing.JPanel topPanel1;
     private javax.swing.JTextField txtLocation;
+    private javax.swing.JTextField txtSubtotal;
     // End of variables declaration//GEN-END:variables
 }

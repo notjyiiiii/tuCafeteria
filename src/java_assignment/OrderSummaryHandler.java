@@ -16,6 +16,23 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         }
     }
     
+    public ArrayList<OrderSummary> GetCusOrderSummary(String cusID)
+    {
+        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+        
+        for(int i = 0; i<this.collection.size(); i++)
+        {
+            OrderSummary summary = collection.get(i);
+            
+            if (summary.getCusID().equals(cusID))
+            {
+                orderSummary.add(summary);
+            }
+        }
+        
+        return orderSummary;
+    }
+    
     public void WriteOrderSummary(String cusID, String food, String foodPrice) {
         // Create a new Review object with the provided values
         OrderSummary newOrder = new OrderSummary();
