@@ -98,7 +98,61 @@ public class BaseHandler<T extends IDataContainer> {
         }
     }
     
+        // or could return custom exception instead
+//    public void UpdateItem(T item)
+//    {
+//        
+//        try {
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//            fm.updateFile(get, item1.SerializeData(), item2.SerializeData());
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to add new item");
+//            // TODO: Look at how you want to handle error exception
+//            // Maybe to put a popup stating the error?
+//        }
+//        
+//    }
     
+    
+//    public void DeleteItem(T item)
+//    {
+//        try {
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//            fm.deleteRecord(get, item.SerializeData());
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to add new item");
+//            // TODO: Look at how you want to handle error exception
+//            // Maybe to put a popup stating the error?
+//        }
+//        
+//    }
+    
+    public void DeleteItem(T item)
+    {
+        collection.remove(item); 
+
+        try {
+            fileManager fm = new fileManager();
+            String get = fm.getConfigVar(this.filePath, true);
+            String stringArray = collection.toString();
+            fm.deleteRecord(get,stringArray);
+            System.out.println(stringArray);
+            System.out.println("bh");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error: Unable to delete item");
+            e.printStackTrace();
+            // TODO: Look at how you want to handle error exception
+            // Maybe to put a popup stating the error?
+        }
+    }
     
     
     

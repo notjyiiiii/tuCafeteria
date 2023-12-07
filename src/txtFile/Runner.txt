@@ -1,4 +1,4 @@
-UserID;Status
-DR011;Standby
-DR012;Busy
-DR013;Away
+UserID;Status;TotalIncome
+DR011;Standby;120.00
+DR012;Busy;70.00
+DR013;Away;40.00

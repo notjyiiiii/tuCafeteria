@@ -11,9 +11,9 @@ public class Java_assignment {
         
 //        currentUser = new Users();
         
-        fileManager fm = new fileManager();
+       fileManager fm = new fileManager();
 //        
-       LogIn lg = new LogIn();
+    //   LogIn lg = new LogIn();
 //        
        // String key = "User";
 //        String configVar = 
@@ -100,9 +100,21 @@ public class Java_assignment {
        // fm.readObjFile(get);
         
 
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
+//        Menu men2u = menu.get(0);
+//        mh.DeleteItem(men2u);
+        
+        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+        System.out.println(mh);
+        ArrayList<Menu> menu = mh.GetVendorMenu("VD003");
+        System.out.println(menu);
+        Menu del = menu.get(0);
+        mh.DeleteItem(del);
+       
         // ArrayList<String[]> dataList = fm.readFile(get);
          // dataList.get(2)[1] = "nyanyaaaaaa";
-         // fm.updateFile(get, dataList);
+          //fm.updateFile(get, dataList);
          
 //        ArrayList<String> data = new ArrayList<String>();
 //        data.add("DR14");  
