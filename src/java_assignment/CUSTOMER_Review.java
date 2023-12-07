@@ -7,18 +7,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CUSTOMER_ViewReview extends javax.swing.JFrame {
+public class CUSTOMER_Review extends javax.swing.JFrame {
 
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel modelReview = new DefaultTableModel();
     private String[] columnName = {"Name", "Review", "Rating"};
     private int row=-1;
     private String vendorID;
     private String vendorName;
+    private String cusName = Java_assignment.LoggedInUser.username;
     
-    public CUSTOMER_ViewReview(){initComponents();}
+    public CUSTOMER_Review(){initComponents();}
     
     
-    public CUSTOMER_ViewReview(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
+    public CUSTOMER_Review(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
         this.vendorID = vendorID;
         this.vendorName = vendorName;
@@ -30,19 +31,25 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
 //        System.out.println(vendorID);
         
         
-        model.setColumnIdentifiers(columnName);
+        modelReview.setColumnIdentifiers(columnName);
         
-        ViewMenu.setModel(model);
+        ViewMenu.setModel(modelReview);
         
         ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
         ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
         ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
         
         ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
-        ArrayList<Review> review = reviewHandler.GetVendorMenu(vendorID);
+//        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
+//        
+//        for (Review review : reviews) {
+//            modelReview.addRow(new Object[]{review.getCustomerName(), review.getReview(), review.getRating()});
+//        }
+        
+        ArrayList<Review> review = reviewHandler.GetReview(vendorID);
         
         for (Review reviewList : review) {
-            model.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
+            modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
         }
         
     }
@@ -61,7 +68,9 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
         ViewMenu = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         btnReviewBck = new javax.swing.JButton();
-        btnWrite = new javax.swing.JButton();
+        btnWriteReview = new javax.swing.JButton();
+        txtWriteReview = new javax.swing.JTextField();
+        comboRating = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,7 +98,7 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
                 .addComponent(lb_logoPic1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb_logoName1)
-                .addGap(176, 176, 176)
+                .addGap(330, 330, 330)
                 .addComponent(lb_quit1)
                 .addGap(37, 37, 37))
         );
@@ -108,7 +117,7 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Search");
 
-        ViewMenu.setModel(model);
+        ViewMenu.setModel(modelReview);
         ViewMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 ViewMenuMouseReleased(evt);
@@ -125,15 +134,29 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
             }
         });
 
-        btnWrite.setText("Write Review");
-        btnWrite.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnWriteReview.setText("Write Review");
+        btnWriteReview.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnWriteMouseClicked(evt);
+                btnWriteReviewMouseClicked(evt);
             }
         });
-        btnWrite.addActionListener(new java.awt.event.ActionListener() {
+        btnWriteReview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWriteActionPerformed(evt);
+                btnWriteReviewActionPerformed(evt);
+            }
+        });
+
+        txtWriteReview.setText("Write a review here...");
+        txtWriteReview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtWriteReviewMouseClicked(evt);
+            }
+        });
+
+        comboRating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        comboRating.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboRatingActionPerformed(evt);
             }
         });
 
@@ -146,15 +169,20 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))))
+                                .addComponent(jButton3))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtWriteReview, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboRating, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(45, 45, 45)
+                                    .addComponent(btnWriteReview, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 858, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(btnWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(387, 387, 387)
                         .addComponent(btnReviewBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -166,12 +194,15 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReviewBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(txtWriteReview, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboRating, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnWriteReview, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnReviewBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,15 +231,21 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnReviewBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReviewBckMouseClicked
+        
         try {
             this.dispose();
-            CUSTOMER_Main CusMain = new CUSTOMER_Main();
-            CusMain.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(CUSTOMER_ViewReview.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_ViewReview.class.getName()).log(Level.SEVERE, null, ex);
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
+            vdProfile.setVisible(true);
+            
+            
+            
+            } catch (IOException ex) {
+                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }//GEN-LAST:event_btnReviewBckMouseClicked
     
     public void updateViewOrderTable(String food, String foodDesc, String foodPrice) {
@@ -218,43 +255,53 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
     
     private void ViewMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewMenuMouseReleased
          //TODO add your handling code here:
-        row = ViewMenu.getSelectedRow();
-        String Food = String.valueOf(model.getValueAt(row, 0));
-        String FoodDesc = String.valueOf(model.getValueAt(row, 1));
-        String FoodPrice = String.valueOf(model.getValueAt(row, 2));
+//        row = ViewMenu.getSelectedRow();
+//        String Food = String.valueOf(modelReview.getValueAt(row, 0));
+//        String FoodDesc = String.valueOf(modelReview.getValueAt(row, 1));
+//        String FoodPrice = String.valueOf(modelReview.getValueAt(row, 2));
     }//GEN-LAST:event_ViewMenuMouseReleased
 
-    private void btnWriteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteActionPerformed
+    private void btnWriteReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteReviewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnWriteActionPerformed
+    }//GEN-LAST:event_btnWriteReviewActionPerformed
 
-    private void btnWriteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWriteMouseClicked
+    private void btnWriteReviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWriteReviewMouseClicked
         // TODO add your handling code here:
-        //        this.dispose();
-        //        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
-        //        order.setVisible(true);
-        row = ViewMenu.getSelectedRow();
-        if (row != -1) {
-            String food = String.valueOf(model.getValueAt(row, 0));
-            String foodDesc = String.valueOf(model.getValueAt(row, 1));
-            String foodPrice = String.valueOf(model.getValueAt(row, 2));
-
-            this.dispose();
-            CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(food,foodDesc,foodPrice,vendorName);
-            confirmorder.setVisible(true);
+        
+        
+        String review = txtWriteReview.getText();
+        String rating = String.valueOf(comboRating.getSelectedItem());
+        String[] reviews = {cusName,review,rating};
+        modelReview.addRow(reviews);
+        
+        //write to file
+        ReviewHandler reviewHandler;
+        try {
+            reviewHandler = new ReviewHandler("Review", Review.class);
+            reviewHandler.WriteReview(vendorID, reviews);
+            
+        } catch (IOException | ClassNotFoundException ex) {
+            // Handle exceptions as needed
+            Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error writing review to file.");
         }
-        else {
-            // Display a message or handle the case where no item is selected
-            JOptionPane.showMessageDialog(this, "Please select an item before placing an order.");
-        }
+        
+    }//GEN-LAST:event_btnWriteReviewMouseClicked
 
-    }//GEN-LAST:event_btnWriteMouseClicked
+    private void txtWriteReviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtWriteReviewMouseClicked
+        // TODO add your handling code here:
+        txtWriteReview.setText("");
+    }//GEN-LAST:event_txtWriteReviewMouseClicked
+
+    private void comboRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRatingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboRatingActionPerformed
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CUSTOMER_ViewReview().setVisible(true);
+                new CUSTOMER_Review().setVisible(true);
             }
         });
     }
@@ -262,7 +309,8 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ViewMenu;
     private javax.swing.JButton btnReviewBck;
-    private javax.swing.JButton btnWrite;
+    private javax.swing.JButton btnWriteReview;
+    private javax.swing.JComboBox<String> comboRating;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -271,5 +319,6 @@ public class CUSTOMER_ViewReview extends javax.swing.JFrame {
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JPanel topPanel1;
+    private javax.swing.JTextField txtWriteReview;
     // End of variables declaration//GEN-END:variables
 }

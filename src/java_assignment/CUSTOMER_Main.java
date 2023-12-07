@@ -549,7 +549,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             // TODO add your handling code here:
             this.dispose();
             //VendorHandler vdHandler = new VendorHandler();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Western");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD001","Western");
             vdProfile.setVisible(true);
             
         } catch (IOException ex) {
@@ -566,7 +566,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Chinese");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD002","Chinese");
             vdProfile.setVisible(true);
             
             
@@ -582,7 +582,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Malay");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD003","Malay");
             vdProfile.setVisible(true);
             
             
@@ -598,7 +598,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Indian");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD004","Indian");
             vdProfile.setVisible(true);
             
             
@@ -614,7 +614,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Korean");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD005","Korean");
             vdProfile.setVisible(true);
             
             
@@ -630,7 +630,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("Japanese");
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD006","Japanese");
             vdProfile.setVisible(true);
             
             

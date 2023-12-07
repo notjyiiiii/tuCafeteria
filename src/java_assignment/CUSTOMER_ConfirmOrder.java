@@ -12,35 +12,51 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private String selFoodDesc;
     private String selFoodPrice;
     private String vendorName;
+    private String vendorID;
+    private String cusID = Java_assignment.LoggedInUser.userid;
     private int row = -1;
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel modelFood = new DefaultTableModel();
     private String[] columnName = {"Food","Price"};
+    private String[][] itemsArray;
     
     public CUSTOMER_ConfirmOrder() {
         initComponents();
     }
     
-    public CUSTOMER_ConfirmOrder(String selFood, String selFoodDesc, String selFoodPrice, String vendorName ) {
+    public CUSTOMER_ConfirmOrder(String selFood, String selFoodDesc, String selFoodPrice, String vendorId, String vendorName ) {
         initComponents();
         this.selFood = selFood;
         this.selFoodDesc = selFoodDesc;
         this.selFoodPrice = selFoodPrice;
+        this.vendorID = vendorID;
         this.vendorName = vendorName;
         
         lb_Vname.setText(vendorName);
         
-        model.setColumnIdentifiers(columnName);
+        modelFood.setColumnIdentifiers(columnName);
         Object[] rowData = {selFood, selFoodPrice};
-        model.addRow(rowData);
-        ViewOrder.setModel(model);
+        modelFood.addRow(rowData);
+        ViewOrder.setModel(modelFood);
+        
+        
         
     }
 
-    
-    public void updateViewOrderTable(String food, String foodPrice) {
-        Object[] rowData = {food, foodPrice};
-        model.addRow(rowData);
-        ViewOrder.setModel(model);
+    public CUSTOMER_ConfirmOrder(String[][] itemsArray) {
+        initComponents();
+
+        // Initialize the viewOrderModel
+        modelFood = new DefaultTableModel();
+        ViewOrder.setModel(modelFood);
+
+        // Add columns to the viewOrderModel if needed
+        // viewOrderModel.addColumn("Column1");
+        // viewOrderModel.addColumn("Column2");
+
+        // Populate the viewOrderModel with items from itemsArray
+        for (String[] item : itemsArray) {
+            modelFood.addRow(item);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,8 +72,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lb_Vname = new javax.swing.JLabel();
         lb_checkout1 = new javax.swing.JLabel();
-        txtLocation1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtLocation = new javax.swing.JTextField();
         lb_checkout3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnAddItem = new javax.swing.JButton();
@@ -75,6 +90,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         lb_checkout9 = new javax.swing.JLabel();
         btnCancelOrder = new javax.swing.JButton();
         btnPlaceOrder = new javax.swing.JButton();
+        comboOrderType = new javax.swing.JComboBox<>();
 
         OrderBack.setText("Back");
         OrderBack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,8 +179,6 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         lb_checkout1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout1.setText("Location");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Delivery", "Dine In", "Pick Up" }));
-
         lb_checkout3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout3.setText("Delivery Option");
 
@@ -183,17 +197,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         lb_checkout4.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_checkout4.setText("Order Summary");
 
-        ViewOrder.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        ViewOrder.setModel(modelFood);
         jScrollPane1.setViewportView(ViewOrder);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -297,6 +301,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             }
         });
 
+        comboOrderType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Delivery", "Dine-In", "Takeaway" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -310,11 +316,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lb_checkout1)
-                                    .addComponent(txtLocation1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(134, 134, 134)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lb_checkout3))
+                                    .addComponent(lb_checkout3)
+                                    .addComponent(comboOrderType, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -364,9 +370,9 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     .addComponent(lb_checkout1)
                     .addComponent(lb_checkout3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLocation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboOrderType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -456,6 +462,26 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
     private void btnPlaceOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlaceOrderMouseClicked
         // TODO add your handling code here:
+        String food = String.valueOf(modelFood.getValueAt(row, 0));
+        String foodPrice = String.valueOf(modelFood.getValueAt(row, 1));
+        String OrderType = String.valueOf(comboOrderType.getSelectedItem());
+        String Location = txtLocation.getText();
+                
+        String[] orders = {food,foodPrice};
+        modelFood.addRow(orders);
+        
+        //ReviewHandler reviewHandler;
+//        OrderHandler orderHandler;
+//        try {
+//            orderHandler = new OrderHandler("Order", Order.class);
+//            orderHandler.WritePlaceOrder(cusID,vendorID, orders);
+//            
+//        } catch (IOException | ClassNotFoundException ex) {
+//            // Handle exceptions as needed
+//            Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+//            JOptionPane.showMessageDialog(this, "Error writing review to file.");
+//        }
+        
     }//GEN-LAST:event_btnPlaceOrderMouseClicked
 
     private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
@@ -464,52 +490,48 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
     private void btnAddItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddItemMouseClicked
         // TODO add your handling code here:
-        try {
-//            VendorHandler vd = new VendorHandler();
-//            vendor = vd.GetVendorByVendorID("VD001");
-//            String vdName = vendor.getVendorName();
-//            System.out.println(vdName);
-            
-
-            if("Western".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD001",vendorName);
-                viewMenu.setVisible(true);
-            }
-            else if("Chinese".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD002",vendorName);
-                viewMenu.setVisible(true);
-            }
-            else if("Malay".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD003",vendorName);
-                viewMenu.setVisible(true);
-            }
-            else if("Indian".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD004",vendorName);
-                viewMenu.setVisible(true);
-            }
-            else if("Korean".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD005",vendorName);
-                viewMenu.setVisible(true);
-            }
-            else if("Japanese".equals(this.vendorName)){
-                this.dispose();
-                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD006",vendorName);
-                viewMenu.setVisible(true);
-            }
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        this.dispose();
-//        CUSTOMER_ViewMenu addFood = new CUSTOMER_ViewMenu();
-//        addFood.setVisible(true);
-        String food = String.valueOf(model.getValueAt(row, 0));
-        String foodPrice = String.valueOf(model.getValueAt(row, 1));
-        updateViewOrderTable(food, foodPrice);
+//        try {
+////            VendorHandler vd = new VendorHandler();
+////            vendor = vd.GetVendorByVendorID("VD001");
+////            String vdName = vendor.getVendorName();
+////            System.out.println(vdName);
+//            
+//
+//            if("Western".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD001",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//            else if("Chinese".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD002",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//            else if("Malay".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD003",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//            else if("Indian".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD004",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//            else if("Korean".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD005",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//            else if("Japanese".equals(this.vendorName)){
+//                //this.dispose();
+//                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD006",vendorName);
+//                viewMenu.setVisible(true);
+//            }
+//        } catch (IOException | ClassNotFoundException ex) {
+//            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
     }//GEN-LAST:event_btnAddItemMouseClicked
 
     public static void main(String args[]) {
@@ -527,7 +549,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnAddItem;
     private javax.swing.JButton btnCancelOrder;
     private javax.swing.JButton btnPlaceOrder;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboOrderType;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -550,6 +572,6 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubtotalCus;
     private javax.swing.JLabel lblTotalCus;
     private javax.swing.JPanel topPanel1;
-    private javax.swing.JTextField txtLocation1;
+    private javax.swing.JTextField txtLocation;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,2 @@
+CS006;Nasi Lemak;8.00;
+CS006;Kuih Bahulu;1.0;

@@ -1,3 +1,11 @@
-VendorID;CustomerName;Review;Rating
-VD001;Brian;All Good, fast delivery;5
-VD001;Will;Food not really nice;3
+VendorID;CustomerName;Review;Rating;
+VD001;Brian;All Good, fast delivery;5;
+VD001;Will;Food not really nice;3;
+VD002;Will;Food is nice;4;
+VD002;Brian;Not bad;3;
+VD003;Will;Don't really like it;2;
+VD004;Kudo;Overall not too bad;4;
+VD005;Kudo;Delicious;5;
+VD005;Will;Is so authentic, love it;4;
+VD006;Brian;There's hair in my food;1;
+VD006;Kudo;Don't recommend;0;
