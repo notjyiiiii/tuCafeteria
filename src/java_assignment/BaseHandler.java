@@ -78,7 +78,51 @@ public class BaseHandler<T extends IDataContainer> {
         }
 
     } 
+    
+    public void DeleteItem(T item)throws IOException
+    {
+        try{
+        collection.remove(item); 
+            fileManager fm = new fileManager();
+            String get = fm.getConfigVar(this.filePath, true);
 
+             Object[] objArray = collection.toArray(new Object[0]);
+
+        String[] strarr = new String[objArray.length];
+        for (int i = 0; i < objArray.length; i++) {
+            strarr[i] = objArray[i].toString() + "\n";
+        }
+            fm.updateFile(get,strarr);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println("Error: Unable to delete item");
+        }
+    }
+        
+        public void UpdateItem(T item1,T item2)throws IOException
+    {
+        try{
+        collection.remove(item1); 
+        collection.add(item2);
+            fileManager fm = new fileManager();
+            String get = fm.getConfigVar(this.filePath, true);
+
+             Object[] objArray = collection.toArray(new Object[0]);
+
+        String[] strarr = new String[objArray.length];
+        for (int i = 0; i < objArray.length; i++) {
+            strarr[i] = objArray[i].toString() + "\n";
+        }
+            fm.updateFile(get,strarr);
+        }
+
+        catch(Exception e)
+        {
+            System.out.println("Error: Unable to delete item");
+        }
+    }
    
     
 //    public void UpdateItem(T item)

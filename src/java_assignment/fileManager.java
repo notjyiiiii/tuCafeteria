@@ -122,31 +122,29 @@ public class fileManager {
 }
     
     
-    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+    public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
         try{
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            
-            String textItem = "";
-            for (String[] row: data)
+            String textData = "";
+            for (String string: data)
             {
-                for (String item: row)
-                {
-                    
-                    textItem += item;
-                    textItem += ";";
-                }
-                textItem += "\n";
-                
+                textData += string;
+                //textData += ";";
+//                textData += "\n";
             }
+           
             
-            bw.write(textItem);
+            
+            bw.write(textData);
             bw.close();
             
         } catch (FileNotFoundException e){
             System.out.println(e);
         }
+        
     }
+  
     
 }
