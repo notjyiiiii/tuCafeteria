@@ -55,10 +55,11 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         }
     }
     
-    private void populateComboBox1(ArrayList<Order> order) {
+    private void populateComboBox1(ArrayList<Order> order) throws IOException, ClassNotFoundException {
         Set<String> uniqueOrderTypes = new HashSet<>();
-
-        for (Order orderItem : order) {
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> todayOrders = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        for (Order orderItem : todayOrders) {
             uniqueOrderTypes.add(orderItem.getOrderType().toString());
         }
 
@@ -86,10 +87,12 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         });
     }
     
-    private void populateComboBox2(ArrayList<Order> order) {
+    private void populateComboBox2(ArrayList<Order> order) throws IOException, ClassNotFoundException {
         Set<String> uniqueOrderStatus = new HashSet<>();
-
-        for (Order orderItem : order) {
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> todayOrders = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        
+        for (Order orderItem : todayOrders) {
             uniqueOrderStatus.add(orderItem.getOrderStatus().toString());
         }
 
@@ -137,13 +140,12 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     
     private void refreshData() throws IOException, ClassNotFoundException {
         model.setRowCount(0);
-
-        // Reload menu data
         MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
         ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);
 
         OrderHandler oh = new OrderHandler();
-        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        ArrayList<Order> order = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        
         populateComboBox1(order);
         populateComboBox2(order);
 

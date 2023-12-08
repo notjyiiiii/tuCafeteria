@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -111,6 +113,37 @@ public class OrderHistory extends javax.swing.JFrame {
         });
     }
     
+    private void populateViewBy(ArrayList<Order> order) {
+        Set<String> uniqueOrderStatus = new HashSet<>();
+
+        for (Order orderItem : order) {
+            uniqueOrderStatus.add(orderItem.getOrderStatus().toString());
+        }
+
+        String[] orderStatusArray = uniqueOrderStatus.toArray(new String[0]);
+
+        String[] comboBoxItems = new String[orderStatusArray.length + 1];
+        comboBoxItems[0] = "Filter by...";
+        System.arraycopy(orderStatusArray, 0, comboBoxItems, 1, orderStatusArray.length);
+
+        DefaultComboBoxModel<String> statusComboBoxModel = new DefaultComboBoxModel<>(comboBoxItems);
+        jComboBox2.setModel(statusComboBoxModel);
+
+        // Add action listener to the combo box
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (IOException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
     
     private void updateTable() throws IOException, ClassNotFoundException {
         String selectedOrderType = jComboBox1.getSelectedItem().toString();
@@ -128,7 +161,84 @@ public class OrderHistory extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void filterByDateRange() throws IOException, ClassNotFoundException {
+        String selectedViewBy = jComboBox3.getSelectedItem().toString();
+        model.setRowCount(0);
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
 
+        switch (selectedViewBy) {
+            case "Daily":
+                ArrayList<Order> orderDaily = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+                populateTable(orderDaily);
+                break;
+            case "Weekly":
+                filterByWeekly(order);
+                break;
+            case "Monthly":
+                filterByMonthly(order);
+                break;
+            case "Yearly":
+                filterByYearly(order);
+                break;
+            default:
+                filterAllOrders(order, "Filter by...", "Filter by..."); // Add your default filter
+                break;
+        }
+    }
+
+    private void populateTable(ArrayList<Order> order) {
+        for (Order orderItem : order) {
+            model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+        }
+    }
+
+    // Helper method to filter orders by week
+    private void filterByWeekly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().with(DayOfWeek.MONDAY);
+        LocalDate endDate = LocalDate.now().with(DayOfWeek.SUNDAY);
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter orders by month
+    private void filterByMonthly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+        LocalDate endDate = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter orders by year
+    private void filterByYearly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        LocalDate endDate = LocalDate.now().withDayOfYear(LocalDate.now().lengthOfYear());
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter all orders based on type and status
+    private void filterAllOrders(ArrayList<Order> order, String selectedOrderType, String selectedOrderStatus) {
+        for (Order orderItem : order) {
+            if (("Filter by...".equals(selectedOrderType) || orderItem.getOrderType().toString().equals(selectedOrderType)) &&
+                    ("Filter by...".equals(selectedOrderStatus) || orderItem.getOrderStatus().toString().equals(selectedOrderStatus))) {
+                model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -147,6 +257,8 @@ public class OrderHistory extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        lb_userID2 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,6 +327,21 @@ public class OrderHistory extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lb_userID2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        lb_userID2.setText("View by:");
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filter by...", "Daily", "Weekly", "Monthly", "Yearly" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -227,20 +354,25 @@ public class OrderHistory extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton3)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lb_userID)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(lb_userID1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)))))
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lb_userID2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -255,7 +387,9 @@ public class OrderHistory extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_userID)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_userID1))
+                    .addComponent(lb_userID1)
+                    .addComponent(lb_userID2)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -311,6 +445,28 @@ public class OrderHistory extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        try {
+            this.filterByDateRange();
+        } catch (IOException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
     
     private void performSearch(String query) throws IOException, ClassNotFoundException {
         model.setRowCount(0);
@@ -341,6 +497,7 @@ public class OrderHistory extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -350,6 +507,7 @@ public class OrderHistory extends javax.swing.JFrame {
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_userID;
     private javax.swing.JLabel lb_userID1;
+    private javax.swing.JLabel lb_userID2;
     private javax.swing.JPanel topPanel1;
     // End of variables declaration//GEN-END:variables
 }
