@@ -106,6 +106,4 @@ public class Vendor implements IDataContainer, Serializable{
                 operatingDaysString + ";" +
                 this.getOperatingHours();
     }
-    
-    
 }
