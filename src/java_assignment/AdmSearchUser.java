@@ -45,15 +45,15 @@ public class AdmSearchUser extends javax.swing.JFrame {
         btnDashboard = new javax.swing.JButton();
         btnNoti = new javax.swing.JButton();
         AMP_Right = new javax.swing.JPanel();
-        btnSearch = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDispUser = new javax.swing.JTable();
-        lblUserID = new javax.swing.JLabel();
-        lblUserName = new javax.swing.JLabel();
-        lblUserRole = new javax.swing.JLabel();
-        txtUserID = new javax.swing.JTextField();
-        txtUserName = new javax.swing.JTextField();
-        txtUserRole = new javax.swing.JTextField();
+        jTable1 = new javax.swing.JTable();
+        lblAdminName1 = new javax.swing.JLabel();
+        lblAdminName2 = new javax.swing.JLabel();
+        lblAdminName3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,55 +152,30 @@ public class AdmSearchUser extends javax.swing.JFrame {
         btnSettings.setText("jButton3");
         btnSettings.setIconTextGap(-6);
         btnSettings.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSettingsActionPerformed(evt);
-            }
-        });
 
         btnTopUp.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp.setText("jButton3");
         btnTopUp.setIconTextGap(-6);
         btnTopUp.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnTopUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTopUpActionPerformed(evt);
-            }
-        });
 
         btnRegistration.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration.setText("jButton3");
         btnRegistration.setIconTextGap(-6);
         btnRegistration.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnRegistration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrationActionPerformed(evt);
-            }
-        });
 
         btnDashboard.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard.setText("jButton3");
         btnDashboard.setIconTextGap(-6);
         btnDashboard.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDashboardActionPerformed(evt);
-            }
-        });
 
         btnNoti.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti.setText("jButton3");
         btnNoti.setIconTextGap(-6);
         btnNoti.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnNoti.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNotiActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout AMP_BottomLayout = new javax.swing.GroupLayout(AMP_Bottom);
         AMP_Bottom.setLayout(AMP_BottomLayout);
@@ -248,12 +223,12 @@ public class AdmSearchUser extends javax.swing.JFrame {
 
         AMP_Right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
-        btnSearch.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        btnSearch.setForeground(new java.awt.Color(255, 204, 51));
-        btnSearch.setText("Search");
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 204, 51));
+        jButton1.setText("Search");
 
-        tblDispUser.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -264,25 +239,25 @@ public class AdmSearchUser extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblDispUser);
+        jScrollPane1.setViewportView(jTable1);
 
-        lblUserID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblUserID.setForeground(new java.awt.Color(255, 204, 102));
-        lblUserID.setText("User ID:");
+        lblAdminName1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblAdminName1.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminName1.setText("User ID:");
 
-        lblUserName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblUserName.setForeground(new java.awt.Color(255, 204, 102));
-        lblUserName.setText("User Name:");
+        lblAdminName2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblAdminName2.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminName2.setText("User Name:");
 
-        lblUserRole.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblUserRole.setForeground(new java.awt.Color(255, 204, 102));
-        lblUserRole.setText("User Role:");
+        lblAdminName3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblAdminName3.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminName3.setText("User Role:");
 
-        txtUserID.setText("jTextField1");
+        jTextField1.setText("jTextField1");
 
-        txtUserName.setText("jTextField1");
+        jTextField2.setText("jTextField1");
 
-        txtUserRole.setText("jTextField1");
+        jTextField3.setText("jTextField1");
 
         javax.swing.GroupLayout AMP_RightLayout = new javax.swing.GroupLayout(AMP_Right);
         AMP_Right.setLayout(AMP_RightLayout);
@@ -294,22 +269,22 @@ public class AdmSearchUser extends javax.swing.JFrame {
                         .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AMP_RightLayout.createSequentialGroup()
                                 .addGap(134, 134, 134)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(AMP_RightLayout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                                        .addComponent(lblUserRole)
+                                        .addComponent(lblAdminName3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtUserRole, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_RightLayout.createSequentialGroup()
-                                        .addComponent(lblUserName)
+                                        .addComponent(lblAdminName2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_RightLayout.createSequentialGroup()
-                                        .addComponent(lblUserID)
+                                        .addComponent(lblAdminName1)
                                         .addGap(55, 55, 55)
-                                        .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(AMP_RightLayout.createSequentialGroup()
                         .addContainerGap()
@@ -321,18 +296,18 @@ public class AdmSearchUser extends javax.swing.JFrame {
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserID)
-                    .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdminName1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserName)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdminName2)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserRole)
-                    .addComponent(txtUserRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdminName3)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -367,36 +342,6 @@ public class AdmSearchUser extends javax.swing.JFrame {
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
-
-    private void btnNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotiActionPerformed
-        this.dispose();
-        AdminNotifications noti2 = new AdminNotifications();
-        noti2.setVisible(true); 
-    }//GEN-LAST:event_btnNotiActionPerformed
-
-    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
-        this.dispose();
-        AdminMainPage dashb = new AdminMainPage();
-        dashb.setVisible(true); 
-    }//GEN-LAST:event_btnDashboardActionPerformed
-
-    private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        this.dispose();
-        AdminRegMain reg = new AdminRegMain();
-        reg.setVisible(true); 
-    }//GEN-LAST:event_btnRegistrationActionPerformed
-
-    private void btnTopUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUpActionPerformed
-        this.dispose();
-        AdminTopUp topup = new AdminTopUp();
-        topup.setVisible(true);
-    }//GEN-LAST:event_btnTopUpActionPerformed
-
-    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
-        this.dispose();
-        AdminTopUp topup = new AdminTopUp();
-        topup.setVisible(true);
-    }//GEN-LAST:event_btnSettingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,12 +386,16 @@ public class AdmSearchUser extends javax.swing.JFrame {
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnNoti;
     private javax.swing.JButton btnRegistration;
-    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnTopUp;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lb_cafeName;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
@@ -454,13 +403,9 @@ public class AdmSearchUser extends javax.swing.JFrame {
     private javax.swing.JLabel lb_tuName;
     private javax.swing.JLabel lb_tuName1;
     private javax.swing.JLabel lblAdminName;
+    private javax.swing.JLabel lblAdminName1;
+    private javax.swing.JLabel lblAdminName2;
+    private javax.swing.JLabel lblAdminName3;
     private javax.swing.JLabel lblAdminNum;
-    private javax.swing.JLabel lblUserID;
-    private javax.swing.JLabel lblUserName;
-    private javax.swing.JLabel lblUserRole;
-    private javax.swing.JTable tblDispUser;
-    private javax.swing.JTextField txtUserID;
-    private javax.swing.JTextField txtUserName;
-    private javax.swing.JTextField txtUserRole;
     // End of variables declaration//GEN-END:variables
 }

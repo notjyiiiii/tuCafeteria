@@ -318,9 +318,6 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSettingsActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTopUp">
           <Properties>
@@ -336,9 +333,6 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopUpActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistration">
           <Properties>
@@ -354,9 +348,6 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrationActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDashboard">
           <Properties>
@@ -372,9 +363,6 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDashboardActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNoti">
           <Properties>
@@ -390,9 +378,6 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNotiActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -416,25 +401,25 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
-                                  <Component id="btnSearch" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="jButton1" min="-2" pref="86" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="lblUserRole" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblAdminName3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtUserRole" min="-2" pref="142" max="-2" attributes="0"/>
+                                          <Component id="jTextField3" min="-2" pref="142" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblAdminName2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="txtUserName" min="-2" pref="142" max="-2" attributes="0"/>
+                                          <Component id="jTextField2" min="-2" pref="142" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblUserID" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblAdminName1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                          <Component id="txtUserID" min="-2" pref="142" max="-2" attributes="0"/>
+                                          <Component id="jTextField1" min="-2" pref="142" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -455,21 +440,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblUserID" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUserID" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdminName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdminName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblUserRole" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUserRole" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdminName3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="btnSearch" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
                   <EmptySpace pref="13" max="32767" attributes="0"/>
@@ -478,7 +463,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnSearch">
+        <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -499,7 +484,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tblDispUser">
+            <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -513,7 +498,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblUserID">
+        <Component class="javax.swing.JLabel" name="lblAdminName1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -524,7 +509,7 @@
             <Property name="text" type="java.lang.String" value="User ID:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblUserName">
+        <Component class="javax.swing.JLabel" name="lblAdminName2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -535,7 +520,7 @@
             <Property name="text" type="java.lang.String" value="User Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblUserRole">
+        <Component class="javax.swing.JLabel" name="lblAdminName3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -546,17 +531,17 @@
             <Property name="text" type="java.lang.String" value="User Role:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUserID">
+        <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUserName">
+        <Component class="javax.swing.JTextField" name="jTextField2">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUserRole">
+        <Component class="javax.swing.JTextField" name="jTextField3">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>

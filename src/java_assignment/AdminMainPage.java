@@ -31,12 +31,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         lb_tuName = new javax.swing.JLabel();
         lb_cafeName = new javax.swing.JLabel();
         AMP_Right = new javax.swing.JPanel();
-        btnViewUsers = new javax.swing.JButton();
-        btnSearchUsers = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         lblOngOrd = new javax.swing.JLabel();
         lblDispOngOrd = new javax.swing.JLabel();
         lblUserNum = new javax.swing.JLabel();
-        lblDispNumUser = new javax.swing.JLabel();
+        lblDispNumUer = new javax.swing.JLabel();
         AMP_Bottom = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         lblAdminName = new javax.swing.JLabel();
@@ -129,23 +129,18 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         AMP_Right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        btnViewUsers.setBackground(new java.awt.Color(255, 204, 0));
-        btnViewUsers.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        btnViewUsers.setText("View Users");
-        btnViewUsers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        btnViewUsers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewUsersActionPerformed(evt);
-            }
-        });
+        jButton1.setBackground(new java.awt.Color(255, 204, 0));
+        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton1.setText("View Users");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
 
-        btnSearchUsers.setBackground(new java.awt.Color(255, 204, 0));
-        btnSearchUsers.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        btnSearchUsers.setText("Search Users");
-        btnSearchUsers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        btnSearchUsers.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(255, 204, 0));
+        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton2.setText("Search Users");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchUsersActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -159,9 +154,9 @@ public class AdminMainPage extends javax.swing.JFrame {
         lblUserNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lblUserNum.setText("Number of Users:");
 
-        lblDispNumUser.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblDispNumUser.setForeground(new java.awt.Color(255, 204, 102));
-        lblDispNumUser.setText("Num");
+        lblDispNumUer.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblDispNumUer.setForeground(new java.awt.Color(255, 204, 102));
+        lblDispNumUer.setText("Num");
 
         javax.swing.GroupLayout AMP_RightLayout = new javax.swing.GroupLayout(AMP_Right);
         AMP_Right.setLayout(AMP_RightLayout);
@@ -170,14 +165,14 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDispNumUser, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDispNumUer, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserNum)
                     .addComponent(lblDispOngOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOngOrd)
                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                        .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSearchUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         AMP_RightLayout.setVerticalGroup(
@@ -190,11 +185,11 @@ public class AdminMainPage extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(lblUserNum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDispNumUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblDispNumUer, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -216,55 +211,30 @@ public class AdminMainPage extends javax.swing.JFrame {
         btnSettings.setText("jButton3");
         btnSettings.setIconTextGap(-6);
         btnSettings.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSettingsActionPerformed(evt);
-            }
-        });
 
         btnTopUp.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp.setText("jButton3");
         btnTopUp.setIconTextGap(-6);
         btnTopUp.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnTopUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTopUpActionPerformed(evt);
-            }
-        });
 
         btnRegistration.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration.setText("jButton3");
         btnRegistration.setIconTextGap(-6);
         btnRegistration.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnRegistration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrationActionPerformed(evt);
-            }
-        });
 
         btnDashboard.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard.setText("jButton3");
         btnDashboard.setIconTextGap(-6);
         btnDashboard.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDashboardActionPerformed(evt);
-            }
-        });
 
         btnNoti.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti.setText("jButton3");
         btnNoti.setIconTextGap(-6);
         btnNoti.setMaximumSize(new java.awt.Dimension(55, 55));
-        btnNoti.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNotiActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout AMP_BottomLayout = new javax.swing.GroupLayout(AMP_Bottom);
         AMP_Bottom.setLayout(AMP_BottomLayout);
@@ -334,52 +304,15 @@ public class AdminMainPage extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
 
-    private void btnSearchUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchUsersActionPerformed
-        this.dispose();
-        AdmSearchUser search = new AdmSearchUser();
-        search.setVisible(true); 
-    }//GEN-LAST:event_btnSearchUsersActionPerformed
-
-    private void btnViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUsersActionPerformed
-        this.dispose();
-        AdminNotifications noti2 = new AdminNotifications();
-        noti2.setVisible(true); 
-    }//GEN-LAST:event_btnViewUsersActionPerformed
-
-    private void btnNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotiActionPerformed
-        this.dispose();
-        AdminNotifications noti2 = new AdminNotifications();
-        noti2.setVisible(true); 
-    }//GEN-LAST:event_btnNotiActionPerformed
-
-    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
-
-    }//GEN-LAST:event_btnDashboardActionPerformed
-
-    private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        this.dispose();
-        AdminRegMain reg = new AdminRegMain();
-        reg.setVisible(true); 
-    }//GEN-LAST:event_btnRegistrationActionPerformed
-
-    private void btnTopUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUpActionPerformed
-        this.dispose();
-        AdminTopUp topup = new AdminTopUp();
-        topup.setVisible(true);
-    }//GEN-LAST:event_btnTopUpActionPerformed
-
-    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
-        this.dispose();
-        AdminTopUp topup = new AdminTopUp();
-        topup.setVisible(true);
-    }//GEN-LAST:event_btnSettingsActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,11 +357,11 @@ public class AdminMainPage extends javax.swing.JFrame {
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnNoti;
     private javax.swing.JButton btnRegistration;
-    private javax.swing.JButton btnSearchUsers;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnTopUp;
-    private javax.swing.JButton btnViewUsers;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lb_cafeName;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
@@ -437,7 +370,7 @@ public class AdminMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lb_tuName1;
     private javax.swing.JLabel lblAdminName;
     private javax.swing.JLabel lblAdminNum;
-    private javax.swing.JLabel lblDispNumUser;
+    private javax.swing.JLabel lblDispNumUer;
     private javax.swing.JLabel lblDispOngOrd;
     private javax.swing.JLabel lblOngOrd;
     private javax.swing.JLabel lblUserNum;
