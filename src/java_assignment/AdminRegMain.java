@@ -27,13 +27,13 @@ public class AdminRegMain extends javax.swing.JFrame {
     private void initComponents() {
 
         AMP_Right = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnUpdUserDet = new javax.swing.JButton();
+        btnViewUsers = new javax.swing.JButton();
+        btnRegStudent = new javax.swing.JButton();
+        btnRegVen = new javax.swing.JButton();
+        btnRedDelRun = new javax.swing.JButton();
+        btnRegAdmin = new javax.swing.JButton();
+        btnDelUsers = new javax.swing.JButton();
         AMP_Top = new javax.swing.JPanel();
         lb_quit1 = new javax.swing.JLabel();
         lb_logoName1 = new javax.swing.JLabel();
@@ -56,49 +56,79 @@ public class AdminRegMain extends javax.swing.JFrame {
 
         AMP_Right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 0));
-        jButton1.setText("Update User Details");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 204, 0));
-        jButton2.setText("View Users");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdUserDet.setBackground(new java.awt.Color(0, 0, 0));
+        btnUpdUserDet.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        btnUpdUserDet.setForeground(new java.awt.Color(255, 204, 0));
+        btnUpdUserDet.setText("Update User Details");
+        btnUpdUserDet.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnUpdUserDet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnUpdUserDetActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 204, 0));
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton3.setText("Register Student");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnViewUsers.setBackground(new java.awt.Color(0, 0, 0));
+        btnViewUsers.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnViewUsers.setForeground(new java.awt.Color(255, 204, 0));
+        btnViewUsers.setText("View Users");
+        btnViewUsers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnViewUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUsersActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(255, 204, 0));
-        jButton4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton4.setText("Register Vendor");
-        jButton4.setToolTipText("");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegStudent.setBackground(new java.awt.Color(255, 204, 0));
+        btnRegStudent.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnRegStudent.setText("Register Student");
+        btnRegStudent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegStudentActionPerformed(evt);
+            }
+        });
 
-        jButton5.setBackground(new java.awt.Color(255, 204, 0));
-        jButton5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Register Delivery \nRunner");
-        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegVen.setBackground(new java.awt.Color(255, 204, 0));
+        btnRegVen.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnRegVen.setText("Register Vendor");
+        btnRegVen.setToolTipText("");
+        btnRegVen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegVen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegVenActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(255, 204, 0));
-        jButton6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton6.setText("Register Admin");
-        jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRedDelRun.setBackground(new java.awt.Color(255, 204, 0));
+        btnRedDelRun.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        btnRedDelRun.setText("Register Delivery \nRunner");
+        btnRedDelRun.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRedDelRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedDelRunActionPerformed(evt);
+            }
+        });
 
-        jButton7.setBackground(new java.awt.Color(0, 0, 0));
-        jButton7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 204, 0));
-        jButton7.setText("Delete Users");
-        jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegAdmin.setBackground(new java.awt.Color(255, 204, 0));
+        btnRegAdmin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnRegAdmin.setText("Register Admin");
+        btnRegAdmin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegAdminActionPerformed(evt);
+            }
+        });
+
+        btnDelUsers.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelUsers.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnDelUsers.setForeground(new java.awt.Color(255, 204, 0));
+        btnDelUsers.setText("Delete Users");
+        btnDelUsers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnDelUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelUsersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_RightLayout = new javax.swing.GroupLayout(AMP_Right);
         AMP_Right.setLayout(AMP_RightLayout);
@@ -108,21 +138,21 @@ public class AdminRegMain extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRegAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegVen, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRedDelRun, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdUserDet, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDelUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(8, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_RightLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
         AMP_RightLayout.setVerticalGroup(
@@ -130,18 +160,18 @@ public class AdminRegMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_RightLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRedDelRun, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegVen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdUserDet, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -240,30 +270,55 @@ public class AdminRegMain extends javax.swing.JFrame {
         btnSettings.setText("jButton3");
         btnSettings.setIconTextGap(-6);
         btnSettings.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingsActionPerformed(evt);
+            }
+        });
 
         btnTopUp.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp.setText("jButton3");
         btnTopUp.setIconTextGap(-6);
         btnTopUp.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnTopUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopUpActionPerformed(evt);
+            }
+        });
 
         btnRegistration.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration.setText("jButton3");
         btnRegistration.setIconTextGap(-6);
         btnRegistration.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrationActionPerformed(evt);
+            }
+        });
 
         btnDashboard.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard.setText("jButton3");
         btnDashboard.setIconTextGap(-6);
         btnDashboard.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
 
         btnNoti.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti.setText("jButton3");
         btnNoti.setIconTextGap(-6);
         btnNoti.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnNoti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_BottomLayout = new javax.swing.GroupLayout(AMP_Bottom);
         AMP_Bottom.setLayout(AMP_BottomLayout);
@@ -335,13 +390,81 @@ public class AdminRegMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUsersActionPerformed
+        this.dispose();
+        AdmSearchUser search = new AdmSearchUser();
+        search.setVisible(true);
+    }//GEN-LAST:event_btnViewUsersActionPerformed
 
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
+
+    private void btnRegStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegStudentActionPerformed
+        this.dispose();
+        AdminRegCus regstu = new AdminRegCus();
+        regstu.setVisible(true);
+    }//GEN-LAST:event_btnRegStudentActionPerformed
+
+    private void btnRegAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegAdminActionPerformed
+        this.dispose();
+        AdminRegAdm regadm = new AdminRegAdm();
+        regadm.setVisible(true);
+    }//GEN-LAST:event_btnRegAdminActionPerformed
+
+    private void btnRegVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegVenActionPerformed
+        this.dispose();
+        AdminRegVen regven = new AdminRegVen();
+        regven.setVisible(true);
+    }//GEN-LAST:event_btnRegVenActionPerformed
+
+    private void btnRedDelRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedDelRunActionPerformed
+        this.dispose();
+        AdminRegDelRun regdelrun = new AdminRegDelRun();
+        regdelrun.setVisible(true);
+    }//GEN-LAST:event_btnRedDelRunActionPerformed
+
+    private void btnUpdUserDetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdUserDetActionPerformed
+        this.dispose();
+        AdmUpdMain update = new AdmUpdMain();
+        update.setVisible(true);
+    }//GEN-LAST:event_btnUpdUserDetActionPerformed
+
+    private void btnDelUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelUsersActionPerformed
+        this.dispose();
+        AdminDelUser deluser = new AdminDelUser();
+        deluser.setVisible(true);
+    }//GEN-LAST:event_btnDelUsersActionPerformed
+
+    private void btnNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotiActionPerformed
+        this.dispose();
+        AdminNotifications noti2 = new AdminNotifications();
+        noti2.setVisible(true);
+    }//GEN-LAST:event_btnNotiActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        this.dispose();
+        AdminMainPage dashb = new AdminMainPage();
+        dashb.setVisible(true); 
+    }//GEN-LAST:event_btnDashboardActionPerformed
+
+    private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
+        this.dispose();
+        AdminRegMain reg = new AdminRegMain();
+        reg.setVisible(true); 
+    }//GEN-LAST:event_btnRegistrationActionPerformed
+
+    private void btnTopUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUpActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnTopUpActionPerformed
+
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnSettingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,18 +507,18 @@ public class AdminRegMain extends javax.swing.JFrame {
     private javax.swing.JPanel AMP_Right;
     private javax.swing.JPanel AMP_Top;
     private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnDelUsers;
     private javax.swing.JButton btnNoti;
+    private javax.swing.JButton btnRedDelRun;
+    private javax.swing.JButton btnRegAdmin;
+    private javax.swing.JButton btnRegStudent;
+    private javax.swing.JButton btnRegVen;
     private javax.swing.JButton btnRegistration;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnTopUp;
+    private javax.swing.JButton btnUpdUserDet;
+    private javax.swing.JButton btnViewUsers;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel lb_cafeName;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;

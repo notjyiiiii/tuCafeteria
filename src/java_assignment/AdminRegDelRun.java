@@ -40,18 +40,18 @@ public class AdminRegDelRun extends javax.swing.JFrame {
         btnDashboard1 = new javax.swing.JButton();
         btnNoti1 = new javax.swing.JButton();
         AMP_Right1 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        lblAdminName2 = new javax.swing.JLabel();
-        lblAdminName3 = new javax.swing.JLabel();
-        lblAdminName4 = new javax.swing.JLabel();
-        lblAdminName5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        lblAdminName8 = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblRunnerName = new javax.swing.JLabel();
+        lblRunnerID = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblConNum = new javax.swing.JLabel();
+        txtRunnerName = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtRunnerID = new javax.swing.JTextField();
+        txtConNum = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
         AMP_Top1 = new javax.swing.JPanel();
         lb_quit2 = new javax.swing.JLabel();
         lb_logoName2 = new javax.swing.JLabel();
@@ -114,30 +114,55 @@ public class AdminRegDelRun extends javax.swing.JFrame {
         btnSettings1.setText("jButton3");
         btnSettings1.setIconTextGap(-6);
         btnSettings1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnSettings1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettings1ActionPerformed(evt);
+            }
+        });
 
         btnTopUp1.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp1.setText("jButton3");
         btnTopUp1.setIconTextGap(-6);
         btnTopUp1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnTopUp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopUp1ActionPerformed(evt);
+            }
+        });
 
         btnRegistration1.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration1.setText("jButton3");
         btnRegistration1.setIconTextGap(-6);
         btnRegistration1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnRegistration1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistration1ActionPerformed(evt);
+            }
+        });
 
         btnDashboard1.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard1.setText("jButton3");
         btnDashboard1.setIconTextGap(-6);
         btnDashboard1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnDashboard1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboard1ActionPerformed(evt);
+            }
+        });
 
         btnNoti1.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti1.setText("jButton3");
         btnNoti1.setIconTextGap(-6);
         btnNoti1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnNoti1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoti1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_Bottom1Layout = new javax.swing.GroupLayout(AMP_Bottom1);
         AMP_Bottom1.setLayout(AMP_Bottom1Layout);
@@ -185,62 +210,67 @@ public class AdminRegDelRun extends javax.swing.JFrame {
 
         AMP_Right1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jButton8.setBackground(new java.awt.Color(0, 0, 0));
-        jButton8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 204, 0));
-        jButton8.setText("Register");
-        jButton8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-
-        jButton9.setBackground(new java.awt.Color(0, 0, 0));
-        jButton9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 204, 0));
-        jButton9.setText("Cancel");
-        jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setBackground(new java.awt.Color(0, 0, 0));
+        btnRegister.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 204, 0));
+        btnRegister.setText("Register");
+        btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
 
-        lblAdminName2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName2.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName2.setText("Runner Name:");
-
-        lblAdminName3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName3.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName3.setText("Runner ID:");
-
-        lblAdminName4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName4.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName4.setText("Email Address:");
-
-        lblAdminName5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName5.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName5.setText("Contact Number:");
-
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 204, 0));
+        btnCancel.setText("Cancel");
+        btnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("jTextField1");
+        lblRunnerName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblRunnerName.setForeground(new java.awt.Color(255, 204, 102));
+        lblRunnerName.setText("Runner Name:");
 
-        jTextField6.setText("jTextField1");
+        lblRunnerID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblRunnerID.setForeground(new java.awt.Color(255, 204, 102));
+        lblRunnerID.setText("Runner ID:");
 
-        jTextField4.setText("jTextField1");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        lblEmail.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(255, 204, 102));
+        lblEmail.setText("Email Address:");
+
+        lblConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblConNum.setForeground(new java.awt.Color(255, 204, 102));
+        lblConNum.setText("Contact Number:");
+
+        txtRunnerName.setText("jTextField1");
+
+        txtEmail.setText("jTextField1");
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
-        lblAdminName8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName8.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName8.setText("Password:");
+        txtRunnerID.setText("jTextField1");
+
+        txtConNum.setText("jTextField1");
+
+        txtPassword.setText("jTextField1");
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        lblPassword.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblPassword.setForeground(new java.awt.Color(255, 204, 102));
+        lblPassword.setText("Password:");
 
         javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
         AMP_Right1.setLayout(AMP_Right1Layout);
@@ -250,31 +280,31 @@ public class AdminRegDelRun extends javax.swing.JFrame {
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AMP_Right1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AMP_Right1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AMP_Right1Layout.createSequentialGroup()
                                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAdminName3)
-                                    .addComponent(lblAdminName2))
+                                    .addComponent(lblRunnerID)
+                                    .addComponent(lblRunnerName))
                                 .addGap(42, 42, 42)
                                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblAdminName4)
+                                    .addComponent(txtRunnerName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRunnerID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblEmail)
                             .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblAdminName5)
+                                    .addComponent(lblConNum)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblAdminName8)
+                                    .addComponent(lblPassword)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AMP_Right1Layout.setVerticalGroup(
@@ -282,28 +312,28 @@ public class AdminRegDelRun extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminName3)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRunnerID)
+                    .addComponent(txtRunnerID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminName2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRunnerName)
+                    .addComponent(txtRunnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAdminName8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAdminName4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminName5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblConNum)
+                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -373,21 +403,57 @@ public class AdminRegDelRun extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+        AdminRegMain reg = new AdminRegMain();
+        reg.setVisible(true); 
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void lb_quit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit2MouseClicked
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
+        this.dispose();
+        AdminNotifications noti2 = new AdminNotifications();
+        noti2.setVisible(true); 
+    }//GEN-LAST:event_btnNoti1ActionPerformed
+
+    private void btnDashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboard1ActionPerformed
+        this.dispose();
+        AdminMainPage dashb = new AdminMainPage();
+        dashb.setVisible(true); 
+    }//GEN-LAST:event_btnDashboard1ActionPerformed
+
+    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
+        this.dispose();
+        AdminRegMain reg = new AdminRegMain();
+        reg.setVisible(true); 
+    }//GEN-LAST:event_btnRegistration1ActionPerformed
+
+    private void btnTopUp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUp1ActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnTopUp1ActionPerformed
+
+    private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnSettings1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,19 +495,14 @@ public class AdminRegDelRun extends javax.swing.JFrame {
     private javax.swing.JPanel AMP_Left1;
     private javax.swing.JPanel AMP_Right1;
     private javax.swing.JPanel AMP_Top1;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDashboard1;
     private javax.swing.JButton btnNoti1;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnRegistration1;
     private javax.swing.JButton btnSettings1;
     private javax.swing.JButton btnTopUp1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lb_cafeName1;
     private javax.swing.JLabel lb_logoName2;
     private javax.swing.JLabel lb_logoPic2;
@@ -449,11 +510,16 @@ public class AdminRegDelRun extends javax.swing.JFrame {
     private javax.swing.JLabel lb_tuName2;
     private javax.swing.JLabel lb_tuName3;
     private javax.swing.JLabel lblAdminName1;
-    private javax.swing.JLabel lblAdminName2;
-    private javax.swing.JLabel lblAdminName3;
-    private javax.swing.JLabel lblAdminName4;
-    private javax.swing.JLabel lblAdminName5;
-    private javax.swing.JLabel lblAdminName8;
     private javax.swing.JLabel lblAdminNum1;
+    private javax.swing.JLabel lblConNum;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRunnerID;
+    private javax.swing.JLabel lblRunnerName;
+    private javax.swing.JTextField txtConNum;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtRunnerID;
+    private javax.swing.JTextField txtRunnerName;
     // End of variables declaration//GEN-END:variables
 }

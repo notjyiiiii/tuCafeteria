@@ -9,7 +9,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -210,14 +210,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblDispNumUer" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="lblDispNumUser" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                       <Component id="lblUserNum" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDispOngOrd" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                       <Component id="lblOngOrd" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" pref="161" max="-2" attributes="0"/>
+                          <Component id="btnViewUsers" min="-2" pref="161" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="157" max="-2" attributes="0"/>
+                          <Component id="btnSearchUsers" min="-2" pref="157" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -234,11 +234,11 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="lblUserNum" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblDispNumUer" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="lblDispNumUser" min="-2" pref="20" max="-2" attributes="0"/>
                   <EmptySpace pref="99" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="btnViewUsers" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="btnSearchUsers" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -246,7 +246,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnViewUsers">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="cc" red="ff" type="rgb"/>
@@ -263,8 +263,11 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewUsersActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnSearchUsers">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="cc" red="ff" type="rgb"/>
@@ -282,7 +285,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchUsersActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblOngOrd">
@@ -312,7 +315,7 @@
             <Property name="text" type="java.lang.String" value="Number of Users:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblDispNumUer">
+        <Component class="javax.swing.JLabel" name="lblDispNumUser">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -449,6 +452,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSettingsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTopUp">
           <Properties>
@@ -464,6 +470,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopUpActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistration">
           <Properties>
@@ -479,6 +488,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrationActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDashboard">
           <Properties>
@@ -494,6 +506,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDashboardActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNoti">
           <Properties>
@@ -509,6 +524,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNotiActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

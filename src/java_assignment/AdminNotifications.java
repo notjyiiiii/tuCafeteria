@@ -1,6 +1,6 @@
 package java_assignment;
 
-public class AdminNotifications extends Notification {
+public class AdminNotifications extends javax.swing.JFrame{
 
     /**
      * Creates new form AdminNotifications
@@ -36,11 +36,11 @@ public class AdminNotifications extends Notification {
         lb_tuName = new javax.swing.JLabel();
         lb_cafeName = new javax.swing.JLabel();
         AMP_Right = new javax.swing.JPanel();
-        calendarPane1 = new com.jcalendar.pane.calendar.CalendarPane();
-        jButton1 = new javax.swing.JButton();
+        cmbSelectMonth = new com.jcalendar.pane.calendar.CalendarPane();
+        btnRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        tblNotifications = new javax.swing.JTable();
+        btnSendNoti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,30 +102,55 @@ public class AdminNotifications extends Notification {
         btnSettings.setText("jButton3");
         btnSettings.setIconTextGap(-6);
         btnSettings.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingsActionPerformed(evt);
+            }
+        });
 
         btnTopUp.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp.setText("jButton3");
         btnTopUp.setIconTextGap(-6);
         btnTopUp.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnTopUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopUpActionPerformed(evt);
+            }
+        });
 
         btnRegistration.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration.setText("jButton3");
         btnRegistration.setIconTextGap(-6);
         btnRegistration.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrationActionPerformed(evt);
+            }
+        });
 
         btnDashboard.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard.setText("jButton3");
         btnDashboard.setIconTextGap(-6);
         btnDashboard.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
 
         btnNoti.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti.setText("jButton3");
         btnNoti.setIconTextGap(-6);
         btnNoti.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnNoti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_BottomLayout = new javax.swing.GroupLayout(AMP_Bottom);
         AMP_Bottom.setLayout(AMP_BottomLayout);
@@ -210,15 +235,20 @@ public class AdminNotifications extends Notification {
 
         AMP_Right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        calendarPane1.setBackground(new java.awt.Color(0, 0, 0));
-        calendarPane1.setForeground(new java.awt.Color(255, 204, 0));
+        cmbSelectMonth.setBackground(new java.awt.Color(0, 0, 0));
+        cmbSelectMonth.setForeground(new java.awt.Color(255, 204, 0));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 51));
-        jButton1.setText("Refresh");
+        btnRefresh.setBackground(new java.awt.Color(0, 0, 0));
+        btnRefresh.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 204, 51));
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNotifications.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -229,12 +259,17 @@ public class AdminNotifications extends Notification {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblNotifications);
 
-        jButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 51));
-        jButton3.setText("Send Notification");
+        btnSendNoti.setBackground(new java.awt.Color(0, 0, 0));
+        btnSendNoti.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnSendNoti.setForeground(new java.awt.Color(255, 204, 51));
+        btnSendNoti.setText("Send Notification");
+        btnSendNoti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendNotiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_RightLayout = new javax.swing.GroupLayout(AMP_Right);
         AMP_Right.setLayout(AMP_RightLayout);
@@ -243,30 +278,30 @@ public class AdminNotifications extends Notification {
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AMP_RightLayout.createSequentialGroup()
-                        .addComponent(calendarPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSelectMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(AMP_RightLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
-                .addComponent(jButton3)
+                .addComponent(btnSendNoti)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AMP_RightLayout.setVerticalGroup(
             AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSelectMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AMP_RightLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(btnSendNoti, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -299,6 +334,44 @@ public class AdminNotifications extends Notification {
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnSendNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendNotiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSendNotiActionPerformed
+
+    private void btnNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotiActionPerformed
+        this.dispose();
+        AdminNotifications noti2 = new AdminNotifications();
+        noti2.setVisible(true); 
+    }//GEN-LAST:event_btnNotiActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        this.dispose();
+        AdminMainPage dashb = new AdminMainPage();
+        dashb.setVisible(true); 
+    }//GEN-LAST:event_btnDashboardActionPerformed
+
+    private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
+        this.dispose();
+        AdminRegMain reg = new AdminRegMain();
+        reg.setVisible(true); 
+    }//GEN-LAST:event_btnRegistrationActionPerformed
+
+    private void btnTopUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUpActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnTopUpActionPerformed
+
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
+        this.dispose();
+        AdminTopUp topup = new AdminTopUp();
+        topup.setVisible(true);
+    }//GEN-LAST:event_btnSettingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,15 +415,14 @@ public class AdminNotifications extends Notification {
     private javax.swing.JPanel AMP_Top;
     private javax.swing.JButton btnDashboard;
     private javax.swing.JButton btnNoti;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRegistration;
+    private javax.swing.JButton btnSendNoti;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton btnTopUp;
-    private com.jcalendar.pane.calendar.CalendarPane calendarPane1;
+    private com.jcalendar.pane.calendar.CalendarPane cmbSelectMonth;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lb_cafeName;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
@@ -359,5 +431,6 @@ public class AdminNotifications extends Notification {
     private javax.swing.JLabel lb_tuName1;
     private javax.swing.JLabel lblAdminName;
     private javax.swing.JLabel lblAdminNum;
+    private javax.swing.JTable tblNotifications;
     // End of variables declaration//GEN-END:variables
 }

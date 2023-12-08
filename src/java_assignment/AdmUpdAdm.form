@@ -138,36 +138,36 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jButton8" min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="btnUpdate" min="-2" pref="119" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="btnCancel" min="-2" pref="119" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblAdminName3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblAdminName2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAdminID" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAdminName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextField2" pref="156" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" max="32767" attributes="0"/>
+                                      <Component id="txtAdminName" pref="156" max="32767" attributes="0"/>
+                                      <Component id="cmbAdminID" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="lblAdminName4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAdminEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextField3" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                                  <Component id="txtAdminEmail" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblAdminName5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAdminConNum" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField6" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Component id="txtAdminConNum" min="-2" pref="156" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblAdminName8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Component id="txtPassword" min="-2" pref="156" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -182,33 +182,33 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblAdminName3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAdminID" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbAdminID" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblAdminName2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="lblAdminName" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtAdminName" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblAdminName8" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField4" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblPassword" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtPassword" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblAdminName4" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField3" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblAdminEmail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtAdminEmail" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblAdminName5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lblAdminConNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtAdminConNum" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton8" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnUpdate" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnCancel" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -216,7 +216,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton8">
+        <Component class="javax.swing.JButton" name="btnUpdate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -236,8 +236,11 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -258,10 +261,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAdminName2">
+        <Component class="javax.swing.JLabel" name="lblAdminName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -272,7 +275,7 @@
             <Property name="text" type="java.lang.String" value="Admin Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAdminName3">
+        <Component class="javax.swing.JLabel" name="lblAdminID">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -283,7 +286,7 @@
             <Property name="text" type="java.lang.String" value="Admin ID:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAdminName4">
+        <Component class="javax.swing.JLabel" name="lblAdminEmail">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -294,7 +297,7 @@
             <Property name="text" type="java.lang.String" value="Email Address:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAdminName5">
+        <Component class="javax.swing.JLabel" name="lblAdminConNum">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -305,33 +308,33 @@
             <Property name="text" type="java.lang.String" value="Contact Number:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtAdminName">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="txtAdminEmail">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAdminEmailActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAdminName8">
+        <Component class="javax.swing.JTextField" name="txtAdminConNum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPassword">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPassword">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="18" style="1"/>
@@ -342,7 +345,7 @@
             <Property name="text" type="java.lang.String" value="Password:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmbAdminID">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -389,7 +392,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnDashboard1" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnRegistration1" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="btnRegistration" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnTopUp1" min="-2" pref="55" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -408,7 +411,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnSettings1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                               <Component id="btnTopUp1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                              <Component id="btnRegistration1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="btnRegistration" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                               <Component id="btnDashboard1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                               <Component id="btnNoti1" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                           </Group>
@@ -483,6 +486,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSettings1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTopUp1">
           <Properties>
@@ -498,8 +504,11 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTopUp1ActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegistration1">
+        <Component class="javax.swing.JButton" name="btnRegistration">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -513,6 +522,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrationActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDashboard1">
           <Properties>
@@ -528,6 +540,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDashboard1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNoti1">
           <Properties>
@@ -543,6 +558,9 @@
               <Dimension value="[55, 55]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNoti1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
