@@ -1,1 +1,2 @@
-CS006;Ayam Percik;8.0;
+ORD1;CS006;Kuih Bahulu;1.0;
+ORD1;CS006;Kaya Toast;4.0;

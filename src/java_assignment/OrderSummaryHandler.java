@@ -33,9 +33,10 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         return orderSummary;
     }
     
-    public void WriteOrderSummary(String cusID, String food, String foodPrice) {
+    public void WriteOrderSummary(String orderIDforSummary, String cusID, String food, String foodPrice) {
         // Create a new Review object with the provided values
         OrderSummary newOrder = new OrderSummary();
+        newOrder.setOrderIDforSummary(orderIDforSummary);
         newOrder.setCusID(cusID);
         newOrder.setFoodName(food);
         newOrder.setFoodPrice(foodPrice);
@@ -60,6 +61,8 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
             // Handle the IOException, you might want to throw a custom exception or log the error
         }
     }
+    
+    
     
     
 //    public ArrayList<OrderSummary> ReadOrderSummariesFromFile() {

@@ -17,8 +17,11 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
     private String vendorID;
     private String vendorName;
     private String cusID = Java_assignment.LoggedInUser.userid;
+    private String orderIDforSummary;
     
-    public CUSTOMER_ViewMenu(){initComponents();}
+    public CUSTOMER_ViewMenu(){
+        initComponents();
+    }
     
     
     public CUSTOMER_ViewMenu(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
@@ -31,7 +34,9 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
              
 //        String vendorID = String.valueOf(vendorIDObj);
 //        System.out.println(vendorID);
-        
+        OrderHandler orderHandlerGenerate = new OrderHandler();
+        String orderIDforSummary = orderHandlerGenerate.generateOrderID();
+        this.orderIDforSummary = orderIDforSummary;
         
         model.setColumnIdentifiers(columnName);
         
@@ -265,7 +270,9 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 //            itemsArray[i][1] = foodPrice;
 //        }
         this.dispose();
-        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(vendorID,vendorName);
+        System.out.println(vendorID+"ViewMenu");
+        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(orderIDforSummary,vendorID,vendorName);
+        System.out.println(vendorID+"ViewMenu, after pass");
         confirmorder.setVisible(true);
 
         
@@ -309,10 +316,13 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
             
             OrderSummaryHandler ordersummaryHandler;
             try{
+                
+                
+                
                 ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
                 //System.out.println(food+foodPrice);
-                ordersummaryHandler.WriteOrderSummary(cusID,food,foodPrice);
-                //System.out.println(food+foodPrice);
+                ordersummaryHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
+                System.out.println(orderIDforSummary+"In viewMenu");
                 
             } catch(IOException | ClassNotFoundException ex){
                 Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);

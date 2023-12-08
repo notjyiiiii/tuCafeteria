@@ -7,8 +7,10 @@ public class OrderHandler extends BaseHandler<Order>{
     
     private static ArrayList<Order> allOrders = new ArrayList<>();
     
+    public OrderHandler(){}
+    
     public OrderHandler(String filePath, Class<Order> clazz) throws IOException, ClassNotFoundException{
-        super("Order", Order.class);
+        super("Order_1", Order.class);
         if (allOrders.isEmpty()) {
             allOrders.addAll(collection);
         }
@@ -43,25 +45,52 @@ public class OrderHandler extends BaseHandler<Order>{
     }
     
     public String generateOrderID() {
-        
-        return String.format("%04d", allOrders.size());
+        String prefix = "ORD";
+        int maxOrderNumber = 0;
+
+        // Iterate over existing order IDs to find the maximum order number
+        for (Order order : allOrders) {
+            String orderID = order.getOrderid();
+            if (orderID != null && orderID.startsWith(prefix)) {
+                try {
+                    // Extract the number part and parse it
+                    int orderNumber = Integer.parseInt(orderID.substring(prefix.length()));
+                    // Update maxOrderNumber if the current order number is greater
+                    maxOrderNumber = Math.max(maxOrderNumber, orderNumber);
+                } catch (NumberFormatException e) {
+                    // Handle the case where the order number is not a valid integer
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // Increment the maximum order number and construct the new order ID
+        int newOrderNumber = maxOrderNumber + 1;
+        String newOrderID = prefix + newOrderNumber;
+
+        return newOrderID;
     }
     
-    public void WritePlaceOrder(String cusID, String vendorID, String[] values) {
+    
+    public void WritePlaceOrder(String orderID, String cusID, String vendorID, String[] values) {
         // Create a new Review object with the provided values
+        String orderidentification = generateOrderID();
         Order newOrder = new Order();
         
         // Generate a new orderID using the OrderIDGenerator
-        String orderID = generateOrderID();
         
-        newOrder.setOrderid(orderID);
+        newOrder.setOrderid(orderidentification);
         newOrder.setCustomerid(cusID);
         newOrder.setVendorid(vendorID);
         
-        newOrder.setOrderid(values[0]);
-        //newOrder.setReview(values[1]);
-        //newOrder.setRating(values[2]);
+        newOrder.setOrderStatus(values[0]);
+        newOrder.setOrderType(values[1]);
+        newOrder.setDeliveryLocation(values[2]);
+        newOrder.setOrderAmount(Double.parseDouble(values[3].replace("RM ", "")));
+        newOrder.setDeliveryFees(Double.parseDouble(values[4].replace("RM ", "")));
+        newOrder.setTotalAmount(Double.parseDouble(values[5].replace("RM ", "")));
 
+        
         // Add the new review to the collection
         collection.add(newOrder);
 

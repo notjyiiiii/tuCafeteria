@@ -10,13 +10,13 @@ public class Order implements IDataContainer, Serializable{
     private String orderid;
     private String customerid;
     private String vendorid;
-    private OrderStatus orderStatus;
-    private OrderType orderType;
-    private LocalDateTime orderDateTime;
+    private String orderStatus;
+    private String orderType;
+    //private LocalDateTime orderDateTime;
     private String deliveryLocation;
-    private float orderAmount;
-    private float deliveryFees;
-    private float totalAmount;
+    private double orderAmount;
+    private double deliveryFees;
+    private double totalAmount;
 //    private OrderItem[] orderList;
     
     
@@ -25,33 +25,74 @@ public class Order implements IDataContainer, Serializable{
     }
 
     public String[] SerializeData(){
-        String [] dataString = new String[10];
+
+        String [] dataString = new String[9];
         dataString[0] = this.orderid;
         dataString[1] = this.customerid;
         dataString[2] = this.vendorid;
-        dataString[3] = this.orderStatus.toString();
-        dataString[4] = this.orderType.toString();
-        dataString[5] = this.orderDateTime.toString();
-        dataString[6] = this.deliveryLocation;
-        dataString[7] = Float.toString(this.orderAmount);
-        dataString[8] = Float.toString(this.deliveryFees);
-        dataString[9] = Float.toString(this.totalAmount);
+        dataString[3] = this.orderStatus;
+        dataString[4] = this.orderType;
+        dataString[5] = this.deliveryLocation;
+        dataString[6] = Double.toString(this.orderAmount);
+        dataString[7] = Double.toString(this.deliveryFees);
+        dataString[8] = Double.toString(this.totalAmount)   ;
+        
+//        String [] dataString = new String[11];
+//        dataString[0] = this.orderid;
+//        dataString[1] = this.customerid;
+//        dataString[2] = this.vendorid;
+//        dataString[3] = this.orderStatus;
+//        dataString[4] = this.orderType;
+//        dataString[5] = this.orderDateTime.toString();
+//        dataString[6] = this.deliveryLocation;
+//        dataString[7] = Double.toString(this.orderAmount);
+//        dataString[8] = Double.toString(this.deliveryFees);
+//        dataString[9] = Double.toString(this.totalAmount);
+        
+        
         
         return dataString;
     }
     
     
     public void DeserializeData(String[] dataArray){
-        this.orderid = dataArray[0];
-        this.customerid = dataArray[1];
-        this.vendorid = dataArray[2];
-        this.orderStatus = OrderStatus.valueOf(dataArray[3]);
-        this.orderType = OrderType.valueOf(dataArray[4]);
-        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
-        this.deliveryLocation = dataArray[6];
-        this.orderAmount = Float.parseFloat(dataArray[7]);
-        this.deliveryFees = Float.parseFloat(dataArray[8]);
-        this.totalAmount = Float.parseFloat(dataArray[9]);
+
+//        this.orderid = dataArray[0];
+//        this.customerid = dataArray[1];
+//        this.vendorid = dataArray[2];
+//        this.orderStatus = dataArray[3];
+//        this.orderType = dataArray[4];
+//        this.deliveryLocation = dataArray[5];
+//        this.orderAmount = Double.parseDouble(dataArray[6]);
+//        this.deliveryFees = Double.parseDouble(dataArray[7]);
+//        this.totalAmount = Double.parseDouble(dataArray[8]);
+        if (dataArray.length == 9) {
+            this.orderid = dataArray[0];
+            this.customerid = dataArray[1];
+            this.vendorid = dataArray[2];
+            this.orderStatus = dataArray[3];
+            this.orderType = dataArray[4];
+            this.deliveryLocation = dataArray[5];
+            this.orderAmount = Double.parseDouble(dataArray[6]);
+            this.deliveryFees = Double.parseDouble(dataArray[7]);
+            this.totalAmount = Double.parseDouble(dataArray[8]);
+        } else {
+            // Handle the case where the array doesn't have the expected length
+            // For example, log an error or throw an exception
+            System.err.println("Error: Invalid array length");
+        }
+        
+        
+//        this.orderid = dataArray[0];
+//        this.customerid = dataArray[1];
+//        this.vendorid = dataArray[2];
+//        this.orderStatus = dataArray[3];
+//        this.orderType = dataArray[4];
+//        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+//        this.deliveryLocation = dataArray[6];
+//        this.orderAmount = Double.parseDouble(dataArray[7]);
+//        this.deliveryFees = Double.parseDouble(dataArray[8]);
+//        this.totalAmount = Double.parseDouble(dataArray[9]);
        
     }
     
@@ -80,29 +121,29 @@ public class Order implements IDataContainer, Serializable{
         this.vendorid = vendorid;
     }
 
-    public OrderStatus getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public OrderType getOrderType() {
+    public String getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(OrderType orderType) {
+    public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
 
-    public LocalDateTime getOrderDateTime() {
-        return orderDateTime;
-    }
-
-    public void setOrderDateTime(LocalDateTime orderDateTime) {
-        this.orderDateTime = orderDateTime;
-    }
+//    public LocalDateTime getOrderDateTime() {
+//        return orderDateTime;
+//    }
+//
+//    public void setOrderDateTime(LocalDateTime orderDateTime) {
+//        this.orderDateTime = orderDateTime;
+//    }
 
     public String getDeliveryLocation() {
         return deliveryLocation;
@@ -112,27 +153,27 @@ public class Order implements IDataContainer, Serializable{
         this.deliveryLocation = deliveryLocation;
     }
 
-    public float getOrderAmount() {
+    public double getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(float orderAmount) {
+    public void setOrderAmount(double orderAmount) {
         this.orderAmount = orderAmount;
     }
 
-    public float getDeliveryFees() {
+    public double getDeliveryFees() {
         return deliveryFees;
     }
 
-    public void setDeliveryFees(float deliveryFees) {
+    public void setDeliveryFees(double deliveryFees) {
         this.deliveryFees = deliveryFees;
     }
 
-    public float getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(float totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
