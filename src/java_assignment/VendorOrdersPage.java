@@ -46,10 +46,11 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         
         
         ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        ArrayList<Order> todayOrders = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
         populateComboBox1(order);
         populateComboBox2(order);
         
-        for (Order orderItem : order) {
+        for (Order orderItem : todayOrders) {
             model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
         }
     }
@@ -530,9 +531,15 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        this.dispose();
-        OrderHistory oh = new OrderHistory(vendor);
-        oh.setVisible(true);
+        try {
+            this.dispose();
+            OrderHistory oh = new OrderHistory(vendor);
+            oh.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
@@ -554,9 +561,15 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ordersActionPerformed
 
     private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
-        this.dispose();
-        VendorCreditPage vcreditp = new VendorCreditPage();
-        vcreditp.setVisible(true);
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(vendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_CreditsActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed

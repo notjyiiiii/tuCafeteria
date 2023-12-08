@@ -532,9 +532,15 @@ public class VendorMenuPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
-        this.dispose();
-        VendorCreditPage vcreditp = new VendorCreditPage();
-        vcreditp.setVisible(true);
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(vendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_CreditsActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed

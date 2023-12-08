@@ -1,5 +1,9 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class VendorInsightsPage extends javax.swing.JFrame {
 
     private String username;
@@ -495,9 +499,15 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-        this.dispose();
-        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-        vmenup.setVisible(true);
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void btn_dashbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashbMouseClicked
@@ -507,9 +517,15 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_dashbMouseClicked
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_ordersMouseClicked
 
     public static void main(String args[]) {

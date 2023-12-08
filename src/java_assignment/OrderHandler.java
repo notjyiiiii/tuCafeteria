@@ -1,5 +1,6 @@
 package java_assignment;
 
+import com.jcalendar.event.CalendarEvent;
 import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
@@ -88,15 +89,46 @@ public class OrderHandler extends BaseHandler<Order>{
     
     
     public float CalculateTotalIncome(String userID) {
-    float totalIncome = 0;
+        float totalIncome = 0;
 
-    for (Order order : collection) {
-        if (order.getVendorid().equals(userID)) {
-            totalIncome += order.getOrderAmount();
+        for (Order order : collection) {
+            if (order.getVendorid().equals(userID)) {
+                totalIncome += order.getOrderAmount();
+            }
         }
+
+        return totalIncome;
+    }
+    
+    public ArrayList<Order> GetTodayOrdersByVendorID(String vendorID) {
+        ArrayList<Order> todayOrders = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+
+        for (Order order : collection) {
+            LocalDateTime orderDateTime = order.getOrderDateTime();
+
+            if (orderDateTime != null && orderDateTime.toLocalDate().equals(today) && order.getVendorid().equals(vendorID)) {
+                todayOrders.add(order);
+            }
+        }
+
+        return todayOrders;
     }
 
-    return totalIncome;
-}
+    
+    public ArrayList<Order> getOrdersByDateRange(LocalDate startDate, LocalDate endDate) {
+        ArrayList<Order> ordersWithinDateRange = new ArrayList<>();
+
+        for (Order order : collection) {
+            LocalDate orderDate = order.getOrderDateTime().toLocalDate();
+
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                ordersWithinDateRange.add(order);
+            }
+        }
+
+        return ordersWithinDateRange;
+    }
+    
     
 }

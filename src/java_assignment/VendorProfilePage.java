@@ -2,8 +2,10 @@ package java_assignment;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_assignment.Enums.OperatingDay;
 
 public class VendorProfilePage extends javax.swing.JFrame {
 
@@ -22,6 +24,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
         String formattedIncome = "RM" + decimalFormat.format(income);
         lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
         
+        readOperatingDaysAndTimes(Java_assignment.LoggedInUser.userid, "Vendor");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -196,6 +199,11 @@ public class VendorProfilePage extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
 
         jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
         jLabel1.setText("Vendor Name");
@@ -642,9 +650,15 @@ public class VendorProfilePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
-        this.dispose();
-        VendorCreditPage vcreditp = new VendorCreditPage();
-        vcreditp.setVisible(true);
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(vendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_CreditsActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
@@ -696,6 +710,49 @@ public class VendorProfilePage extends javax.swing.JFrame {
         vmp.setVisible(true);
     }//GEN-LAST:event_btn_dashbActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            this.dispose();
+            VendorEditProfile vep = new VendorEditProfile(vendor);
+            vep.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void readOperatingDaysAndTimes(String userId, String filePath) throws ClassNotFoundException {
+        try {
+            VendorHandler vendorHandler = new VendorHandler();
+            ArrayList<OperatingDay> operatingDays = vendorHandler.GetVendorByVendorID(userId).getOperatingDays();
+
+
+            // Update labels based on operating days
+            updateLabel(jLabel10, OperatingDay.MONDAY);
+            updateLabel(jLabel12, OperatingDay.TUESDAY);
+            updateLabel(jLabel13, OperatingDay.WEDNESDAY);
+            updateLabel(jLabel15, OperatingDay.THURSDAY);
+            updateLabel(jLabel18, OperatingDay.FRIDAY);
+            updateLabel(jLabel20, OperatingDay.SATURDAY);
+            updateLabel(jLabel22, OperatingDay.SUNDAY);
+
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void updateLabel(javax.swing.JLabel label, OperatingDay day) {
+        if (vendor.getOperatingDays().contains(day)) {
+            label.setText("Open: " + vendor.getOperatingHours());
+        } else {
+            label.setText("Closed");
+        }
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

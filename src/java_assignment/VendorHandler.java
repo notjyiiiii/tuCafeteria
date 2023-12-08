@@ -1,7 +1,9 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.lang.System.Logger;
 import java.util.ArrayList;
+import java_assignment.Enums.OperatingDay;
 
 public class VendorHandler extends BaseHandler<Vendor>{
 
@@ -39,6 +41,17 @@ public class VendorHandler extends BaseHandler<Vendor>{
         }
         
         return null;
+    }
+    
+    
+    public void updateOperatingDays(String vendorid, ArrayList<OperatingDay> newOperatingDays) {
+        Vendor vendorToUpdate = GetVendorByVendorID(vendorid);
+        if (vendorToUpdate != null) {
+            vendorToUpdate.setOperatingDays(newOperatingDays);
+            this.SaveCollection();
+        } else {
+            System.out.println("Vendor not found with ID: " + vendorid);
+        }
     }
     
 }

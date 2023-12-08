@@ -90,59 +90,14 @@ public class User implements IDataContainer{
         this.role = role;
     }
     
-    
-    //to get user details
-//    public boolean checkIdPass(){
-//        fileManager fm = new fileManager();
-//        String key = "User";
-//        String configVar = fm.getConfigVar(key, true);
-//        ArrayList<String[]> recordList = fm.readFile(configVar);
-//        
-//        //check userid and password
-//        for(int i = 0; i<recordList.size(); i++){
-//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(password)){
-//                DeserializeData(recordList.get(i));
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
-    
-    //put the data into the variables
-//    private void LoadData(String[] dataArray)
-//    {
-//        this.username = dataArray[1];
-//        this.password = dataArray[4];
-//        this.email = dataArray[2];
-//        this.role = dataArray[5];
-//        this.hpnum = dataArray [3];
-//    }    
-//    
-//    //check if the text fields is empty or not because kudo says so
-//    public boolean checkIfExist(){
-//        if(userid == null || userid.length() == 0 || password == null || password.length() == 0){
-//            return false;
-//        }
-//        return true;
-//    }
-    
-//    public boolean writeDetails(){ //not done
-//        fileManager fm = new fileManager();
-//        String key = "User";
-//        String configVar = fm.getConfigVar(key, true);
-//        ArrayList<String[]> recordList = fm.readFile(configVar);
-//        
-//        //check userid and password
-//        for(int i = 0; i<recordList.size(); i++){
-//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(password)){
-//                LoadData(recordList.get(i));
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
-
-    
+    @Override
+    public String toString() {
+        // Return a string representation of the Order object in the desired format
+        return this.getUserid()+ ";" +
+               this.getUsername() + ";" +
+               this.getEmail()+ ";" +
+               this.getHpnum() + ";" +
+               this.getPassword() + ";" +
+               this.getRole();
+    }
 }

@@ -2,6 +2,7 @@ package java_assignment;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java_assignment.Enums.OperatingDay;
 
 
@@ -17,26 +18,21 @@ public class Vendor implements IDataContainer, Serializable{
     
     public ArrayList<OperatingDay> DeserializeOperatingDay(String dayString)
     {
-        String[] dayStringArr = dayString.strip().split(",");
-        ArrayList<OperatingDay> dayArr = new ArrayList<OperatingDay>();
-        
-        for (int i = 0; i < dayStringArr.length; i++)
-        {
-            dayArr.add(OperatingDay.valueOf(dayStringArr[i]));
+        String[] dayStringArr = dayString.split(",");
+        ArrayList<OperatingDay> dayArr = new ArrayList<>();
+
+        for (String day : dayStringArr) {
+            dayArr.add(OperatingDay.valueOf(day));
         }
-        
+
         return dayArr;
     }
     
     public String SerializeOperatingDay()
     {
-        String dayString = "";
-        
-        for (int i = 0; i < operatingDays.size(); i++)
-        {
-            dayString += operatingDays.get(i).toString();
-        }  
-        return dayString;
+        return operatingDays.stream()
+            .map(OperatingDay::toString)
+            .collect(Collectors.joining(","));
     }
     
     
@@ -95,5 +91,21 @@ public class Vendor implements IDataContainer, Serializable{
         this.operatingHours = operatingHours;
     }
 
+   @Override
+    public String toString() {
+        // Format the OperatingDays as a comma-separated string without square brackets
+        String operatingDaysString = this.getOperatingDays().stream()
+                .map(OperatingDay::toString)
+                .collect(Collectors.joining(";"));
+
+        
+
+        // Return the formatted string
+        return this.getVendorid() + ";" +
+                this.getVendorName() + ";" +
+                operatingDaysString + ";" +
+                this.getOperatingHours();
+    }
+    
     
 }

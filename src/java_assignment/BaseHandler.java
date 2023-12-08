@@ -3,6 +3,8 @@ package java_assignment;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -47,6 +49,23 @@ public class BaseHandler<T extends IDataContainer> {
         }
         
         return tList;
+    }
+    
+    public void SaveCollection() {
+        try {
+            fileManager fm = new fileManager();
+            String get = fm.getConfigVar(this.filePath, true);
+
+            Object[] objArray = collection.toArray(new Object[0]);
+
+            String[] strarr = new String[objArray.length];
+            for (int i = 0; i < objArray.length; i++) {
+                strarr[i] = objArray[i].toString() + "\n";
+            }
+            fm.updateFile(get, strarr);
+        } catch (IOException e) {
+           
+        }
     }
     
     private T InstantiateHandler(Class<T> clazz) {

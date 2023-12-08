@@ -433,9 +433,15 @@ public class VendorMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ordersMouseClicked
 
     private void btn_CreditsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreditsMouseClicked
-        this.dispose();
-        VendorCreditPage vcreditp = new VendorCreditPage();
-        vcreditp.setVisible(true);
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(currentVendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_CreditsMouseClicked
 
     private void btn_ProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProfileMouseClicked
