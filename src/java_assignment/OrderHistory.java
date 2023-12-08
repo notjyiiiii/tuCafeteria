@@ -1,11 +1,17 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class OrderHistory extends javax.swing.JFrame {
 
-    public OrderHistory() {
+    private Vendor vendor;
+    
+    public OrderHistory(Vendor vendor) {
         initComponents();
+        this.vendor = vendor;
     }
 
     @SuppressWarnings("unchecked")
@@ -194,16 +200,22 @@ public class OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OrderHistory().setVisible(true);
+               
             }
         });
     }

@@ -1,13 +1,157 @@
 package java_assignment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java_assignment.Enums.OrderStatus;
+import java_assignment.Enums.OrderType;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 public class VendorOrdersPage extends javax.swing.JFrame {
 
     private Vendor vendor;
+    private DefaultTableModel model = new DefaultTableModel();
+    private String[] columnName = {"ID","Status","Service","Date Time","Amount"};
+    private int row=-1;
     
-    public VendorOrdersPage() {
+    public VendorOrdersPage(Vendor vendor) throws ClassNotFoundException, IOException {
         initComponents();
+        this.vendor = vendor;
+        
+        model.setColumnIdentifiers(columnName);
+        jTable1.setModel(model);
+        String searchQuery = jTextField1.getText();
+
+        OrderHandler oh = new OrderHandler();      
+        Float income = oh.CalculateTotalIncome(Java_assignment.LoggedInUser.userid);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        String formattedIncome = "RM" + decimalFormat.format(income);
+        lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
+        
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(300);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
+        
+        
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        populateComboBox1(order);
+        populateComboBox2(order);
+        
+        for (Order orderItem : order) {
+            model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+        }
     }
+    
+    private void populateComboBox1(ArrayList<Order> order) {
+        Set<String> uniqueOrderTypes = new HashSet<>();
+
+        for (Order orderItem : order) {
+            uniqueOrderTypes.add(orderItem.getOrderType().toString());
+        }
+
+        String[] orderTypesArray = uniqueOrderTypes.toArray(new String[0]);
+
+        String[] comboBoxItems = new String[orderTypesArray.length + 1];
+        comboBoxItems[0] = "Filter by...";
+        System.arraycopy(orderTypesArray, 0, comboBoxItems, 1, orderTypesArray.length);
+
+        DefaultComboBoxModel<String> typeComboBoxModel = new DefaultComboBoxModel<>(comboBoxItems);
+        jComboBox1.setModel(typeComboBoxModel);
+
+        // Add action listener to the combo box
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (IOException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void populateComboBox2(ArrayList<Order> order) {
+        Set<String> uniqueOrderStatus = new HashSet<>();
+
+        for (Order orderItem : order) {
+            uniqueOrderStatus.add(orderItem.getOrderStatus().toString());
+        }
+
+        String[] orderStatusArray = uniqueOrderStatus.toArray(new String[0]);
+
+        String[] comboBoxItems = new String[orderStatusArray.length + 1];
+        comboBoxItems[0] = "Filter by...";
+        System.arraycopy(orderStatusArray, 0, comboBoxItems, 1, orderStatusArray.length);
+
+        DefaultComboBoxModel<String> statusComboBoxModel = new DefaultComboBoxModel<>(comboBoxItems);
+        jComboBox2.setModel(statusComboBoxModel);
+
+        // Add action listener to the combo box
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (IOException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    
+    private void updateTable() throws IOException, ClassNotFoundException {
+        String selectedOrderType = jComboBox1.getSelectedItem().toString();
+        String selectedOrderStatus = jComboBox2.getSelectedItem().toString();
+
+        // Filter the table based on selected values
+        model.setRowCount(0);
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+
+        for (Order orderItem : order) {
+            if (("Filter by...".equals(selectedOrderType) || orderItem.getOrderType().toString().equals(selectedOrderType)) &&
+                ("Filter by...".equals(selectedOrderStatus) || orderItem.getOrderStatus().toString().equals(selectedOrderStatus))) {
+                model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+    
+    private void refreshData() throws IOException, ClassNotFoundException {
+        model.setRowCount(0);
+
+        // Reload menu data
+        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
+        ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);
+
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        populateComboBox1(order);
+        populateComboBox2(order);
+
+        for (Order orderItem : order) {
+            model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+        }
+}
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,10 +194,25 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         bottomPanel.setBackground(new java.awt.Color(66, 33, 11));
 
         btn_noti.setText("Notification");
+        btn_noti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_notiActionPerformed(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
+        btn_orders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordersActionPerformed(evt);
+            }
+        });
 
         btn_dashb.setText("Dashboard");
+        btn_dashb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dashbActionPerformed(evt);
+            }
+        });
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,37 +300,27 @@ public class VendorOrdersPage extends javax.swing.JFrame {
 
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
 
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Search");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"#2768", "Dine In", "Food1 , Food 2", "Pending", null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
-        ));
+        });
+
         jScrollPane1.setViewportView(jTable1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("View");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         lb_userID.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_userID.setText("Service");
@@ -180,6 +329,11 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         lb_userID1.setText("Status");
 
         jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("History");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -261,8 +415,18 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         lb_tuName1.setText("Tech");
 
         btn_Profile.setLabel("Profile");
+        btn_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfileActionPerformed(evt);
+            }
+        });
 
         btn_Settings.setLabel("Settings");
+        btn_Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SettingsActionPerformed(evt);
+            }
+        });
 
         lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -271,6 +435,11 @@ public class VendorOrdersPage extends javax.swing.JFrame {
 
         btn_Credits.setActionCommand("Credits");
         btn_Credits.setLabel("Credits");
+        btn_Credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreditsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -345,9 +514,15 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-        this.dispose();
-        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-        vmenup.setVisible(true);
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
@@ -356,10 +531,137 @@ public class VendorOrdersPage extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         this.dispose();
-        OrderHistory oh = new OrderHistory();
+        OrderHistory oh = new OrderHistory(vendor);
         oh.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
+    private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
+        this.dispose();
+        Notification_Page noti = new Notification_Page();
+        noti.setVisible(true);
+    }//GEN-LAST:event_btn_notiActionPerformed
+
+    private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ordersActionPerformed
+
+    private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
+        this.dispose();
+        VendorCreditPage vcreditp = new VendorCreditPage();
+        vcreditp.setVisible(true);
+    }//GEN-LAST:event_btn_CreditsActionPerformed
+
+    private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
+        try {
+            this.dispose();
+            VendorProfilePage vpp = new VendorProfilePage(vendor);
+            vpp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ProfileActionPerformed
+
+    private void btn_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashbActionPerformed
+        this.dispose();
+        VendorMainPage vmp = null;
+        try {
+            vmp = new VendorMainPage(vendor);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vmp.setVisible(true);
+    }//GEN-LAST:event_btn_dashbActionPerformed
+
+    private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
+        this.dispose();
+        VendorSettingsPage vsp = new VendorSettingsPage();
+        
+    }//GEN-LAST:event_btn_SettingsActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  
+        int selectedRowIndex = jTable1.getSelectedRow();
+
+        if (selectedRowIndex != -1) {
+            try {
+                // Get the order ID from the selected row
+                String orderId = jTable1.getValueAt(selectedRowIndex, 0).toString();
+                // Pass the order ID to the OrdersView page
+                openViewPage(orderId);
+            } catch (IOException ex) {
+                Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // If no row is selected, show a message or take appropriate action
+            JOptionPane.showMessageDialog(this, "Please select a row to view.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void openViewPage(String orderId) throws IOException, ClassNotFoundException {
+        this.dispose();
+        OrdersView oh = new OrdersView(orderId, vendor);
+        oh.setVisible(true);
+    }
+
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+        String searchQuery = jTextField1.getText();
+        performSearch(searchQuery);
+
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            refreshData();
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    private void performSearch(String query) throws IOException, ClassNotFoundException {
+        model.setRowCount(0);
+        
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+
+        for (Order orderItem : order) {
+        if (orderItem.getOrderid().toLowerCase().contains(query.toLowerCase())) {
+            model.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    
+    
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

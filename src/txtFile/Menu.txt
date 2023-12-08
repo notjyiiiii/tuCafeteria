@@ -1,20 +1,21 @@
-VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;3.80
-VD001;MD002;null;Kuih Bahulu;Cake similar in concept to the madeleine cake but round in shape and composed of different ingredients;Dessert;1.00
-VD001;MD003;null;Nasi Kandar;Steamed rice combined with an array of distinct curries, sides dishes, and gravies;Main Dish;8.00
-VD001;MD004;null;Ayam Percik;Barbecued chicken slathered in spicy chili, garlic and ginger sauce mixed with coconut milk ;Main Dish;8.00
-VD001;MD005;null;Kaya Toast;A sweet and fragrant coconut custard jam, slathered onto thin slices of warm toast;Dessert;4.00
-VD003;MD006;null;Kopi Hailam Cold;Coffee that is named after the region it comes from, with a unique preparatino method;Drink;3.50
-VD003;MD007;null;Croissant;A buttery, flaky, viennoiserie pastry;Dessert;4.00
-VD003;MD008;null;Polo Bun;A Hong Kong style sweet bun cover with a topping that tastes like butter cookies;Dessert;3.00
-VD003;MD009;null;Chicken Floss Bun;This soft bread is topped with tasty chicken floss and mayonnaise;Appetiser;3.00
-VD003;MD010;null;Red Bean Pao;A leavened dough wrapper that's pillowy soft and fluffy filled with a creamy, sweet paste made of adzuki beans;Dessert;2.00
-VD004;MD011;null;White Rice;Cooked white rice;Main Dish;2.00
-VD004;MD012;null;Fried Rice; Stir-fried rice mixed with egg and mixed vegetables;Main Dish;4.00
-VD004;MD013;null;Mapo Tofu;Tofu set in a spicy sauce, with minced beef;Side Dish;4.00
-VD004;MD014;null;Beef and Potatoes;Braised beef with pan-fired potatoes;Side Dish;5.00
-VD004;MD015;null;Dry Chilli Chicken;Crispy fried chicken tossed in a spicy tangy chilli sauce;Side Dish;5.00
-VD005;MD016;null;Fried Chicken Chop;Deboned chicken leg cured and coated in spice then fried;Main Dish;7.00 
-VD005;MD017;null;Grilled Chicken Chop;Deboned chicken leg cured and coated in spice then grilled;Main Dish;7.00 
-VD005;MD018;null;Chocolate Milkshake;Beverage made by blending together a combination of milk, chocolate ice cream, and chocolate syrup;Drink;4.00
-VD005;MD019;null;Spaghetti Bolognaise;Flavorful meat sauce served over cooked spaghetti noodles;Main Dish;8.00
-VD005;MD020;null;Mac and Cheese;Cooked macaroni pasta mixed with a creamy cheese sauce;Main Dish;6.00
+VD001;MD002;null;Kuih Bahulu;Cake similar in concept to the madeleine cake but round in shape and composed of different ingredients;Dessert;1.0
+VD001;MD003;null;Nasi Kandar;Steamed rice combined with an array of distinct curries, sides dishes, and gravies;Main Dish;8.0
+VD001;MD004;null;Ayam Percik;Barbecued chicken slathered in spicy chili, garlic and ginger sauce mixed with coconut milk ;Main Dish;8.0
+VD001;MD005;null;Kaya Toast;A sweet and fragrant coconut custard jam, slathered onto thin slices of warm toast;Dessert;4.0
+VD003;MD006;null;Kopi Hailam Cold;Coffee that is named after the region it comes from, with a unique preparatino method;Drink;3.5
+VD003;MD007;null;Croissant;A buttery, flaky, viennoiserie pastry;Dessert;4.0
+VD003;MD008;null;Polo Bun;A Hong Kong style sweet bun cover with a topping that tastes like butter cookies;Dessert;3.0
+VD003;MD009;null;Chicken Floss Bun;This soft bread is topped with tasty chicken floss and mayonnaise;Appetiser;3.0
+VD003;MD010;null;Red Bean Pao;A leavened dough wrapper that's pillowy soft and fluffy filled with a creamy, sweet paste made of adzuki beans;Dessert;2.0
+VD004;MD011;null;White Rice;Cooked white rice;Main Dish;2.0
+VD004;MD012;null;Fried Rice; Stir-fried rice mixed with egg and mixed vegetables;Main Dish;4.0
+VD004;MD013;null;Mapo Tofu;Tofu set in a spicy sauce, with minced beef;Side Dish;4.0
+VD004;MD014;null;Beef and Potatoes;Braised beef with pan-fired potatoes;Side Dish;5.0
+VD004;MD015;null;Dry Chilli Chicken;Crispy fried chicken tossed in a spicy tangy chilli sauce;Side Dish;5.0
+VD005;MD016;null;Fried Chicken Chop;Deboned chicken leg cured and coated in spice then fried;Main Dish;7.0
+VD005;MD017;null;Grilled Chicken Chop;Deboned chicken leg cured and coated in spice then grilled;Main Dish;7.0
+VD005;MD018;null;Chocolate Milkshake;Beverage made by blending together a combination of milk, chocolate ice cream, and chocolate syrup;Drink;4.0
+VD005;MD019;null;Spaghetti Bolognaise;Flavorful meat sauce served over cooked spaghetti noodles;Main Dish;8.0
+VD005;MD020;null;Mac and Cheese;Cooked macaroni pasta mixed with a creamy cheese sauce;Main Dish;6.0
+VD001;MD123;null;Ayam McGoreng;McDonald's famous chicken;Main Dish;13.9
+VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;3.8

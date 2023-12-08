@@ -1,27 +1,53 @@
 package java_assignment;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.*;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VendorMenuPage extends javax.swing.JFrame {
 
-    private JPanel pI1 = new JPanel();
-    private JPanel pI2 = new JPanel();
-    private JButton bOK = new JButton();
-    private JButton bCancel = new JButton();
     private String username;
     private String password;
     private Vendor vendor;
+    private DefaultTableModel model = new DefaultTableModel();
+    private String[] columnName = {"ID","Food","Description","Type","Price"};
+    private int row=-1;
     
-    public VendorMenuPage(Vendor v) {
+    public VendorMenuPage(Vendor v) throws IOException, ClassNotFoundException {
         initComponents();
         this.vendor = v;
-//        Menu menu = new Menu(v);
-//        lb_dailyEarningstxt.setText(menu.getItemName());
-//        System.out.println(menu.toString());
-//        System.out.println(menu.toString());
-//        System.out.println(menu.toString());
+        model.setColumnIdentifiers(columnName);
+        jTable1.setModel(model);
+        String searchQuery = jTextField1.getText();
+
+        OrderHandler oh = new OrderHandler();      
+        Float income = oh.CalculateTotalIncome(Java_assignment.LoggedInUser.userid);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        String formattedIncome = "RM" + decimalFormat.format(income);
+        lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
+        
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+//        jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+//        jTable1.getColumnModel().getColumn(6).setPreferredWidth(50);
+        
+        MenuHandler menuHandler = new MenuHandler("Menu",Menu.class);
+        ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);
+        
+        for (Menu menuItem : menu) {
+            model.addRow(new Object[]{menuItem.getItemid(), menuItem.getItemName(), menuItem.getItemDesc(), menuItem.getItemType(), menuItem.getItemPrice()});
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -102,6 +128,11 @@ public class VendorMenuPage extends javax.swing.JFrame {
         bottomPanel.setBackground(new java.awt.Color(66, 33, 11));
 
         btn_noti.setText("Notification");
+        btn_noti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_notiActionPerformed(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
         btn_orders.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,6 +147,11 @@ public class VendorMenuPage extends javax.swing.JFrame {
                 btn_dashbMouseClicked(evt);
             }
         });
+        btn_dashb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dashbActionPerformed(evt);
+            }
+        });
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,8 +159,18 @@ public class VendorMenuPage extends javax.swing.JFrame {
                 btn_insightsMouseClicked(evt);
             }
         });
+        btn_insights.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_insightsActionPerformed(evt);
+            }
+        });
 
         btn_menu.setText("Menu");
+        btn_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_menuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
@@ -216,8 +262,18 @@ public class VendorMenuPage extends javax.swing.JFrame {
         lb_tuName1.setText("Tech");
 
         btn_Profile.setLabel("Profile");
+        btn_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfileActionPerformed(evt);
+            }
+        });
 
         btn_Settings.setLabel("Settings");
+        btn_Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SettingsActionPerformed(evt);
+            }
+        });
 
         lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -226,6 +282,11 @@ public class VendorMenuPage extends javax.swing.JFrame {
 
         btn_Credits.setActionCommand("Credits");
         btn_Credits.setLabel("Credits");
+        btn_Credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreditsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -278,31 +339,20 @@ public class VendorMenuPage extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"", "", "", ""},
-                {"", "", "", ""},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "FoodID", "Picture", "Name", "Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Search");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -353,7 +403,11 @@ public class VendorMenuPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    
+    
+    
+    
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
@@ -366,33 +420,182 @@ public class VendorMenuPage extends javax.swing.JFrame {
 
     private void btn_dashbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashbMouseClicked
         this.dispose();
-        //VendorMainPage vip = new VendorMainPage(vendor);
-        //vip.setVisible(true);
+        VendorMainPage vmp = null;
+        try {
+            vmp = new VendorMainPage(vendor);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vmp.setVisible(true);
     }//GEN-LAST:event_btn_dashbMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        int a = JOptionPane.showConfirmDialog(this, "Are you sure?","Confirm", JOptionPane.YES_NO_OPTION);
+        int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            try {
+                int selectedRowIndex = jTable1.getSelectedRow();
+                if (selectedRowIndex != -1) {
+                    String selectedItemId = (String) model.getValueAt(selectedRowIndex, 0);
+
+                    MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
+                    ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);
+
+                    Menu selectedItem = null;
+                    for (Menu menuItem : menu) {
+                        if (menuItem.getItemid().equals(selectedItemId)) {
+                            selectedItem = menuItem;
+                            break;
+                        }
+                    }
+
+                    if (selectedItem != null) {
+                        menuHandler.DeleteItem(selectedItem);
+
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        model.removeRow(selectedRowIndex);
+
+                        JOptionPane.showMessageDialog(this, "Item deleted successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Selected item not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "Error deleting item: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void btn_AddItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AddItemMouseClicked
-//        Menu menu = new Menu(vendor);
-//        this.setVisible(false);
-//        MenuAdd ma = new MenuAdd(vendor);
-//        ma.setVisible(true);
+       this.setVisible(false);
+        MenuAdd ma = new MenuAdd(vendor);
+        ma.setVisible(true);
     }//GEN-LAST:event_btn_AddItemMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.setVisible(false);
-        MenuEdit me = new MenuEdit();
-        me.setVisible(true);
+        try {
+            this.setVisible(false);
+            MenuEdit me = new MenuEdit(vendor);
+            me.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_ordersMouseClicked
 
+    private void btn_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashbActionPerformed
+        try {
+            this.dispose();
+            VendorMainPage vmp = new VendorMainPage(vendor);
+            vmp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_dashbActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+        String searchQuery = jTextField1.getText();
+        performSearch(searchQuery);
+
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
+        this.dispose();
+        VendorCreditPage vcreditp = new VendorCreditPage();
+        vcreditp.setVisible(true);
+    }//GEN-LAST:event_btn_CreditsActionPerformed
+
+    private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
+        try {
+            this.dispose();
+            VendorProfilePage vpp = new VendorProfilePage(vendor);
+            vpp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ProfileActionPerformed
+
+    private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
+        this.dispose();
+        VendorSettingsPage vsp = new VendorSettingsPage();
+        vsp.setVisible(true);
+    }//GEN-LAST:event_btn_SettingsActionPerformed
+
+    private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
+        this.dispose();
+        Notification_Page noti = new Notification_Page();
+        noti.setVisible(true);
+    }//GEN-LAST:event_btn_notiActionPerformed
+
+    private void btn_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuActionPerformed
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_menuActionPerformed
+
+    private void btn_insightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insightsActionPerformed
+        this.dispose();
+        VendorInsightsPage vip = new VendorInsightsPage(vendor);
+        vip.setVisible(true);
+    }//GEN-LAST:event_btn_insightsActionPerformed
+
+    
+    private void performSearch(String query) throws IOException, ClassNotFoundException {
+        model.setRowCount(0);
+
+        MenuHandler menuHandler = new MenuHandler("Menu",Menu.class);
+        ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);
+
+        for (Menu menuItem : menu) {
+            if (menuItem.getItemid().toLowerCase().contains(query.toLowerCase()) ||
+                menuItem.getItemName().toLowerCase().contains(query.toLowerCase()) ||
+                menuItem.getItemDesc().toLowerCase().contains(query.toLowerCase()) ||
+                menuItem.getItemType().toLowerCase().contains(query.toLowerCase()) ||
+                String.valueOf(menuItem.getItemPrice()).toLowerCase().contains(query.toLowerCase())) {
+                model.addRow(new Object[]{menuItem.getItemid(), menuItem.getItemName(), menuItem.getItemDesc(), menuItem.getItemType(), menuItem.getItemPrice()});
+            }
+        }
+}
     
     public static void main(String args[]) {
 

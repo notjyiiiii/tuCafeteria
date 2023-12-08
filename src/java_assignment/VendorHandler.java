@@ -28,4 +28,17 @@ public class VendorHandler extends BaseHandler<Vendor>{
         return null;
     }
     
+    public Vendor GetVendorByVendorName(String name)
+    {
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if (collection.get(i).getVendorName().equals(name))
+            {
+                return collection.get(i);
+            }
+        }
+        
+        return null;
+    }
+    
 }

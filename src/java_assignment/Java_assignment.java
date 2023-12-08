@@ -12,7 +12,12 @@ public class Java_assignment {
         
         fileManager fm = new fileManager();
 //        
-       LogIn lg = new LogIn();
+        LogIn lg = new LogIn();
+//       float incomeForToday = oh.CalculateTotalIncomeForToday(Java_assignment.LoggedInUser.userid);
+//        System.out.println("Total Income for Today: " + incomeForToday);
+//       String userID = "VD001";
+//       OrderHandler oh = new OrderHandler();
+//       System.out.println(oh.CalculateTotalIncome(userID));
 //        
        // String key = "Menu";
 //        String configVar = 
@@ -33,8 +38,9 @@ public class Java_assignment {
 //        data.add("DR14");   
 //        fm.writeFile(get, data);
 // VD001;MD021;null;TomYum Soup;Thai cooked soup spicy and hot;Main Dish;12.00null;MD022;null;null;null;null;0.0;
-//        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
+//        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
+//        System.out.print(menuList);
 //        Menu menu = new Menu();
 //        menu.setUserid("VD001");
 //        menu.setItemid("MD022");
@@ -61,6 +67,32 @@ public class Java_assignment {
 //
 //            }
 //        }
+
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
+//        Menu del = menu.get(0);
+//        mh.DeleteItem(del);
+//        System.out.println(del);
+
+//        del.setItemDesc("Fat ric ony mah");
+//        mh.UpdateItem(del,del);
+
+
+        
+
+//
+//        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
+//
+//        Menu menu1 = new Menu();
+//        menu1.setItemName("hhuhushdushduhuhus");
+//
+//        // Assuming you want to update the first item in menuList
+//        Menu existingMenu = menuList.get(0);
+//
+//        // Update the item in the collection and the file
+//        menuHandler.UpdateItem(existingMenu, menu1);
+//        
 
 //        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
@@ -123,7 +155,6 @@ public class Java_assignment {
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName());
 //        System.out.println(abs.getItemPrice());
-        
         
         
         

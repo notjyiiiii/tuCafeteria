@@ -347,7 +347,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Malayalam MN" size="13" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Total Orders (Daily)"/>
+            <Property name="text" type="java.lang.String" value="Total Orders"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_totalordersdailytxt">
@@ -428,6 +428,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Dashboard"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dashbActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_insights">
           <Properties>

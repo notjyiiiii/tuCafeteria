@@ -41,19 +41,35 @@ public class Order implements IDataContainer, Serializable{
     }
     
     
-    public void DeserializeData(String[] dataArray){
+    public void DeserializeData(String[] dataArray) {
+    try {
         this.orderid = dataArray[0];
         this.customerid = dataArray[1];
         this.vendorid = dataArray[2];
         this.orderStatus = OrderStatus.valueOf(dataArray[3]);
         this.orderType = OrderType.valueOf(dataArray[4]);
-        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+        if (!dataArray[5].equals("NULL")) {
+            this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+        } else {
+        this.orderDateTime = null;  
+        }
         this.deliveryLocation = dataArray[6];
         this.orderAmount = Float.parseFloat(dataArray[7]);
         this.deliveryFees = Float.parseFloat(dataArray[8]);
         this.totalAmount = Float.parseFloat(dataArray[9]);
-       
+    } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+        System.err.println("Error while deserializing order data: " + e.getMessage());
     }
+}
+    
+//    private OrderStatus mapOrderStatus(String status) {
+//    try {
+//        return OrderStatus.valueOf(status.toUpperCase());
+//    } catch (IllegalArgumentException e) {
+//        System.err.println("Invalid OrderStatus: " + status);
+//        return OrderStatus.CANCELLED; 
+//    }
+//}
     
     
     public String getOrderid() {

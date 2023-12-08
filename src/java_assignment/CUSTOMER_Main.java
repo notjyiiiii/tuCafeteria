@@ -1,5 +1,6 @@
  package java_assignment;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -24,25 +25,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         // Handle the case where userid is null (perhaps display an error message)
         System.err.println("Userid is null");
         }
-        
-//        CustomerHandler testing = new CustomerHandler("Customer", Customer.class);
-//        testing.AddNewItem(customer);
-        
-//        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
-//        String x = customerHandler.getCredit(userid);
-//        lb_cCredit.setText(x);
-        
-        //CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
-        //Customer cs = new Customer();
-//        String x = Double.toString(customer.getCredit());
-//        System.out.println(x);
-//        lb_cCredit.setText(x);
-        
-//        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
-//        ArrayList<Customer> credit = customerHandler.getCredit(userid);
-//        
-//        Customer getCredit = credit.get(1);
-//        System.out.println(getCredit);
         
     }
 

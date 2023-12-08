@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 
 public class MenuHandler extends BaseHandler<Menu>{
+    
+    private ArrayList<Menu> menu;
 
     public MenuHandler(String filePath, Class<Menu> clazz) throws IOException, ClassNotFoundException {
         super(filePath, clazz);
@@ -24,24 +26,31 @@ public class MenuHandler extends BaseHandler<Menu>{
                 vendorMenu.add(menu);
             }
         }
-        
+        this.menu = vendorMenu;
         return vendorMenu;
     }
     
     
-    public void updateItem(){
-        
+    public int GetTotalMenusForVendor() {
+        if (menu != null) {
+            return menu.size();
+        } else {
+            // Handle the case when GetVendorMenu has not been called yet
+            return 0;
+        }
     }
     
-    public void deleteItem(){
-        
-    }
     
-    public void filterMenu(){
+    public Menu GeMenuByItemID(String itemID)
+    {
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if (collection.get(i).getItemid().equals(itemID))
+            {
+                return collection.get(i);
+            }
+        }
         
-    }
-      
-    public void searchMenu(){
-        
+        return null;
     }
 }
