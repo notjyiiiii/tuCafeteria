@@ -44,29 +44,51 @@ public class OrderHandler extends BaseHandler<Order>{
         return (Order[]) orderList.toArray();
     }
     
+    private int getMaxOrderNumber(String lastOrderID) {
+        String prefix = "ORD";
+        int maxOrderNumber = 0;
+
+        // Extract the number part and parse it
+        try {
+            int lastOrderNumber = Integer.parseInt(lastOrderID.substring(prefix.length()));
+            // Update maxOrderNumber if the last order number is greater
+            maxOrderNumber = Math.max(maxOrderNumber, lastOrderNumber);
+        } catch (NumberFormatException e) {
+            // Handle the exception (e.g., log it) and proceed with the default maxOrderNumber
+        }
+
+        return maxOrderNumber;
+    }
+    
     public String generateOrderID() {
         String prefix = "ORD";
         int maxOrderNumber = 0;
 
-        // Iterate over existing order IDs to find the maximum order number
-        for (Order order : allOrders) {
-            String orderID = order.getOrderid();
-            if (orderID != null && orderID.startsWith(prefix)) {
-                try {
-                    // Extract the number part and parse it
-                    int orderNumber = Integer.parseInt(orderID.substring(prefix.length()));
-                    // Update maxOrderNumber if the current order number is greater
-                    maxOrderNumber = Math.max(maxOrderNumber, orderNumber);
-                } catch (NumberFormatException e) {
-                    // Handle the case where the order number is not a valid integer
-                    e.printStackTrace();
-                }
-            }
+        try {
+            // Load the last used order ID from persistent storage
+            fileManager fm = new fileManager();
+            String configVar = fm.getConfigVar("lastOrderID", true);
+            String lastOrderID = fm.readFile(configVar).get(0)[0];
+
+            // Get the maximum order number
+            maxOrderNumber = getMaxOrderNumber(lastOrderID);
+        } catch (NumberFormatException e) {
+            // Handle the IOException or NumberFormatException (e.g., log it) and proceed with the default maxOrderNumber
         }
 
         // Increment the maximum order number and construct the new order ID
         int newOrderNumber = maxOrderNumber + 1;
         String newOrderID = prefix + newOrderNumber;
+
+        // Save the new order ID to persistent storage for future use
+        try {
+            fileManager fm2 = new fileManager();
+            String configVar2 = fm2.getConfigVar("lastOrderID", true);
+            fm2.updateFile(configVar2, new String[]{newOrderID});
+        } catch (IOException e) {
+            // Handle the IOException (e.g., log it)
+            e.printStackTrace();
+        }
 
         return newOrderID;
     }
@@ -74,12 +96,12 @@ public class OrderHandler extends BaseHandler<Order>{
     
     public void WritePlaceOrder(String orderID, String cusID, String vendorID, String[] values) {
         // Create a new Review object with the provided values
-        String orderidentification = generateOrderID();
+//        String orderidentification = generateOrderID();
         Order newOrder = new Order();
         
         // Generate a new orderID using the OrderIDGenerator
         
-        newOrder.setOrderid(orderidentification);
+        newOrder.setOrderid(orderID);
         newOrder.setCustomerid(cusID);
         newOrder.setVendorid(vendorID);
         

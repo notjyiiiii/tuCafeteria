@@ -44,7 +44,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             this.vendorName = vendorName;
             this.orderID = orderID;
             
-            System.out.println(this.orderID);
+            System.out.println("\nBeing pass from menu in confirm order, writing to order_1 file: "+ this.orderID);
             lb_Vname.setText(vendorName);
             
 //        modelFood.setColumnIdentifiers(columnName);
@@ -77,10 +77,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             
         }
         //txtSubtotal.setText("");
-        System.out.println(totalFoodPrice+"Hi");
+        System.out.println("Total price: "+totalFoodPrice);
         txtSubtotal.setText(String.valueOf(totalFoodPrice));
-        
-        System.out.println(totalFoodPrice+"Hi2");
         
                 } catch (IOException ex) {
                     Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +95,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 //txtAvailableCredit.setText("");
                 txtAvailableCredit.setText("RM: "+String.valueOf(x));
                 
-                System.out.println(x);
+                System.out.println("\nAvailable credit: "+x);
             } catch (IOException ex) {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -563,7 +561,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         }
         Object Location = comboLocation.getSelectedItem();
         
-        System.out.println(Location+"   Hi");
+        //System.out.println(Location+"   Hi");
         
         
         String orderAmount = txtSubtotal.getText();
@@ -585,9 +583,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     double newcredit = credit - Double.parseDouble(totalAmount);
                     //CustomerHandler customerHandler = new CustomerHandler();
                     // Call the updateCredit method to update the credit
-                    double updatedCredit = customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    customerHandler.updateCredit(cusID, String.valueOf(newcredit));
                     // Print or use the updated credit as needed
-                    System.out.println("Customer's credit updated to: " + updatedCredit);
                     
                     
                     
@@ -599,9 +596,9 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     OrderHandler orderHandler;
                     try{
                         orderHandler = new OrderHandler("Order_1",Order.class);
-                        //System.out.println("before writing order to file");
+                        System.out.println(orderID +"before writing to order_1");
                         orderHandler.WritePlaceOrder(orderID, cusID, vendorID, orders);
-                        //System.out.println("After writing order to file");
+                        System.out.println("After writing order to file: "+ orderID);
 
                     }catch (IOException | ClassNotFoundException ex){
                         Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE,null,ex);
