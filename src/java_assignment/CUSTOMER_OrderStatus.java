@@ -27,7 +27,7 @@ public CUSTOMER_OrderStatus(String orderID) {
             OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
             ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
             
-            OrderHandler orderHandler = new OrderHandler("Orer_1",Order.class);
+            OrderHandler orderHandler = new OrderHandler("Order_1",Order.class);
             ArrayList<Order> orderStatus = orderHandler.GetOrderStatusByOrderID(orderID);
             
             Iterator<Order> orderStatusIterator = orderStatus.iterator();
