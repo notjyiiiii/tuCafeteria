@@ -1,5 +1,1 @@
-ORD38;CS006;VD001;Pending;Delivery;Block A;9.0;0.0;9.0;
-ORD39;CS002;VD001;Pending;Delivery;Block A;8.0;0.0;8.0;
-ORD40;CS002;VD004;Pending;Delivery;Block A;12.0;0.0;12.0;
-ORD41;CS006;VD001;Delivered;Delivery;Block A;16.8;0.0;16.8;
-ORD42;CS002;VD001;Delivered;Delivery;Block A;20.0;0.0;20.0;
+ORD78;CS002;VD001;PENDING;Delivery;Block A;12.0;0.0;12.0;

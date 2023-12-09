@@ -145,7 +145,7 @@ public class OrderHandler extends BaseHandler<Order>{
     
     public ArrayList<Order> GetOrderStatusByOrderID(String orderID){
         
-        ArrayList<Order> orderstatus = new ArrayList<Order>();
+        ArrayList<Order> orderstatus = new ArrayList<>();
         
         for(int i = 0; i<this.collection.size(); i++)
         {
@@ -165,7 +165,7 @@ public class OrderHandler extends BaseHandler<Order>{
         
         for(Order orderStatus : this.collection)
         {
-            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("Delivered"))
+            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("DELIVERED"))
             {
                 orderstatus.add(orderStatus);
             }

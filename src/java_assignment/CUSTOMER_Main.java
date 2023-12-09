@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 public class CUSTOMER_Main extends javax.swing.JFrame {
@@ -22,7 +23,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         if (Java_assignment.LoggedInUser.userid != null) {
         CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
         double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
-        lb_Credit.setText("RM: "+String.valueOf(x));
+        lb_Credit.setText("RM: "+String.valueOf(String.format("%.2f",x)));
         }
         else {
         // Handle the case where userid is null (perhaps display an error message)

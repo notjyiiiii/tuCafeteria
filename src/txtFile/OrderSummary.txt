@@ -1,11 +1,2 @@
-ORD38;CS006;Ayam Percik;8.0;
-ORD38;CS006;Kuih Bahulu;1.0;
-ORD39;CS002;Ayam Percik;8.0;
-ORD40;CS002;Mapo Tofu;4.0;
-ORD41;CS006;Nasi Lemak;3.8;
-ORD41;CS006;Kaya Toast;4.0;
-ORD42;CS002;Ayam Percik;8.0;
-ORD43;CS007;Mapo Tofu;4.0;
-ORD44;CS006;White Rice;2.0;
-ORD45;CS007;Beef and Potatoes;5.0;
-ORD46;CS007;Mapo Tofu;4.0;
+ORD78;CS002;Nasi Kandar;8.0;
+ORD78;CS002;Kaya Toast;4.0;

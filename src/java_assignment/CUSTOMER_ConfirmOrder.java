@@ -79,7 +79,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         }
         //txtSubtotal.setText("");
         System.out.println("Total price: "+totalFoodPrice);
-        txtSubtotal.setText(String.valueOf(totalFoodPrice));
+        txtSubtotal.setText(String.valueOf(String.format("%.2f",totalFoodPrice)));
         
                 } catch (IOException ex) {
                     Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,7 +94,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
                 
                 //txtAvailableCredit.setText("");
-                txtAvailableCredit.setText("RM: "+String.valueOf(x));
+                txtAvailableCredit.setText("RM: "+String.valueOf(String.format("%.2f",x)));
                 
                 System.out.println("\nAvailable credit: "+x);
             } catch (IOException ex) {
@@ -537,7 +537,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
     private void btnPlaceOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlaceOrderMouseClicked
         // TODO add your handling code here:
-        String orderStatus = "Pending";
+        String orderStatus = "PENDING";
 //        String food = String.valueOf(modelFood.getValueAt(row, 0));
 //        String foodPrice = String.valueOf(modelFood.getValueAt(row, 1));
         
@@ -572,10 +572,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 }
                 else{
                     JOptionPane.showMessageDialog(this,"Order successfully!");
-                    double newcredit = credit - Double.parseDouble(totalAmount);
+                    //double newcredit = credit - Double.parseDouble(totalAmount);
                     //CustomerHandler customerHandler = new CustomerHandler();
                     // Call the updateCredit method to update the credit
-                    double updatedCredit = customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    //double updatedCredit = customerHandler.updateCredit(cusID, String.valueOf(newcredit));
                     
                     // Print or use the updated credit as needed
                     

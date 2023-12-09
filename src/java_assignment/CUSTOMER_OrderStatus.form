@@ -128,7 +128,7 @@
                           <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                           <Component id="btnCancelOrder" min="-2" pref="118" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnOrderHistoryBck" min="-2" pref="118" max="-2" attributes="0"/>
+                          <Component id="btnOrderStatusBck" min="-2" pref="118" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
@@ -147,7 +147,7 @@
                   <Component id="jScrollPane1" min="-2" pref="306" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnOrderHistoryBck" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnOrderStatusBck" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="btnCancelOrder" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="39" max="32767" attributes="0"/>
@@ -227,13 +227,13 @@
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnOrderHistoryBck">
+        <Component class="javax.swing.JButton" name="btnOrderStatusBck">
           <Properties>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOrderHistoryBckMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderHistoryBckActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOrderStatusBckMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderStatusBckActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelOrder">

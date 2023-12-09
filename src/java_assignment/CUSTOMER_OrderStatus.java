@@ -3,6 +3,7 @@ package java_assignment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,35 +21,41 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
 
 public CUSTOMER_OrderStatus(String orderID) {
         initComponents();
-        modelOrderStatus.setColumnIdentifiers(columnName);
-        
-        OrderStatus.setModel(modelOrderStatus);
-        try {
-            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
-            
-            OrderHandler orderHandler = new OrderHandler("Order_1",Order.class);
-            ArrayList<Order> orderStatus = orderHandler.GetOrderStatusByOrderID(orderID);
-            
-            Iterator<Order> orderStatusIterator = orderStatus.iterator();
+    modelOrderStatus.setColumnIdentifiers(columnName);
 
-            for (OrderSummary orderSummaryItem : ordersummary) {
-                // Check if there is a corresponding orderStatus
-                if (orderStatusIterator.hasNext()) {
-                    Order orderStatusItem = orderStatusIterator.next();
+    OrderStatus.setModel(modelOrderStatus);
+    try {
+        OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+        ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
-                    // Add data to the modelOrderStatus
-                    modelOrderStatus.addRow(new Object[]{orderSummaryItem.getOrderIDforSummary(),orderSummaryItem.getFoodName(),orderStatusItem.getOrderStatus()});
-                }
+        OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
+        ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
+
+        for (OrderSummary orderSummaryItem : ordersummary) {
+            // Find matching order status in orderStatusList
+            Optional<Order> matchingOrderStatus = orderStatusList.stream()
+                    .filter(order -> order.getOrderid().equals(orderID))
+                    .findFirst();
+
+            // Add data to the modelOrderStatus
+            if (matchingOrderStatus.isPresent()) {
+                modelOrderStatus.addRow(new Object[]{
+                        orderSummaryItem.getOrderIDforSummary(),
+                        orderSummaryItem.getFoodName(),
+                        matchingOrderStatus.get().getOrderStatus()
+                });
+            } else {
+                // Handle the case where order status is not found (you can set a default value or leave it empty)
+                modelOrderStatus.addRow(new Object[]{
+                        orderSummaryItem.getOrderIDforSummary(),
+                        orderSummaryItem.getFoodName(),
+                        "Status Not Found"
+                });
             }
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
+    } catch (IOException | ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+    }
         
         
     }
@@ -65,7 +72,7 @@ public CUSTOMER_OrderStatus(String orderID) {
         jScrollPane1 = new javax.swing.JScrollPane();
         OrderStatus = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        btnOrderHistoryBck = new javax.swing.JButton();
+        btnOrderStatusBck = new javax.swing.JButton();
         btnCancelOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,15 +125,15 @@ public CUSTOMER_OrderStatus(String orderID) {
 
         jButton3.setText("Search");
 
-        btnOrderHistoryBck.setText("Back");
-        btnOrderHistoryBck.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnOrderStatusBck.setText("Back");
+        btnOrderStatusBck.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOrderHistoryBckMouseClicked(evt);
+                btnOrderStatusBckMouseClicked(evt);
             }
         });
-        btnOrderHistoryBck.addActionListener(new java.awt.event.ActionListener() {
+        btnOrderStatusBck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrderHistoryBckActionPerformed(evt);
+                btnOrderStatusBckActionPerformed(evt);
             }
         });
 
@@ -161,7 +168,7 @@ public CUSTOMER_OrderStatus(String orderID) {
                         .addGap(172, 172, 172)
                         .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnOrderStatusBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +182,7 @@ public CUSTOMER_OrderStatus(String orderID) {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOrderStatusBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -203,51 +210,115 @@ public CUSTOMER_OrderStatus(String orderID) {
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
 
-    private void btnOrderHistoryBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
-    }//GEN-LAST:event_btnOrderHistoryBckMouseClicked
+    private void btnOrderStatusBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderStatusBckMouseClicked
+        try {
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnOrderStatusBckMouseClicked
 
-    private void btnOrderHistoryBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckActionPerformed
+    private void btnOrderStatusBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderStatusBckActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnOrderHistoryBckActionPerformed
+    }//GEN-LAST:event_btnOrderStatusBckActionPerformed
 
     private void btnCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelOrderMouseClicked
         // TODO add your handling code here:
         try {
-            // Step 1: Read the contents of the "Order_1" file
-            String filePath = "Order_1.txt";
-            fileManager fm = new fileManager();
-            
-            // Assuming readFile returns ArrayList<String[]>
-            ArrayList<String[]> fileContent = fm.readFile(filePath);
+    // Step 1: Get the selected row from the JTable
+        int selectedRow = OrderStatus.getSelectedRow();
 
-            // Step 2: Identify and update lines with "Pending" status to "Cancelled"
-            for (int i = 0; i < fileContent.size(); i++) {
-                String[] parts = fileContent.get(i);
-                
-                // Assuming the status is at index 3 (adjust if it's at a different index)
-                if (parts.length > 3 && parts[3].equalsIgnoreCase("Pending")) {
-                    // Update the status to "Cancelled"
-                    parts[3] = "Cancelled";
-                    // Reconstruct the line with the updated status
-                    fileContent.set(i, parts);
-                }
-            }
-
-            // Step 3: Write the updated data back to the "Order_1" file
-            String[] updatedData = fileContent.stream()
-                .map(parts -> String.join(";", parts))
-                .toArray(String[]::new);
-
-            fm.updateFile(filePath, updatedData);
-
-            System.out.println("File updated successfully.");
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (selectedRow == -1) {
+            // No row selected, handle accordingly
+            System.out.println("Please select a row to cancel.");
+            return;
         }
+
+        // Step 2: Get the order ID and status from the selected row
+        String orderID = (String) OrderStatus.getValueAt(selectedRow, 0);
+
+        // Step 3: Update the JTable modelOrderStatus
+        modelOrderStatus.setValueAt("Cancelled", selectedRow, 2);
+
+        // Step 4: Use OrderHandler to update the collection
+        OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
+        ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(Java_assignment.LoggedInUser.userid);
+
+        // Find the order to update
+        for (Order completedOrder : completedOrders) {
+            if (completedOrder.getOrderid().equals(orderID)) {
+                // Update the order status
+                completedOrder.setOrderStatus("Cancelled");
+                break; // Exit the loop after updating the matching order ID
+            }
+        }
+
+        // Step 5: Update the file using the FileManager
+        //String filePath = "Order_1.txt";
+        fileManager fm = new fileManager();
+        ArrayList<String[]> fileContent = fm.readFile("Order_1");
+
+        // Step 6: Identify and update the line with the selected order ID to "Cancelled"
+        for (int i = 0; i < fileContent.size(); i++) {
+            String[] parts = fileContent.get(i);
+
+            // Assuming the order ID is at index 0 (adjust if it's at a different index)
+            if (parts.length > 0 && parts[0].equals(orderID)) {
+                // Update the status to "Cancelled"
+                parts[3] = "Cancelled";
+                // Reconstruct the line with the updated status
+                fileContent.set(i, parts);
+                break; // Exit the loop after updating the matching order ID
+            }
+        }
+
+        // Step 7: Write the updated data back to the "Order_1" file
+        String[] updatedData = fileContent.stream()
+            .map(parts -> String.join(";", parts))
+            .toArray(String[]::new);
+
+        fm.updateFile("Order_1", updatedData);
+
+        System.out.println("Order cancelled successfully.");
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        try{
+//            int selectedRow = OrderStatus.getSelectedRow();
+//            if(selectedRow == -1){
+//                System.out.println("Select item to cancel");
+//                return;
+//            }
+//            String orderID = (String) OrderStatus.getValueAt(selectedRow, 0);
+//            
+//            String filePath = "Order_1.txt";
+//            fileManager fm = new fileManager();
+//            ArrayList<String[]> fileContent = fm.readFile(filePath);
+//            
+//            for(int i =0; i<fileContent.size();i++){
+//                String[] parts = fileContent.get(i);
+//                
+//                if(parts.length > 0 && parts[0].equals(orderID)){
+//                    parts[3] = "Cancelled";
+//                    fileContent.set(i, parts);
+//                    break;
+//                }
+//            }
+//            String[] updatedData = fileContent.stream().map(parts -> String.join(";", parts)).toArray(String[]::new);
+//            fm.updateFile(filePath, updatedData);
+//            modelOrderStatus.setValueAt("Cancelled", selectedRow, 2);
+//            System.out.println("Order cancelled successfully.");
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_btnCancelOrderMouseClicked
 
     private void btnCancelOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelOrderActionPerformed
@@ -266,7 +337,7 @@ public CUSTOMER_OrderStatus(String orderID) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable OrderStatus;
     private javax.swing.JButton btnCancelOrder;
-    private javax.swing.JButton btnOrderHistoryBck;
+    private javax.swing.JButton btnOrderStatusBck;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

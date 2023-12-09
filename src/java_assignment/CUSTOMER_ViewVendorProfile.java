@@ -29,7 +29,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         if (Java_assignment.LoggedInUser.userid != null) {
             CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
             double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
-            lb_Credit.setText("RM: " + String.valueOf(x));
+            lb_Credit.setText("RM: "+String.valueOf(String.format("%.2f",x)));
         } 
         else {
             System.err.println("Userid is null");
@@ -45,7 +45,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         if (Java_assignment.LoggedInUser.userid != null) {
         CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
         double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
-        lb_Credit.setText("RM: "+String.valueOf(x));
+        lb_Credit.setText("RM: "+String.valueOf(String.format("%.2f",x)));
         }
         else {
         // Handle the case where userid is null (perhaps display an error message)
