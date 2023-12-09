@@ -21,41 +21,41 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
 
 public CUSTOMER_OrderStatus(String orderID) {
         initComponents();
-    modelOrderStatus.setColumnIdentifiers(columnName);
+        modelOrderStatus.setColumnIdentifiers(columnName);
 
-    OrderStatus.setModel(modelOrderStatus);
-    try {
-        OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
-        ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
+        OrderStatus.setModel(modelOrderStatus);
+        try {
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
-        OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
-        ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
+            OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
+            ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
 
-        for (OrderSummary orderSummaryItem : ordersummary) {
-            // Find matching order status in orderStatusList
-            Optional<Order> matchingOrderStatus = orderStatusList.stream()
-                    .filter(order -> order.getOrderid().equals(orderID))
-                    .findFirst();
+            for (OrderSummary orderSummaryItem : ordersummary) {
+                // Find matching order status in orderStatusList
+                Optional<Order> matchingOrderStatus = orderStatusList.stream()
+                        .filter(order -> order.getOrderid().equals(orderID))
+                        .findFirst();
 
-            // Add data to the modelOrderStatus
-            if (matchingOrderStatus.isPresent()) {
-                modelOrderStatus.addRow(new Object[]{
-                        orderSummaryItem.getOrderIDforSummary(),
-                        orderSummaryItem.getFoodName(),
-                        matchingOrderStatus.get().getOrderStatus()
-                });
-            } else {
-                // Handle the case where order status is not found (you can set a default value or leave it empty)
-                modelOrderStatus.addRow(new Object[]{
-                        orderSummaryItem.getOrderIDforSummary(),
-                        orderSummaryItem.getFoodName(),
-                        "Status Not Found"
-                });
+                // Add data to the modelOrderStatus
+                if (matchingOrderStatus.isPresent()) {
+                    modelOrderStatus.addRow(new Object[]{
+                            orderSummaryItem.getOrderIDforSummary(),
+                            orderSummaryItem.getFoodName(),
+                            matchingOrderStatus.get().getOrderStatus()
+                    });
+                } else {
+                    // Handle the case where order status is not found (you can set a default value or leave it empty)
+                    modelOrderStatus.addRow(new Object[]{
+                            orderSummaryItem.getOrderIDforSummary(),
+                            orderSummaryItem.getFoodName(),
+                            "Status Not Found"
+                    });
+                }
             }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (IOException | ClassNotFoundException ex) {
-        Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
-    }
         
         
     }

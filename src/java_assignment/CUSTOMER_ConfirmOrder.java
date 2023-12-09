@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
@@ -47,6 +49,16 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             System.out.println("\nBeing pass from menu in confirm order, writing to order_1 file: "+ this.orderID);
             lb_Vname.setText(vendorName);
             System.out.println(vendorName);
+            
+            
+            LocalDateTime now = LocalDateTime.now();
+
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+
+            String formattedDateTime = now.format(formatter);
+
+            System.out.println(formattedDateTime);
             
 //        modelFood.setColumnIdentifiers(columnName);
 //        Object[] rowData = {selFood, selFoodPrice};
