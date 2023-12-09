@@ -24,6 +24,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private String[] columnName = {"Food","Price"};
     private String[][] itemsArray;
     private ButtonGroup OrderType = new ButtonGroup();
+    private LocalDateTime now;
     
     
     public CUSTOMER_ConfirmOrder() {
@@ -46,19 +47,21 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             this.vendorName = vendorName;
             this.orderID = orderID;
             
-            System.out.println("\nBeing pass from menu in confirm order, writing to order_1 file: "+ this.orderID);
-            lb_Vname.setText(vendorName);
-            System.out.println(vendorName);
-            
-            
             LocalDateTime now = LocalDateTime.now();
-
-
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
 
             String formattedDateTime = now.format(formatter);
 
-            System.out.println(formattedDateTime);
+            // Store the LocalDateTime object directly
+            this.now = now;
+            
+            
+            System.out.println("\nBeing pass from menu in confirm order, writing to Order file: "+ this.orderID);
+            lb_Vname.setText(vendorName);
+            System.out.println(vendorName);
+            
+            
+            
             
 //        modelFood.setColumnIdentifiers(columnName);
 //        Object[] rowData = {selFood, selFoodPrice};
@@ -599,10 +602,18 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     String[] orders = {orderStatus,orderType,String.valueOf(Location),orderAmount,deliveryFees,totalAmount};
 
                     OrderHandler orderHandler;
+                    
                     try{
-                        orderHandler = new OrderHandler("Order_1",Order.class);
-                        System.out.println(orderID +"before writing to order_1");
-                        orderHandler.WritePlaceOrder(orderID, cusID, vendorID, orders);
+                        Order datetime = new Order();
+                        //LocalDateTime orderDateTime = LocalDateTime.parse(formattedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
+                        datetime.setOrderDateTime(now);
+                        
+                        orderHandler = new OrderHandler("Order",Order.class);
+                        System.out.println(orderID +"before writing to order");
+                        
+                        
+                        
+                        orderHandler.WritePlaceOrder(orderID, cusID, vendorID, now,orders);
                         System.out.println("After writing order to file: "+ orderID);
 
                     }catch (IOException | ClassNotFoundException ex){

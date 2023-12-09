@@ -2,6 +2,8 @@ package java_assignment;
 
 import java.util.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 
 public class OrderHandler extends BaseHandler<Order>{
@@ -101,7 +103,7 @@ public class OrderHandler extends BaseHandler<Order>{
     }
     
     
-    public void WritePlaceOrder(String orderID, String cusID, String vendorID, String[] values) {
+    public void WritePlaceOrder(String orderID, String cusID, String vendorID, LocalDateTime orderDateTime,String[] values) {
         // Create a new Review object with the provided values
 //        String orderidentification = generateOrderID();
         Order newOrder = new Order();
@@ -111,6 +113,7 @@ public class OrderHandler extends BaseHandler<Order>{
         newOrder.setOrderid(orderID);
         newOrder.setCustomerid(cusID);
         newOrder.setVendorid(vendorID);
+        newOrder.setOrderDateTime(orderDateTime); 
         
         newOrder.setOrderStatus(values[0]);
         newOrder.setOrderType(values[1]);

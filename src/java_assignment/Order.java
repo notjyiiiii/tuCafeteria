@@ -12,7 +12,7 @@ public class Order implements IDataContainer, Serializable{
     private String vendorid;
     private String orderStatus;
     private String orderType;
-    //private LocalDateTime orderDateTime;
+    private LocalDateTime orderDateTime;
     private String deliveryLocation;
     private double orderAmount;
     private double deliveryFees;
@@ -26,28 +26,28 @@ public class Order implements IDataContainer, Serializable{
 
     public String[] SerializeData(){
 
-        String [] dataString = new String[9];
-        dataString[0] = this.orderid;
-        dataString[1] = this.customerid;
-        dataString[2] = this.vendorid;
-        dataString[3] = this.orderStatus;
-        dataString[4] = this.orderType;
-        dataString[5] = this.deliveryLocation;
-        dataString[6] = Double.toString(this.orderAmount);
-        dataString[7] = Double.toString(this.deliveryFees);
-        dataString[8] = Double.toString(this.totalAmount)   ;
-        
-//        String [] dataString = new String[11];
+//        String [] dataString = new String[9];
 //        dataString[0] = this.orderid;
 //        dataString[1] = this.customerid;
 //        dataString[2] = this.vendorid;
 //        dataString[3] = this.orderStatus;
 //        dataString[4] = this.orderType;
-//        dataString[5] = this.orderDateTime.toString();
-//        dataString[6] = this.deliveryLocation;
-//        dataString[7] = Double.toString(this.orderAmount);
-//        dataString[8] = Double.toString(this.deliveryFees);
-//        dataString[9] = Double.toString(this.totalAmount);
+//        dataString[5] = this.deliveryLocation;
+//        dataString[6] = Double.toString(this.orderAmount);
+//        dataString[7] = Double.toString(this.deliveryFees);
+//        dataString[8] = Double.toString(this.totalAmount)   ;
+        
+        String [] dataString = new String[10];
+        dataString[0] = this.orderid;
+        dataString[1] = this.customerid;
+        dataString[2] = this.vendorid;
+        dataString[3] = this.orderStatus;
+        dataString[4] = this.orderType;
+        dataString[5] = this.orderDateTime.toString();
+        dataString[6] = this.deliveryLocation;
+        dataString[7] = Double.toString(this.orderAmount);
+        dataString[8] = Double.toString(this.deliveryFees);
+        dataString[9] = Double.toString(this.totalAmount);
         
         
         
@@ -66,16 +66,26 @@ public class Order implements IDataContainer, Serializable{
 //        this.orderAmount = Double.parseDouble(dataArray[6]);
 //        this.deliveryFees = Double.parseDouble(dataArray[7]);
 //        this.totalAmount = Double.parseDouble(dataArray[8]);
-        if (dataArray.length == 9) {
+        if (dataArray.length == 10) {
             this.orderid = dataArray[0];
             this.customerid = dataArray[1];
             this.vendorid = dataArray[2];
             this.orderStatus = dataArray[3];
             this.orderType = dataArray[4];
-            this.deliveryLocation = dataArray[5];
-            this.orderAmount = Double.parseDouble(dataArray[6]);
-            this.deliveryFees = Double.parseDouble(dataArray[7]);
-            this.totalAmount = Double.parseDouble(dataArray[8]);
+            this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+            this.deliveryLocation = dataArray[6];
+            this.orderAmount = Double.parseDouble(dataArray[7]);
+            this.deliveryFees = Double.parseDouble(dataArray[8]);
+            this.totalAmount = Double.parseDouble(dataArray[9]);
+//            this.orderid = dataArray[0];
+//            this.customerid = dataArray[1];
+//            this.vendorid = dataArray[2];
+//            this.orderStatus = dataArray[3];
+//            this.orderType = dataArray[4];
+//            this.deliveryLocation = dataArray[5];
+//            this.orderAmount = Double.parseDouble(dataArray[6]);
+//            this.deliveryFees = Double.parseDouble(dataArray[7]);
+//            this.totalAmount = Double.parseDouble(dataArray[8]);
         } else {
             // Handle the case where the array doesn't have the expected length
             // For example, log an error or throw an exception
@@ -83,16 +93,16 @@ public class Order implements IDataContainer, Serializable{
         }
         
         
-//        this.orderid = dataArray[0];
-//        this.customerid = dataArray[1];
-//        this.vendorid = dataArray[2];
-//        this.orderStatus = dataArray[3];
-//        this.orderType = dataArray[4];
-//        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
-//        this.deliveryLocation = dataArray[6];
-//        this.orderAmount = Double.parseDouble(dataArray[7]);
-//        this.deliveryFees = Double.parseDouble(dataArray[8]);
-//        this.totalAmount = Double.parseDouble(dataArray[9]);
+        this.orderid = dataArray[0];
+        this.customerid = dataArray[1];
+        this.vendorid = dataArray[2];
+        this.orderStatus = dataArray[3];
+        this.orderType = dataArray[4];
+        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+        this.deliveryLocation = dataArray[6];
+        this.orderAmount = Double.parseDouble(dataArray[7]);
+        this.deliveryFees = Double.parseDouble(dataArray[8]);
+        this.totalAmount = Double.parseDouble(dataArray[9]);
        
     }
     
@@ -139,13 +149,13 @@ public class Order implements IDataContainer, Serializable{
         this.orderType = orderType;
     }
 
-//    public LocalDateTime getOrderDateTime() {
-//        return orderDateTime;
-//    }
-//
-//    public void setOrderDateTime(LocalDateTime orderDateTime) {
-//        this.orderDateTime = orderDateTime;
-//    }
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    public void setOrderDateTime(LocalDateTime orderDateTime) {
+        this.orderDateTime = orderDateTime;
+    }
 
     public String getDeliveryLocation() {
         return deliveryLocation;
