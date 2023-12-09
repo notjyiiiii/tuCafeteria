@@ -24,7 +24,7 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
         try {
             //get completed items based on cusID
             modelReorder.setColumnIdentifiers(columnName);
-            OrderHandler orderHandler = new OrderHandler("Order_1",Order.class);
+            OrderHandler orderHandler = new OrderHandler("Order",Order.class);
             ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(cusID);
             
             //from the completed items, get the orderID
@@ -219,34 +219,15 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnOrderHistoryBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckMouseClicked
-        
-        String reorderFood = String.valueOf(modelReorder.getValueAt(row, 0));
-        String reorderFoodPrice = String.valueOf(modelReorder.getValueAt(row, 1));
-        
-//        row = OrderHistory.getSelectedRow();
-//        if (row != -1) {
-//            String food = String.valueOf(modelReorder.getValueAt(row, 0));
-//            //String foodDesc = String.valueOf(model.getValueAt(row2, 1));
-//            String foodPrice = String.valueOf(modelReorder.getValueAt(row, 1));
-//            
-//            
-//            OrderSummaryHandler ordersummaryHandler;
-//            try{
-//                
-//                ordersummaryHandler = new OrderSummaryHandler("OrderHistory",OrderSummary.class);
-//                //System.out.println(food+foodPrice);
-//                ordersummaryHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
-//                System.out.println("\nView Menu's orderID,OrderSummary: "+orderIDforSummary);
-//                
-//            } catch(IOException | ClassNotFoundException ex){
-//                Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);
-//                JOptionPane.showMessageDialog(this,"Error writing review to file");
-//            }
-//        } 
-//        else {
-//        // Display a message or handle the case where no item is selected
-//            JOptionPane.showMessageDialog(this, "Please select an item.");
-//        }
+        try {
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnOrderHistoryBckMouseClicked
 
     private void btnOrderHistoryBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckActionPerformed

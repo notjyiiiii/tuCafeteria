@@ -558,13 +558,13 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         
         String orderType = "";
         if(RBdinein.isSelected()){
-            orderType = "Dine-In";
+            orderType = "DINE-IN";
         }
         else if(RBtakeaway.isSelected()){
-            orderType = "Takeaway";
+            orderType = "TAKEAWAY";
         }
         else{
-            orderType = "Delivery";
+            orderType = "DELIVERY";
         }
         Object Location = comboLocation.getSelectedItem();
         

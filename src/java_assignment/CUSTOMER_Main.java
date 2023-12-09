@@ -674,10 +674,34 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_japaneseFoodMouseClicked
 
     private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-        CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus();
-        orderStatus.setVisible(true);
+//        try {
+//            // TODO add your handling code here:
+//            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+//            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+//            
+//            this.dispose();
+//            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+//            orderStatus.setVisible(true);
+//
+//            
+//        } catch (IOException ex) {
+//            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+
+    try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
+            this.dispose();
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_orderStatMouseClicked
 
     private void btn_orderStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatActionPerformed

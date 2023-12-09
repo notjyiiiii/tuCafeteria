@@ -1,7 +1,9 @@
 package java_assignment;
 
+import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -19,6 +21,50 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
         initComponents();
     }
 
+public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
+        initComponents();
+        modelOrderStatus.setColumnIdentifiers(columnName);
+
+        OrderStatus.setModel(modelOrderStatus);
+
+        try {
+        OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+
+        for (String orderID : orderIDs) {
+            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
+
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
+
+            for (OrderSummary orderSummaryItem : ordersummary) {
+                // Find matching order status in orderStatusList
+                Optional<Order> matchingOrderStatus = orderStatusList.stream()
+                        .filter(order -> order.getOrderid().equals(orderID))
+                        .findFirst();
+
+                // Add data to the modelOrderStatus
+                if (matchingOrderStatus.isPresent()) {
+                    modelOrderStatus.addRow(new Object[]{
+                            orderSummaryItem.getOrderIDforSummary(),
+                            orderSummaryItem.getFoodName(),
+                            matchingOrderStatus.get().getOrderStatus()
+                    });
+                } else {
+                    // Handle the case where order status is not found (you can set a default value or leave it empty)
+                    modelOrderStatus.addRow(new Object[]{
+                            orderSummaryItem.getOrderIDforSummary(),
+                            orderSummaryItem.getFoodName(),
+                            "Status Not Found"
+                    });
+                }
+            }
+        }
+    } catch (IOException | ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }
+
 public CUSTOMER_OrderStatus(String orderID) {
         initComponents();
         modelOrderStatus.setColumnIdentifiers(columnName);
@@ -28,7 +74,7 @@ public CUSTOMER_OrderStatus(String orderID) {
             OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
             ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
-            OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
             ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
 
             for (OrderSummary orderSummaryItem : ordersummary) {
@@ -242,54 +288,62 @@ public CUSTOMER_OrderStatus(String orderID) {
         String orderID = (String) OrderStatus.getValueAt(selectedRow, 0);
 
         // Step 3: Update the JTable modelOrderStatus
-        modelOrderStatus.setValueAt("Cancelled", selectedRow, 2);
+        modelOrderStatus.setValueAt("CANCELLED", selectedRow, 2);
 
         // Step 4: Use OrderHandler to update the collection
-        OrderHandler orderHandler = new OrderHandler("Order_1", Order.class);
+        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
         ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(Java_assignment.LoggedInUser.userid);
 
-        // Find the order to update
-        for (Order completedOrder : completedOrders) {
-            if (completedOrder.getOrderid().equals(orderID)) {
-                // Update the order status
-                completedOrder.setOrderStatus("Cancelled");
-                break; // Exit the loop after updating the matching order ID
-            }
+    // Find the order to update
+    Order foundOrder = null;
+    for (Order completedOrder : completedOrders) {
+        if (completedOrder.getOrderid().equals(orderID)) {
+            // Update the order status
+            completedOrder.setOrderStatus("CANCELLED");
+            foundOrder = completedOrder;
+            break; // Exit the loop after updating the matching order ID
         }
+    }
 
-        // Step 5: Update the file using the FileManager
-        //String filePath = "Order_1.txt";
-        fileManager fm = new fileManager();
-        ArrayList<String[]> fileContent = fm.readFile("Order_1");
+    // Step 5: Update the file content
+    fileManager fm = new fileManager();
+    ArrayList<String[]> fileContent = fm.readFile("Order");
 
-        // Step 6: Identify and update the line with the selected order ID to "Cancelled"
-        for (int i = 0; i < fileContent.size(); i++) {
-            String[] parts = fileContent.get(i);
+    // Step 6: Identify and update the line with the selected order ID to "Cancelled"
+    for (int i = 0; i < fileContent.size(); i++) {
+        String[] parts = fileContent.get(i);
 
-            // Assuming the order ID is at index 0 (adjust if it's at a different index)
-            if (parts.length > 0 && parts[0].equals(orderID)) {
-                // Update the status to "Cancelled"
-                parts[3] = "Cancelled";
-                // Reconstruct the line with the updated status
-                fileContent.set(i, parts);
-                break; // Exit the loop after updating the matching order ID
-            }
+        // Assuming the order ID is at index 0 (adjust if it's at a different index)
+        if (parts.length > 0 && parts[0].equals(orderID)) {
+            // Update the status to "Cancelled"
+            parts[3] = "CANCELLED";
+
+            // If you need to update other fields, do it here
+
+            // Reconstruct the line with the updated status
+            fileContent.set(i, parts);
+            break; // Exit the loop after updating the matching order ID
         }
+    }
 
-        // Step 7: Write the updated data back to the "Order_1" file
-        String[] updatedData = fileContent.stream()
-            .map(parts -> String.join(";", parts))
-            .toArray(String[]::new);
+    // Step 7: Write the updated data back to the "Order_1" file
+    StringBuilder updatedData = new StringBuilder();
+    for (String[] parts : fileContent) {
+        updatedData.append(String.join(";", parts)).append(System.lineSeparator());
+    }
 
-        fm.updateFile("Order_1", updatedData);
+    ArrayList<String[]> updatedDataList = new ArrayList<>();
+    updatedDataList.add(updatedData.toString().split(";")); // Convert StringBuilder to String[]
+    fm.updateFile("Order", updatedDataList);
 
-        System.out.println("Order cancelled successfully.");
 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }   catch (ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    System.out.println("Order cancelled successfully.");
+
+} catch (IOException e) {
+    e.printStackTrace();
+} catch (ClassNotFoundException ex) {
+    Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+}
 
 //        try{
 //            int selectedRow = OrderStatus.getSelectedRow();
@@ -323,6 +377,7 @@ public CUSTOMER_OrderStatus(String orderID) {
 
     private void btnCancelOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelOrderActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnCancelOrderActionPerformed
 
     public static void main(String args[]) {

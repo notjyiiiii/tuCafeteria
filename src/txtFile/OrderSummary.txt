@@ -1,2 +1,12 @@
-ORD80;CS002;Kuih Bahulu;1.0;
-ORD80;CS002;Nasi Kandar;8.0;
+ORD84;CS007;Ayam Percik;8.0;
+ORD84;CS007;Kuih Bahulu;1.0;
+ORD85;CS002;Kaya Toast;4.0;
+ORD86;CS002;Kaya Toast;4.0;
+ORD87;CS006;Fried Rice;4.0;
+ORD88;CS002;Beef and Potatoes;5.0;
+ORD89;CS006;White Rice;2.0;
+ORD90;CS006;Nasi Kandar;8.0;
+ORD91;CS007;Kaya Toast;4.0;
+ORD92;CS002;Ayam Percik;8.0;
+ORD93;CS002;Kuih Bahulu;1.0;
+ORD93;CS002;Kaya Toast;4.0;

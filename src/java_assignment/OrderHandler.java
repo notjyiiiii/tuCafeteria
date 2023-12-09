@@ -18,7 +18,7 @@ public class OrderHandler extends BaseHandler<Order>{
     }
     
     public OrderHandler(String filePath, Class<Order> clazz) throws IOException, ClassNotFoundException{
-        super("Order_1", Order.class);
+        super("Order", Order.class);
         if (allOrders.isEmpty()) {
             allOrders.addAll(collection);
         }
@@ -161,6 +161,20 @@ public class OrderHandler extends BaseHandler<Order>{
         }
         return orderstatus;
     }
+    
+    public ArrayList<String> GetOrderIDsByUserID(String cusID) {
+    ArrayList<String> orderIDs = new ArrayList<>();
+
+        for (int i = 0; i < this.collection.size(); i++) {
+            Order order = collection.get(i);
+
+            if (order.getCustomerid().equals(cusID)) {
+                orderIDs.add(order.getOrderid());
+            }
+        }
+        return orderIDs;
+    }
+    
     //somehow correct??
     public ArrayList<Order> GetCompletedOrderByUserID(String cusID){
         
@@ -175,6 +189,15 @@ public class OrderHandler extends BaseHandler<Order>{
         }
        //System.out.println(orderstatus);
         return orderstatus;
+    }
+    
+    public Order GetOrderByOrderID(String orderID) {
+    for (Order order : collection) {
+        if (order.getOrderid().equals(orderID)) {
+            return order;
+        }
+    }
+    return null; // Return null if the order with the specified ID is not found
     }
     
 //    public ArrayList<Order> GetCompletedOrderByUserID(String cusID) {
