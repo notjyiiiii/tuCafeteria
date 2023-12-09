@@ -151,7 +151,7 @@ public class OrderHandler extends BaseHandler<Order>{
         {
             Order orderStatus = collection.get(i);
             
-            if(orderStatus.getOrderid().equals(orderID));
+            if(orderStatus.getOrderid().equals(orderID))
             {
                 orderstatus.add(orderStatus);
             }
