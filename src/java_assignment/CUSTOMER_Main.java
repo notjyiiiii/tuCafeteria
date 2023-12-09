@@ -10,6 +10,8 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
     //private String userid, password;
     private Customer customer;
+    private String vendorName;
+    private String vendorID;
     
     public CUSTOMER_Main() throws IOException, ClassNotFoundException {
         initComponents();
@@ -74,6 +76,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         btn_orderHis = new javax.swing.JButton();
         btn_dashCus = new javax.swing.JButton();
         btn_dashb1 = new javax.swing.JButton();
+        btn_orderStat = new javax.swing.JButton();
         leftPanel2 = new javax.swing.JPanel();
         lb_cafeName2 = new javax.swing.JLabel();
         lb_tuName4 = new javax.swing.JLabel();
@@ -285,7 +288,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(japaneseFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(malayFood, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         rightPanelLayout.setVerticalGroup(
@@ -350,31 +353,46 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
+        btn_orderStat.setText("Order Status");
+        btn_orderStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_orderStatMouseClicked(evt);
+            }
+        });
+        btn_orderStat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderStatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(23, 23, 23)
                 .addComponent(btn_notiCus)
                 .addGap(32, 32, 32)
                 .addComponent(btn_orderHis)
                 .addGap(33, 33, 33)
                 .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btn_orderStat)
+                .addGap(38, 38, 38)
                 .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(bottomPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_notiCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_orderHis, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_orderStat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         leftPanel2.setBackground(new java.awt.Color(246, 246, 246));
@@ -481,7 +499,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
     private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked
         this.dispose();
-        CUSTOMER_OrderHistory orderHis = new CUSTOMER_OrderHistory();
+        CUSTOMER_OrderHistory orderHis = new CUSTOMER_OrderHistory(Java_assignment.LoggedInUser.userid);
         orderHis.setVisible(true);
     }//GEN-LAST:event_btn_orderHisMouseClicked
 
@@ -550,7 +568,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             // TODO add your handling code here:
             this.dispose();
             //VendorHandler vdHandler = new VendorHandler();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD001","Western");
+            this.vendorID="VD001";
+            this.vendorName="Western";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
         } catch (IOException ex) {
@@ -567,7 +587,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD002","Chinese");
+            this.vendorID="VD002";
+            this.vendorName="Chinese";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
             
@@ -583,7 +605,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD003","Malay");
+            this.vendorID="VD003";
+            this.vendorName="Malay";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
             
@@ -599,7 +623,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD004","Indian");
+            this.vendorID="VD004";
+            this.vendorName="Indian";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
             
@@ -615,7 +641,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD005","Korean");
+            this.vendorID="VD005";
+            this.vendorName="Korean";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
             
@@ -631,7 +659,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         try {
             
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile("VD006","Japanese");
+            this.vendorID="VD006";
+            this.vendorName="Japanese";
+            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
             vdProfile.setVisible(true);
             
             
@@ -641,6 +671,17 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_japaneseFoodMouseClicked
+
+    private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus();
+        orderStatus.setVisible(true);
+    }//GEN-LAST:event_btn_orderStatMouseClicked
+
+    private void btn_orderStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_orderStatActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -660,6 +701,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
+    private javax.swing.JButton btn_orderStat;
     private javax.swing.JButton chineseFood;
     private javax.swing.JButton indianFood;
     private javax.swing.JPanel jPanel1;

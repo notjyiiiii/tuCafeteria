@@ -1,11 +1,53 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
 
-    public CUSTOMER_OrderHistory() {
+    private DefaultTableModel modelReorder = new DefaultTableModel();
+    private String[] columnName = {"Food","Price"};
+    private int row = -1;
+    private String cusID;
+    
+    public CUSTOMER_OrderHistory(){}
+    
+    public CUSTOMER_OrderHistory(String cusID) {
+        
         initComponents();
+        this.cusID = cusID;
+        try {
+            //get completed items based on cusID
+            modelReorder.setColumnIdentifiers(columnName);
+            OrderHandler orderHandler = new OrderHandler("Order_1",Order.class);
+            ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(cusID);
+            
+            //from the completed items, get the orderID
+            for(Order completedOrder : completedOrders){
+                String OrderID = completedOrder.getOrderid();
+                
+                //use the orderID from order to get food
+                OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+                ArrayList<OrderSummary> ordersummary = orderSummaryHandler.getOrderSummaryByOrderID(OrderID);
+            
+                for (OrderSummary orderSummary : ordersummary) {
+                    modelReorder.addRow(new Object[]{orderSummary.getFoodName(), orderSummary.getFoodPrice()});
+                }
+            }
+            OrderHistory.setModel(modelReorder);
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -124,34 +166,33 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
-                                .addGap(271, 271, 271))))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
                         .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +207,7 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,9 +219,34 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnOrderHistoryBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        
+        String reorderFood = String.valueOf(modelReorder.getValueAt(row, 0));
+        String reorderFoodPrice = String.valueOf(modelReorder.getValueAt(row, 1));
+        
+//        row = OrderHistory.getSelectedRow();
+//        if (row != -1) {
+//            String food = String.valueOf(modelReorder.getValueAt(row, 0));
+//            //String foodDesc = String.valueOf(model.getValueAt(row2, 1));
+//            String foodPrice = String.valueOf(modelReorder.getValueAt(row, 1));
+//            
+//            
+//            OrderSummaryHandler ordersummaryHandler;
+//            try{
+//                
+//                ordersummaryHandler = new OrderSummaryHandler("OrderHistory",OrderSummary.class);
+//                //System.out.println(food+foodPrice);
+//                ordersummaryHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
+//                System.out.println("\nView Menu's orderID,OrderSummary: "+orderIDforSummary);
+//                
+//            } catch(IOException | ClassNotFoundException ex){
+//                Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);
+//                JOptionPane.showMessageDialog(this,"Error writing review to file");
+//            }
+//        } 
+//        else {
+//        // Display a message or handle the case where no item is selected
+//            JOptionPane.showMessageDialog(this, "Please select an item.");
+//        }
     }//GEN-LAST:event_btnOrderHistoryBckMouseClicked
 
     private void btnOrderHistoryBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckActionPerformed
@@ -189,6 +255,7 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
 
     private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnReorderMouseClicked
 
     private void btnReorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReorderActionPerformed

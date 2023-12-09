@@ -2,12 +2,18 @@ package java_assignment;
 
 import java.util.*;
 import java.io.*;
+import javax.swing.table.DefaultTableModel;
 
 public class OrderHandler extends BaseHandler<Order>{
     
     private static ArrayList<Order> allOrders = new ArrayList<>();
+    private DefaultTableModel orderTableModel;
     
     public OrderHandler(){}
+    
+    public OrderHandler(DefaultTableModel orderTableModel) {
+        this.orderTableModel = orderTableModel;
+    }
     
     public OrderHandler(String filePath, Class<Order> clazz) throws IOException, ClassNotFoundException{
         super("Order_1", Order.class);
@@ -16,18 +22,18 @@ public class OrderHandler extends BaseHandler<Order>{
         }
     }
     
-    public Order GetOrderByOrderID(String orderID)
-    {
-        for (int i = 0; i<collection.size(); i++)
-        {
-            if (collection.get(i).getOrderid().equals(orderID))
-            {
-                return collection.get(i);
-            }
-        }
-        
-        return null;
-    }
+//    public Order GetOrderByOrderID(String orderID)
+//    {
+//        for (int i = 0; i<collection.size(); i++)
+//        {
+//            if (collection.get(i).getOrderid().equals(orderID))
+//            {
+//                return collection.get(i);
+//            }
+//        }
+//        
+//        return null;
+//    }
     
     public Order[] GetOrdersByUserID(String userID)
     {
@@ -44,6 +50,7 @@ public class OrderHandler extends BaseHandler<Order>{
         return (Order[]) orderList.toArray();
     }
     
+   
     private int getMaxOrderNumber(String lastOrderID) {
         String prefix = "ORD";
         int maxOrderNumber = 0;
@@ -134,7 +141,53 @@ public class OrderHandler extends BaseHandler<Order>{
             // Handle the IOException, you might want to throw a custom exception or log the error
         }
     }
+    //order status
     
+    public ArrayList<Order> GetOrderStatusByOrderID(String orderID){
+        
+        ArrayList<Order> orderstatus = new ArrayList<Order>();
+        
+        for(int i = 0; i<this.collection.size(); i++)
+        {
+            Order orderStatus = collection.get(i);
+            
+            if(orderStatus.getOrderid().equals(orderID));
+            {
+                orderstatus.add(orderStatus);
+            }
+        }
+        return orderstatus;
+    }
+    //somehow correct??
+    public ArrayList<Order> GetCompletedOrderByUserID(String cusID){
+        
+        ArrayList<Order> orderstatus = new ArrayList<>();
+        
+        for(Order orderStatus : this.collection)
+        {
+            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("Delivered"))
+            {
+                orderstatus.add(orderStatus);
+            }
+        }
+       //System.out.println(orderstatus);
+        return orderstatus;
+    }
     
+//    public ArrayList<Order> GetCompletedOrderByUserID(String cusID) {
+//    ArrayList<Order> orderstatus = new ArrayList<>();
+//
+//    for (Order orderStatus : this.collection) {
+//        System.out.println("Order ID: " + orderStatus.getOrderid());
+//        System.out.println("Customer ID: " + cusID);
+//        System.out.println("Order Status: " + orderStatus.getOrderStatus());
+//
+//        if (orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("Delivered")) {
+//            orderstatus.add(orderStatus);
+//        }
+//    }
+//    System.out.println(orderstatus);
+//    return orderstatus;
+//    }
     
 }

@@ -46,6 +46,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             
             System.out.println("\nBeing pass from menu in confirm order, writing to order_1 file: "+ this.orderID);
             lb_Vname.setText(vendorName);
+            System.out.println(vendorName);
             
 //        modelFood.setColumnIdentifiers(columnName);
 //        Object[] rowData = {selFood, selFoodPrice};
@@ -143,7 +144,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         lb_checkout = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lb_Vname = new javax.swing.JLabel();
+        lb_Vname = new javax.swing.JTextField();
         lb_checkout1 = new javax.swing.JLabel();
         lb_checkout3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -226,12 +227,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 189, 49));
         jPanel2.setForeground(new java.awt.Color(255, 189, 49));
 
-        lb_Vname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
-        lb_Vname.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_VnameMouseClicked(evt);
-            }
-        });
+        lb_Vname.setEditable(false);
+        lb_Vname.setBackground(new java.awt.Color(242, 189, 49));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -239,15 +236,15 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lb_Vname, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         lb_checkout1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
@@ -473,9 +470,9 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_checkout8)
-                    .addComponent(TotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TotalCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_checkout8))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -517,11 +514,6 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private void OrderBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OrderBackActionPerformed
-
-    private void lb_VnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_VnameMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_lb_VnameMouseClicked
 
     private void btnCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelOrderMouseClicked
         // TODO add your handling code here:
@@ -583,7 +575,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                     double newcredit = credit - Double.parseDouble(totalAmount);
                     //CustomerHandler customerHandler = new CustomerHandler();
                     // Call the updateCredit method to update the credit
-                    customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    double updatedCredit = customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    
                     // Print or use the updated credit as needed
                     
                     
@@ -711,7 +704,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lb_Vname;
+    private javax.swing.JTextField lb_Vname;
     private javax.swing.JLabel lb_checkout;
     private javax.swing.JLabel lb_checkout1;
     private javax.swing.JLabel lb_checkout2;

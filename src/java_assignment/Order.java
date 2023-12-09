@@ -98,6 +98,7 @@ public class Order implements IDataContainer, Serializable{
     
     
     public String getOrderid() {
+        //System.out.println("\n\tOrder Class: "+orderid);
         return orderid;
     }
 
@@ -106,6 +107,7 @@ public class Order implements IDataContainer, Serializable{
     }
 
     public String getCustomerid() {
+        //System.out.println("\n\tOrder Class: "+customerid);
         return customerid;
     }
 

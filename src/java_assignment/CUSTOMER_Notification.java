@@ -36,6 +36,7 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
         btn_orderHis = new javax.swing.JButton();
         btn_dashCus = new javax.swing.JButton();
         btn_dashb1 = new javax.swing.JButton();
+        btn_orderStat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,7 +173,7 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(calendarPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
@@ -242,20 +243,34 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
             }
         });
 
+        btn_orderStat.setText("Order Status");
+        btn_orderStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_orderStatMouseClicked(evt);
+            }
+        });
+        btn_orderStat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderStatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(22, 22, 22)
                 .addComponent(btn_notiCus)
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addComponent(btn_orderHis)
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(30, 30, 30)
+                .addComponent(btn_orderStat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +280,8 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
                     .addComponent(btn_notiCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_orderHis, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_orderStat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -335,6 +351,17 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
 //        CusMain.setVisible(true);
     }//GEN-LAST:event_btn_dashCusMouseClicked
 
+    private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus();
+        orderStatus.setVisible(true);
+    }//GEN-LAST:event_btn_orderStatMouseClicked
+
+    private void btn_orderStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_orderStatActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -377,6 +404,7 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
     private javax.swing.JButton btn_dashb1;
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
+    private javax.swing.JButton btn_orderStat;
     private com.jcalendar.pane.calendar.CalendarPane calendarPane1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

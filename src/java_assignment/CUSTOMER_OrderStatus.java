@@ -1,15 +1,55 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
 
+    private DefaultTableModel modelOrderStatus = new DefaultTableModel(); 
+    private String[] columnName = {"Order ID", "Food","Status"};
+    private int row = -1;
+    
     public CUSTOMER_OrderStatus() {
         initComponents();
     }
 
-    public CUSTOMER_OrderStatus(String orderID) {
+public CUSTOMER_OrderStatus(String orderID) {
         initComponents();
+        modelOrderStatus.setColumnIdentifiers(columnName);
+        
+        OrderStatus.setModel(modelOrderStatus);
+        try {
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
+            
+            OrderHandler orderHandler = new OrderHandler("Orer_1",Order.class);
+            ArrayList<Order> orderStatus = orderHandler.GetOrderStatusByOrderID(orderID);
+            
+            Iterator<Order> orderStatusIterator = orderStatus.iterator();
+
+            for (OrderSummary orderSummaryItem : ordersummary) {
+                // Check if there is a corresponding orderStatus
+                if (orderStatusIterator.hasNext()) {
+                    Order orderStatusItem = orderStatusIterator.next();
+
+                    // Add data to the modelOrderStatus
+                    modelOrderStatus.addRow(new Object[]{orderSummaryItem.getOrderIDforSummary(),orderSummaryItem.getFoodName(),orderStatusItem.getOrderStatus()});
+                }
+            }
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
     @SuppressWarnings("unchecked")
@@ -23,10 +63,10 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OrderHistory = new javax.swing.JTable();
+        OrderStatus = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         btnOrderHistoryBck = new javax.swing.JButton();
-        btnReorder = new javax.swing.JButton();
+        btnCancelOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,26 +113,8 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Search");
 
-        OrderHistory.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"#2768", "Dine In", "Food1 , Food 2", "Pending", null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
-            }
-        ));
-        jScrollPane1.setViewportView(OrderHistory);
+        OrderStatus.setModel(modelOrderStatus);
+        jScrollPane1.setViewportView(OrderStatus);
 
         jButton3.setText("Search");
 
@@ -108,15 +130,15 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
             }
         });
 
-        btnReorder.setText("Order Again");
-        btnReorder.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancelOrder.setText("Cancel Order");
+        btnCancelOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReorderMouseClicked(evt);
+                btnCancelOrderMouseClicked(evt);
             }
         });
-        btnReorder.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReorderActionPerformed(evt);
+                btnCancelOrderActionPerformed(evt);
             }
         });
 
@@ -129,16 +151,16 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3)
                                 .addGap(271, 271, 271))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addGap(172, 172, 172)
+                        .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -149,12 +171,12 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -191,13 +213,46 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOrderHistoryBckActionPerformed
 
-    private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
+    private void btnCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelOrderMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnReorderMouseClicked
+        try {
+            // Step 1: Read the contents of the "Order_1" file
+            String filePath = "Order_1.txt";
+            fileManager fm = new fileManager();
+            
+            // Assuming readFile returns ArrayList<String[]>
+            ArrayList<String[]> fileContent = fm.readFile(filePath);
 
-    private void btnReorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReorderActionPerformed
+            // Step 2: Identify and update lines with "Pending" status to "Cancelled"
+            for (int i = 0; i < fileContent.size(); i++) {
+                String[] parts = fileContent.get(i);
+                
+                // Assuming the status is at index 3 (adjust if it's at a different index)
+                if (parts.length > 3 && parts[3].equalsIgnoreCase("Pending")) {
+                    // Update the status to "Cancelled"
+                    parts[3] = "Cancelled";
+                    // Reconstruct the line with the updated status
+                    fileContent.set(i, parts);
+                }
+            }
+
+            // Step 3: Write the updated data back to the "Order_1" file
+            String[] updatedData = fileContent.stream()
+                .map(parts -> String.join(";", parts))
+                .toArray(String[]::new);
+
+            fm.updateFile(filePath, updatedData);
+
+            System.out.println("File updated successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCancelOrderMouseClicked
+
+    private void btnCancelOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelOrderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnReorderActionPerformed
+    }//GEN-LAST:event_btnCancelOrderActionPerformed
 
     public static void main(String args[]) {
 
@@ -209,9 +264,9 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable OrderHistory;
+    private javax.swing.JTable OrderStatus;
+    private javax.swing.JButton btnCancelOrder;
     private javax.swing.JButton btnOrderHistoryBck;
-    private javax.swing.JButton btnReorder;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

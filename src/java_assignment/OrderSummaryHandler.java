@@ -33,6 +33,24 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         return orderSummary;
     }
     
+    public ArrayList<OrderSummary> GetOrderID(String orderID){
+        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+        
+        for(int i = 0; i<this.collection.size(); i++)
+        {
+            OrderSummary orderIDsummary = collection.get(i);
+            
+            if (orderIDsummary.getOrderIDforSummary().equals(orderID))
+            {
+                orderSummary.add(orderIDsummary);
+            }
+        }
+        
+        return orderSummary;
+    }
+    
+    
+        
     public void WriteOrderSummary(String orderIDforSummary, String cusID, String food, String foodPrice) {
         // Create a new Review object with the provided values
         OrderSummary newOrder = new OrderSummary();
@@ -62,8 +80,36 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         }
     }
     
+    public ArrayList<OrderSummary> getOrderSummaryByOrderID(String orderID) {
+    ArrayList<OrderSummary> orderSummaries = new ArrayList<>();
+
+        for (OrderSummary orderSummary : this.collection) {
+            if (orderSummary.getOrderIDforSummary().equals(orderID)) {
+                orderSummaries.add(orderSummary);
+            }
+        }
+
+        return orderSummaries;
+    }
+
     
-    
+//    public ArrayList<OrderSummary> GetOrderSummaryByOrderID(String orderID)
+//    {
+//        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+//        
+//        for(int i = 0; i<this.collection.size(); i++)
+//        {
+//            OrderSummary summary = collection.get(i);
+//            
+//            if (summary.getOrderIDforSummary().equals(orderID))
+//            {
+//                orderSummary.add(summary);
+//            }
+//        }
+//        
+//        return orderSummary;
+//    }
+//    
     
 //    public ArrayList<OrderSummary> ReadOrderSummariesFromFile() {
 //        // Load the collection from the file
