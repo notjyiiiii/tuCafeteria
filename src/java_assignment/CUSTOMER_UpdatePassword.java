@@ -279,15 +279,13 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
-        vip.setVisible(true);
+        
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-        this.dispose();
-        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-        vmenup.setVisible(true);
+//        this.dispose();
+//        VendorMenuPage vmenup = new VendorMenuPage(vendor);
+//        vmenup.setVisible(true);
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked

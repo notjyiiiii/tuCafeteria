@@ -301,9 +301,9 @@ public class CUSTOMER_Notification extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
-        this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+//        this.dispose();
+//        Notification_Page noti = new Notification_Page();
+//        noti.setVisible(true);
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked

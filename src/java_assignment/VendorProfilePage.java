@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_assignment.Enums.OperatingDay;
+import javax.swing.JTabbedPane;
 
 public class VendorProfilePage extends javax.swing.JFrame {
 
@@ -24,6 +25,39 @@ public class VendorProfilePage extends javax.swing.JFrame {
         String formattedIncome = "RM" + decimalFormat.format(income);
         lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
         
+        ReviewHandler rh = new ReviewHandler("Review", Review.class);
+        ArrayList<Review> reviews = rh.GetReview(vendor.getVendorid());
+
+        double averageRating = rh.GetAverageRating(vendor.getVendorid());
+        lbl_ratings.setText(String.valueOf(averageRating));
+        
+        int totalReviews = reviews.size();
+        jLabel8.setText(String.valueOf(totalReviews + " people"));
+        
+        if (!reviews.isEmpty()) {
+            Review firstReview = reviews.get(0);
+
+            jLabel23.setText(firstReview.getReview());
+            jLabel24.setText(firstReview.getCustomerName());
+            jLabel25.setText(firstReview.getRating().toString() + " stars");
+        } else {
+            jLabel23.setText("No reviews available");
+            jLabel24.setText("");
+            jLabel25.setText("");
+        }
+        
+        if (!reviews.isEmpty()) {
+            Review secondReview = reviews.get(1);
+
+            jLabel26.setText(secondReview.getReview());
+            jLabel27.setText(secondReview.getCustomerName());
+            jLabel28.setText(secondReview.getRating().toString() + " stars");
+        } else {
+            jLabel26.setText("No more reviews available");
+            jLabel27.setText("");
+            jLabel28.setText("");
+        }
+
         readOperatingDaysAndTimes(Java_assignment.LoggedInUser.userid, "Vendor");
     }
     @SuppressWarnings("unchecked")
@@ -46,7 +80,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbl_ratings = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -216,8 +250,8 @@ public class VendorProfilePage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
         jLabel6.setText("Ratings");
 
-        jLabel7.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jLabel7.setText("Ratings");
+        lbl_ratings.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        lbl_ratings.setText("Ratings");
 
         jLabel8.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         jLabel8.setText("How many people");
@@ -261,6 +295,11 @@ public class VendorProfilePage extends javax.swing.JFrame {
         );
 
         jButton4.setText("See All");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 189, 49));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -481,7 +520,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
                                     .addGroup(rightPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
+                                        .addComponent(lbl_ratings))
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,7 +545,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(lbl_ratings))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(rightPanelLayout.createSequentialGroup()
@@ -632,9 +671,15 @@ public class VendorProfilePage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
@@ -675,14 +720,20 @@ public class VendorProfilePage extends javax.swing.JFrame {
 
     private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
         this.dispose();
-        VendorSettingsPage vsp = new VendorSettingsPage();
+        VendorSettingsPage vsp = new VendorSettingsPage(vendor);
         vsp.setVisible(true);
     }//GEN-LAST:event_btn_SettingsActionPerformed
 
     private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
-        this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(vendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiActionPerformed
 
     private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
@@ -721,6 +772,20 @@ public class VendorProfilePage extends javax.swing.JFrame {
             Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            this.dispose();
+            VendorInsightsPage vrp = new VendorInsightsPage(vendor);
+            vrp.setVisible(true);
+            // Set the selected index to the second tab (index 1)
+            vrp.getTabbedPane().setSelectedIndex(1);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void readOperatingDaysAndTimes(String userId, String filePath) throws ClassNotFoundException {
         try {
@@ -802,7 +867,6 @@ public class VendorProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -816,6 +880,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_tuName;
     private javax.swing.JLabel lb_tuName1;
+    private javax.swing.JLabel lbl_ratings;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;

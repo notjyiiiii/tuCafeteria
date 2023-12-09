@@ -403,9 +403,15 @@ public class VendorMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(currentVendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(currentVendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
@@ -458,14 +464,20 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_SettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SettingsMouseClicked
         this.dispose();
-        VendorSettingsPage vsp = new VendorSettingsPage();
+        VendorSettingsPage vsp = new VendorSettingsPage(currentVendor);
         vsp.setVisible(true);
     }//GEN-LAST:event_btn_SettingsMouseClicked
 
     private void btn_notiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiMouseClicked
-        this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(currentVendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiMouseClicked
 
     private void btn_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashbActionPerformed

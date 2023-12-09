@@ -3,18 +3,55 @@ package java_assignment;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
-    private Vendor vendor;
+    //private Vendor vendor;
+    private String vendorName;
+    private String vendorID;
+    private VendorReviewPage reviewPage;
+    private DefaultTableModel modelReview;
     
-    public CUSTOMER_ViewVendorProfile(Vendor vendor) {
+//    public CUSTOMER_ViewVendorProfile(Vendor vendor){
+//        initComponents();
+//        this.vendor = vendor;
+//    }
+    
+    public CUSTOMER_ViewVendorProfile(){initComponents();}
+    
+    public CUSTOMER_ViewVendorProfile(DefaultTableModel modelReview, String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
-        this.vendor= vendor;
-//        jLabel1.setText(vendor.getUsername());
-//        jLabel2.setText(vendor.getUserid());
-////        jLabel29.setText(vendor.getHP());
-//        jLabel31.setText(vendor.getEmail());
+        this.modelReview = modelReview;
+        this.vendorName = vendorName;
+        lblvdName.setText(this.vendorName);
+        
+        if (Java_assignment.LoggedInUser.userid != null) {
+            CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+            double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
+            lb_Credit.setText("RM: " + String.valueOf(x));
+        } 
+        else {
+            System.err.println("Userid is null");
+        }
+    }
+    
+    public CUSTOMER_ViewVendorProfile(String vendorID, String vendorName) throws IOException, ClassNotFoundException {
+        initComponents();
+        this.vendorName = vendorName;
+        this.vendorID = vendorID;
+        lblvdName.setText(this.vendorName);
+        
+        if (Java_assignment.LoggedInUser.userid != null) {
+        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+        double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
+        lb_Credit.setText("RM: "+String.valueOf(x));
+        }
+        else {
+        // Handle the case where userid is null (perhaps display an error message)
+        System.err.println("Userid is null");
+        }
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,14 +68,13 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         btn_dashb1 = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         btnVendorMenuCus = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblvdName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        lblRating1 = new javax.swing.JLabel();
+        AllRating = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -60,13 +96,13 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
+        lblRating2 = new javax.swing.JLabel();
         leftPanel = new javax.swing.JPanel();
         lb_tuName5 = new javax.swing.JLabel();
         lb_tuName4 = new javax.swing.JLabel();
         lb_cafeName2 = new javax.swing.JLabel();
         lb_dailyEarnings3 = new javax.swing.JLabel();
-        lb_dailyEarningstxt3 = new javax.swing.JLabel();
+        lb_Credit = new javax.swing.JLabel();
         btn_Profile1 = new java.awt.Button();
         btn_Settings1 = new java.awt.Button();
 
@@ -134,6 +170,11 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         });
 
         btn_dashCus.setText("Dashboard");
+        btn_dashCus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dashCusMouseClicked(evt);
+            }
+        });
         btn_dashCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dashCusActionPerformed(evt);
@@ -183,11 +224,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
-        jLabel1.setText("Vendor Name");
-
-        jLabel2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jLabel2.setText("VendorID");
+        lblvdName.setFont(new java.awt.Font("Malayalam MN", 3, 24)); // NOI18N
+        lblvdName.setText("Vendor Name");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Rectangle 1835.png"))); // NOI18N
 
@@ -199,8 +237,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel23.setFont(new java.awt.Font("Malayalam MN", 0, 12)); // NOI18N
-        jLabel23.setText("sgt sedap! best restaurant");
+        lblRating1.setFont(new java.awt.Font("Malayalam MN", 0, 12)); // NOI18N
+        lblRating1.setText("sgt sedap! best restaurant");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,21 +246,26 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel23)
+                .addComponent(lblRating1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel23)
+                .addComponent(lblRating1)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jButton4.setText("See All");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        AllRating.setText("See All");
+        AllRating.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AllRatingMouseClicked(evt);
+            }
+        });
+        AllRating.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                AllRatingActionPerformed(evt);
             }
         });
 
@@ -384,8 +427,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel26.setFont(new java.awt.Font("Malayalam MN", 0, 12)); // NOI18N
-        jLabel26.setText("sgt sedap! best restaurant");
+        lblRating2.setFont(new java.awt.Font("Malayalam MN", 0, 12)); // NOI18N
+        lblRating2.setText("sgt sedap! best restaurant");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -393,14 +436,14 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel26)
+                .addComponent(lblRating2)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel26)
+                .addComponent(lblRating2)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -416,20 +459,17 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(rightPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblvdName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVendorMenuCus)
                         .addGap(24, 24, 24))
                     .addGroup(rightPanelLayout.createSequentialGroup()
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton4)
+                            .addComponent(AllRating)
                             .addGroup(rightPanelLayout.createSequentialGroup()
-                                .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(rightPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
-                                    .addComponent(jLabel2))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -446,11 +486,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVendorMenuCus)
-                            .addGroup(rightPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
-                        .addGap(18, 18, 18)
+                            .addComponent(lblvdName))
+                        .addGap(44, 44, 44)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)))
@@ -460,7 +497,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15)
-                .addComponent(jButton4)
+                .addComponent(AllRating)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -480,7 +517,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         lb_dailyEarnings3.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_dailyEarnings3.setText("TU - E Credits:");
 
-        lb_dailyEarningstxt3.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
+        lb_Credit.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         btn_Profile1.setLabel("Profile");
 
@@ -499,7 +536,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                     .addComponent(lb_tuName4)
                     .addComponent(lb_tuName5)
                     .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lb_Credit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lb_cafeName2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -515,7 +552,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lb_dailyEarnings3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_dailyEarningstxt3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Credit, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Profile1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
@@ -556,15 +593,15 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
-        this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+//        this.dispose();
+//        Notification_Page noti = new Notification_Page();
+//        noti.setVisible(true);
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+//        this.dispose();
+//        VendorOrdersPage vop = new VendorOrdersPage();
+//        vop.setVisible(true);
     }//GEN-LAST:event_btn_orderHisMouseClicked
 
     private void btn_orderHisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderHisActionPerformed
@@ -579,22 +616,124 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_dashb1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void AllRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllRatingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_AllRatingActionPerformed
 
     private void btnVendorMenuCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVendorMenuCusMouseClicked
         try {
+//            VendorHandler vd = new VendorHandler();
+//            vendor = vd.GetVendorByVendorID("VD001");
+//            String vdName = vendor.getVendorName();
+//            System.out.println(vdName);
+            
+
+            if("Western".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD001",vendorName);
+                viewMenu.setVisible(true);
+            }
+            else if("Chinese".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD002",vendorName);
+                viewMenu.setVisible(true);
+            }
+            else if("Malay".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD003",vendorName);
+                viewMenu.setVisible(true);
+            }
+            else if("Indian".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD004",vendorName);
+                viewMenu.setVisible(true);
+            }
+            else if("Korean".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD005",vendorName);
+                viewMenu.setVisible(true);
+            }
+            else if("Japanese".equals(this.vendorName)){
+                this.dispose();
+                CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu("VD006",vendorName);
+                viewMenu.setVisible(true);
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnVendorMenuCusMouseClicked
+
+    private void btn_dashCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashCusMouseClicked
+        try {
             // TODO add your handling code here:
             this.dispose();
-            CUSTOMER_ViewMenu viewMenu = new CUSTOMER_ViewMenu();
-            viewMenu.setVisible(true);
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+            
         } catch (IOException ex) {
             Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnVendorMenuCusMouseClicked
+    }//GEN-LAST:event_btn_dashCusMouseClicked
+
+    private void AllRatingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllRatingMouseClicked
+        // TODO add your handling code here:
+        
+//        try {
+////            VendorHandler vd = new VendorHandler();
+////            vendor = vd.GetVendorByVendorID("VD001");
+////            String vdName = vendor.getVendorName();
+////            System.out.println(vdName);
+//            
+//
+//            if("Western".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD001",vendorName);
+//                review.setVisible(true);
+//            }
+//            else if("Chinese".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD002",vendorName);
+//                review.setVisible(true);
+//            }
+//            else if("Malay".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD003",vendorName);
+//                review.setVisible(true);
+//            }
+//            else if("Indian".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD004",vendorName);
+//                review.setVisible(true);
+//            }
+//            else if("Korean".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD005",vendorName);
+//                review.setVisible(true);
+//            }
+//            else if("Japanese".equals(this.vendorName)){
+//                this.dispose();
+//                CUSTOMER_Review review = new CUSTOMER_Review("VD006",vendorName);
+//                review.setVisible(true);
+//            }
+//        } catch (IOException | ClassNotFoundException ex) {
+//            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            try {
+                
+            if (reviewPage == null || !reviewPage.isVisible()) {
+                this.dispose();
+                CUSTOMER_Review reviewPage = new CUSTOMER_Review(vendorID, vendorName);
+                reviewPage.setVisible(true);
+            } else {
+                reviewPage.toFront();
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_AllRatingMouseClicked
 
     public static void main(String args[]) {
 
@@ -606,6 +745,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AllRating;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton btnVendorMenuCus;
     private java.awt.Button btn_Profile1;
@@ -614,8 +754,6 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JButton btn_dashb1;
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -626,12 +764,9 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -644,14 +779,17 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lb_Credit;
     private javax.swing.JLabel lb_cafeName2;
     private javax.swing.JLabel lb_dailyEarnings3;
-    private javax.swing.JLabel lb_dailyEarningstxt3;
     private javax.swing.JLabel lb_logoName1;
     private javax.swing.JLabel lb_logoPic1;
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_tuName4;
     private javax.swing.JLabel lb_tuName5;
+    private javax.swing.JLabel lblRating1;
+    private javax.swing.JLabel lblRating2;
+    private javax.swing.JLabel lblvdName;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;

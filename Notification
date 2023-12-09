@@ -1,8 +1,5 @@
 001;VD001;CS006;Your Order has been delivered;2023-12-09T23:25:55.755853;read
 002;AD004;CS009;Your tuCard has been top up for RM100;2023-12-09T23:25:55.755853;unread
-403;VD001;CS003;Your order#O012 has been accepted! Your order is preparing...;2023-12-10T05:48:17.193262;Unread
-661;VD001;CS003;Your order#O006 has been accepted! Your order is preparing...;2023-12-10T05:48:49.319134;Unread
-033;VD001;CS003;Your order#O012 has been declined :( It's sad...;2023-12-10T05:49:39.441128;Unread
 003;CS006;VD001;ehhhhdsdshhhh;2023-12-09T23:25:55.755853;unread
 004;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 005;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
@@ -11,9 +8,15 @@
 008;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
 009;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 010;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
-011;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
+011;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 012;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 013;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 014;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 015;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 016;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+426;VD001;CS003;Your order#O008 has been accepted! Your order is preparing...;2023-12-10T04:55:24.768376;Unread
+644;VD001;CS003;Your order#O012 has been accepted! Your order is preparing...;2023-12-10T04:56:44.438368;Unread
+603;VD001;CS003;Your order#O008 has been accepted! Your order is preparing...;2023-12-10T04:58:39.160372;Unread
+157;VD001;CS003;Your order#O012 has been accepted! Your order is preparing...;2023-12-10T05:03:51.078269;Unread
+157;VD001;CS003;Your order#O012 has been accepted! Your order is preparing...;2023-12-10T05:03:51.078269;Unread
+866;VD001;CS003;Your order#O008 has been accepted! Your order is preparing...;2023-12-10T05:07:11.108432;Unread

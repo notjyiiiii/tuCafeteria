@@ -160,18 +160,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton10" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="indianFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="westernFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton11" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                              <Component id="jButton8" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="koreanFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="chineseFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton12" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                              <Component id="jButton9" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="japaneseFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                              <Component id="malayFood" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="24" max="32767" attributes="0"/>
                       </Group>
@@ -191,15 +191,15 @@
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton8" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="westernFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="chineseFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="malayFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton10" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton11" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton12" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="indianFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="koreanFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="japaneseFood" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
@@ -222,7 +222,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="westernFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Western"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -233,8 +233,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="westernFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="westernFoodActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -278,7 +278,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton8">
+        <Component class="javax.swing.JButton" name="chineseFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Chinese"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -289,10 +289,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chineseFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chineseFoodActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="malayFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Malay"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -303,10 +304,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="malayFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="malayFoodActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton10">
+        <Component class="javax.swing.JButton" name="indianFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Indian"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -317,10 +319,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="indianFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="indianFoodActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton11">
+        <Component class="javax.swing.JButton" name="koreanFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Korean"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -331,10 +334,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="koreanFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="koreanFoodActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton12">
+        <Component class="javax.swing.JButton" name="japaneseFood">
           <Properties>
             <Property name="text" type="java.lang.String" value="Japanese"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -345,7 +349,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="japaneseFoodMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="japaneseFoodActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -438,7 +443,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lb_cCredit" min="-2" pref="126" max="-2" attributes="0"/>
+                      <Component id="lb_Credit" min="-2" pref="126" max="-2" attributes="0"/>
                       <Component id="lb_dailyEarnings3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_Settings1" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
                       <Component id="lb_tuName4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -462,7 +467,7 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="lb_dailyEarnings3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lb_cCredit" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="lb_Credit" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btn_Profile1" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -521,7 +526,12 @@
             <Property name="text" type="java.lang.String" value="TU - E Credits:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_cCredit">
+        <Component class="javax.swing.JLabel" name="lb_Credit">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="25" style="1"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

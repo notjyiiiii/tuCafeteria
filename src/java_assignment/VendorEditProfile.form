@@ -164,16 +164,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Notification"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_notiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_orders">
           <Properties>
             <Property name="text" type="java.lang.String" value="Orders"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ordersActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_dashb">
           <Properties>
             <Property name="text" type="java.lang.String" value="Dashboard"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dashbActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_insights">
           <Properties>
@@ -520,11 +529,17 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Profile"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ProfileActionPerformed"/>
+          </Events>
         </Component>
         <Component class="java.awt.Button" name="btn_Settings">
           <Properties>
             <Property name="label" type="java.lang.String" value="Settings"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SettingsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_dailyEarningstxt">
           <Properties>
@@ -546,6 +561,9 @@
             <Property name="actionCommand" type="java.lang.String" value="Credits"/>
             <Property name="label" type="java.lang.String" value="Credits"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CreditsActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

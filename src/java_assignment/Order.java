@@ -25,6 +25,7 @@ public class Order implements IDataContainer, Serializable{
     }
 
     public String[] SerializeData(){
+
         String [] dataString = new String[10];
         dataString[0] = this.orderid;
         dataString[1] = this.customerid;
@@ -72,7 +73,7 @@ public class Order implements IDataContainer, Serializable{
 //}
     
     
-    public String getOrderid() {
+     public String getOrderid() {
         return orderid;
     }
 

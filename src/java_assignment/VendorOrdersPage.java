@@ -511,9 +511,15 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
@@ -545,9 +551,15 @@ public class VendorOrdersPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
-        this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(vendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiActionPerformed
 
     private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
@@ -601,8 +613,8 @@ public class VendorOrdersPage extends javax.swing.JFrame {
 
     private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
         this.dispose();
-        VendorSettingsPage vsp = new VendorSettingsPage();
-        
+        VendorSettingsPage vsp = new VendorSettingsPage(vendor);
+        vsp.setVisible(true);
     }//GEN-LAST:event_btn_SettingsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -611,17 +623,52 @@ public class VendorOrdersPage extends javax.swing.JFrame {
 
         if (selectedRowIndex != -1) {
             try {
-                // Get the order ID from the selected row
                 String orderId = jTable1.getValueAt(selectedRowIndex, 0).toString();
-                // Pass the order ID to the OrdersView page
-                openViewPage(orderId);
+                String orderStatus = jTable1.getValueAt(selectedRowIndex, 1).toString();
+                OrderHandler oh = new OrderHandler();
+                String customerID = oh.getCustomerIDForOrder(orderId);
+
+                if ("PENDING".equals(orderStatus)) {
+                    int choice = JOptionPane.showConfirmDialog(this, "Do you want to accept this order?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+                    if (choice == JOptionPane.YES_OPTION) {
+                        
+                        oh.updateOrderStatus(orderId, OrderStatus.PREPARING);
+
+                        try {
+                            NotificationHandler nh = new NotificationHandler("Notification", Notification.class);
+                            nh.createNotification(vendor.getVendorid(), customerID, "Your order#" + orderId + " has been accepted! Your order is preparing...", "Unread");
+
+                            openViewPage(orderId);
+                        } catch (IOException ex) {
+                            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(this, "Error processing notification: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else if (choice == JOptionPane.NO_OPTION) {
+                        oh.deleteOrder(orderId);
+
+                        try {
+                            NotificationHandler nh = new NotificationHandler("Notification", Notification.class);
+                            nh.createNotification(vendor.getVendorid(), customerID, "Your order#" + orderId + " has been declined :( It's sad...", "Unread");
+
+                            refreshData();
+                        } catch (IOException ex) {
+                            Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(this, "Error processing notification: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    openViewPage(orderId);
+                }
             } catch (IOException ex) {
+                ex.printStackTrace();
                 Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                // Handle the IOException (e.g., show a message to the user)
+                JOptionPane.showMessageDialog(this, "Error processing notification: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            // If no row is selected, show a message or take appropriate action
             JOptionPane.showMessageDialog(this, "Please select a row to view.", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -96,7 +96,7 @@ public class Vendor implements IDataContainer, Serializable{
         // Format the OperatingDays as a comma-separated string without square brackets
         String operatingDaysString = this.getOperatingDays().stream()
                 .map(OperatingDay::toString)
-                .collect(Collectors.joining(";"));
+                .collect(Collectors.joining(","));
 
         
 

@@ -32,10 +32,6 @@ public class MenuEdit extends javax.swing.JFrame {
         
     }
     
-    
-    
-    
-    
     private void populateComboBox() throws IOException, ClassNotFoundException {
         MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
         ArrayList<Menu> menu = menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid);

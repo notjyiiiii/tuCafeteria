@@ -97,8 +97,6 @@ public class BaseHandler<T extends IDataContainer> {
         }
 
     } 
-
-   
     
     public void DeleteItem(T item)throws IOException
     {
@@ -121,9 +119,6 @@ public class BaseHandler<T extends IDataContainer> {
             System.out.println("Error: Unable to delete item");
         }
     }
-    
-    
-    
         
         public void UpdateItem(T item1,T item2)throws IOException
     {
@@ -147,4 +142,7 @@ public class BaseHandler<T extends IDataContainer> {
             System.out.println("Error: Unable to delete item");
         }
     }
+   
+    
+    
 }

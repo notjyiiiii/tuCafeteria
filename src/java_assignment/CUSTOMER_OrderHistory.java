@@ -178,9 +178,9 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnOrderHistoryBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+//        this.dispose();
+//        VendorOrdersPage vop = new VendorOrdersPage();
+//        vop.setVisible(true);
     }//GEN-LAST:event_btnOrderHistoryBckMouseClicked
 
     private void btnOrderHistoryBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckActionPerformed

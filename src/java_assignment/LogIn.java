@@ -1,5 +1,6 @@
 package java_assignment;
 
+import java.awt.event.ItemEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,7 +41,6 @@ public class LogIn extends javax.swing.JFrame {
         tf_userID = new javax.swing.JTextField();
         lb_pw = new javax.swing.JLabel();
         bt_logIn = new javax.swing.JButton();
-        lb_forgotpw = new javax.swing.JLabel();
         cb_showPw = new javax.swing.JCheckBox();
         pwf_pw = new javax.swing.JPasswordField();
 
@@ -118,12 +118,13 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        lb_forgotpw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_forgotpw.setForeground(new java.awt.Color(0, 153, 255));
-        lb_forgotpw.setText("Forgot Password?");
-
         cb_showPw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         cb_showPw.setText("Show Password");
+        cb_showPw.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_showPwItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
@@ -144,12 +145,7 @@ public class LogIn extends javax.swing.JFrame {
                             .addComponent(pwf_pw)))
                     .addGroup(bottomPanelLayout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(lb_forgotpw)
-                                .addGap(35, 35, 35)))))
+                        .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         bottomPanelLayout.setVerticalGroup(
@@ -173,9 +169,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(cb_showPw)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_forgotpw)
-                .addGap(28, 28, 28))
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,6 +207,16 @@ public class LogIn extends javax.swing.JFrame {
     private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_logInActionPerformed
+
+    private void cb_showPwItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_showPwItemStateChanged
+         if (evt.getStateChange() == ItemEvent.SELECTED) {
+                    // If selected, set the echo char to 0 (show password)
+                    pwf_pw.setEchoChar((char) 0);
+                } else {
+                    // If not selected, set the echo char to '*'
+                    pwf_pw.setEchoChar('*');
+                }
+    }//GEN-LAST:event_cb_showPwItemStateChanged
 
     private void Login(String userid, String password)
     {
@@ -256,7 +260,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton bt_logIn;
     private javax.swing.JCheckBox cb_showPw;
     private javax.swing.JLabel lb_cafeName;
-    private javax.swing.JLabel lb_forgotpw;
     private javax.swing.JLabel lb_logoName;
     private javax.swing.JLabel lb_logoPic;
     private javax.swing.JLabel lb_motto;

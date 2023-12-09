@@ -2,19 +2,28 @@ package java_assignment;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Java_assignment {
     
     public static User LoggedInUser = null;
-    
+
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        
-        
         fileManager fm = new fileManager();
-//        
         LogIn lg = new LogIn();
+
+    }
+
+}
+
+
+
 //       float incomeForToday = oh.CalculateTotalIncomeForToday(Java_assignment.LoggedInUser.userid);
-//        System.out.println("Total Income for Today: " + incomeForToday);
+//       System.out.println("Total Income for Today: " + incomeForToday);
 //       String userID = "VD001";
 //       OrderHandler oh = new OrderHandler();
 //       System.out.println(oh.CalculateTotalIncome(userID));
@@ -157,8 +166,3 @@ public class Java_assignment {
 //        System.out.println(abs.getItemPrice());
         
         
-        
-    }
-    
-    
-}
