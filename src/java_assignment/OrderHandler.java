@@ -176,6 +176,17 @@ public class OrderHandler extends BaseHandler<Order>{
         return orderIDs;
     }
     
+    public String getVendorIDByOrderID(String orderID) {
+    for (int i = 0; i < this.collection.size(); i++) {
+        Order orderStatus = collection.get(i);
+
+        if (orderStatus.getOrderid().equals(orderID)) {
+            // Assuming there is a method in your Order class to get vendorID, replace it with the actual method
+            return orderStatus.getVendorid();
+        }
+    }
+    return null; // If no matching orderID is found
+}
     
     public void updateOrderStatusToCompleted(String orderID) {
         try {

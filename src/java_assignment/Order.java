@@ -226,4 +226,18 @@ public class Order implements IDataContainer, Serializable{
         this.totalAmount = totalAmount;
     }
 
+    
+    public String toString() {
+        // Return a string representation of the Order object in the desired format
+    return this.getOrderid() + ";" +
+               this.getCustomerid() + ";" +
+               this.getVendorid() + ";" +
+               this.getOrderStatus() + ";" +
+               this.getOrderType() + ";" +
+               this.getOrderDateTime() + ";" +
+               this.getDeliveryLocation() + ";" +
+               this.getOrderAmount() + ";" +
+               this.getDeliveryFees()+ ";" +
+               this.getTotalAmount();
+    }
 }

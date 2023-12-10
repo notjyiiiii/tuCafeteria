@@ -13,8 +13,8 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
     private void initComponents() {
 
         rightPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        updatePass = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         btn_notiCus = new javax.swing.JButton();
         btn_orderHis = new javax.swing.JButton();
@@ -38,24 +38,24 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
 
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
 
-        jButton1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jButton1.setText("Update Password");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        updatePass.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        updatePass.setText("Update Password");
+        updatePass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                updatePassMouseClicked(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jButton2.setText("Log Out");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        logout.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        logout.setText("Log Out");
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                logoutMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                logoutActionPerformed(evt);
             }
         });
 
@@ -66,17 +66,17 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updatePass, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(updatePass, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -139,15 +139,15 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
             .addGroup(bottomPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btn_notiCus)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(btn_orderHis)
-                .addGap(29, 29, 29)
-                .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btn_orderStat)
+                .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_orderStat)
+                .addGap(26, 26, 26)
                 .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(16, 16, 16))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,11 +290,11 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         this.dispose();
         LogIn login = new LogIn();
         login.setVisible(true);
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_logoutMouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
         this.dispose();
@@ -324,14 +324,16 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_dashb1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_logoutActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void updatePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePassMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1MouseClicked
+        this.dispose();
+        CUSTOMER_UpdatePassword updatePass = new CUSTOMER_UpdatePassword();
+        updatePass.setVisible(true);
+    }//GEN-LAST:event_updatePassMouseClicked
 
     private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
         // TODO add your handling code here:
@@ -361,8 +363,6 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
     private javax.swing.JButton btn_orderStat;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lb_cafeName2;
     private javax.swing.JLabel lb_dailyEarnings3;
     private javax.swing.JLabel lb_dailyEarningstxt3;
@@ -372,7 +372,9 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
     private javax.swing.JLabel lb_tuName4;
     private javax.swing.JLabel lb_tuName5;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JButton logout;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;
+    private javax.swing.JButton updatePass;
     // End of variables declaration//GEN-END:variables
 }

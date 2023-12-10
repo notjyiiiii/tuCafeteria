@@ -1,6 +1,8 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,15 +12,22 @@ import javax.swing.table.DefaultTableModel;
 public class CUSTOMER_Review extends javax.swing.JFrame {
 
     private DefaultTableModel modelReview = new DefaultTableModel();
-    private String[] columnName = {"Name", "Review", "Rating"};
+    private String[] columnName = {"Name", "Rating", "Review","Date & Time"};
     private int row=-1;
     private String vendorID;
     private String vendorName;
     private String cusName = Java_assignment.LoggedInUser.username;
+    private LocalDateTime now;
     
     public CUSTOMER_Review(){
         try {
             initComponents();
+            
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+            String formattedDateTime = now.format(formatter);
+            this.now = now;
+            
             modelReview.setColumnIdentifiers(columnName);
             
             ViewMenu.setModel(modelReview);
@@ -26,6 +35,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
             ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
             ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
             ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
+            ViewMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
             
             ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
 //        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
@@ -37,7 +47,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     ArrayList<Review> review = reviewHandler.GetReview(vendorID);
 
     for (Review reviewList : review) {
-        modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
+        modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating(),reviewList.getReviewDateTime()});
     }
             } catch (IOException ex) {
                 Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,6 +76,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
         ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
         ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
         ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
+        ViewMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
         
         ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
 //        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
@@ -77,7 +88,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
         ArrayList<Review> review = reviewHandler.GetReview(vendorID);
         
         for (Review reviewList : review) {
-            modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
+            modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getRating(), reviewList.getReview(),reviewList.getReviewDateTime()});
         }
         
     }
@@ -299,7 +310,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
         
         String review = txtWriteReview.getText();
         String rating = String.valueOf(comboRating.getSelectedItem());
-        String[] reviews = {cusName,review,rating};
+        String[] reviews = {cusName,rating,review,String.valueOf(now)};
         modelReview.addRow(reviews);
         
         //write to file

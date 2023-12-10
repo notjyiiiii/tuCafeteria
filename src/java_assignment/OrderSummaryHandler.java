@@ -16,6 +16,7 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         }
     }
     
+    
     public ArrayList<OrderSummary> GetCusOrderSummary(String cusID)
     {
         ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();

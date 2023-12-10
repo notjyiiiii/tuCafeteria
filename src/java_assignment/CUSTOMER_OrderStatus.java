@@ -67,6 +67,8 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
                         if (confirmResult == JOptionPane.YES_OPTION) {
                             // Open the review writing dialog or perform any other action
                             // You can replace the following line with the code to open your review dialog
+                            
+                            
                             CUSTOMER_Review review = new CUSTOMER_Review();
                             review.setVisible(true);
                         }
@@ -100,46 +102,55 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
         
     }
 
+
 public CUSTOMER_OrderStatus(String orderID) {
-        initComponents();
-        modelOrderStatus.setColumnIdentifiers(columnName);
+    initComponents();
+    modelOrderStatus.setColumnIdentifiers(columnName);
 
-        OrderStatus.setModel(modelOrderStatus);
-        try {
-            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
-            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
+    OrderStatus.setModel(modelOrderStatus);
+    
+    try {
+        OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+        ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
-            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
-            ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
+        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+        ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
 
-            for (OrderSummary orderSummaryItem : ordersummary) {
-                // Find matching order status in orderStatusList
-                Optional<Order> matchingOrderStatus = orderStatusList.stream()
-                        .filter(order -> order.getOrderid().equals(orderID))
-                        .findFirst();
+        StringBuilder foodNames = new StringBuilder();
 
-                // Add data to the modelOrderStatus
-                if (matchingOrderStatus.isPresent()) {
-                    modelOrderStatus.addRow(new Object[]{
-                            orderSummaryItem.getOrderIDforSummary(),
-                            orderSummaryItem.getFoodName(),
-                            matchingOrderStatus.get().getOrderStatus()
-                    });
-                } else {
-                    // Handle the case where order status is not found (you can set a default value or leave it empty)
-                    modelOrderStatus.addRow(new Object[]{
-                            orderSummaryItem.getOrderIDforSummary(),
-                            orderSummaryItem.getFoodName(),
-                            "Status Not Found"
-                    });
-                }
+        for (OrderSummary orderSummaryItem : ordersummary) {
+            // Find matching order status in orderStatusList
+            Optional<Order> matchingOrderStatus = orderStatusList.stream()
+                    .filter(order -> order.getOrderid().equals(orderID))
+                    .findFirst();
+
+            // Add data to the modelOrderStatus
+            if (matchingOrderStatus.isPresent()) {
+                foodNames.append(orderSummaryItem.getFoodName()).append(", ");
             }
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+        if (foodNames.length() > 0) {
+            // Remove the trailing comma and space
+            foodNames.setLength(foodNames.length() - 2);
+        }
+
+        // Define matchingOrderStatus outside the loop
+        Optional<Order> matchingOrderStatus = orderStatusList.stream()
+                .filter(order -> order.getOrderid().equals(orderID))
+                .findFirst();
+
+        modelOrderStatus.addRow(new Object[]{
+                orderID,
+                foodNames.toString(),
+                matchingOrderStatus.map(Order::getOrderStatus).orElse("Status Not Found")
+        });
+
+    } catch (IOException | ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -318,6 +329,7 @@ public CUSTOMER_OrderStatus(String orderID) {
             System.out.println("Please select a row to cancel.");
             return;
         }
+        
 
         // Step 2: Get the order ID and status from the selected row
         String orderID = (String) OrderStatus.getValueAt(selectedRow, 0);
@@ -325,52 +337,34 @@ public CUSTOMER_OrderStatus(String orderID) {
         // Step 3: Update the JTable modelOrderStatus
         modelOrderStatus.setValueAt("CANCELLED", selectedRow, 2);
 
-        // Step 4: Use OrderHandler to update the collection
-        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
-        ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(Java_assignment.LoggedInUser.userid);
+        OrderHandler oh = new OrderHandler("Order",Order.class);
+        Order orderToDelete = oh.GetOrderByOrderID(orderID);
+        oh.DeleteItem(orderToDelete);
 
-    // Find the order to update
-    Order foundOrder = null;
-    for (Order completedOrder : completedOrders) {
-        if (completedOrder.getOrderid().equals(orderID)) {
-            // Update the order status
-            completedOrder.setOrderStatus("CANCELLED");
-            foundOrder = completedOrder;
-            break; // Exit the loop after updating the matching order ID
+        
+        OrderSummaryHandler osh = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+        ArrayList<OrderSummary> orderSummary = osh.getOrderSummaryByOrderID(orderID);
+        
+        for(OrderSummary orderSummaryItem:orderSummary){
+            osh.DeleteItem(orderSummaryItem);
         }
-    }
+        int confirmResult = JOptionPane.showConfirmDialog(this, "Your order is cancelled!");
+        if (confirmResult == JOptionPane.YES_OPTION) {
+                            // Open the review writing dialog or perform any other action
+                            // You can replace the following line with the code to open your review dialog
+                            
+                            CUSTOMER_Main main = new CUSTOMER_Main();
+                            main.setVisible(true);
+                        }
+        
+        
+    
 
-    // Step 5: Update the file content
-    fileManager fm = new fileManager();
-    ArrayList<String[]> fileContent = fm.readFile("Order");
-
-    // Step 6: Identify and update the line with the selected order ID to "Cancelled"
-    for (int i = 0; i < fileContent.size(); i++) {
-        String[] parts = fileContent.get(i);
-
-        // Assuming the order ID is at index 0 (adjust if it's at a different index)
-        if (parts.length > 0 && parts[0].equals(orderID)) {
-            // Update the status to "Cancelled"
-            parts[3] = "CANCELLED";
-
-            // If you need to update other fields, do it here
-
-            // Update the ArrayList directly
-            fileContent.set(i, parts);
-            break; // Exit the loop after updating the matching order ID
-        }
-    }
-
-    // Step 7: Write the updated data back to the "Order" file
-    fm.updateFile("Order", fileContent);
-
-    System.out.println("Order cancelled successfully.");
-
-} catch (IOException e) {
-    e.printStackTrace();
-} catch (ClassNotFoundException ex) {
-    Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
-} 
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+    } 
 
 //        try{
 //            int selectedRow = OrderStatus.getSelectedRow();

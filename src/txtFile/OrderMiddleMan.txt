@@ -1,3 +1,12 @@
 ORD169;CS006;Kuih Bahulu;0.0;
 ORD169;CS006;Nasi Lemak;0.0;
 ORD176;CS002;Nasi Kandar;0.0;
+ORD177;CS002;Beef and Potatoes;0.0;
+ORD178;CS007;Ayam Percik;0.0;
+ORD179;CS002;Nasi Kandar;0.0;
+ORD180;CS006;Ayam Percik;0.0;
+ORD180;CS006;Nasi Lemak;0.0;
+ORD181;CS006;Fried Rice;0.0;
+ORD181;CS006;Mapo Tofu;0.0;
+ORD182;CS006;Kuih Bahulu;0.0;
+ORD182;CS006;Ayam Percik;0.0;

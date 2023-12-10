@@ -64,4 +64,14 @@ public class OrderSummary implements IDataContainer, Serializable{
         this.foodName = dataArray[2];
         this.foodPrice = dataArray[3];
     }
+    
+    public String toString() {
+        // Return a string representation of the Order object in the desired format
+    return this.getOrderIDforSummary() + ";" + 
+            this.getCusID() + ";" +
+            this.getFoodName() + "'" +
+            this.getFoodPrice();
+            
+    }
+    
 }
