@@ -1,5 +1,10 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class CUSTOMER_Setting extends javax.swing.JFrame {
     
     private Vendor vendor;
@@ -107,6 +112,11 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
         });
 
         btn_dashCus.setText("Dashboard");
+        btn_dashCus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dashCusMouseClicked(evt);
+            }
+        });
         btn_dashCus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_dashCusActionPerformed(evt);
@@ -337,14 +347,38 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
 
     private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus();
-        orderStatus.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
+            this.dispose();
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_orderStatMouseClicked
 
     private void btn_orderStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_orderStatActionPerformed
+
+    private void btn_dashCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashCusMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_dashCusMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
