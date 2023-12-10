@@ -556,11 +556,9 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
 
     private void btn_Settings1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Settings1MouseClicked
         // TODO add your handling code here:
-//        this.dispose();
-//        CUSTOMER_Setting orderHis = new CUSTOMER_Setting();
-//        orderHis.setVisible(true);
-          CUSTOMER_ConfirmOrder test = new CUSTOMER_ConfirmOrder();
-          test.setVisible(true);
+        this.dispose();
+        CUSTOMER_Setting setting = new CUSTOMER_Setting();
+        setting.setVisible(true);
     }//GEN-LAST:event_btn_Settings1MouseClicked
 
     private void westernFoodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_westernFoodMouseClicked

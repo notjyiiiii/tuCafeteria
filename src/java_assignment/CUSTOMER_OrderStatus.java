@@ -106,7 +106,7 @@ public CUSTOMER_OrderStatus(String orderID) {
 
         OrderStatus.setModel(modelOrderStatus);
         try {
-            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderMiddleMan", OrderSummary.class);
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
             ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
             OrderHandler orderHandler = new OrderHandler("Order", Order.class);
