@@ -364,8 +364,8 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
         this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        //VendorOrdersPage vop = new VendorOrdersPage();
+        //vop.setVisible(true);
     }//GEN-LAST:event_btn_ordersMouseClicked
 
     private void btn_CreditsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CreditsMouseClicked
@@ -388,8 +388,8 @@ public class VendorMainPage extends javax.swing.JFrame {
 
     private void btn_notiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiMouseClicked
         this.dispose();
-        Notification_Page noti = new Notification_Page();
-        noti.setVisible(true);
+//        Notification_Page noti = new Notification_Page();
+//        noti.setVisible(true);
     }//GEN-LAST:event_btn_notiMouseClicked
 
     // Custom code

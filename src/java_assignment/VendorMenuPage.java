@@ -389,8 +389,8 @@ public class VendorMenuPage extends javax.swing.JFrame {
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
         this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+//        VendorOrdersPage vop = new VendorOrdersPage();
+//        vop.setVisible(true);
     }//GEN-LAST:event_btn_ordersMouseClicked
 
     

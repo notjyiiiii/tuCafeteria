@@ -10,13 +10,18 @@ public class Java_assignment {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
         
-        fileManager fm = new fileManager();
+      // fileManager fm = new fileManager();
 //        
+
         LogIn lg = new LogIn();
+
+
+       //LogIn lg = new LogIn();
+
 //        
        // String key = "Menu";
 //        String configVar = 
-        //String get = fm.getConfigVar(key, true);
+//        String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
 //        System.out.println(user);
 //        System.out.println("------");
@@ -36,7 +41,7 @@ public class Java_assignment {
 //        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
 //        Menu menu = new Menu();
-//        menu.setUserid("VD001");
+//       menu.setUserid("VD001");
 //        menu.setItemid("MD022");
 //        menu.setItemPic("null");
 //        menu.setItemPrice(8);
@@ -44,9 +49,9 @@ public class Java_assignment {
 //        menu.setItemName("Tom Yam Soup");
 //        menu.setItemDesc("Spicy and Sour soup made in Thailand");
 //        menuHandler.AddNewItem(menu);
-//        
-//        
-//        Menu abs = menuList.get(5);
+////        
+////        
+//        Menu abs = menuList.get(0);
 //        
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName()+"\n");

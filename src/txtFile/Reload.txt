@@ -1,6 +1,6 @@
-UserID;UserName;UserEmail;UserHP;Userpw;UserRole
-VD001;Amy;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor
-CU002;Kudo;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer
-VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor
-VD004;Valen;valen@tuCafeteria.edu.co;0156789234;valen123;Vendor
-VD005;Nathan Western Food;nathanfood@tuCaferia.edu.co;0167892345;nathan123;Vendor
+ReloadID;CustomerID;ReloadDate;ReloadTime;ReloadAmount;
+R001;CS006;2023-01-15;09:30:00;50.00
+R002;CS002;2023-02-02;12:45:00;25.00
+R003;CS002;2023-02-10;15:20:00;30.00
+R004;CS007;2023-03-05;10:00:00;40.00
+R005;CS006;2023-03-12;18:15:00;20.00

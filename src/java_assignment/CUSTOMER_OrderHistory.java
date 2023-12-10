@@ -264,51 +264,67 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOrderHistoryBckActionPerformed
 
-    private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
-        try {
-            // TODO add your handling code here:
-            this.dispose();
-            //generate new orderID
-            OrderHandler orderHandlerGenerate = new OrderHandler();
-            String reorderID = orderHandlerGenerate.generateOrderID();
-            //write into OrderSummary file
-            OrderMiddleManHandler ordermiddlemanHandler2;
-            ordermiddlemanHandler2 = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
-            ordermiddlemanHandler2.WriteOrderSummary(reorderID, cusID, food, foodPrice);
-            
-            OrderSummaryHandler ordersummaryHandler2;
-            ordersummaryHandler2 = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-            ordersummaryHandler2.WriteOrderSummary(reorderID, cusID, food, foodPrice);
-            
-            
-            CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName);
-            System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
-            reorder.setVisible(true);
-//        OrderSummaryHandler ordersummaryHandler;
-//            OrderMiddleManHandler ordermiddlemanHandler;
-//            try{
-//
-//                ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-//                //System.out.println(food+foodPrice);
-//                ordersummaryHandler.WriteOrderSummary(reorderID,cusID,food,foodPrice);
-//                CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID,vendorID,vendorName);
-//                reorder.setVisible(true);
-//                
-//                System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
-//                
-//            } catch(IOException | ClassNotFoundException ex){
-//                Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);
-//                JOptionPane.showMessageDialog(this,"Error writing review to file");
-//            }
-//        } 
-//        
-        } catch (IOException ex) {
-            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+    private String[][] getSelectedDataFromOrderHistory() {
+        int[] selectedRows = OrderHistory.getSelectedRows();
+        int colCount = modelReorder.getColumnCount();
+        String[][] orderData = new String[selectedRows.length][colCount];
+
+        for (int i = 0; i < selectedRows.length; i++) {
+            int selectedRow = selectedRows[i];
+            for (int col = 0; col < colCount; col++) {
+                orderData[i][col] = String.valueOf(modelReorder.getValueAt(selectedRow, col));
+            }
         }
+
+        return orderData;
+    }
+    
+    private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
+        // TODO add your handling code here:
+        try {
+        this.dispose();
+        OrderHandler orderHandlerGenerate = new OrderHandler();
+        String reorderID = orderHandlerGenerate.generateOrderID();
+
+        // Assuming orderData is available in your CUSTOMER_OrderHistory class
+        String[][] orderData = getSelectedDataFromOrderHistory();
+
+        // Loop through each row in orderData and write to OrderSummary
+        for (int i = 0; i < orderData.length; i++) {
+            String reorderedFood = orderData[i][0]; // Extract food name
+            double reorderedFoodPrice = Double.parseDouble(orderData[i][1]); // Extract food price
+
+            // Create an instance of OrderSummaryHandler
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+
+            // Call WriteOrderSummary to write the reordered item to OrderSummary
+            orderSummaryHandler.WriteOrderSummary(reorderID, cusID, reorderedFood, String.valueOf(reorderedFoodPrice));
+            System.out.println("Reordered item written to OrderSummary successfully.");
+        }
+
+        CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName, orderData);
+        System.out.println("\nView Menu's orderID, OrderSummary: " + reorderID);
+        reorder.setVisible(true);
+
+    } catch (IOException ex) {
+        Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
         
-        
+//        //generate new orderID
+//        OrderHandler orderHandlerGenerate = new OrderHandler();
+//        String reorderID = orderHandlerGenerate.generateOrderID();
+//
+//
+//        String[][] orderData = getSelectedDataFromOrderHistory();
+//        
+//        this.dispose();
+//        CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName,orderData);
+//        System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
+//        reorder.setVisible(true);
+      
          
     }//GEN-LAST:event_btnReorderMouseClicked
 

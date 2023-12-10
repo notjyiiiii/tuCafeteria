@@ -1,6 +1,7 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -57,6 +58,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_orderStat = new javax.swing.JButton();
         topPanel1 = new javax.swing.JPanel();
         lb_logoPic1 = new javax.swing.JLabel();
         lb_logoName1 = new javax.swing.JLabel();
@@ -66,6 +68,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         btn_orderHis = new javax.swing.JButton();
         btn_dashCus = new javax.swing.JButton();
         btn_dashb1 = new javax.swing.JButton();
+        btn_orderStatus = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         btnVendorMenuCus = new javax.swing.JButton();
         lblvdName = new javax.swing.JLabel();
@@ -105,6 +108,18 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         lb_Credit = new javax.swing.JLabel();
         btn_Profile1 = new java.awt.Button();
         btn_Settings1 = new java.awt.Button();
+
+        btn_orderStat.setText("Order Status");
+        btn_orderStat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_orderStatMouseClicked(evt);
+            }
+        });
+        btn_orderStat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderStatActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,31 +203,46 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
             }
         });
 
+        btn_orderStatus.setText("Order Status");
+        btn_orderStatus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_orderStatusMouseClicked(evt);
+            }
+        });
+        btn_orderStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_orderStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(31, 31, 31)
                 .addComponent(btn_notiCus)
                 .addGap(32, 32, 32)
                 .addComponent(btn_orderHis)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(26, 26, 26)
+                .addComponent(btn_orderStatus)
+                .addGap(18, 18, 18)
                 .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_notiCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_orderHis, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_orderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
@@ -594,13 +624,13 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
         this.dispose();
-        Notification_Page noti = new Notification_Page();
+        CUSTOMER_Notification noti = new CUSTOMER_Notification();
         noti.setVisible(true);
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked
         this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
+        CUSTOMER_OrderHistory vop = new CUSTOMER_OrderHistory();
         vop.setVisible(true);
     }//GEN-LAST:event_btn_orderHisMouseClicked
 
@@ -734,6 +764,46 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AllRatingMouseClicked
 
+    private void btn_orderStatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatMouseClicked
+
+        try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
+            this.dispose();
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_orderStatMouseClicked
+
+    private void btn_orderStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_orderStatActionPerformed
+
+    private void btn_orderStatusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderStatusMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
+            this.dispose();
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_orderStatusMouseClicked
+
+    private void btn_orderStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_orderStatusActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -753,6 +823,8 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     private javax.swing.JButton btn_dashb1;
     private javax.swing.JButton btn_notiCus;
     private javax.swing.JButton btn_orderHis;
+    private javax.swing.JButton btn_orderStat;
+    private javax.swing.JButton btn_orderStatus;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

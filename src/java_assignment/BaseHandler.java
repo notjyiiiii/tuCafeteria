@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.*;
 
 
 
@@ -34,6 +35,7 @@ public class BaseHandler<T extends IDataContainer> {
         String configVar = fm.getConfigVar(filePath, true);
         
         ArrayList<String[]> recordList = fm.readFile(configVar);
+
         ArrayList<T> tList = new ArrayList<T>();
 
         for(int i = 0; i<recordList.size(); i++){
@@ -147,10 +149,69 @@ public class BaseHandler<T extends IDataContainer> {
 //    }
     
     
-    
-    
-    
-    
+//        public void DeleteItem(T item)throws IOException
+//    {
+//        try{
+//        collection.remove(item); 
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//
+//             Object[] objArray = collection.toArray(new Object[0]);
+//
+//        String[] strarr = new String[objArray.length];
+//        for (int i = 0; i < objArray.length; i++) {
+//            strarr[i] = objArray[i].toString() + "\n";
+//            System.out.println(strarr.toString());
+//        }
+//            fm.updateFile(get,strarr);
+//        }
+//
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to delete item");
+//        }
+//    }
+//        
+//        public void UpdateItem(T item1,T item2)throws IOException
+//    {
+//        try{
+//        collection.remove(item1); 
+//        collection.add(item2);
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//
+//             Object[] objArray = collection.toArray(new Object[0]);
+//
+//        String[] strarr = new String[objArray.length];
+//        for (int i = 0; i < objArray.length; i++) {
+//            strarr[i] = objArray[i].toString() + "\n";
+//        }
+//            fm.updateFile(get,strarr);
+//        }
+//
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to delete item");
+//        }
+//    }
+}
+     
+//        public void DeleteItem(T item)
+//    {
+//        try {
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//            fm.deleteRecord(get, item.SerializeData());
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to delete new item");
+//            // TODO: Look at how you want to handle error exception
+//            // Maybe to put a popup stating the error?
+//        }
+//
+//    }
+
 //    public void AddNewObjItem(T item)
 //    {
 //        collection.add(item); 
@@ -188,6 +249,6 @@ public class BaseHandler<T extends IDataContainer> {
 //    }
  
     
-    
 
-}
+
+

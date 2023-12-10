@@ -89,8 +89,17 @@ public class User implements IDataContainer{
     public void setRole(String role) {
         this.role = role;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        // Return a string representation of the Order object in the desired format
+        return this.getUserid()+ ";" +
+               this.getUsername() + ";" +
+               this.getEmail()+ ";" +
+               this.getHpnum() + ";" +
+               this.getPassword() + ";" +
+               this.getRole();
+    }
     //to get user details
 //    public boolean checkIdPass(){
 //        fileManager fm = new fileManager();

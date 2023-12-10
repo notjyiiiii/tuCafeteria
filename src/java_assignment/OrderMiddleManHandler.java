@@ -16,6 +16,20 @@ public class OrderMiddleManHandler extends BaseHandler<OrderMiddleMan> {
         }
     }
     
+    public void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt"; // Update with your actual file path
+
+        try {
+            FileWriter fw = new FileWriter(filePath, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (Exception exception) {
+            System.out.println("Exception has been caught");
+        }
+    }
+    
     public ArrayList<OrderMiddleMan> GetCusOrderSummary(String cusID)
     {
         ArrayList<OrderMiddleMan> orderSummary = new ArrayList<OrderMiddleMan>();

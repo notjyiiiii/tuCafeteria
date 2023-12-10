@@ -233,7 +233,21 @@ public class OrderHandler extends BaseHandler<Order>{
     return null; // Return null if the order with the specified ID is not found
     }
     
-    
+    public static void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt";
+
+        try {
+            FileWriter fw = new FileWriter(filePath, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+            System.out.println("OrderMiddleMan.txt file cleared successfully.");
+        } catch (IOException exception) {
+            System.out.println("Exception caught while clearing OrderMiddleMan.txt file.");
+            exception.printStackTrace();
+        }
+    }
 //    public ArrayList<Order> GetCompletedOrderByUserID(String cusID) {
 //    ArrayList<Order> orderstatus = new ArrayList<>();
 //

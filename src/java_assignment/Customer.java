@@ -30,7 +30,10 @@ public class Customer extends User implements IDataContainer, Serializable{
         return credit;
     }
     
-    
+    @Override
+    public String toString (){
+        return userid + ";" + credit;
+    }
     
     
     @Override

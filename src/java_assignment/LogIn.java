@@ -231,8 +231,8 @@ public class LogIn extends javax.swing.JFrame {
             switch(userRole){
                 case "Vendor":
                     this.dispose(); 
-                    VendorMainPage vmp = new VendorMainPage();
-                    vmp.setVisible(true);
+                    //VendorMainPage vmp = new VendorMainPage();
+                    //vmp.setVisible(true);
                     break;
                     
                 case "Customer":
@@ -241,6 +241,12 @@ public class LogIn extends javax.swing.JFrame {
                     vr.setVisible(true);
                     break;
                 // TODO: More switch case for each role
+                    
+                case "Admin":
+//                    this.dispose(); 
+//                    AdmMainPage amp = new AdmMainPage();
+//                    amp.setVisible(true);
+                    break;    
                     
         }
         } catch (IOException ex) {

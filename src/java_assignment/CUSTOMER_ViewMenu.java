@@ -251,30 +251,34 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
         vdProfile.setVisible(true);
     }//GEN-LAST:event_btnOrderBckMouseClicked
 
+    private String[][] getOrderDataFromAddedFood() {
+    int rowCount = AddedOrdermodel.getRowCount();
+    int colCount = AddedOrdermodel.getColumnCount();
+    String[][] orderData = new String[rowCount][colCount];
+    
+    for (int row = 0; row < rowCount; row++) {
+        for (int col = 0; col < colCount; col++) {
+            orderData[row][col] = String.valueOf(AddedOrdermodel.getValueAt(row, col));
+        }
+    }
+    
+        return orderData;
+    }
+    
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
-        // TODO add your handling code here:
-//        this.dispose();
-//        CUSTOMER_ConfirmOrder order = new CUSTOMER_ConfirmOrder();
-//        order.setVisible(true); 
-
-//        int rowCount = AddedOrdermodel.getRowCount();
-//
-//        // Create an array to store the items
-//        String[][] itemsArray = new String[rowCount][2]; // Assuming 2 columns, adjust as needed
-//
-//        // Iterate through the rows and extract data
-//        for (int i = 0; i < rowCount; i++) {
-//            String food = String.valueOf(AddedOrdermodel.getValueAt(i, 0));
-//            String foodPrice = String.valueOf(AddedOrdermodel.getValueAt(i, 1));
-//
-//            // Store the data in the array
-//            itemsArray[i][0] = food;
-//            itemsArray[i][1] = foodPrice;
-//        }
+//        
+//        AddedOrdermodel.setRowCount(0);
+//        AddedFood.setModel(AddedOrdermodel);
+      
+        String[][] orderData = getOrderDataFromAddedFood();
         this.dispose();
-        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(orderIDforSummary,vendorID,vendorName);
-        System.out.println("OrderID in View Menu, before passing to confirm order: "+orderIDforSummary);
+        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(orderIDforSummary, vendorID, vendorName, orderData);
         confirmorder.setVisible(true);
+        
+//        this.dispose();
+//        CUSTOMER_ConfirmOrder confirmorder = new CUSTOMER_ConfirmOrder(orderIDforSummary,vendorID,vendorName);
+//        System.out.println("OrderID in View Menu, before passing to confirm order: "+orderIDforSummary);
+//        confirmorder.setVisible(true);
 
         
     }//GEN-LAST:event_btnOrderMouseClicked
@@ -352,6 +356,8 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
             try{
 
                 ordermiddlemanHandler = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
+                
+                ordermiddlemanHandler.clearOrderMiddleManFile();
                 ordermiddlemanHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
                 
                 System.out.println("\nView Menu's orderID,OrderSummary: "+orderIDforSummary);
