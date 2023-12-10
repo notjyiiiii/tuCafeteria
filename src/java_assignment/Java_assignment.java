@@ -4,20 +4,29 @@ import java.io.*;
 import java.util.*;
 
 public class Java_assignment {
-    
-//    public static Users currentUser;
+
+   public static User LoggedInUser = null; 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
 //        currentUser = new Users();
         
-       fileManager fm = new fileManager();
-//        
-    //   LogIn lg = new LogIn();
-//        
-       // String key = "User";
+       fileManager fm = new fileManager();       
+       LogIn lg = new LogIn();
+      
+  
+    //  fileManager fm = new fileManager();
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
+//        Menu del = menu.get(0);
+////        mh.DeleteItem(del);
+////        System.out.println(del);
+//
+//        del.setItemDesc("Fat ric ony mah");
+//        mh.UpdateItem(del,del);
+        //String key = "Menu";
 //        String configVar = 
-        //String get = fm.getConfigVar(key, true);
+//        String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
 //        System.out.println(user);
 //        System.out.println("------");
@@ -37,7 +46,7 @@ public class Java_assignment {
 //        MenuHandler menuHandler = new MenuHandler(key, Menu.class);
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
 //        Menu menu = new Menu();
-//        menu.setUserid("VD001");
+//       menu.setUserid("VD001");
 //        menu.setItemid("MD022");
 //        menu.setItemPic("null");
 //        menu.setItemPrice(8);
@@ -45,9 +54,9 @@ public class Java_assignment {
 //        menu.setItemName("Tom Yam Soup");
 //        menu.setItemDesc("Spicy and Sour soup made in Thailand");
 //        menuHandler.AddNewItem(menu);
-//        
-//        
-//        Menu abs = menuList.get(5);
+////        
+////        
+//        Menu abs = menuList.get(0);
 //        
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName()+"\n");
@@ -105,12 +114,12 @@ public class Java_assignment {
 //        Menu men2u = menu.get(0);
 //        mh.DeleteItem(men2u);
         
-        MenuHandler mh = new MenuHandler("Menu", Menu.class);
-        System.out.println(mh);
-        ArrayList<Menu> menu = mh.GetVendorMenu("VD003");
-        System.out.println(menu);
-        Menu del = menu.get(0);
-        mh.DeleteItem(del);
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        System.out.println(mh);
+//        ArrayList<Menu> menu = mh.GetVendorMenu("VD003");
+//        System.out.println(menu);
+//        Menu del = menu.get(0);
+//        mh.DeleteItem(del);
        
         // ArrayList<String[]> dataList = fm.readFile(get);
          // dataList.get(2)[1] = "nyanyaaaaaa";

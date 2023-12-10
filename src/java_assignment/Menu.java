@@ -1,7 +1,6 @@
 package java_assignment;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,9 +19,38 @@ public class Menu implements IDataContainer, Serializable {
     {
        // itemid = "Empty Test";
     }
-    
+
+//    public static ArrayList<Menu> readMenuDataFromFile(String filePath) {
+//        ArrayList<Menu> menuList = new ArrayList<>();
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] data = line.split(";");
+//
+//                Menu menu = new Menu();
+//                menu.setUserid(data[0]);
+//                menu.setItemid(data[1]);
+//                menu.setItemPic(data[2]);
+//                menu.setItemName(data[3]);
+//                menu.setItemDesc(data[4]);
+//                menu.setItemType(data[5]);
+//                menu.setItemPrice(Double.parseDouble(data[6]));
+//
+//                menuList.add(menu);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return menuList;
+//    }
     // No setters here
 
+    /**
+     *
+     * @return
+     */
     public String getItemid() {
         return itemid;
     }
@@ -84,6 +112,9 @@ public class Menu implements IDataContainer, Serializable {
 //    public String toString(){
 //		return String.format("%1s %-10s %1s  %-20s %1s  %.2f %1s ", "|",getItemName(),"|",getItemDesc(),"|",getItemPrice(),"|");
 //	}
+    public String toString(){
+		return getUserid()+";"+getItemid()+";"+getItemPic()+";"+getItemName()+";"+getItemDesc()+";"+getItemPrice();
+	}
     
     @Override
     public String[] SerializeData() {
@@ -100,7 +131,6 @@ public class Menu implements IDataContainer, Serializable {
         
     }
 
-
     @Override
     public void DeserializeData(String[] dataArray) {
         this.userid = dataArray[0];
@@ -110,9 +140,10 @@ public class Menu implements IDataContainer, Serializable {
         this.itemDesc = dataArray[4];
         this.itemType = dataArray[5];
         
-        // Remove non-numeric characters and then parse the double ; 
-        //        String itemPriceString = dataArray[6].replaceAll("[^0-9.]", "");
-        this.itemPrice = Double.parseDouble(dataArray[6]);    
+//         Remove non-numeric characters and then parse the double ; 
+              //  String itemPriceString = dataArray[6].replaceAll("[^0-9.]", "");
+//        this.itemPrice = Double.parseDouble(dataArray[6]);  
+       // this.itemPrice = Double.parseDouble(itemPriceString);
     }
     
 }

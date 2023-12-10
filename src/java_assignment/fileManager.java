@@ -10,12 +10,7 @@ public class fileManager {
     private final String baseDirectory = "";
     private final String configDirectory = "/src/java_assignment/Config.properties";
     private final String mainFolderPath, configFilePath;
-//    private final String delimiter = ";";
-//    private static boolean check;
     private String configVal;
-//    private String userid;
-//    private String pw;
-//    private final String tempFile = "temp.txt";
     
     //all the paths
     public fileManager(){
@@ -86,13 +81,14 @@ public class fileManager {
             
             bw.write(textData);
             bw.close();
-            fw.close();
             
         } catch (FileNotFoundException e){
             System.out.println(e);
         }
         
     }
+    
+    
     
     
     
@@ -123,102 +119,37 @@ public class fileManager {
         ObjectInputStream ois = new ObjectInputStream(bis);
 
         Object obj = ois.readObject();
-        
-        //if hard code then can lorh
-//        Menu m1 = (Menu)ois.readObject();
-//        System.out.println(m1.getItemid());
-//        System.out.println(m1.getUserid());
-        //System.out.println(ois.readLine());
 
        return obj;
        
-    }
+}
     
-//    public void deleteRecord(String filePath, String[] data) throws IOException { 
-//        
-//        File oldFile = new File(filePath);
-//        File newFile = new File(tempFile);
-//        
-//        String currentLine;
-//        String oldData[];
-//        String newData [] = data[0].split(",");
-//        
-//        try{
-//            FileWriter fw = new FileWriter(tempFile, true);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//            PrintWriter pw = new PrintWriter(bw);
-//            
-//            FileReader fr = new FileReader(filePath);
-//            BufferedReader br = new BufferedReader(fr);
-//            
-//            while((currentLine = br.readLine()) != null)
-//            {
-//                oldData = currentLine.split(";");
-//                
-//                if (!(oldData[0].equalsIgnoreCase(newData[0])))
-//                {
-//                    pw.println(currentLine);
-//                }
-//            }
-//            
-//            pw.flush();
-//            pw.close();
-//            fr.close();
-//            br.close();
-//            fw.close();
-//            bw.close();
-//            
-//            oldFile.delete();
-//            File dump = new File(filePath);
-//            newFile.renameTo(dump);
-//            
-//        } catch (FileNotFoundException e){
-//            System.out.println(e);
-//        }
-//        
-//    }
     
-    public void deleteRecord(String filePath, String data) throws IOException { 
-
-        File oldFile = new File(filePath);
-        File tempFile = File.createTempFile("temp", ".txt");
-
-        String currentLine;
-        String oldData[];
-        String newData [] = data.split(",");
-         ArrayList<String> newDataList = new ArrayList<>(Arrays.asList(newData));
-         
-         
-        try (FileWriter fw = new FileWriter(tempFile, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter pw = new PrintWriter(bw);
-             FileReader fr = new FileReader(filePath);
-             BufferedReader br = new BufferedReader(fr)) {
+    public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileWriter fw = new FileWriter(filePath, false);
+            BufferedWriter bw = new BufferedWriter(fw);
             
-            while ((currentLine = br.readLine()) != null) {
-                oldData = currentLine.split("\\|");
-                for (int i = 0; i < oldData.length; i++) {
-                    oldData[i] = oldData[i].trim();
-                }
-
-            // Check if oldData[0] is in newDataList
-                if (!newDataList.contains(oldData[0])) {
-                    pw.println(currentLine);
-                }
+            String textData = "";
+            for (String string: data)
+            {
+                textData += string;
+                //textData += ";";
+//                textData += "\n";
             }
+           
             
-            oldFile.delete();
-            File dump = new File(filePath);
-            tempFile.renameTo(dump);
             
-        } catch (FileNotFoundException e) {
+            bw.write(textData);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
             System.out.println(e);
         }
-    } 
-
-
+        
+    }  
     
-  /*  public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
         try{
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -244,71 +175,6 @@ public class fileManager {
             System.out.println(e);
         }
     }
-    */
-    
-    
-    
-//    public void updateFile(String filePath, String[] oldData, String[] newData) throws IOException{
-//        try{
-//            FileWriter fw = new FileWriter(filePath, false);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//            
-//            String oldText = "";
-//            String newText = "";
-//
-//            FileReader fr = new FileReader(filePath);
-//            BufferedReader br = new BufferedReader(fr);
-//            
-//            String line = br.readLine();
-//             
-//            while (line != null) 
-//            {
-//                oldText += line + System.lineSeparator();
-//                 
-//                line = br.readLine();
-//            }
-//            
-//            for (int i = 0; i < oldData.length; i++) {
-//                newText = oldText.replaceAll(oldData[i], newData);
-//            }
-//            
-//            bw.write(newText);
-//            bw.close();
-//            
-//       } catch (FileNotFoundException e){
-//            System.out.println(e);
-//        }
-//    }
-    
-    // I'M ACTUALLY CONFUSED I THINK THIS CAN BE SOMETHING TO CALL SINCE EVERYTIME WE HAVE A CLASS WE GOTTA USE THIS
-//    public boolean getDetails(String fileName){
-//        fileManager fm = new fileManager();
-//        String key = fileName;
-//        String configVar = fm.getConfigVar(key, true);
-//        ArrayList<String[]> recordList = fm.readFile(configVar);
-//        
-//        //check userid and password
-//        for(int i = 0; i<recordList.size(); i++){
-//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(pw)){
-//                LoadData(recordList.get(i));
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
-//    
-    
-//    //put the data into the variables
-//    private void LoadData(String[] dataArray)
-//    {
-//        this.username = dataArray[1];
-//        this.password = dataArray[4];
-//        this.email = dataArray[2];
-//        this.role = dataArray[5];
-//        this.hpnum = dataArray [3];
-//    }
-    
     
     
     
