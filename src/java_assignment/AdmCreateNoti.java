@@ -5,28 +5,27 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author User
  */
-public class AdmRegAdm extends javax.swing.JFrame {
+public class AdmCreateNoti extends javax.swing.JFrame {
 
-    User AdmUser = new User();
-    
-    public AdmRegAdm() throws IOException, ClassNotFoundException {
+    public AdmCreateNoti() throws IOException, ClassNotFoundException {
         initComponents();
-        String userid = Java_assignment.LoggedInUser.getUserid();
-        
         UserHandler admhandler = new UserHandler("User",User.class);
+        String[] userIds = new String[admhandler.collection.size()];
+        for (int i = 0; i < admhandler.collection.size(); i++) {
+            userIds[i] = admhandler.collection.get(i).getUserid();
+        }
         
-        this.AdmUser = admhandler.GetUserByUserID(userid);
-        
-        lblAdminName.setText(AdmUser.username);
-        lblAdminNum.setText(AdmUser.userid);
+        for (String element : userIds) {
+            cmbRecID.addItem(element);
+        }
     }
 
     /**
@@ -38,32 +37,28 @@ public class AdmRegAdm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        AMP_Left1 = new javax.swing.JPanel();
-        lb_tuName2 = new javax.swing.JLabel();
-        lb_tuName3 = new javax.swing.JLabel();
-        lb_cafeName1 = new javax.swing.JLabel();
         AMP_Bottom1 = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
-        lblAdminName = new javax.swing.JLabel();
-        lblAdminNum = new javax.swing.JLabel();
+        lblAdminName1 = new javax.swing.JLabel();
+        lblAdminNum1 = new javax.swing.JLabel();
         btnSettings1 = new javax.swing.JButton();
         btnTopUp1 = new javax.swing.JButton();
         btnRegistration1 = new javax.swing.JButton();
         btnDashboard1 = new javax.swing.JButton();
         btnNoti1 = new javax.swing.JButton();
         AMP_Right1 = new javax.swing.JPanel();
-        btnRegister = new javax.swing.JButton();
+        btnSend = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        lblAdminNamell = new javax.swing.JLabel();
-        lblAdminID = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
-        lblConNum = new javax.swing.JLabel();
-        txtAdminName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtAdminID = new javax.swing.JTextField();
-        txtConNum = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        lblCusName = new javax.swing.JLabel();
+        lblCusID = new javax.swing.JLabel();
+        txtNotiID = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
+        txtMessage = new javax.swing.JTextField();
+        cmbRecID = new javax.swing.JComboBox<>();
+        AMP_Left1 = new javax.swing.JPanel();
+        lb_tuName2 = new javax.swing.JLabel();
+        lb_tuName3 = new javax.swing.JLabel();
+        lb_cafeName1 = new javax.swing.JLabel();
         AMP_Top1 = new javax.swing.JPanel();
         lb_quit2 = new javax.swing.JLabel();
         lb_logoName2 = new javax.swing.JLabel();
@@ -71,55 +66,18 @@ public class AdmRegAdm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        AMP_Left1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        AMP_Left1.setForeground(new java.awt.Color(204, 204, 204));
-
-        lb_tuName2.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
-        lb_tuName2.setText("Tech");
-
-        lb_tuName3.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
-        lb_tuName3.setText("University");
-
-        lb_cafeName1.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
-        lb_cafeName1.setForeground(new java.awt.Color(255, 189, 49));
-        lb_cafeName1.setText("Cafeteria");
-
-        javax.swing.GroupLayout AMP_Left1Layout = new javax.swing.GroupLayout(AMP_Left1);
-        AMP_Left1.setLayout(AMP_Left1Layout);
-        AMP_Left1Layout.setHorizontalGroup(
-            AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AMP_Left1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_tuName3)
-                    .addComponent(lb_tuName2)
-                    .addComponent(lb_cafeName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(48, 48, 48))
-        );
-        AMP_Left1Layout.setVerticalGroup(
-            AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AMP_Left1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_tuName2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_tuName3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_cafeName1)
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
-
         AMP_Bottom1.setBackground(new java.awt.Color(58, 54, 54));
         AMP_Bottom1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         filler2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblAdminName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName.setText("Admin Name");
+        lblAdminName1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblAdminName1.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminName1.setText("Admin Name");
 
-        lblAdminNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        lblAdminNum.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminNum.setText("Admin Num");
+        lblAdminNum1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        lblAdminNum1.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminNum1.setText("Admin Num");
 
         btnSettings1.setBackground(new java.awt.Color(0, 0, 0));
         btnSettings1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/settings.png"))); // NOI18N
@@ -183,8 +141,8 @@ public class AdmRegAdm extends javax.swing.JFrame {
             .addGroup(AMP_Bottom1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AMP_Bottom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminNum, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAdminName))
+                    .addComponent(lblAdminNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAdminName1))
                 .addGap(55, 55, 55)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,22 +172,22 @@ public class AdmRegAdm extends javax.swing.JFrame {
                             .addComponent(btnNoti1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(AMP_Bottom1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(lblAdminName)
+                        .addComponent(lblAdminName1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAdminNum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAdminNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         AMP_Right1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        btnRegister.setBackground(new java.awt.Color(0, 0, 0));
-        btnRegister.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        btnRegister.setForeground(new java.awt.Color(255, 204, 0));
-        btnRegister.setText("Register");
-        btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        btnSend.setBackground(new java.awt.Color(0, 0, 0));
+        btnSend.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnSend.setForeground(new java.awt.Color(255, 204, 0));
+        btnSend.setText("Send");
+        btnSend.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                btnSendActionPerformed(evt);
             }
         });
 
@@ -244,101 +202,102 @@ public class AdmRegAdm extends javax.swing.JFrame {
             }
         });
 
-        lblAdminNamell.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminNamell.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminNamell.setText("Admin Name:");
+        lblCusName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblCusName.setForeground(new java.awt.Color(255, 204, 102));
+        lblCusName.setText("Recipient ID:");
 
-        lblAdminID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminID.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminID.setText("Admin ID:");
-
-        lblEmail.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(255, 204, 102));
-        lblEmail.setText("Email Address:");
-
-        lblConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblConNum.setForeground(new java.awt.Color(255, 204, 102));
-        lblConNum.setText("Contact Number:");
-
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
+        lblCusID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblCusID.setForeground(new java.awt.Color(255, 204, 102));
+        lblCusID.setText("Notification ID:");
 
         lblPassword.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(255, 204, 102));
-        lblPassword.setText("Password:");
+        lblPassword.setText("Message:");
 
         javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
         AMP_Right1.setLayout(AMP_Right1Layout);
         AMP_Right1Layout.setHorizontalGroup(
             AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AMP_Right1Layout.createSequentialGroup()
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AMP_Right1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AMP_Right1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAdminID)
-                                    .addComponent(lblAdminNamell))
-                                .addGap(45, 45, 45)
-                                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAdminName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAdminID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblEmail)
-                            .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblConNum)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblPassword)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(38, 38, 38)
+                .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(AMP_Right1Layout.createSequentialGroup()
+                        .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCusID)
+                            .addComponent(lblCusName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNotiID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbRecID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
+                        .addComponent(lblPassword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
         AMP_Right1Layout.setVerticalGroup(
             AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminID)
-                    .addComponent(txtAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblCusID)
+                    .addComponent(txtNotiID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCusName)
+                    .addComponent(cmbRecID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminNamell)
-                    .addComponent(txtAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
+                .addGap(18, 25, Short.MAX_VALUE)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConNum)
-                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGap(21, 21, 21))
+        );
+
+        AMP_Left1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        AMP_Left1.setForeground(new java.awt.Color(204, 204, 204));
+
+        lb_tuName2.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
+        lb_tuName2.setText("Tech");
+
+        lb_tuName3.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
+        lb_tuName3.setText("University");
+
+        lb_cafeName1.setFont(new java.awt.Font("Josefin Sans", 1, 26)); // NOI18N
+        lb_cafeName1.setForeground(new java.awt.Color(255, 189, 49));
+        lb_cafeName1.setText("Cafeteria");
+
+        javax.swing.GroupLayout AMP_Left1Layout = new javax.swing.GroupLayout(AMP_Left1);
+        AMP_Left1.setLayout(AMP_Left1Layout);
+        AMP_Left1Layout.setHorizontalGroup(
+            AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AMP_Left1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_tuName3)
+                    .addComponent(lb_tuName2)
+                    .addComponent(lb_cafeName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+        );
+        AMP_Left1Layout.setVerticalGroup(
+            AMP_Left1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AMP_Left1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_tuName2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_tuName3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_cafeName1)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         AMP_Top1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -407,116 +366,6 @@ public class AdmRegAdm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.dispose();
-        AdmRegMain reg;
-        try {
-            reg = new AdmRegMain();
-            reg.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void lb_quit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit2MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lb_quit2MouseClicked
-
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        User user = new User();
-        
-        try {
-            UserHandler ushan = new UserHandler("User",User.class);
-            
-            user.setUserid(txtAdminID.getText()); 
-            user.setUsername(txtAdminName.getText());
-            user.setPassword(txtPassword.getText());
-            user.setEmail(txtEmail.getText()); 
-            user.setHpnum(txtConNum.getText()); 
-            user.setRole("Admin");
-            
-            ushan.AddNewItem(user);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        txtAdminID.setText("");
-        txtAdminName.setText("");
-        txtPassword.setText("");
-        txtEmail.setText("");
-        txtConNum.setText("");
-        JOptionPane.showMessageDialog(null,"Successfully Registered.");    
-    }//GEN-LAST:event_btnRegisterActionPerformed
-
-    private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
-        this.dispose();
-        AdmNoti noti;
-        try {
-            noti = new AdmNoti();
-            noti.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnNoti1ActionPerformed
-
-    private void btnDashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboard1ActionPerformed
-        this.dispose();
-        AdmMainPage main;
-        try {
-            main = new AdmMainPage();
-            main.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnDashboard1ActionPerformed
-
-    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
-        this.dispose();
-        AdmRegMain reg;
-        try {
-            reg = new AdmRegMain();
-            reg.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnRegistration1ActionPerformed
-
-    private void btnTopUp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUp1ActionPerformed
-        this.dispose();
-        AdmTopUp topup;
-        try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnTopUp1ActionPerformed
-
     private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
         this.dispose();
         AdmSettings sett;
@@ -528,8 +377,103 @@ public class AdmRegAdm extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnSettings1ActionPerformed
+
+    private void btnTopUp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUp1ActionPerformed
+        this.dispose();
+        AdmTopUp topup;
+        try {
+            topup = new AdmTopUp();
+            topup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnTopUp1ActionPerformed
+
+    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
+        this.dispose();
+        AdmRegMain reg;
+        try {
+            reg = new AdmRegMain();
+            reg.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnRegistration1ActionPerformed
+
+    private void btnDashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboard1ActionPerformed
+        this.dispose();
+        AdmMainPage main;
+        try {
+            main = new AdmMainPage();
+            main.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnDashboard1ActionPerformed
+
+    private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
+        this.dispose();
+        AdmNoti noti;
+        try {
+            noti = new AdmNoti();
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnNoti1ActionPerformed
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+
+        try {
+            NotificationHandler notihan = new NotificationHandler("Notification",Notification.class);
+            Notification newnoti = new Notification();
+            
+            newnoti.setNotiID(txtNotiID.getText());
+            newnoti.setSenderID(Java_assignment.LoggedInUser.getUserid());
+            newnoti.setRecipientID(cmbRecID.getSelectedItem().toString());
+            newnoti.setNotiMessage(txtMessage.getText());
+            newnoti.setNotiDateTime(LocalDateTime.MIN);
+            newnoti.setNotiStatus("Unread");
+            notihan.AddNewItem(newnoti);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AdmCreateNoti.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmCreateNoti.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+        AdmNoti noti;
+        try {
+            noti = new AdmNoti();
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void lb_quit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit2MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lb_quit2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -548,26 +492,25 @@ public class AdmRegAdm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdmRegAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmCreateNoti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdmRegAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmCreateNoti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdmRegAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmCreateNoti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdmRegAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmCreateNoti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new AdmRegAdm().setVisible(true);
+                    new AdmCreateNoti().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdmCreateNoti.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdmCreateNoti.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -581,10 +524,11 @@ public class AdmRegAdm extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDashboard1;
     private javax.swing.JButton btnNoti1;
-    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnRegistration1;
+    private javax.swing.JButton btnSend;
     private javax.swing.JButton btnSettings1;
     private javax.swing.JButton btnTopUp1;
+    private javax.swing.JComboBox<String> cmbRecID;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel lb_cafeName1;
     private javax.swing.JLabel lb_logoName2;
@@ -592,17 +536,12 @@ public class AdmRegAdm extends javax.swing.JFrame {
     private javax.swing.JLabel lb_quit2;
     private javax.swing.JLabel lb_tuName2;
     private javax.swing.JLabel lb_tuName3;
-    private javax.swing.JLabel lblAdminID;
-    private javax.swing.JLabel lblAdminName;
-    private javax.swing.JLabel lblAdminNamell;
-    private javax.swing.JLabel lblAdminNum;
-    private javax.swing.JLabel lblConNum;
-    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblAdminName1;
+    private javax.swing.JLabel lblAdminNum1;
+    private javax.swing.JLabel lblCusID;
+    private javax.swing.JLabel lblCusName;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JTextField txtAdminID;
-    private javax.swing.JTextField txtAdminName;
-    private javax.swing.JTextField txtConNum;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtMessage;
+    private javax.swing.JTextField txtNotiID;
     // End of variables declaration//GEN-END:variables
 }

@@ -561,14 +561,14 @@ public class AdmRegMain extends javax.swing.JFrame {
 
     private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
         this.dispose();
-        AdmTopUp topup;
+        AdmSettings sett;
         try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
+            sett = new AdmSettings();
+            sett.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmRegMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSettingsActionPerformed

@@ -95,5 +95,7 @@ public class Vendor implements IDataContainer, Serializable{
         this.operatingHours = operatingHours;
     }
 
-    
+    public String toString(){
+        return vendorid + ";" + vendorName + ";" + operatingDays + ";" + operatingHours;
+    }
 }

@@ -551,14 +551,14 @@ public class AdmRegVen extends javax.swing.JFrame {
 
     private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
         this.dispose();
-        AdmTopUp topup;
+        AdmSettings sett;
         try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
+            sett = new AdmSettings();
+            sett.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmRegAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSettings1ActionPerformed
 

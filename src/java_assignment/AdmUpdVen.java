@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -342,6 +343,12 @@ for (String element : userIds) {
         lblPassword.setForeground(new java.awt.Color(255, 204, 102));
         lblPassword.setText("Password:");
 
+        cmbVenID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVenIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
         AMP_Right1.setLayout(AMP_Right1Layout);
         AMP_Right1Layout.setHorizontalGroup(
@@ -468,7 +475,39 @@ for (String element : userIds) {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        User selus = new User();
+        Vendor selven = new Vendor();
+        User newselus = new User();
+        Vendor newselven = new Vendor();    
+            
+            UserHandler ushan;
+        try {
+            ushan = new UserHandler("User",User.class);
+            VendorHandler venhan = new VendorHandler();
+            
+            selus = ushan.GetUserByUserID(cmbVenID.getSelectedItem().toString());
+            selven = venhan.GetVendorByVendorID(cmbVenID.getSelectedItem().toString());
+            
+            newselus.setUserid(cmbVenID.getSelectedItem().toString());
+            newselus.setUsername(txtVenName.getText());
+            newselus.setPassword(txtPassword.getText());
+            newselus.setEmail(txtEmail.getText());
+            newselus.setHpnum(txtConNum.getText());
+            newselus.setRole("Vendor");
+            
+            newselven.setVendorid(cmbVenID.getSelectedItem().toString());
+            newselven.setVendorName(txtVenName.getText());
+            newselven.setOperatingDays(selven.getOperatingDays());
+            newselven.setOperatingHours(txtOpHrs.getText());
+            
+            ushan.UpdateItem(selus, newselus);
+            venhan.UpdateItem(selven,  newselven);
+            JOptionPane.showMessageDialog(null,"Successfully Updated.");
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdCus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdCus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
@@ -529,17 +568,40 @@ for (String element : userIds) {
 
     private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
         this.dispose();
-        AdmTopUp topup;
+        AdmSettings sett;
         try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
+            sett = new AdmSettings();
+            sett.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdVen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdVen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSettings1ActionPerformed
+
+    private void cmbVenIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVenIDActionPerformed
+        User selected = new User();
+        Vendor selven = new Vendor();
+        UserHandler selhandler;
+        try {
+            selhandler = new UserHandler("User",User.class);
+            VendorHandler venhan = new VendorHandler();
+            selected = selhandler.GetUserByUserID(cmbVenID.getSelectedItem().toString());
+            selven = venhan.GetVendorByVendorID(cmbVenID.getSelectedItem().toString());
+            
+            txtVenName.setText(selected.getUsername());
+            txtPassword.setText(selected.getPassword());
+            txtEmail.setText(selected.getEmail());
+            txtConNum.setText(selected.getHpnum());
+            txtOpHrs.setText(selven.getOperatingHours());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }            
+    }//GEN-LAST:event_cmbVenIDActionPerformed
 
     /**
      * @param args the command line arguments

@@ -16,18 +16,16 @@ public class AdmMainPage extends javax.swing.JFrame {
         initComponents();
         
         String userid = Java_assignment.LoggedInUser.getUserid();
-        
+                
         UserHandler admhandler = new UserHandler("User",User.class);
-//        OrderHandler ord = new OrderHandler();
-//        int intnumorder = ord.collection.size() - 1;
-//        String strnumorder = String.valueOf(intnumorder);
         
         UserHandler usernum = new UserHandler("User",User.class);
-        int intnumuser = usernum.collection.size() - 1;
+        int intnumuser = usernum.collection.size();
         String strnumuser = String.valueOf(intnumuser);
                 
         this.AdmUser = admhandler.GetUserByUserID(userid);
         
+        lblWelcome.setText("Welcome, " + AdmUser.username);
         lblAdminName.setText(AdmUser.username);
         lblAdminNum.setText(AdmUser.userid);
         
@@ -56,10 +54,9 @@ public class AdmMainPage extends javax.swing.JFrame {
         AMP_Right = new javax.swing.JPanel();
         btnViewUsers = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        lblOngOrd = new javax.swing.JLabel();
-        lblDispOngOrd = new javax.swing.JLabel();
-        lblUserNum = new javax.swing.JLabel();
+        lblWelcome = new javax.swing.JLabel();
         lblDispNumUser = new javax.swing.JLabel();
+        lblUserNum1 = new javax.swing.JLabel();
         AMP_Bottom = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         lblAdminName = new javax.swing.JLabel();
@@ -172,19 +169,15 @@ public class AdmMainPage extends javax.swing.JFrame {
             }
         });
 
-        lblOngOrd.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        lblOngOrd.setText("Ongoing Orders:");
+        lblWelcome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        lblWelcome.setText("Default Text");
 
-        lblDispOngOrd.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblDispOngOrd.setForeground(new java.awt.Color(255, 204, 102));
-        lblDispOngOrd.setText("Num");
-
-        lblUserNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        lblUserNum.setText("Number of Users:");
-
-        lblDispNumUser.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblDispNumUser.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lblDispNumUser.setForeground(new java.awt.Color(255, 204, 102));
         lblDispNumUser.setText("Num");
+
+        lblUserNum1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        lblUserNum1.setText("Number of Users:");
 
         javax.swing.GroupLayout AMP_RightLayout = new javax.swing.GroupLayout(AMP_Right);
         AMP_Right.setLayout(AMP_RightLayout);
@@ -193,28 +186,25 @@ public class AdmMainPage extends javax.swing.JFrame {
             .addGroup(AMP_RightLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDispNumUser, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUserNum)
-                    .addComponent(lblDispOngOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblOngOrd)
+                    .addComponent(lblDispNumUser)
+                    .addComponent(lblUserNum1)
+                    .addComponent(lblWelcome)
                     .addGroup(AMP_RightLayout.createSequentialGroup()
                         .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AMP_RightLayout.setVerticalGroup(
             AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_RightLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblOngOrd)
+                .addContainerGap()
+                .addComponent(lblWelcome)
+                .addGap(18, 18, 18)
+                .addComponent(lblUserNum1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDispOngOrd, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(lblUserNum)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDispNumUser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(lblDispNumUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(AMP_RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -300,7 +290,7 @@ public class AdmMainPage extends javax.swing.JFrame {
                     .addComponent(lblAdminName))
                 .addGap(55, 55, 55)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btnNoti, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,7 +354,16 @@ public class AdmMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        AdmSearchUser search;
+        try {
+            search = new AdmSearchUser();
+            search.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUsersActionPerformed
@@ -438,14 +437,14 @@ public class AdmMainPage extends javax.swing.JFrame {
 
     private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
         this.dispose();
-        AdmTopUp topup;
+        AdmSettings sett;
         try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
+            sett = new AdmSettings();
+            sett.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmMainPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmMainPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSettingsActionPerformed
@@ -514,8 +513,7 @@ public class AdmMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblAdminName;
     private javax.swing.JLabel lblAdminNum;
     private javax.swing.JLabel lblDispNumUser;
-    private javax.swing.JLabel lblDispOngOrd;
-    private javax.swing.JLabel lblOngOrd;
-    private javax.swing.JLabel lblUserNum;
+    private javax.swing.JLabel lblUserNum1;
+    private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
 }

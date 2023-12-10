@@ -469,10 +469,28 @@ public class AdmDelUser extends javax.swing.JFrame {
                 null,
                 "User deleted.",
                 "Confirmation",
-                JOptionPane.OK_OPTION
-        );
+                JOptionPane.OK_OPTION);
             
+           if(selected.getRole()=="Customer"){
+               Customer selcus = new Customer();
+               CustomerHandler cushan = new CustomerHandler("Customer",Customer.class); 
+               selcus = (Customer) cushan.GetCustomerByCustomerID(cmbUserID.getSelectedItem().toString());
+               cushan.DeleteItem(selcus);
+           }
 
+           if(selected.getRole()=="Runner"){
+               Runner selrun = new Runner();
+               RunnerHandler runhan = new RunnerHandler(); 
+               selrun = runhan.getRunnerDetails(cmbUserID.getSelectedItem().toString());
+               runhan.DeleteItem(selrun);
+           }
+           
+           if(selected.getRole()=="Vendor"){
+               Vendor selven = new Vendor();
+               VendorHandler venhan = new VendorHandler(); 
+               selven = venhan.GetVendorByVendorID(cmbUserID.getSelectedItem().toString());
+               venhan.DeleteItem(selven);
+           }
         } else {
             
         }
@@ -542,14 +560,14 @@ public class AdmDelUser extends javax.swing.JFrame {
 
     private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
         this.dispose();
-        AdmTopUp topup;
+        AdmSettings sett;
         try {
-            topup = new AdmTopUp();
-            topup.setVisible(true);
+            sett = new AdmSettings();
+            sett.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmRegCus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSettings1ActionPerformed

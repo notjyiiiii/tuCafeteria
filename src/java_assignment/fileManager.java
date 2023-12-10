@@ -73,13 +73,14 @@ public class fileManager {
             BufferedWriter bw = new BufferedWriter(fw);
             
             String textData = "";
+
             for (String string: data)
             {
                 textData += string;
                 textData += ";";
             }
-           
-            textData += "\n";
+           textData += "\n";
+            
             
             bw.write(textData);
             bw.close();

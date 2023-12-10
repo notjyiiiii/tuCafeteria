@@ -7,7 +7,10 @@ CS006;Brian;brain@tuCafeteria.edu.co;0171234568;brian123;Customer
 CS007;Will;will@tuCafeteria.edu.co;08123456;will123;Customer
 AD008;Jonas;jonas@tuCafeteria.edu.co;091234567;jonas123;Admin
 AD009;Yeslav;yeslav@tuCafeteria.edu.co;010235648;yeslav123;Admin
+AD010;Islam;islam@tuCafeteria.edu.co;011234567;islam123;Admin
 DR011;Frank;frank@tuCafeteria.edu.co;012234567;frank123;Runner
 DR012;Ben;ben@tuCafeteria.edu.co;013234567;ben123;Runner
 DR013;Paul;paul@tuCafeteria.edu.co;014234567;paul123;Runner
-AD010;Islam;islam@tuCafeteria.edu.co;Admin;islam111;Admin
+cs222;knee;knee@kne.com;234242;knee;Customer
+AD232;ggggg;444@g.vom;23232;4g4g4g;Admin
+VD333;grgrg;grg@grg.vom;234234;grg;Admin
