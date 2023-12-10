@@ -2,124 +2,138 @@ package java_assignment;
 
 import java.util.ArrayList;
 import java.io.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java_assignment.Enums.*;
 
 public class Order implements IDataContainer, Serializable{
-    private String userid;
-    private String orderStatus;
-    private String orderType;
-    private Date orderDate;
-    private String orderLocation;
-    private double orderAmt;
-    private double deliveryFee;
-    private double totalAmt;
+
+    private String orderid;
+    private String customerid;
+    private String vendorid;
+    private OrderStatus orderStatus;
+    private OrderType orderType;
+    private LocalDateTime orderDateTime;
+    private String deliveryLocation;
+    private float orderAmount;
+    private float deliveryFees;
+    private float totalAmount;
+//    private OrderItem[] orderList;
     
     
     public Order(){
         
     }
 
-    
-    
-    
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public String getOrderLocation() {
-        return orderLocation;
-    }
-
-    public void setOrderLocation(String orderLocation) {
-        this.orderLocation = orderLocation;
-    }
-
-    public double getOrderAmt() {
-        return orderAmt;
-    }
-
-    public void setOrderAmt(double orderAmt) {
-        this.orderAmt = orderAmt;
-    }
-
-    public double getDeliveryFee() {
-        return deliveryFee;
-    }
-
-    public void setDeliveryFee(double deliveryFee) {
-        this.deliveryFee = deliveryFee;
-    }
-
-    public double getTotalAmt() {
-        return totalAmt;
-    }
-
-    public void setTotalAmt(double totalAmt) {
-        this.totalAmt = totalAmt;
-    }
-    
-    
-    
-    
-    
-    
-    
-   
-    
     public String[] SerializeData(){
-        String [] dataString = new String[8];
-        dataString[0] = this.userid;
-        dataString[1] = this.orderStatus;
-        dataString[2] = this.orderType;
-        //dataString[3] = Date.toString(this.orderDate);
-        dataString[4] = this.orderLocation;
-        dataString[5] = Double.toString(this.orderAmt);
-        dataString[6] = Double.toString(this.deliveryFee);
-        dataString[7] = Double.toString(this.totalAmt);
+        String [] dataString = new String[10];
+        dataString[0] = this.orderid;
+        dataString[1] = this.customerid;
+        dataString[2] = this.vendorid;
+        dataString[3] = this.orderStatus.toString();
+        dataString[4] = this.orderType.toString();
+        dataString[5] = this.orderDateTime.toString();
+        dataString[6] = this.deliveryLocation;
+        dataString[7] = Float.toString(this.orderAmount);
+        dataString[8] = Float.toString(this.deliveryFees);
+        dataString[9] = Float.toString(this.totalAmount);
         
         return dataString;
     }
     
     
     public void DeserializeData(String[] dataArray){
-        this.userid = dataArray[0];
-        this.orderStatus = dataArray[1];
-        this.orderType = dataArray[2];
-       //this.orderDate = Date.parse(dataArray[3]);
-       this.orderLocation = dataArray[4];
-       this.orderAmt = Double.parseDouble(dataArray[5]);
-       this.deliveryFee = Double.parseDouble(dataArray[6]);
-       this.totalAmt = Double.parseDouble(dataArray[7]);
+        this.orderid = dataArray[0];
+        this.customerid = dataArray[1];
+        this.vendorid = dataArray[2];
+        this.orderStatus = OrderStatus.valueOf(dataArray[3]);
+        this.orderType = OrderType.valueOf(dataArray[4]);
+        this.orderDateTime = LocalDateTime.parse(dataArray[5]);
+        this.deliveryLocation = dataArray[6];
+        this.orderAmount = Float.parseFloat(dataArray[7]);
+        this.deliveryFees = Float.parseFloat(dataArray[8]);
+        this.totalAmount = Float.parseFloat(dataArray[9]);
        
     }
     
     
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
+    }
+
+    public String getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(String customerid) {
+        this.customerid = customerid;
+    }
+
+    public String getVendorid() {
+        return vendorid;
+    }
+
+    public void setVendorid(String vendorid) {
+        this.vendorid = vendorid;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(OrderType orderType) {
+        this.orderType = orderType;
+    }
+
+    public LocalDateTime getOrderDateTime() {
+        return orderDateTime;
+    }
+
+    public void setOrderDateTime(LocalDateTime orderDateTime) {
+        this.orderDateTime = orderDateTime;
+    }
+
+    public String getDeliveryLocation() {
+        return deliveryLocation;
+    }
+
+    public void setDeliveryLocation(String deliveryLocation) {
+        this.deliveryLocation = deliveryLocation;
+    }
+
+    public float getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(float orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public float getDeliveryFees() {
+        return deliveryFees;
+    }
+
+    public void setDeliveryFees(float deliveryFees) {
+        this.deliveryFees = deliveryFees;
+    }
+
+    public float getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(float totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
 }

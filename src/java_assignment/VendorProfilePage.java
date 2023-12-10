@@ -7,10 +7,10 @@ public class VendorProfilePage extends javax.swing.JFrame {
     public VendorProfilePage(Vendor vendor) {
         initComponents();
         this.vendor= vendor;
-        jLabel1.setText(vendor.getUsername());
-        jLabel2.setText(vendor.getUserid());
-        jLabel29.setText(vendor.getHP());
-        jLabel31.setText(vendor.getEmail());
+        jLabel1.setText(Java_assignment.LoggedInUser.username);
+        jLabel2.setText(Java_assignment.LoggedInUser.userid);
+        jLabel29.setText(Java_assignment.LoggedInUser.hpnum);
+        jLabel31.setText(Java_assignment.LoggedInUser.email);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -8,18 +8,18 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author User
  */
-public class AdmUpdAdm extends javax.swing.JFrame {
+public class AdmDelUser extends javax.swing.JFrame {
 
     User AdmUser = new User();
     
-    public AdmUpdAdm() throws IOException, ClassNotFoundException {
+    public AdmDelUser() throws IOException, ClassNotFoundException {
         initComponents();
-        
         String userid = Java_assignment.LoggedInUser.getUserid();
         
         UserHandler admhandler = new UserHandler("User",User.class);
@@ -31,23 +31,15 @@ public class AdmUpdAdm extends javax.swing.JFrame {
         
         String[] userIds = new String[admhandler.collection.size()];
         for (int i = 0; i < admhandler.collection.size(); i++) {
-            String uid = admhandler.collection.get(i).getUserid();
-            
-            if(uid.matches("AD.*")){
-                userIds[i] = uid;
-            }
-            
+            userIds[i] = admhandler.collection.get(i).getUserid();
         }
         
-        userIds = Arrays.stream(userIds)
-        .filter(uid -> uid != null && !uid.isEmpty())
-        .toArray(String[]::new);
-
-// Add non-blank elements to cmbUserID
-for (String element : userIds) {
-    cmbAdminID.addItem(element);
-}
+        for (String element : userIds) {
+            cmbUserID.addItem(element);
+        }
     }
+        
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,23 +50,25 @@ for (String element : userIds) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        AMP_Right1 = new javax.swing.JPanel();
+        btnDelete = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        lblUserID = new javax.swing.JLabel();
+        cmbUserID = new javax.swing.JComboBox<>();
+        lblUserRole = new javax.swing.JLabel();
+        lblConNum = new javax.swing.JLabel();
+        lblDispName = new javax.swing.JLabel();
+        lblDispConNum = new javax.swing.JLabel();
+        lblDispUserRole = new javax.swing.JLabel();
+        AMP_Top1 = new javax.swing.JPanel();
+        lb_quit2 = new javax.swing.JLabel();
+        lb_logoName2 = new javax.swing.JLabel();
+        lb_logoPic2 = new javax.swing.JLabel();
         AMP_Left1 = new javax.swing.JPanel();
         lb_tuName2 = new javax.swing.JLabel();
         lb_tuName3 = new javax.swing.JLabel();
         lb_cafeName1 = new javax.swing.JLabel();
-        AMP_Right1 = new javax.swing.JPanel();
-        btnUpdate = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        lblAdminNamelbl = new javax.swing.JLabel();
-        lblAdminID = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
-        lblConNum = new javax.swing.JLabel();
-        txtAdminName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtConNum = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        lblPassword = new javax.swing.JLabel();
-        cmbAdminID = new javax.swing.JComboBox<>();
         AMP_Bottom1 = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         lblAdminName = new javax.swing.JLabel();
@@ -84,12 +78,161 @@ for (String element : userIds) {
         btnRegistration1 = new javax.swing.JButton();
         btnDashboard1 = new javax.swing.JButton();
         btnNoti1 = new javax.swing.JButton();
-        AMP_Top1 = new javax.swing.JPanel();
-        lb_quit2 = new javax.swing.JLabel();
-        lb_logoName2 = new javax.swing.JLabel();
-        lb_logoPic2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        AMP_Right1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 204, 0));
+        btnDelete.setText("Delete");
+        btnDelete.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 204, 0));
+        btnCancel.setText("Cancel");
+        btnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        lblName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblName.setForeground(new java.awt.Color(255, 204, 102));
+        lblName.setText("Name:");
+
+        lblUserID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblUserID.setForeground(new java.awt.Color(255, 204, 102));
+        lblUserID.setText("User ID:");
+
+        cmbUserID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cmbUserID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUserIDActionPerformed(evt);
+            }
+        });
+
+        lblUserRole.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblUserRole.setForeground(new java.awt.Color(255, 204, 102));
+        lblUserRole.setText("User Role:");
+
+        lblConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblConNum.setForeground(new java.awt.Color(255, 204, 102));
+        lblConNum.setText("Contact Number:");
+
+        lblDispName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblDispName.setText("Name");
+
+        lblDispConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblDispConNum.setText("Number");
+
+        lblDispUserRole.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblDispUserRole.setText("User Role");
+
+        javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
+        AMP_Right1.setLayout(AMP_Right1Layout);
+        AMP_Right1Layout.setHorizontalGroup(
+            AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AMP_Right1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUserID)
+                    .addComponent(lblName)
+                    .addComponent(lblUserRole)
+                    .addComponent(lblConNum))
+                .addGap(18, 18, 18)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AMP_Right1Layout.createSequentialGroup()
+                        .addComponent(lblDispConNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(14, 14, 14))
+                    .addGroup(AMP_Right1Layout.createSequentialGroup()
+                        .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDispName, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AMP_Right1Layout.createSequentialGroup()
+                        .addComponent(lblDispUserRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(AMP_Right1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        AMP_Right1Layout.setVerticalGroup(
+            AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserID)
+                    .addComponent(cmbUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(lblDispName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConNum)
+                    .addComponent(lblDispConNum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserRole)
+                    .addComponent(lblDispUserRole))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+
+        AMP_Top1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        lb_quit2.setFont(new java.awt.Font("Myanmar Sangam MN", 1, 20)); // NOI18N
+        lb_quit2.setText("X");
+        lb_quit2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_quit2MouseClicked(evt);
+            }
+        });
+
+        lb_logoName2.setFont(new java.awt.Font("Josefin Sans", 1, 18)); // NOI18N
+        lb_logoName2.setText("Tech University");
+
+        lb_logoPic2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tuCafeteria_logo.png"))); // NOI18N
+
+        javax.swing.GroupLayout AMP_Top1Layout = new javax.swing.GroupLayout(AMP_Top1);
+        AMP_Top1.setLayout(AMP_Top1Layout);
+        AMP_Top1Layout.setHorizontalGroup(
+            AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AMP_Top1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_logoPic2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_logoName2)
+                .addGap(145, 145, 145)
+                .addComponent(lb_quit2)
+                .addGap(37, 37, 37))
+        );
+        AMP_Top1Layout.setVerticalGroup(
+            AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AMP_Top1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_logoPic2)
+                    .addGroup(AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lb_logoName2)
+                        .addComponent(lb_quit2)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         AMP_Left1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         AMP_Left1.setForeground(new java.awt.Color(204, 204, 204));
@@ -125,135 +268,7 @@ for (String element : userIds) {
                 .addComponent(lb_tuName3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb_cafeName1)
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
-
-        AMP_Right1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
-        btnUpdate.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        btnUpdate.setForeground(new java.awt.Color(255, 204, 0));
-        btnUpdate.setText("Update");
-        btnUpdate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
-        btnCancel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        btnCancel.setForeground(new java.awt.Color(255, 204, 0));
-        btnCancel.setText("Cancel");
-        btnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
-        lblAdminNamelbl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminNamelbl.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminNamelbl.setText("Admin Name:");
-
-        lblAdminID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminID.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminID.setText("Admin ID:");
-
-        lblEmail.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(255, 204, 102));
-        lblEmail.setText("Email Address:");
-
-        lblConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblConNum.setForeground(new java.awt.Color(255, 204, 102));
-        lblConNum.setText("Contact Number:");
-
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-
-        lblPassword.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblPassword.setForeground(new java.awt.Color(255, 204, 102));
-        lblPassword.setText("Password:");
-
-        cmbAdminID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
-        cmbAdminID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbAdminIDActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
-        AMP_Right1.setLayout(AMP_Right1Layout);
-        AMP_Right1Layout.setHorizontalGroup(
-            AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AMP_Right1Layout.createSequentialGroup()
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AMP_Right1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(AMP_Right1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAdminID)
-                                    .addComponent(lblAdminNamelbl))
-                                .addGap(42, 42, 42)
-                                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtAdminName, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                    .addComponent(cmbAdminID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(lblEmail)
-                            .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblConNum)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblPassword)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        AMP_Right1Layout.setVerticalGroup(
-            AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminID)
-                    .addComponent(cmbAdminID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminNamelbl)
-                    .addComponent(txtAdminName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConNum)
-                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         AMP_Bottom1.setBackground(new java.awt.Color(58, 54, 54));
@@ -368,46 +383,6 @@ for (String element : userIds) {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        AMP_Top1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        lb_quit2.setFont(new java.awt.Font("Myanmar Sangam MN", 1, 20)); // NOI18N
-        lb_quit2.setText("X");
-        lb_quit2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_quit2MouseClicked(evt);
-            }
-        });
-
-        lb_logoName2.setFont(new java.awt.Font("Josefin Sans", 1, 18)); // NOI18N
-        lb_logoName2.setText("Tech University");
-
-        lb_logoPic2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tuCafeteria_logo.png"))); // NOI18N
-
-        javax.swing.GroupLayout AMP_Top1Layout = new javax.swing.GroupLayout(AMP_Top1);
-        AMP_Top1.setLayout(AMP_Top1Layout);
-        AMP_Top1Layout.setHorizontalGroup(
-            AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AMP_Top1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_logoPic2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_logoName2)
-                .addGap(145, 145, 145)
-                .addComponent(lb_quit2)
-                .addGap(37, 37, 37))
-        );
-        AMP_Top1Layout.setVerticalGroup(
-            AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AMP_Top1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lb_logoPic2)
-                    .addGroup(AMP_Top1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lb_logoName2)
-                        .addComponent(lb_quit2)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -436,54 +411,78 @@ for (String element : userIds) {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
-        AdmUpdMain update;
+        AdmRegMain reg;
         try {
-            update = new AdmUpdMain();
-            update.setVisible(true);
+            reg = new AdmRegMain();
+            reg.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
+    private void cmbUserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUserIDActionPerformed
+        try {
+            User selected = new User();
+            UserHandler selhandler = new UserHandler("User",User.class);
+            selected = selhandler.GetUserByUserID(cmbUserID.getSelectedItem().toString());
+            
+            lblDispName.setText(selected.getUsername());
+            lblDispConNum.setText(selected.getHpnum());
+            lblDispUserRole.setText(selected.getRole());
+        } catch (IOException ex) {
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cmbUserIDActionPerformed
 
     private void lb_quit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit2MouseClicked
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-                
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
         try {
-            User selus = new User();
-            User newselus = new User();
-            UserHandler ushan = new UserHandler("User",User.class);
+            User selected = new User();
+            UserHandler selhandler;
+            selhandler = new UserHandler("User",User.class);
+            selected = selhandler.GetUserByUserID(cmbUserID.getSelectedItem().toString());
             
-            selus = ushan.GetUserByUserID(cmbAdminID.getSelectedItem().toString());
             
-            newselus.setUserid(cmbAdminID.getSelectedItem().toString());
-            newselus.setUsername(txtAdminName.getText());
-            newselus.setPassword(txtPassword.getText());
-            newselus.setEmail(txtEmail.getText());
-            newselus.setHpnum(txtConNum.getText());
-            newselus.setRole("Admin");
             
-            ushan.UpdateItem(selus, newselus);
+            int result = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to delete the user?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        // Check the user's choice
+        if (result == JOptionPane.YES_OPTION) {
+            selhandler.DeleteItem(selected);
             
-        } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(
+                null,
+                "User deleted.",
+                "Confirmation",
+                JOptionPane.OK_OPTION
+        );
+            
+
+        } else {
+            
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+        } catch (IOException ex) {
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
         this.dispose();
@@ -492,9 +491,9 @@ for (String element : userIds) {
             noti = new AdmNoti();
             noti.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnNoti1ActionPerformed
@@ -506,9 +505,9 @@ for (String element : userIds) {
             main = new AdmMainPage();
             main.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnDashboard1ActionPerformed
@@ -520,9 +519,9 @@ for (String element : userIds) {
             reg = new AdmRegMain();
             reg.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnRegistration1ActionPerformed
@@ -534,9 +533,9 @@ for (String element : userIds) {
             topup = new AdmTopUp();
             topup.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnTopUp1ActionPerformed
@@ -548,30 +547,12 @@ for (String element : userIds) {
             topup = new AdmTopUp();
             topup.setVisible(true);
         } catch (IOException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSettings1ActionPerformed
-
-    private void cmbAdminIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminIDActionPerformed
-        try {
-            User selected = new User();
-            UserHandler selhandler = new UserHandler("User",User.class);
-            selected = selhandler.GetUserByUserID(cmbAdminID.getSelectedItem().toString());
-            
-            txtAdminName.setText(selected.getUsername());
-            txtPassword.setText(selected.getPassword());
-            txtEmail.setText(selected.getEmail());
-            txtConNum.setText(selected.getRole());
-            
-        } catch (IOException ex) {
-            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cmbAdminIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,25 +571,26 @@ for (String element : userIds) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdmUpdAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmDelUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdmUpdAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmDelUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdmUpdAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmDelUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdmUpdAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdmDelUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new AdmUpdAdm().setVisible(true);
+                    new AdmDelUser().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdmUpdAdm.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdmDelUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -621,12 +603,12 @@ for (String element : userIds) {
     private javax.swing.JPanel AMP_Top1;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDashboard1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNoti1;
     private javax.swing.JButton btnRegistration1;
     private javax.swing.JButton btnSettings1;
     private javax.swing.JButton btnTopUp1;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cmbAdminID;
+    private javax.swing.JComboBox<String> cmbUserID;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel lb_cafeName1;
     private javax.swing.JLabel lb_logoName2;
@@ -634,16 +616,14 @@ for (String element : userIds) {
     private javax.swing.JLabel lb_quit2;
     private javax.swing.JLabel lb_tuName2;
     private javax.swing.JLabel lb_tuName3;
-    private javax.swing.JLabel lblAdminID;
     private javax.swing.JLabel lblAdminName;
-    private javax.swing.JLabel lblAdminNamelbl;
     private javax.swing.JLabel lblAdminNum;
     private javax.swing.JLabel lblConNum;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblPassword;
-    private javax.swing.JTextField txtAdminName;
-    private javax.swing.JTextField txtConNum;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JLabel lblDispConNum;
+    private javax.swing.JLabel lblDispName;
+    private javax.swing.JLabel lblDispUserRole;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblUserID;
+    private javax.swing.JLabel lblUserRole;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,12 +3,12 @@ package java_assignment;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CustomerHandler extends UsersHandler<Customer>{
-    
-    public CustomerHandler(String filePath) throws IOException, ClassNotFoundException{
-        super(filePath, Customer.class);
-        //readCreditFromFile(filePath);
+public class CustomerHandler extends BaseHandler<Customer>{
+
+    public CustomerHandler(String filePath, Class<Customer> clazz) throws IOException, ClassNotFoundException{
+        super(filePath, clazz);
     }
+
     
     
     
@@ -31,6 +31,7 @@ public class CustomerHandler extends UsersHandler<Customer>{
 //    }
     
 
+
     
     public double getCredit(String customerID) throws IOException, ClassNotFoundException {
     for (Customer cs : this.collection) {
@@ -43,4 +44,16 @@ public class CustomerHandler extends UsersHandler<Customer>{
     throw new RuntimeException("Customer not found with ID: " + customerID);
     }
     
+    public User GetCustomerByCustomerID(String userid)
+    {
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if (collection.get(i).userid.equals(userid))
+            {
+                return collection.get(i);
+            }
+        }
+        
+        return null;
+    }
 }

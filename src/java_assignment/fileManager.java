@@ -10,11 +10,7 @@ public class fileManager {
     private final String baseDirectory = "";
     private final String configDirectory = "//src//java_assignment//Config.properties";
     private final String mainFolderPath, configFilePath;
-    private final String delimiter = ";";
-    private static boolean check;
     private String configVal;
-    private String userid;
-    private String pw;
     
     //all the paths
     public fileManager(){
@@ -122,35 +118,30 @@ public class fileManager {
         ObjectInputStream ois = new ObjectInputStream(bis);
 
         Object obj = ois.readObject();
-        
-        //if hard code then can lorh
-//        Menu m1 = (Menu)ois.readObject();
-//        System.out.println(m1.getItemid());
-//        System.out.println(m1.getUserid());
-        //System.out.println(ois.readLine());
 
        return obj;
        
 }
-   
-    public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
+
+    
+    
+    public void updateFile(String filePath, String[] data) throws IOException{
+
         try{
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
-            
+
             String textData = "";
             for (String string: data)
             {
                 textData += string;
-                //textData += ";";
-//                textData += "\n";
             }
-           
-            
-            
+
+
+
             bw.write(textData);
             bw.close();
-            
+
         } catch (FileNotFoundException e){
             System.out.println(e);
         }
@@ -158,6 +149,7 @@ public class fileManager {
     }
 }                
     
+
 
 
 //    public void deleteRecord(String filePath, String[] newData) throws IOException {
@@ -482,3 +474,5 @@ public class fileManager {
     }
     
     */
+
+

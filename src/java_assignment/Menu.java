@@ -17,7 +17,7 @@ public class Menu implements IDataContainer, Serializable {
     
     public Menu()
     {
-       // itemid = "Empty Test";
+        
     }
 
 //    public static ArrayList<Menu> readMenuDataFromFile(String filePath) {

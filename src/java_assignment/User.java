@@ -1,19 +1,78 @@
-//IGNORE THIS CLASS!!!
 package java_assignment;
 
-import java.awt.Window;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.io.*;
+import java.util.*;
 
 
-public class User {
+
+public class User implements IDataContainer{
     
-    //declaration
-    private String password;
-    private String userid;
-
+    protected String userid;
+    protected String username;
+    protected String email;
+    protected String hpnum;
+    protected String password; 
+    protected String role; 
     
-    //getter & setter
+    // Interface Methods
+    public String[] SerializeData(){
+        String[] dataString = new String[6];
+        dataString[0] = this.userid;
+        dataString[1] = this.username;
+        dataString[2] = this.email;
+        dataString[3] = this.hpnum;
+        dataString[4] = this.password;
+        dataString[5] = this.role;
+        
+        return dataString;
+    }
+    
+    public void DeserializeData(String[] dataArray){
+        this.userid = dataArray[0];
+        this.username = dataArray[1];
+        this.email = dataArray[2];
+        this.hpnum = dataArray[3];
+        this.password = dataArray[4];
+        this.role = dataArray[5];
+    }
+    
+    
+    
+    // Getters and setters
+    
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHpnum() {
+        return hpnum;
+    }
+
+    public void setHpnum(String hpnum) {
+        this.hpnum = hpnum;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -22,77 +81,77 @@ public class User {
         this.password = password;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getRole() {
+        return role;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    // Variables
+    public void setRole(String role) {
+        this.role = role;
     }
-    
-    
-    //empty constructor because why not
-    public User(){
-        
+
+    @Override
+    public String toString() {
+        // Return a string representation of the Order object in the desired format
+        return this.getUserid()+ ";" +
+               this.getUsername() + ";" +
+               this.getEmail()+ ";" +
+               this.getHpnum() + ";" +
+               this.getPassword() + ";" +
+               this.getRole();
     }
+    //to get user details
+//    public boolean checkIdPass(){
+//        fileManager fm = new fileManager();
+//        String key = "User";
+//        String configVar = fm.getConfigVar(key, true);
+//        ArrayList<String[]> recordList = fm.readFile(configVar);
+//        
+//        //check userid and password
+//        for(int i = 0; i<recordList.size(); i++){
+//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(password)){
+//                DeserializeData(recordList.get(i));
+//                return true;
+//            }
+//        }
+//        
+//        return false;
+//    }
     
+    //put the data into the variables
+//    private void LoadData(String[] dataArray)
+//    {
+//        this.username = dataArray[1];
+//        this.password = dataArray[4];
+//        this.email = dataArray[2];
+//        this.role = dataArray[5];
+//        this.hpnum = dataArray [3];
+//    }    
+//    
+//    //check if the text fields is empty or not because kudo says so
+//    public boolean checkIfExist(){
+//        if(userid == null || userid.length() == 0 || password == null || password.length() == 0){
+//            return false;
+//        }
+//        return true;
+//    }
     
-    //constructor with parameters
-    public User(String id, String pw){
-        this.userid = id;
-        this.password = pw;
-    }
+//    public boolean writeDetails(){ //not done
+//        fileManager fm = new fileManager();
+//        String key = "User";
+//        String configVar = fm.getConfigVar(key, true);
+//        ArrayList<String[]> recordList = fm.readFile(configVar);
+//        
+//        //check userid and password
+//        for(int i = 0; i<recordList.size(); i++){
+//            if (recordList.get(i)[0].equals(userid) && recordList.get(i)[4].equals(password)){
+//                LoadData(recordList.get(i));
+//                return true;
+//            }
+//        }
+//        
+//        return false;
+//    }
+
     
-    
-    //log in function
-    public void logIn(Window currentWindow){
-        
-//        checkIfExist();
-        if(checkIfExist() == true){
-            fileManager fm = new fileManager();
-            String key = "User";
-            String configVar = fm.getConfigVar(key, true);
-//            fm.readFile(configVar);
-            ArrayList<String[]> recordList = fm.readFile(configVar);
-            boolean successLogin = false;
-            String[] userDetail = new String[0]; //why 0 though : cos he wants empty array
-            for(String[] record: recordList){
-                
-                if (record[0].equals(userid) && record[4].equals(password)){
-                    successLogin = true;
-                    userDetail = record;
-                    break;
-                }
-            }
-            
-            if (successLogin == true){
-                if (userDetail[5].equals("Vendor")){
-//                    currentWindow.dispose(); //so... kudo say i stupid.. so i will try use his way
-//                    VendorMenuPage vmenup = new VendorMenuPage();
-//                    vmenup.setVisible(true);
-                } else {
-                    VendorRegister vr = new VendorRegister();
-                    vr.setVisible(true);
-                }
-            }
-                    
-                    
-        } else {
-            
-        }
-        
-    }
-    
-    
-    //check if the text fields is empty or not because kudo says so
-    public boolean checkIfExist(){
-        
-        boolean x;
-        if(password.isEmpty() || userid.isEmpty()){
-            int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-            x = false;
-            System.out.println(a);
-        }
-        return true;
-    }
 }

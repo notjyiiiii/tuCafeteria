@@ -4,17 +4,49 @@
  */
 package java_assignment;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author User
  */
 public class AdmUpdDelRun extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdmUpdDelRun
-     */
-    public AdmUpdDelRun() {
+    User AdmUser = new User();
+    
+    public AdmUpdDelRun() throws IOException, ClassNotFoundException {
         initComponents();
+        
+        String userid = Java_assignment.LoggedInUser.getUserid();
+        
+        UserHandler admhandler = new UserHandler("User",User.class);
+        
+        this.AdmUser = admhandler.GetUserByUserID(userid);
+        
+        lblAdminName.setText(AdmUser.username);
+        lblAdminNum.setText(AdmUser.userid);
+        
+        String[] userIds = new String[admhandler.collection.size()];
+        for (int i = 0; i < admhandler.collection.size(); i++) {
+            String uid = admhandler.collection.get(i).getUserid();
+            
+            if(uid.matches("DR.*")){
+                userIds[i] = uid;
+            }
+            
+        }
+        
+        userIds = Arrays.stream(userIds)
+        .filter(uid -> uid != null && !uid.isEmpty())
+        .toArray(String[]::new);
+
+// Add non-blank elements to cmbUserID
+for (String element : userIds) {
+    cmbRunID.addItem(element);
+}
     }
 
     /**
@@ -35,22 +67,22 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
         lb_tuName3 = new javax.swing.JLabel();
         lb_cafeName1 = new javax.swing.JLabel();
         AMP_Right1 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        lblAdminName2 = new javax.swing.JLabel();
-        lblAdminName3 = new javax.swing.JLabel();
-        lblAdminName4 = new javax.swing.JLabel();
-        lblAdminName5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        lblAdminName8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btnUpdate = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblRunName = new javax.swing.JLabel();
+        lblRunID = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblConNum = new javax.swing.JLabel();
+        txtRunName = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtConNum = new javax.swing.JTextField();
+        txtrunPassword = new javax.swing.JTextField();
+        lblRunPassword = new javax.swing.JLabel();
+        cmbRunID = new javax.swing.JComboBox<>();
         AMP_Bottom1 = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
-        lblAdminName1 = new javax.swing.JLabel();
-        lblAdminNum1 = new javax.swing.JLabel();
+        lblAdminName = new javax.swing.JLabel();
+        lblAdminNum = new javax.swing.JLabel();
         btnSettings1 = new javax.swing.JButton();
         btnTopUp1 = new javax.swing.JButton();
         btnRegistration1 = new javax.swing.JButton();
@@ -138,62 +170,59 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
 
         AMP_Right1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jButton8.setBackground(new java.awt.Color(0, 0, 0));
-        jButton8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 204, 0));
-        jButton8.setText("Update");
-        jButton8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-
-        jButton9.setBackground(new java.awt.Color(0, 0, 0));
-        jButton9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 204, 0));
-        jButton9.setText("Cancel");
-        jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
+        btnUpdate.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 204, 0));
+        btnUpdate.setText("Update");
+        btnUpdate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
-        lblAdminName2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName2.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName2.setText("Runner Name:");
-
-        lblAdminName3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName3.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName3.setText("Runner ID:");
-
-        lblAdminName4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName4.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName4.setText("Email Address:");
-
-        lblAdminName5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName5.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName5.setText("Contact Number:");
-
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(255, 204, 0));
+        btnCancel.setText("Cancel");
+        btnCancel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
-        jTextField6.setText("jTextField1");
+        lblRunName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblRunName.setForeground(new java.awt.Color(255, 204, 102));
+        lblRunName.setText("Runner Name:");
 
-        jTextField4.setText("jTextField1");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        lblRunID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblRunID.setForeground(new java.awt.Color(255, 204, 102));
+        lblRunID.setText("Runner ID:");
+
+        lblEmail.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(255, 204, 102));
+        lblEmail.setText("Email Address:");
+
+        lblConNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblConNum.setForeground(new java.awt.Color(255, 204, 102));
+        lblConNum.setText("Contact Number:");
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
-        lblAdminName8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName8.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName8.setText("Password:");
+        txtrunPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtrunPasswordActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblRunPassword.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblRunPassword.setForeground(new java.awt.Color(255, 204, 102));
+        lblRunPassword.setText("Password:");
 
         javax.swing.GroupLayout AMP_Right1Layout = new javax.swing.GroupLayout(AMP_Right1);
         AMP_Right1.setLayout(AMP_Right1Layout);
@@ -206,28 +235,28 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
                         .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AMP_Right1Layout.createSequentialGroup()
                                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAdminName3)
-                                    .addComponent(lblAdminName2))
+                                    .addComponent(lblRunID)
+                                    .addComponent(lblRunName))
                                 .addGap(42, 42, 42)
                                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(lblAdminName4)
+                                    .addComponent(txtRunName, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(cmbRunID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblEmail)
                             .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblAdminName5)
+                                    .addComponent(lblConNum)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(AMP_Right1Layout.createSequentialGroup()
-                                    .addComponent(lblAdminName8)
+                                    .addComponent(lblRunPassword)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtrunPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(AMP_Right1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AMP_Right1Layout.setVerticalGroup(
@@ -235,28 +264,28 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AMP_Right1Layout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminName3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRunID)
+                    .addComponent(cmbRunID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminName2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRunName)
+                    .addComponent(txtRunName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAdminName8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRunPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtrunPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblAdminName4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdminName5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblConNum)
+                    .addComponent(txtConNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(AMP_Right1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -265,43 +294,68 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
 
         filler2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblAdminName1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        lblAdminName1.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminName1.setText("Admin Name");
+        lblAdminName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        lblAdminName.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminName.setText("Admin Name");
 
-        lblAdminNum1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        lblAdminNum1.setForeground(new java.awt.Color(255, 204, 102));
-        lblAdminNum1.setText("Admin Num");
+        lblAdminNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        lblAdminNum.setForeground(new java.awt.Color(255, 204, 102));
+        lblAdminNum.setText("Admin Num");
 
         btnSettings1.setBackground(new java.awt.Color(0, 0, 0));
         btnSettings1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/settings.png"))); // NOI18N
         btnSettings1.setText("jButton3");
         btnSettings1.setIconTextGap(-6);
         btnSettings1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnSettings1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettings1ActionPerformed(evt);
+            }
+        });
 
         btnTopUp1.setBackground(new java.awt.Color(0, 0, 0));
         btnTopUp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/top up.png"))); // NOI18N
         btnTopUp1.setText("jButton3");
         btnTopUp1.setIconTextGap(-6);
         btnTopUp1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnTopUp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopUp1ActionPerformed(evt);
+            }
+        });
 
         btnRegistration1.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistration1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/registration.png"))); // NOI18N
         btnRegistration1.setText("jButton3");
         btnRegistration1.setIconTextGap(-6);
         btnRegistration1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnRegistration1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistration1ActionPerformed(evt);
+            }
+        });
 
         btnDashboard1.setBackground(new java.awt.Color(0, 0, 0));
         btnDashboard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dashboard.png"))); // NOI18N
         btnDashboard1.setText("jButton3");
         btnDashboard1.setIconTextGap(-6);
         btnDashboard1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnDashboard1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboard1ActionPerformed(evt);
+            }
+        });
 
         btnNoti1.setBackground(new java.awt.Color(51, 51, 51));
         btnNoti1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/notifiactions.png"))); // NOI18N
         btnNoti1.setText("jButton3");
         btnNoti1.setIconTextGap(-6);
         btnNoti1.setMaximumSize(new java.awt.Dimension(55, 55));
+        btnNoti1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoti1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AMP_Bottom1Layout = new javax.swing.GroupLayout(AMP_Bottom1);
         AMP_Bottom1.setLayout(AMP_Bottom1Layout);
@@ -310,8 +364,8 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
             .addGroup(AMP_Bottom1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AMP_Bottom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAdminNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAdminName1))
+                    .addComponent(lblAdminNum, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAdminName))
                 .addGap(55, 55, 55)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,9 +395,9 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
                             .addComponent(btnNoti1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(AMP_Bottom1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(lblAdminName1)
+                        .addComponent(lblAdminName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAdminNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAdminNum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -377,17 +431,101 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lb_quit2MouseClicked
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+        AdmUpdMain update;
+        try {
+            update = new AdmUpdMain();
+            update.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtrunPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrunPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtrunPasswordActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnNoti1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoti1ActionPerformed
+        this.dispose();
+        AdmNoti noti;
+        try {
+            noti = new AdmNoti();
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnNoti1ActionPerformed
+
+    private void btnDashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboard1ActionPerformed
+        this.dispose();
+        AdmMainPage main;
+        try {
+            main = new AdmMainPage();
+            main.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnDashboard1ActionPerformed
+
+    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
+        this.dispose();
+        AdmRegMain reg;
+        try {
+            reg = new AdmRegMain();
+            reg.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnRegistration1ActionPerformed
+
+    private void btnTopUp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopUp1ActionPerformed
+        this.dispose();
+        AdmTopUp topup;
+        try {
+            topup = new AdmTopUp();
+            topup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnTopUp1ActionPerformed
+
+    private void btnSettings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettings1ActionPerformed
+        this.dispose();
+        AdmTopUp topup;
+        try {
+            topup = new AdmTopUp();
+            topup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnSettings1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,7 +557,13 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdmUpdDelRun().setVisible(true);
+                try {
+                    new AdmUpdDelRun().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AdmUpdDelRun.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -429,31 +573,31 @@ public class AdmUpdDelRun extends javax.swing.JFrame {
     private javax.swing.JPanel AMP_Left1;
     private javax.swing.JPanel AMP_Right1;
     private javax.swing.JPanel AMP_Top1;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDashboard1;
     private javax.swing.JButton btnNoti1;
     private javax.swing.JButton btnRegistration1;
     private javax.swing.JButton btnSettings1;
     private javax.swing.JButton btnTopUp1;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cmbRunID;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lb_cafeName1;
     private javax.swing.JLabel lb_logoName2;
     private javax.swing.JLabel lb_logoPic2;
     private javax.swing.JLabel lb_quit2;
     private javax.swing.JLabel lb_tuName2;
     private javax.swing.JLabel lb_tuName3;
-    private javax.swing.JLabel lblAdminName1;
-    private javax.swing.JLabel lblAdminName2;
-    private javax.swing.JLabel lblAdminName3;
-    private javax.swing.JLabel lblAdminName4;
-    private javax.swing.JLabel lblAdminName5;
-    private javax.swing.JLabel lblAdminName8;
-    private javax.swing.JLabel lblAdminNum1;
+    private javax.swing.JLabel lblAdminName;
+    private javax.swing.JLabel lblAdminNum;
+    private javax.swing.JLabel lblConNum;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblRunID;
+    private javax.swing.JLabel lblRunName;
+    private javax.swing.JLabel lblRunPassword;
+    private javax.swing.JTextField txtConNum;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtRunName;
+    private javax.swing.JTextField txtrunPassword;
     // End of variables declaration//GEN-END:variables
 }

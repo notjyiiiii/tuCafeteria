@@ -1,6 +1,3 @@
-NotiID;SenderID;RecipientID;Message;NotiDate;NotiTime;
-N001;AD008;CS007;"Sent order history";2023-01-15;09:30:00
-N002;AD009;CS002;"Sent order history";2023-02-02;12:45:00
-N003;AD010;CS007;"Sent order history";2023-02-10;15:20:00
-N004;AD008;CS006;"Sent order history";2023-03-05;10:00:00
-N005;AD008;CS002;"Sent order history";2023-03-12;18:15:00
+notiID;senderID;recipientID;notiMessage;notiDate;notiTime;
+001;VD001;CS006;Your Order has been delivered;12-12-2023;14:00:00;
+002;AD004;CS009;Your tuCard has been top up for RM100;10-12-2023;08:25:09;

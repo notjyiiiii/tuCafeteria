@@ -8,67 +8,48 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.*;
 
+
+
 public class BaseHandler<T extends IDataContainer> {
     
     public ArrayList<T> collection = new ArrayList<T>();
     public String filePath;
     
+    public BaseHandler(){}
     
-    public BaseHandler(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException
+    public BaseHandler(String filePath) 
     {
         this.filePath = filePath;
-        
+    }
+    
+    // Used to auto load
+    public BaseHandler(String filePath, Class<T> clazz) 
+    {
+        this.filePath = filePath;
+        collection = LoadCollection(filePath, clazz);    
+    }
+    
+    public ArrayList<T> LoadCollection(String filePath, Class<T> clazz)
+    {
         fileManager fm = new fileManager();
         String configVar = fm.getConfigVar(filePath, true);
         
         ArrayList<String[]> recordList = fm.readFile(configVar);
-//        System.out.println(recordList);
-//        collection = (T[]) new IDataContainer[recordList.size()];
-//        collection = new ArrayList<T>();
+
+        ArrayList<T> tList = new ArrayList<T>();
 
         for(int i = 0; i<recordList.size(); i++){
             String[] record = recordList.get(i);
             
             // Validate if use other overriden blank class params will it work
             T classRecord = InstantiateHandler(clazz);
-            classRecord.DeserializeData(record);
-            collection.add(classRecord);
+            classRecord.DeserializeData(record); 
+            tList.add(classRecord);
 
         }
         
-        
+        return tList;
     }
-    
-    
-    
-    
-    
-    
-    
-//    public BaseHandler(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException
-//    {
-//        this.filePath = filePath;
-//        
-//        fileManager fm = new fileManager();
-//        String configVar = fm.getConfigVar(filePath, true);
-//        
-//        collection = (ArrayList<T>) fm.readObjFile(configVar);
-//        
-////        collection = (T[]) new IDataContainer[recordList.size()];
-////        collection = new ArrayList<T>();
-////create object
-////        if (recordList != null) {
-////            for (int i = 0; i < recordList.size(); i++) {
-////                String[] record = recordList.get(i);
-////
-////                // Validate if use other overridden blank class params will it work
-////                T classRecord = InstantiateHandler(clazz);
-////                classRecord.DeserializeData(record);
-////                collection.add(classRecord);
-////            }
-////        }
-//        
-//    }
     
     private T InstantiateHandler(Class<T> clazz) {
         try {
@@ -97,7 +78,31 @@ public class BaseHandler<T extends IDataContainer> {
             // TODO: Look at how you want to handle error exception
             // Maybe to put a popup stating the error?
         }
-    }
+
+    } 
+
+   
+    
+//    public void UpdateItem(T item)
+//    {
+//        collection.add(item); 
+//        
+//        try {
+//            fileManager fm = new fileManager();
+//            String get = fm.getConfigVar(this.filePath, true);
+//            ArrayList<String[]> data = new ArrayList<>();
+//            String[] itemArray = (String[]) item;
+//            data.add(itemArray);
+//            fm.updateFile(get, item.);
+//
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Error: Unable to add new item");
+//            // TODO: Look at how you want to handle error exception
+//            // Maybe to put a popup stating the error?
+//        }
+//    }
     
     
         public void DeleteItem(T item)throws IOException
@@ -112,6 +117,7 @@ public class BaseHandler<T extends IDataContainer> {
         String[] strarr = new String[objArray.length];
         for (int i = 0; i < objArray.length; i++) {
             strarr[i] = objArray[i].toString() + "\n";
+            System.out.println(strarr.toString());
         }
             fm.updateFile(get,strarr);
         }
@@ -179,7 +185,7 @@ public class BaseHandler<T extends IDataContainer> {
 //            // Maybe to put a popup stating the error? don't want lah
 //        }
 //    }
-//    
+    
 //    public T ReadNewObjItem(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException
 //    {
 //        this.filePath = filePath;
@@ -197,16 +203,8 @@ public class BaseHandler<T extends IDataContainer> {
 //
 //        }
 //    }
+ 
     
-//    public void readNewObjItems(String filePath, Class<T> clazz) throws IOException, ClassNotFoundException {
-//        this.filePath = filePath;
-//        fileManager fm = new fileManager();
-//        String get = fm.getConfigVar(this.filePath, true);
-//
-//       // Object obj1 = fm.readObjFile(get);
-//        
-//        //return obj1;
-//    }
-        
-    
-    
+
+
+

@@ -5,25 +5,17 @@ import java.util.*;
 
 public class Java_assignment {
     
-//    public static Users currentUser;
-
+    public static User LoggedInUser = null;
+    
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-//        currentUser = new Users();
         
       // fileManager fm = new fileManager();
 //        
-  //     LogIn lg = new LogIn();
-    //  fileManager fm = new fileManager();
-        MenuHandler mh = new MenuHandler("Menu", Menu.class);
-        ArrayList<Menu> menu = mh.GetVendorMenu("VD001");
-        Menu del = menu.get(0);
-//        mh.DeleteItem(del);
-//        System.out.println(del);
 
-        del.setItemDesc("Fat ric ony mah");
-        mh.UpdateItem(del,del);
-        //String key = "Menu";
+       LogIn lg = new LogIn();
+//        
+       // String key = "Menu";
 //        String configVar = 
 //        String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
@@ -60,8 +52,7 @@ public class Java_assignment {
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName()+"\n");
 //        System.out.println(menuList);
-        
-        
+
 //        ArrayList<String[]> data = fm.readFile(get);
 //        for(String[] string : data)
 //        {
@@ -118,6 +109,7 @@ public class Java_assignment {
         //String abc = "sdf";
         
         
+
         
 //        CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
 //        ArrayList<Customer> customer = customerHandler.GetCustomer("CS006");
@@ -125,6 +117,13 @@ public class Java_assignment {
 //        Customer getCredit = credit.get(1);
 //        System.out.println(getCredit);
 //        
+//        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+//        ArrayList<Menu> menuList = mh.GetVendorMenu("VD001");
+//        Menu abs = menuList.get(3);
+//        
+//        //System.out.print(abs);
+//        System.out.println(abs.getItemName());
+//        System.out.println(abs.getItemPrice());
         
         
         

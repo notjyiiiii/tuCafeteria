@@ -19,6 +19,9 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         setVisible(true);
+        
+        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -200,68 +203,58 @@ public class LogIn extends javax.swing.JFrame {
 
     private void bt_logInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_logInMouseClicked
         
-        try {
-            String password = new String(pwf_pw.getPassword());
-            String userid = tf_userID.getText();
+        String password = pwf_pw.getText();
+        String userid = tf_userID.getText();
             
-//            Users user = new Users(userid, password);
-//            if(user.valid == false){
-//                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-//                return;
-//            }
+        Login(userid, password);
             
-            if (password == null || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter a password.", "Error", JOptionPane.OK_OPTION);
-                return;
-            }
-
-            UsersHandler usersHandler = new UsersHandler("User",Users.class);
-            Users user = usersHandler.getAuthenticatedUser(userid, password);
-            
-            if (user == null) {
-                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.", "Error", JOptionPane.OK_OPTION);
-                return;
-            }
-            
-            
-            String userRole = user.getRole();
-            switch(userRole){
-                case "Vendor":
-                    this.dispose();
-                    Vendor v = new Vendor(userid, password);
-                    //v.getDetails();
-                    VendorMainPage vmp = new VendorMainPage(v);
-                    vmp.setVisible(true);
-                    break;
-                    
-                case "Customer":
-                    this.dispose();
-                    Customer c = new Customer(userid,password);
-                    CUSTOMER_Main vr = new CUSTOMER_Main(c);
-                    vr.setVisible(true);
-                    break;
-                    
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_bt_logInMouseClicked
 
     private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_logInActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogIn().setVisible(true);
+    private void Login(String userid, String password)
+    {
+        try {
+            UserHandler handler = new UserHandler("User", User.class);
+            User user = handler.ValidateUserCredential(userid, password);
+       
+            if(user==null){
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
+                return;
             }
-        });
+            
+            Java_assignment.LoggedInUser = user;
+            
+            String userRole = user.getRole();
+            switch(userRole){
+                case "Vendor":
+                    this.dispose(); 
+                    //VendorMainPage vmp = new VendorMainPage();
+                    //vmp.setVisible(true);
+                    break;
+                    
+                case "Customer":
+                    this.dispose();
+                    //CUSTOMER_Main vr = new CUSTOMER_Main();
+                    //vr.setVisible(true);
+                    break;
+                // TODO: More switch case for each role
+                    
+                case "Admin":
+                    this.dispose(); 
+                    AdmMainPage amp = new AdmMainPage();
+                    amp.setVisible(true);
+                    break;    
+                    
+        }
+        } catch (IOException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
