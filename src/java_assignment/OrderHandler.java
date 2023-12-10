@@ -175,6 +175,37 @@ public class OrderHandler extends BaseHandler<Order>{
         return orderIDs;
     }
     
+    public void updateOrderStatusToCompleted(String orderID) {
+        try {
+            fileManager fm = new fileManager();
+            ArrayList<String[]> fileContent = fm.readFile(this.filePath);
+
+            // Identify and update the line with the selected order ID to "COMPLETED"
+            for (int i = 0; i < fileContent.size(); i++) {
+                String[] parts = fileContent.get(i);
+
+                // Assuming the order ID is at index 0 (adjust if it's at a different index)
+                if (parts.length > 0 && parts[0].equals(orderID)) {
+                    // Update the status to "COMPLETED"
+                    parts[3] = "COMPLETED";
+
+                    // If you need to update other fields, do it here
+
+                    // Reconstruct the line with the updated status
+                    fileContent.set(i, parts);
+                    break; // Exit the loop after updating the matching order ID
+                }
+            }
+
+            // Write the updated data back to the file
+            fm.updateFile(this.filePath, fileContent);
+
+            System.out.println("Order status updated to COMPLETED successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     //somehow correct??
     public ArrayList<Order> GetCompletedOrderByUserID(String cusID){
         
@@ -199,6 +230,7 @@ public class OrderHandler extends BaseHandler<Order>{
     }
     return null; // Return null if the order with the specified ID is not found
     }
+    
     
 //    public ArrayList<Order> GetCompletedOrderByUserID(String cusID) {
 //    ArrayList<Order> orderstatus = new ArrayList<>();

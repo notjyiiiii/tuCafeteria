@@ -2,6 +2,9 @@ package java_assignment;
 
 import java.awt.List;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -23,6 +26,8 @@ public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
 
 public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
         initComponents();
+        
+        
         modelOrderStatus.setColumnIdentifiers(columnName);
 
         OrderStatus.setModel(modelOrderStatus);
@@ -44,11 +49,41 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
 
                 // Add data to the modelOrderStatus
                 if (matchingOrderStatus.isPresent()) {
+                    String orderStatus = matchingOrderStatus.get().getOrderStatus();
                     modelOrderStatus.addRow(new Object[]{
                             orderSummaryItem.getOrderIDforSummary(),
                             orderSummaryItem.getFoodName(),
                             matchingOrderStatus.get().getOrderStatus()
                     });
+                    if ("DELIVERED".equals(orderStatus)) {
+                        // Prompt the user to write a review
+                        int confirmResult = JOptionPane.showConfirmDialog(
+                                this,
+                                "Your order has been delivered. Would you like to write a review?",
+                                "Write Review",
+                                JOptionPane.YES_NO_OPTION
+                        );
+
+                        if (confirmResult == JOptionPane.YES_OPTION) {
+                            // Open the review writing dialog or perform any other action
+                            // You can replace the following line with the code to open your review dialog
+                            CUSTOMER_Review review = new CUSTOMER_Review();
+                            review.setVisible(true);
+                        }
+                        
+                        if (confirmResult == JOptionPane.YES_OPTION) {
+                            // Open the review writing dialog (replace the following line with your code)
+                            // For demonstration, a simple message dialog is used
+                            JOptionPane.showMessageDialog(this, "Opening review writing dialog for order ID " + orderID);
+
+                            orderHandler.updateOrderStatusToCompleted(orderID);
+                            // After writing the review, update the order status to "COMPLETED"
+                            //matchingOrderStatus.get().setOrderStatus("COMPLETED");
+                            //orderHandler.UpdateItem(matchingOrderStatus.get(), matchingOrderStatus.get());
+                        }
+                    }
+                    
+                    
                 } else {
                     // Handle the case where order status is not found (you can set a default value or leave it empty)
                     modelOrderStatus.addRow(new Object[]{
@@ -71,7 +106,7 @@ public CUSTOMER_OrderStatus(String orderID) {
 
         OrderStatus.setModel(modelOrderStatus);
         try {
-            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderMiddleMan", OrderSummary.class);
             ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
 
             OrderHandler orderHandler = new OrderHandler("Order", Order.class);
@@ -320,22 +355,14 @@ public CUSTOMER_OrderStatus(String orderID) {
 
             // If you need to update other fields, do it here
 
-            // Reconstruct the line with the updated status
+            // Update the ArrayList directly
             fileContent.set(i, parts);
             break; // Exit the loop after updating the matching order ID
         }
     }
 
-    // Step 7: Write the updated data back to the "Order_1" file
-    StringBuilder updatedData = new StringBuilder();
-    for (String[] parts : fileContent) {
-        updatedData.append(String.join(";", parts)).append(System.lineSeparator());
-    }
-
-    ArrayList<String[]> updatedDataList = new ArrayList<>();
-    updatedDataList.add(updatedData.toString().split(";")); // Convert StringBuilder to String[]
-    fm.updateFile("Order", updatedDataList);
-
+    // Step 7: Write the updated data back to the "Order" file
+    fm.updateFile("Order", fileContent);
 
     System.out.println("Order cancelled successfully.");
 
@@ -343,7 +370,7 @@ public CUSTOMER_OrderStatus(String orderID) {
     e.printStackTrace();
 } catch (ClassNotFoundException ex) {
     Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
-}
+} 
 
 //        try{
 //            int selectedRow = OrderStatus.getSelectedRow();
@@ -380,6 +407,8 @@ public CUSTOMER_OrderStatus(String orderID) {
         
     }//GEN-LAST:event_btnCancelOrderActionPerformed
 
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

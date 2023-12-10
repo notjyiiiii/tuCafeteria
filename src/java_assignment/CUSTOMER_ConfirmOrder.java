@@ -1,6 +1,9 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,14 +84,14 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 //        ViewOrder.getColumnModel().getColumn(1).setPreferredWidth(50);
 //        ViewOrder.getColumnModel().getColumn(2).setPreferredWidth(50);
 
-        OrderSummaryHandler ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-        ArrayList<OrderSummary> ordersummary = ordersummaryHandler.GetCusOrderSummary(cusID);
+        OrderMiddleManHandler ordermiddlemanHandler = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
+        ArrayList<OrderMiddleMan> ordermiddleman = ordermiddlemanHandler.GetCusOrderSummary(cusID);
 
         double totalFoodPrice = 0.0;
         
-        for (OrderSummary ordersummaryItem : ordersummary) {
-            modelFood.addRow(new Object[]{ordersummaryItem.getFoodName(), ordersummaryItem.getFoodPrice()});
-            totalFoodPrice += Double.parseDouble(ordersummaryItem.getFoodPrice());
+        for (OrderMiddleMan ordermiddlemanItem : ordermiddleman) {
+            modelFood.addRow(new Object[]{ordermiddlemanItem.getFoodName(), ordermiddlemanItem.getFoodPrice()});
+            totalFoodPrice += Double.parseDouble(ordermiddlemanItem.getFoodPrice());
             
             
         }
@@ -116,7 +119,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
         }
         else {
         // Handle the case where userid is null (perhaps display an error message)
@@ -125,6 +128,19 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         
     }
 
+    private static void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt"; // Update with your actual file path
+
+        try {
+            // Create or truncate the file to clear its content
+            Path path = Paths.get(filePath);
+            Files.write(path, new byte[0]);
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception according to your needs
+            Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
     public CUSTOMER_ConfirmOrder(String[][] itemsArray) {
         initComponents();
 
@@ -631,6 +647,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+            } finally{
+                System.out.println("Before calling orderMiddleMan.");
+                clearOrderMiddleManFile();
+                System.out.println("After calling orderMiddleMan.");
             }
         
         

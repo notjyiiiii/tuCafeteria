@@ -316,13 +316,13 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
 //            }
             
             OrderSummaryHandler ordersummaryHandler;
+            OrderMiddleManHandler ordermiddlemanHandler;
             try{
-                
-                
-                
+
                 ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
                 //System.out.println(food+foodPrice);
                 ordersummaryHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
+                
                 System.out.println("\nView Menu's orderID,OrderSummary: "+orderIDforSummary);
                 
             } catch(IOException | ClassNotFoundException ex){
@@ -335,7 +335,36 @@ public class CUSTOMER_ViewMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select an item.");
         }
         
-        
+        //OrderMiddleMan
+        row2 = ViewMenu.getSelectedRow();
+        if (row2 != -1) {
+            String food = String.valueOf(model.getValueAt(row2, 0));
+            //String foodDesc = String.valueOf(model.getValueAt(row2, 1));
+            String foodPrice = String.valueOf(model.getValueAt(row2, 2));
+            
+            
+            //String[] orders = {food,foodPrice};
+            //AddedOrdermodel.addRow(orders);
+            
+            //AddedFood.setModel(AddedOrdermodel);
+            
+            OrderMiddleManHandler ordermiddlemanHandler;
+            try{
+
+                ordermiddlemanHandler = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
+                ordermiddlemanHandler.WriteOrderSummary(orderIDforSummary,cusID,food,foodPrice);
+                
+                System.out.println("\nView Menu's orderID,OrderSummary: "+orderIDforSummary);
+                
+            } catch(IOException | ClassNotFoundException ex){
+                Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);
+                JOptionPane.showMessageDialog(this,"Error writing review to file");
+            }
+        } 
+        else {
+        // Display a message or handle the case where no item is selected
+            JOptionPane.showMessageDialog(this, "Please select an item.");
+        }       
         
     }//GEN-LAST:event_btnAddOrderMouseClicked
 

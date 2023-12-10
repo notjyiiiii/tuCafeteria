@@ -16,7 +16,35 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     private String vendorName;
     private String cusName = Java_assignment.LoggedInUser.username;
     
-    public CUSTOMER_Review(){initComponents();}
+    public CUSTOMER_Review(){
+        try {
+            initComponents();
+            modelReview.setColumnIdentifiers(columnName);
+            
+            ViewMenu.setModel(modelReview);
+            
+            ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
+            ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
+            ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
+            
+            ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+//        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
+//        
+//        for (Review review : reviews) {
+//            modelReview.addRow(new Object[]{review.getCustomerName(), review.getReview(), review.getRating()});
+//        }
+
+    ArrayList<Review> review = reviewHandler.GetReview(vendorID);
+
+    for (Review reviewList : review) {
+        modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
+    }
+            } catch (IOException ex) {
+                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     
     
     public CUSTOMER_Review(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
