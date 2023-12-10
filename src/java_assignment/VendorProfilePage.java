@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 public class VendorProfilePage extends javax.swing.JFrame {
 
     private Vendor vendor;
+    //olo
     
     public VendorProfilePage(Vendor vendor) throws IOException, ClassNotFoundException {
         initComponents();
