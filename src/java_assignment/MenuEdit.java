@@ -21,6 +21,7 @@ public class MenuEdit extends javax.swing.JFrame {
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
         populateComboBox();
+        this.vendor = vendor;
         
     }
     

@@ -33,35 +33,35 @@ public class ReviewHandler extends BaseHandler<Review>{
     }
     
     public void WriteReview(String vendorID, String[] values) {
-//        // Create a new Review object with the provided values
-//        Review newReview = new Review();
-//        newReview.setOrderID(values[0]);
-//        newReview.setVendorID(vendorID);
-//        newReview.setCustomerName(values[1]);
-//        newReview.setRating(values[2]);
-//        newReview.setReview(values[3]);
-//        newReview.setReviewDateTime(LocalDateTime.now());
-//
-//        // Add the new review to the collection
-//        collection.add(newReview);
-//
-//        try {
-//            // Save the updated collection to the file
-//            fileManager fm = new fileManager();
-//            String configVar = fm.getConfigVar(this.filePath, true);
-//            ArrayList<String[]> data = new ArrayList<>();
-//            
-//            // Convert the Review objects in the collection to String arrays
-//            for (Review review : collection) {
-//                data.add(review.SerializeData());
-//            }
-//            
-//            // Update the file with the new data
-//            fm.updateFile(configVar, data);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            // Handle the IOException, you might want to throw a custom exception or log the error
-//        }
+        // Create a new Review object with the provided values
+        Review newReview = new Review();
+        newReview.setOrderID(values[0]);
+        newReview.setVendorID(vendorID);
+        newReview.setCustomerName(values[1]);
+        newReview.setRating(values[2]);
+        newReview.setReview(values[3]);
+        newReview.setReviewDateTime(LocalDateTime.now());
+
+        // Add the new review to the collection
+        collection.add(newReview);
+
+        try {
+            // Save the updated collection to the file
+            fileManager fm = new fileManager();
+            String configVar = fm.getConfigVar(this.filePath, true);
+            ArrayList<String[]> data = new ArrayList<>();
+            
+            // Convert the Review objects in the collection to String arrays
+            for (Review review : collection) {
+                data.add(review.SerializeData());
+            }
+            
+            // Update the file with the new data
+            fm.updateFile(configVar, data);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the IOException, you might want to throw a custom exception or log the error
+        }
     }
     
     public void addReview(Review review) {
@@ -102,5 +102,29 @@ public class ReviewHandler extends BaseHandler<Review>{
         return averageRating;
     }
     
+    // new Stuff for runner
     
+    public ArrayList<Review> getRunnerReview(ArrayList<Task> tasks) {
+        ArrayList<Review> review = new ArrayList<>();
+
+        ArrayList<String> orderList = new ArrayList<>();
+        for (Task t : tasks) {
+            String orderId = t.getOrderid();
+            if (orderId != null) {
+                orderList.add(orderId);
+            }
+        }
+
+        for (Review drreview : this.collection) {
+            for (String orderId : orderList) {
+                if (orderId != null && orderId.equals(drreview.getOrderID())) {
+                    review.add(drreview);
+                }
+            }
+        }
+
+        return review;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package java_assignment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class RunnerHandler extends BaseHandler<Runner>{
@@ -20,5 +21,19 @@ public class RunnerHandler extends BaseHandler<Runner>{
         }
         
         throw new NoSuchElementException("No runner found with userid: " + userid);
+    }
+    
+    public ArrayList<Runner> getStandybyRunner() {
+
+        ArrayList<Runner> rnList = new ArrayList<Runner>();
+
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if (collection.get(i).getStatus().equals("Standby"))
+            {
+                rnList.add(collection.get(i));
+            }
+        }
+        return rnList;
     }
 }

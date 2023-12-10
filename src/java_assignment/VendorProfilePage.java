@@ -14,7 +14,6 @@ public class VendorProfilePage extends javax.swing.JFrame {
     
     public VendorProfilePage(Vendor vendor) throws IOException, ClassNotFoundException {
         initComponents();
-        this.vendor = vendor;
         
         VendorHandler vendorHandler = new VendorHandler();
         this.vendor = vendorHandler.GetVendorByVendorID(Java_assignment.LoggedInUser.userid);

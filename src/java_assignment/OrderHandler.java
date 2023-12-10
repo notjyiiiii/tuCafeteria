@@ -247,6 +247,22 @@ public class OrderHandler extends BaseHandler<Order>{
 
         DeleteItem(orderToDelete);
     }
+    
+    public ArrayList<Order> GetNewDeliveryOrder()
+    {
+        ArrayList<Order> orderList = new ArrayList<Order>();
+
+        for (int i = 0; i<collection.size(); i++)
+        {
+            if(collection.get(i).getOrderType().equals(OrderType.DELIVERY) && collection.get(i).getOrderStatus().equals(OrderStatus.AWAIT_PICK_UP)){
+                orderList.add(collection.get(i));
+            }
+        }
+        this.ol = orderList;
+        return orderList;
+
+    }
+    
 
 //olo
 }

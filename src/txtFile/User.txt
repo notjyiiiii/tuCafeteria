@@ -14,4 +14,4 @@ VD002;Talia;talia@tuCafeteria.edu.co;0129304395;talia123;Vendor
 VD006;Bornet;bornet@tuCafeteria.edu.co;0192345829;bornet123;Vendor
 VD091;Chinese;chinese@tuCafeteria.co;0192837384;chinese123;Vendor
 AD008;Jonas;jonas@tuCafeteria.edu.co;0191234567;jonas123;Admin
-VD001;Amy;amy@tuCafeteria.edu.co;0123456789;ame123;Vendor
+VD001;Western;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor

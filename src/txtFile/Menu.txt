@@ -1,7 +1,6 @@
 VD001;MD002;null;Kuih Bahulu;Cake similar in concept to the madeleine cake but round in shape and composed of different ingredients;Dessert;1.0
 VD001;MD003;null;Nasi Kandar;Steamed rice combined with an array of distinct curries, sides dishes, and gravies;Main Dish;8.0
 VD001;MD004;null;Ayam Percik;Barbecued chicken slathered in spicy chili, garlic and ginger sauce mixed with coconut milk ;Main Dish;8.0
-VD001;MD005;null;Kaya Toast;A sweet and fragrant coconut custard jam, slathered onto thin slices of warm toast;Dessert;4.0
 VD003;MD006;null;Kopi Hailam Cold;Coffee that is named after the region it comes from, with a unique preparatino method;Drink;3.5
 VD003;MD007;null;Croissant;A buttery, flaky, viennoiserie pastry;Dessert;4.0
 VD003;MD008;null;Polo Bun;A Hong Kong style sweet bun cover with a topping that tastes like butter cookies;Dessert;3.0
@@ -21,3 +20,5 @@ VD001;MD123;null;Ayam McGoreng;McDonald's famous chicken;Main Dish;13.9
 VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;3.8
 VD001;D434;null;Ice Cream Cone;Strawberry, Chocolate , whatever you like!;Dessert;1.0
 VD001;SD298;null;Pickled Cucumber;??salty sour cucumber not sure;Side Dish;13.9
+VD001;D901;null;Mochi;strawberry, chocolate, vanilla and everything nice <3;Dessert;12.0
+VD001;MD005;null;Kaya Toast;A sweet and fragrant coconut custard jam, slathered onto thin slices of warm toast...;Dessert;4.0
