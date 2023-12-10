@@ -113,5 +113,4 @@ public class NotificationHandler extends BaseHandler<Notification> {
         }
     }
     
-    
 }

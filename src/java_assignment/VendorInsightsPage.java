@@ -57,7 +57,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(600);
         jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
         
-        ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+        ReviewHandler reviewHandler = new ReviewHandler();
         ArrayList<Review> review = reviewHandler.GetReview(vendorID);
         
         for (Review reviewList : review) {
@@ -242,7 +242,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     }
     
     private ArrayList<Review> filterReviews(String selectedRating) throws IOException, ClassNotFoundException {
-        ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+        ReviewHandler reviewHandler = new ReviewHandler();
         ArrayList<Review> review = reviewHandler.GetReview(vendorID);
         ArrayList<Review> filteredReviews = new ArrayList<>();
 

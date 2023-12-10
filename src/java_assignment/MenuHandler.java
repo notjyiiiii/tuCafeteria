@@ -16,18 +16,21 @@ public class MenuHandler extends BaseHandler<Menu>{
     public ArrayList<Menu> GetVendorMenu(String vendorID)
     {
         ArrayList<Menu> vendorMenu = new ArrayList<Menu>();
+        System.out.println(vendorMenu);
         
         for(int i = 0; i<this.collection.size(); i++)
         {
             Menu menu = collection.get(i);
-            
+
             if (menu.getUserid().equals(vendorID))
             {
                 vendorMenu.add(menu);
+                        System.out.println(menu);
             }
         }
         this.menu = vendorMenu;
         return vendorMenu;
+
     }
     
     
@@ -35,7 +38,6 @@ public class MenuHandler extends BaseHandler<Menu>{
         if (menu != null) {
             return menu.size();
         } else {
-            // Handle the case when GetVendorMenu has not been called yet
             return 0;
         }
     }

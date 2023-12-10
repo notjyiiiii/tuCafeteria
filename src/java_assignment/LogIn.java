@@ -244,7 +244,12 @@ public class LogIn extends javax.swing.JFrame {
                     CUSTOMER_Main vr = new CUSTOMER_Main();
                     vr.setVisible(true);
                     break;
-                // TODO: More switch case for each role
+                    
+                case "Admin":
+                    this.dispose(); 
+                    AdmMainPage amp = new AdmMainPage();
+                    amp.setVisible(true);
+                    break;    
                     
         }
         } catch (IOException ex) {

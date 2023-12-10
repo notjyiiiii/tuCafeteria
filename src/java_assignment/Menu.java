@@ -1,7 +1,6 @@
 package java_assignment;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class Menu implements IDataContainer, Serializable {
     private String itemid;
     private String itemName;
     private double itemPrice;
-    private String itemDesc;
+    private String itemDesc; 
     private String userid;
     private String itemPic;
     private String itemType;
@@ -20,9 +19,33 @@ public class Menu implements IDataContainer, Serializable {
     {
         
     }
-    
-    // No setters here
 
+//    public static ArrayList<Menu> readMenuDataFromFile(String filePath) {
+//        ArrayList<Menu> menuList = new ArrayList<>();
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] data = line.split(";");
+//
+//                Menu menu = new Menu();
+//                menu.setUserid(data[0]);
+//                menu.setItemid(data[1]);
+//                menu.setItemPic(data[2]);
+//                menu.setItemName(data[3]);
+//                menu.setItemDesc(data[4]);
+//                menu.setItemType(data[5]);
+//                menu.setItemPrice(Double.parseDouble(data[6]));
+//
+//                menuList.add(menu);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return menuList;
+//    }
+    
     public String getItemid() {
         return itemid;
     }
@@ -100,7 +123,6 @@ public class Menu implements IDataContainer, Serializable {
         
     }
 
-
     @Override
     public void DeserializeData(String[] dataArray) {
         this.userid = dataArray[0];
@@ -109,10 +131,7 @@ public class Menu implements IDataContainer, Serializable {
         this.itemName = dataArray[3];
         this.itemDesc = dataArray[4];
         this.itemType = dataArray[5];
-        
-        // Remove non-numeric characters and then parse the double ; 
-        //        String itemPriceString = dataArray[6].replaceAll("[^0-9.]", "");
-        this.itemPrice = Double.parseDouble(dataArray[6]);    
+        this.itemPrice = Double.parseDouble(dataArray[6]);
     }
     
 }

@@ -19,3 +19,5 @@ VD005;MD019;null;Spaghetti Bolognaise;Flavorful meat sauce served over cooked sp
 VD005;MD020;null;Mac and Cheese;Cooked macaroni pasta mixed with a creamy cheese sauce;Main Dish;6.0
 VD001;MD123;null;Ayam McGoreng;McDonald's famous chicken;Main Dish;13.9
 VD001;MD001;null;Nasi Lemak;Rice with cucumber and sambal;Main Dish;3.8
+VD001;D434;null;Ice Cream Cone;Strawberry, Chocolate , whatever you like!;Dessert;1.0
+VD001;SD298;null;Pickled Cucumber;??salty sour cucumber not sure;Side Dish;13.9

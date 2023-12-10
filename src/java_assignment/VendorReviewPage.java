@@ -31,7 +31,7 @@ public class VendorReviewPage extends javax.swing.JFrame {
         ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
         ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(100);
         
-        ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+        ReviewHandler reviewHandler = new ReviewHandler();
         ArrayList<Review> review = reviewHandler.GetReview(vendorID);
         
         for (Review reviewList : review) {

@@ -39,7 +39,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
         ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
         ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
         
-        ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);
+        ReviewHandler reviewHandler = new ReviewHandler();
 //        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
 //        
 //        for (Review review : reviews) {
@@ -277,7 +277,7 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
         //write to file
         ReviewHandler reviewHandler;
         try {
-            reviewHandler = new ReviewHandler("Review", Review.class);
+            reviewHandler = new ReviewHandler();
             reviewHandler.WriteReview(vendorID, reviews);
             
         } catch (IOException | ClassNotFoundException ex) {

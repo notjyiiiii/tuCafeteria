@@ -8,7 +8,7 @@ public class fileManager {
     
     private final String userDirectory = "user.dir";
     private final String baseDirectory = "";
-    private final String configDirectory = "/src/java_assignment/Config.properties";
+    private final String configDirectory = "//src//java_assignment//Config.properties";
     private final String mainFolderPath, configFilePath;
     private String configVal;
     
@@ -44,6 +44,8 @@ public class fileManager {
         return configVal;
     }
     
+    
+    
     //read the data in the file
     public ArrayList<String[]> readFile (String filePath) {
         ArrayList<String[]> dataList = new ArrayList<String[]>();
@@ -71,13 +73,14 @@ public class fileManager {
             BufferedWriter bw = new BufferedWriter(fw);
             
             String textData = "";
+
             for (String string: data)
             {
                 textData += string;
                 textData += ";";
             }
+           textData += "\n";
             
-            textData += "\n";
             
             bw.write(textData);
             bw.close();
@@ -123,6 +126,7 @@ public class fileManager {
        return obj;
        
 }
+
     
     
     public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
@@ -154,24 +158,35 @@ public class fileManager {
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
             
+            String oldText = "";
+            String newText = "";
+
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
             
-            String textItem = "";
+            String line = br.readLine();
+             
+            while (line != null) 
+            {
+                oldText += line + System.lineSeparator();
+                line = br.readLine();
+                
             for (String[] row: data)
             {
                 for (String item: row)
                 {
                     
-                    textItem += item;
-                    textItem += ";";
+                    newText += item;
+                    newText += ";";
                 }
-                textItem += "\n";
+                newText += "\n";
                 
             }
             
-            bw.write(textItem);
+            bw.write(newText);
             bw.close();
-            
-        } catch (FileNotFoundException e){
+                }
+            } catch (FileNotFoundException e){
             System.out.println(e);
         }
     }

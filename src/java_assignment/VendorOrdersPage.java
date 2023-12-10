@@ -128,7 +128,7 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         // Filter the table based on selected values
         model.setRowCount(0);
         OrderHandler oh = new OrderHandler();
-        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        ArrayList<Order> order = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
 
         for (Order orderItem : order) {
             if (("Filter by...".equals(selectedOrderType) || orderItem.getOrderType().toString().equals(selectedOrderType)) &&
@@ -657,7 +657,7 @@ public class VendorOrdersPage extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Error processing notification: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                } else {
+                }else {
                     openViewPage(orderId);
                 }
             } catch (IOException ex) {
@@ -711,7 +711,7 @@ public class VendorOrdersPage extends javax.swing.JFrame {
         model.setRowCount(0);
         
         OrderHandler oh = new OrderHandler();
-        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        ArrayList<Order> order = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
 
         for (Order orderItem : order) {
         if (orderItem.getOrderid().toLowerCase().contains(query.toLowerCase())) {

@@ -30,7 +30,7 @@ public class Java_assignment {
 //        
        // String key = "Menu";
 //        String configVar = 
-        //String get = fm.getConfigVar(key, true);
+//        String get = fm.getConfigVar(key, true);
 //        ArrayList user = fm.readFile(configVar, key);
 //        System.out.println(user);
 //        System.out.println("------");
@@ -51,7 +51,7 @@ public class Java_assignment {
 //        ArrayList<Menu> menuList = menuHandler.GetVendorMenu("VD001");
 //        System.out.print(menuList);
 //        Menu menu = new Menu();
-//        menu.setUserid("VD001");
+//       menu.setUserid("VD001");
 //        menu.setItemid("MD022");
 //        menu.setItemPic("null");
 //        menu.setItemPrice(8);
@@ -59,9 +59,9 @@ public class Java_assignment {
 //        menu.setItemName("Tom Yam Soup");
 //        menu.setItemDesc("Spicy and Sour soup made in Thailand");
 //        menuHandler.AddNewItem(menu);
-//        
-//        
-//        Menu abs = menuList.get(5);
+////        
+////        
+//        Menu abs = menuList.get(0);
 //        
 //        //System.out.print(abs);
 //        System.out.println(abs.getItemName()+"\n");

@@ -30,7 +30,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
         String formattedIncome = "RM" + decimalFormat.format(income);
         lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
         
-        ReviewHandler rh = new ReviewHandler("Review", Review.class);
+        ReviewHandler rh = new ReviewHandler();
         ArrayList<Review> reviews = rh.GetReview(vendor.getVendorid());
 
         double averageRating = rh.GetAverageRating(vendor.getVendorid());

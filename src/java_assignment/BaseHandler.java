@@ -8,6 +8,7 @@ import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.*;
 
 
 
@@ -36,6 +37,7 @@ public class BaseHandler<T extends IDataContainer> {
         String configVar = fm.getConfigVar(filePath, true);
         
         ArrayList<String[]> recordList = fm.readFile(configVar);
+
         ArrayList<T> tList = new ArrayList<T>();
 
         for(int i = 0; i<recordList.size(); i++){
