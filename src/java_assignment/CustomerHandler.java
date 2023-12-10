@@ -17,7 +17,7 @@ public class CustomerHandler extends UsersHandler<Customer>{
 //        CustomerHandler ch = new CustomerHandler("Customer", Customer.class);
 //        ArrayList<Customer> cslist = new ArrayList<Customer>();
 //        //i don't know what i'm doing
-//        for(int i = 0; i<this.collection.size(); i++)
+//        for(int i = 0; i<this.collection.sizpe(); i++)
 //        {
 //            Customer cs = collection.get(i);
 //            
