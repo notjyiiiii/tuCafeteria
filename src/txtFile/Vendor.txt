@@ -1,4 +1,3 @@
-UserID;VendorName;OperatingHours
 VD001;Amy Kopitiam;7-10
 VD003;Naya Cafe;10-5
 VD004;Valen Mix Rice;7-10

@@ -102,5 +102,29 @@ public class ReviewHandler extends BaseHandler<Review>{
         return averageRating;
     }
     
+    // new Stuff for runner
     
+    public ArrayList<Review> getRunnerReview(ArrayList<Task> tasks) {
+        ArrayList<Review> review = new ArrayList<>();
+
+        ArrayList<String> orderList = new ArrayList<>();
+        for (Task t : tasks) {
+            String orderId = t.getOrderid();
+            if (orderId != null) {
+                orderList.add(orderId);
+            }
+        }
+
+        for (Review drreview : this.collection) {
+            for (String orderId : orderList) {
+                if (orderId != null && orderId.equals(drreview.getOrderID())) {
+                    review.add(drreview);
+                }
+            }
+        }
+
+        return review;
+    }
+
+
 }

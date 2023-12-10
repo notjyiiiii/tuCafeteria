@@ -1,4 +1,3 @@
-UserID;UserName;UserEmail;UserHP;Userpw;UserRole;
 VD001;Amy;amy@tuCafeteria.edu.co;0123456789;amy123;Vendor;
 CS002;Kudo;kudo@tuCafeteria.edu.co;0134567892;kudo123;Customer;
 VD003;Naya;naya@tuCafeteria.edu.co;0145678923;naya123;Vendor;

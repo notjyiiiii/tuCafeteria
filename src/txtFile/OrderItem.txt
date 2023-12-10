@@ -1,4 +1,3 @@
-OrderID;MenuItemID;Quantity;
 O001;MD020;7
 O002;MD008;2
 O003;MD013;1

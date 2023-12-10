@@ -1,4 +1,3 @@
-UserID;Status;TotalIncome
-DR011;Standby;120.00
-DR012;Busy;70.00
-DR013;Away;40.00
+DR012;Ben;Busy
+DR013;Paul;Away
+DR011;Frank;Standby

@@ -1,4 +1,3 @@
-LocationID;LocationName;Description
 L001;BlockAHub;Hub for deliveries on the 5th floor, block A
 L002;BlockBHub;Hub for deliveries on the 5th floor, block B
 L003;BlockDHub;Hub for deliveries on the 5th floor, block D

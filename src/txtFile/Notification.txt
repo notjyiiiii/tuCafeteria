@@ -1,1 +1,19 @@
-notiId;senderid;recipientid;message;notidate;
+001;VD001;CS006;Your Order has been delivered;2023-12-09T23:25:55.755853;read
+002;AD004;CS009;Your tuCard has been top up for RM100;2023-12-09T23:25:55.755853;unread
+003;CS006;VD001;ehhhhdsdshhhh;2023-12-09T23:25:55.755853;Read
+004;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+005;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+006;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
+007;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+008;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
+009;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+010;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+011;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
+012;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+013;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+014;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+015;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+016;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+947;VD001;CS003;Your order#O006 has been accepted! Your order is preparing...;2023-12-10T13:01:14.772287;Unread;
+339;VD001;CS003;Your order#O008 has been accepted! Your order is preparing...;2023-12-10T13:01:36.103406;Unread;
+242;VD001;CS003;Your order#O011 has been declined :( It's sad...;2023-12-10T13:01:54.647006;Unread;

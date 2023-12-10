@@ -63,10 +63,9 @@ public class Review implements IDataContainer, Serializable{
     public void setRating(String rating) {
         this.Rating = rating;
     }
-    
 
     public String[] SerializeData(){
-        String [] dataString = new String[5];
+        String [] dataString = new String[6];
         dataString[0] = this.OrderID;
         dataString[1] = this.VendorID;
         dataString[2] = this.CustomerName;
@@ -86,7 +85,7 @@ public class Review implements IDataContainer, Serializable{
             this.Rating = dataArray[3];
             this.Review = dataArray[4];
             if (!dataArray[5].equals("NULL")) {
-                this.ReviewDateTime = LocalDateTime.parse(dataArray[6]);
+                this.ReviewDateTime = LocalDateTime.parse(dataArray[5]);
                 } else {
                 this.ReviewDateTime = null;  
                 }
