@@ -1,2 +1,2 @@
-ORD112;CS006;Fried Rice;4.0;
-ORD113;CS007;Kuih Bahulu;1.0;
+ORD123;CS002;Beef and Potatoes;5.0;
+ORD124;CS002;Beef and Potatoes;5.0;

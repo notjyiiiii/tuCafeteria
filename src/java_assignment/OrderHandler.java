@@ -162,6 +162,7 @@ public class OrderHandler extends BaseHandler<Order>{
         return orderstatus;
     }
     
+    
     public ArrayList<String> GetOrderIDsByUserID(String cusID) {
     ArrayList<String> orderIDs = new ArrayList<>();
 
@@ -174,6 +175,7 @@ public class OrderHandler extends BaseHandler<Order>{
         }
         return orderIDs;
     }
+    
     
     public void updateOrderStatusToCompleted(String orderID) {
         try {

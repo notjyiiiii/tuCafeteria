@@ -14,6 +14,11 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     private String[] columnName = {"Food","Price"};
     private int row = -1;
     private String cusID;
+    private String vendorID;
+    private String vendorName;
+    private String orderID;
+    private String food;
+    private String foodPrice;
     
     public CUSTOMER_OrderHistory(){}
     
@@ -30,12 +35,37 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
             //from the completed items, get the orderID
             for(Order completedOrder : completedOrders){
                 String OrderID = completedOrder.getOrderid();
+                this.orderID = OrderID;
+                String vendorID = completedOrder.getVendorid();
+                this.vendorID = vendorID;
+                String vendorName="";
+                if(vendorID=="VD001"){
+                    vendorName = "Western";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD002"){
+                    vendorName = "Chinese";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD003"){
+                    vendorName = "Malay";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD004"){
+                    vendorName = "Indian";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD005"){
+                    vendorName = "Korean";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD006"){
+                    vendorName = "Japanese";
+                    this.vendorName = vendorName;
+                }
                 
                 //use the orderID from order to get food
                 OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
                 ArrayList<OrderSummary> ordersummary = orderSummaryHandler.getOrderSummaryByOrderID(OrderID);
             
                 for (OrderSummary orderSummary : ordersummary) {
+                    this.food = orderSummary.getFoodName();
+                    this.foodPrice = orderSummary.getFoodPrice();
                     modelReorder.addRow(new Object[]{orderSummary.getFoodName(), orderSummary.getFoodPrice()});
                 }
             }
@@ -235,8 +265,51 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrderHistoryBckActionPerformed
 
     private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            //generate new orderID
+            OrderHandler orderHandlerGenerate = new OrderHandler();
+            String reorderID = orderHandlerGenerate.generateOrderID();
+            //write into OrderSummary file
+            OrderMiddleManHandler ordermiddlemanHandler2;
+            ordermiddlemanHandler2 = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
+            ordermiddlemanHandler2.WriteOrderSummary(reorderID, cusID, food, foodPrice);
+            
+            OrderSummaryHandler ordersummaryHandler2;
+            ordersummaryHandler2 = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+            ordersummaryHandler2.WriteOrderSummary(reorderID, cusID, food, foodPrice);
+            
+            
+            CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName);
+            System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
+            reorder.setVisible(true);
+//        OrderSummaryHandler ordersummaryHandler;
+//            OrderMiddleManHandler ordermiddlemanHandler;
+//            try{
+//
+//                ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+//                //System.out.println(food+foodPrice);
+//                ordersummaryHandler.WriteOrderSummary(reorderID,cusID,food,foodPrice);
+//                CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID,vendorID,vendorName);
+//                reorder.setVisible(true);
+//                
+//                System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
+//                
+//            } catch(IOException | ClassNotFoundException ex){
+//                Logger.getLogger(CUSTOMER_ViewMenu.class.getName()).log(Level.SEVERE,null,ex);
+//                JOptionPane.showMessageDialog(this,"Error writing review to file");
+//            }
+//        } 
+//        
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+         
     }//GEN-LAST:event_btnReorderMouseClicked
 
     private void btnReorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReorderActionPerformed
