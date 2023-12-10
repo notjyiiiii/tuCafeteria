@@ -15,7 +15,12 @@ public class VendorProfilePage extends javax.swing.JFrame {
     public VendorProfilePage(Vendor vendor) throws IOException, ClassNotFoundException {
         initComponents();
         this.vendor = vendor;
-        jLabel1.setText(Java_assignment.LoggedInUser.username);
+        
+        VendorHandler vendorHandler = new VendorHandler();
+        this.vendor = vendorHandler.GetVendorByVendorID(Java_assignment.LoggedInUser.userid);
+        
+        
+        jLabel1.setText(vendor.getVendorName());
         jLabel2.setText(Java_assignment.LoggedInUser.userid);
         jLabel29.setText(Java_assignment.LoggedInUser.hpnum);
         jLabel31.setText(Java_assignment.LoggedInUser.email);

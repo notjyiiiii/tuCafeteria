@@ -21,3 +21,5 @@ O006;CS002;Nasi Lemak;1.0;
 O006;CS002;Nasi Lemak;1.0;
 O006;CS002;Nasi Lemak;1.0;
 O006;CS002;Nasi Lemak;1.0;
+ORD3;CS006;Kaya Toast;4.0;
+ORD3;CS006;Ayam Percik;8.0;
