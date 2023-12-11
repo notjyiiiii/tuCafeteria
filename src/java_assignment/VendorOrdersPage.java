@@ -658,6 +658,7 @@ public class VendorOrdersPage extends javax.swing.JFrame {
                         }
                     }
                 }else {
+                    System.out.println(orderId);
                     openViewPage(orderId);
                 }
             } catch (IOException ex) {

@@ -44,7 +44,7 @@ public class CustomerHandler extends BaseHandler<Customer>{
     throw new RuntimeException("Customer not found with ID: " + customerID);
     }
     
-    
+
 //    public String updateCredit(String customerID, String newCredit){
 //        for(Customer cs : this.collection){
 //            cs.setCredit(newCredit);
@@ -111,4 +111,5 @@ public class CustomerHandler extends BaseHandler<Customer>{
         
         return null;
     }
+
 }

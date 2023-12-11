@@ -356,7 +356,7 @@ public class OrdersView extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(this, "Update successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
-            } catch (IOException | ClassNotFoundException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(MenuEdit.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "Error updating item.", "Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -12,7 +12,7 @@ public class fileManager {
     private final String mainFolderPath, configFilePath;
     private String configVal;
     
-    //all the paths
+    // all the paths
     public fileManager(){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
@@ -128,7 +128,7 @@ public class fileManager {
 }
 
     
-    
+
     public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
         try{
             FileWriter fw = new FileWriter(filePath, false);
@@ -153,44 +153,69 @@ public class fileManager {
         
     }  
     
+//    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+//        try{
+//            FileWriter fw = new FileWriter(filePath, false);
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            
+//            String oldText = "";
+//            String newText = "";
+//
+//            FileReader fr = new FileReader(filePath);
+//            BufferedReader br = new BufferedReader(fr);
+//            
+//            String line = br.readLine();
+//             
+//            while (line != null) 
+//            {
+//                oldText += line + System.lineSeparator();
+//                line = br.readLine();
+//                
+//            for (String[] row: data)
+//            {
+//                for (String item: row)
+//                {
+//                    
+//                    newText += item;
+//                    newText += ";";
+//                }
+//                newText += "\n";
+//                
+//            }
+//            
+//            bw.write(newText);
+//            bw.close();
+//                }
+//            } catch (FileNotFoundException e){
+//            System.out.println(e);
+//        }
+//    }
+    
     public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
         try{
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            String oldText = "";
-            String newText = "";
-
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
             
-            String line = br.readLine();
-             
-            while (line != null) 
-            {
-                oldText += line + System.lineSeparator();
-                line = br.readLine();
-                
+            String textItem = "";
             for (String[] row: data)
             {
                 for (String item: row)
                 {
                     
-                    newText += item;
-                    newText += ";";
+                    textItem += item;
+                    textItem += ";";
                 }
-                newText += "\n";
+                textItem += "\n";
                 
             }
             
-            bw.write(newText);
+            bw.write(textItem);
             bw.close();
-                }
-            } catch (FileNotFoundException e){
+            
+        } catch (FileNotFoundException e){
             System.out.println(e);
         }
     }
     
-    
-    
-}
+}             

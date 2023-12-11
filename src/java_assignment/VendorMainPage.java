@@ -52,7 +52,7 @@ public class VendorMainPage extends javax.swing.JFrame {
         int totalMenus = menuHandler.GetTotalMenusForVendor();
         
         
-        //System.out.println("Total menus for vendor " + Java_assignment.LoggedInUser.userid + ": " + totalMenus);
+        System.out.println("Total menus for vendor " + Java_assignment.LoggedInUser.userid + ": " + totalMenus);
         lb_totalmenutxt.setText(Integer.toString(totalMenus));
         
         } catch (IOException | ClassNotFoundException e) {

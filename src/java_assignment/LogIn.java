@@ -257,6 +257,7 @@ public class LogIn extends javax.swing.JFrame {
                     rd.setVisible(true);
                     break;
                     
+                
         }
         } catch (IOException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);

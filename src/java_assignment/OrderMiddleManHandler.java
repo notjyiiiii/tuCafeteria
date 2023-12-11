@@ -3,30 +3,40 @@ package java_assignment;
 import java.util.ArrayList;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java_assignment.Enums.*;
 
-public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
+public class OrderMiddleManHandler extends BaseHandler<OrderMiddleMan> {
     
-    private ArrayList<OrderSummary> allOrders = new ArrayList<>();
+    private static ArrayList<OrderMiddleMan> allOrders = new ArrayList<>();
     
-    
-    public OrderSummaryHandler(String filePath, Class<OrderSummary> clazz) throws IOException, ClassNotFoundException{
-        super("OrderSummary", OrderSummary.class);
-        this.allOrders = collection;
+    public OrderMiddleManHandler(String filePath, Class<OrderMiddleMan> clazz) throws IOException, ClassNotFoundException{
+        super("OrderMiddleMan", OrderMiddleMan.class);
         if (allOrders.isEmpty()) {
             allOrders.addAll(collection);
         }
     }
     
+    public void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt"; // Update with your actual file path
+
+        try {
+            FileWriter fw = new FileWriter(filePath, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (Exception exception) {
+            System.out.println("Exception has been caught");
+        }
+    }
     
-    public ArrayList<OrderSummary> GetCusOrderSummary(String cusID)
+    public ArrayList<OrderMiddleMan> GetCusOrderSummary(String cusID)
     {
-        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+        ArrayList<OrderMiddleMan> orderSummary = new ArrayList<OrderMiddleMan>();
         
         for(int i = 0; i<this.collection.size(); i++)
         {
-            OrderSummary summary = collection.get(i);
+            OrderMiddleMan summary = collection.get(i);
             
             if (summary.getCusID().equals(cusID))
             {
@@ -37,12 +47,12 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         return orderSummary;
     }
     
-    public ArrayList<OrderSummary> GetOrderID(String orderID){
-        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+    public ArrayList<OrderMiddleMan> GetOrderID(String orderID){
+        ArrayList<OrderMiddleMan> orderSummary = new ArrayList<OrderMiddleMan>();
         
         for(int i = 0; i<this.collection.size(); i++)
         {
-            OrderSummary orderIDsummary = collection.get(i);
+            OrderMiddleMan orderIDsummary = collection.get(i);
             
             if (orderIDsummary.getOrderIDforSummary().equals(orderID))
             {
@@ -57,7 +67,7 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         
     public void WriteOrderSummary(String orderIDforSummary, String cusID, String food, String foodPrice) {
         // Create a new Review object with the provided values
-        OrderSummary newOrder = new OrderSummary();
+        OrderMiddleMan newOrder = new OrderMiddleMan();
         newOrder.setOrderIDforSummary(orderIDforSummary);
         newOrder.setCusID(cusID);
         newOrder.setFoodName(food);
@@ -72,7 +82,7 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
             ArrayList<String[]> data = new ArrayList<>();
             
             // Convert the Review objects in the collection to String arrays
-            for (OrderSummary order : collection) {
+            for (OrderMiddleMan order : collection) {
                 data.add(order.SerializeData());
             }
             
@@ -84,38 +94,36 @@ public class OrderSummaryHandler extends BaseHandler<OrderSummary> {
         }
     }
     
-    public ArrayList<OrderSummary> GetOrderByOrderID(String orderID)
-    {
-        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
-        
-        for(int i = 0; i<this.collection.size(); i++)
-        {
-            OrderSummary summary = collection.get(i);
-            
-            if (summary.getOrderIDforSummary().equals(orderID))
-            {
-                orderSummary.add(summary);
-            }
-        }
-        
-        return orderSummary;
-    }
-    
-    public ArrayList<OrderSummary> GetOrderByOrderIDs(List<String> orderIDs) {
-        ArrayList<OrderSummary> orderSummary = new ArrayList<>();
+    public ArrayList<OrderMiddleMan> getOrderSummaryByOrderID(String orderID) {
+    ArrayList<OrderMiddleMan> orderSummaries = new ArrayList<>();
 
-        for (int i = 0; i < this.collection.size(); i++) {
-            OrderSummary summary = this.collection.get(i);
-
-            // Assuming getOrderIDforSummary() returns the order ID for the summary
-            if (orderIDs.contains(summary.getOrderIDforSummary())) {
-                orderSummary.add(summary);
+        for (OrderMiddleMan orderSummary : this.collection) {
+            if (orderSummary.getOrderIDforSummary().equals(orderID)) {
+                orderSummaries.add(orderSummary);
             }
         }
 
-        return orderSummary;
+        return orderSummaries;
     }
+
     
+//    public ArrayList<OrderSummary> GetOrderSummaryByOrderID(String orderID)
+//    {
+//        ArrayList<OrderSummary> orderSummary = new ArrayList<OrderSummary>();
+//        
+//        for(int i = 0; i<this.collection.size(); i++)
+//        {
+//            OrderSummary summary = collection.get(i);
+//            
+//            if (summary.getOrderIDforSummary().equals(orderID))
+//            {
+//                orderSummary.add(summary);
+//            }
+//        }
+//        
+//        return orderSummary;
+//    }
+//    
     
 //    public ArrayList<OrderSummary> ReadOrderSummariesFromFile() {
 //        // Load the collection from the file

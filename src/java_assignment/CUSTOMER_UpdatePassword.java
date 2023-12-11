@@ -1,5 +1,10 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
     
     private Vendor vendor;
@@ -14,7 +19,7 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
 
         bottomPanel = new javax.swing.JPanel();
         btn_noti = new javax.swing.JButton();
-        btn_orders = new javax.swing.JButton();
+        btn_orderHis = new javax.swing.JButton();
         btn_dashb = new javax.swing.JButton();
         btn_insights = new javax.swing.JButton();
         btn_menu = new javax.swing.JButton();
@@ -46,18 +51,28 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
 
         btn_noti.setText("Notification");
 
-        btn_orders.setText("Orders");
+        btn_orderHis.setText("Order History");
+        btn_orderHis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_orderHisMouseClicked(evt);
+            }
+        });
 
         btn_dashb.setText("Dashboard");
+        btn_dashb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dashbMouseClicked(evt);
+            }
+        });
 
-        btn_insights.setText("Insights");
+        btn_insights.setText("TUCredit");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_insightsMouseClicked(evt);
             }
         });
 
-        btn_menu.setText("Menu");
+        btn_menu.setText("Order Status");
         btn_menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_menuMouseClicked(evt);
@@ -69,17 +84,17 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(16, 16, 16)
                 .addComponent(btn_noti)
-                .addGap(28, 28, 28)
-                .addComponent(btn_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btn_orderHis)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_dashb)
-                .addGap(32, 32, 32)
-                .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
+                .addComponent(btn_menu)
+                .addGap(29, 29, 29)
                 .addComponent(btn_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(17, 17, 17))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +105,7 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
                     .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_dashb, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_orderHis, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -283,14 +298,45 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-//        this.dispose();
-//        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-//        vmenup.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
+            this.dispose();
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
+
+    private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        CUSTOMER_OrderHistory vop = new CUSTOMER_OrderHistory();
+        vop.setVisible(true);
+    }//GEN-LAST:event_btn_orderHisMouseClicked
+
+    private void btn_dashbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashbMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_dashbMouseClicked
 
     /**
      * @param args the command line arguments
@@ -337,7 +383,7 @@ public class CUSTOMER_UpdatePassword extends javax.swing.JFrame {
     private javax.swing.JButton btn_insights;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_noti;
-    private javax.swing.JButton btn_orders;
+    private javax.swing.JButton btn_orderHis;
     private javax.swing.JCheckBox cb_showPw;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -7,13 +7,29 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java_assignment.Enums.OrderStatus;
 import java_assignment.Enums.OrderType;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java_assignment.Enums.OrderStatus;
+import javax.swing.table.DefaultTableModel;
 
 public class OrderHandler extends BaseHandler<Order>{
     
-    private ArrayList<Order> ol;
+    private static ArrayList<Order> allOrders = new ArrayList<>();
+    private DefaultTableModel orderTableModel;
     
-    public OrderHandler() throws IOException, ClassNotFoundException{
+    public OrderHandler(){
         super("Order", Order.class);
+    }
+    
+    public OrderHandler(DefaultTableModel orderTableModel) {
+        this.orderTableModel = orderTableModel;
+    }
+    
+    public OrderHandler(String filePath, Class<Order> clazz) throws IOException, ClassNotFoundException{
+        super("Order", Order.class);
+        if (allOrders.isEmpty()) {
+            allOrders.addAll(collection);
+        }
     }
     
     public Order GetOrderByOrderID(String orderID)
@@ -40,7 +56,7 @@ public class OrderHandler extends BaseHandler<Order>{
                 orderList.add(collection.get(i));
             }
         }
-        this.ol = orderList;
+        this.allOrders = orderList;
         return orderList;
     }
     
@@ -58,6 +74,7 @@ public class OrderHandler extends BaseHandler<Order>{
         return userOrderIDs;
     }
     
+   
     private int getMaxOrderNumber(String lastOrderID) {
         String prefix = "ORD";
         int maxOrderNumber = 0;
@@ -108,7 +125,7 @@ public class OrderHandler extends BaseHandler<Order>{
     }
     
     
-    public void WritePlaceOrder(String orderID, String cusID, String vendorID, String[] values) throws IOException {
+    public void WritePlaceOrder(String orderID, String cusID, String vendorID, LocalDateTime orderDateTime,String[] values) throws IOException {
         // Create a new Review object with the provided values
 //        String orderidentification = generateOrderID();
         Order newOrder = new Order();
@@ -118,6 +135,7 @@ public class OrderHandler extends BaseHandler<Order>{
         newOrder.setOrderid(orderID);
         newOrder.setCustomerid(cusID);
         newOrder.setVendorid(vendorID);
+        newOrder.setOrderDateTime(orderDateTime); 
         
         newOrder.setOrderStatus(OrderStatus.valueOf(values[0]));
         newOrder.setOrderType(OrderType.valueOf(values[1]));
@@ -159,19 +177,147 @@ public class OrderHandler extends BaseHandler<Order>{
                 orderList.add(collection.get(i));
             }
         }
-        this.ol = orderList;
+        this.allOrders = orderList;
         return orderList;
+    }
+    //order status
+    
+    public ArrayList<Order> GetOrderStatusByOrderID(String orderID){
+        
+        ArrayList<Order> orderstatus = new ArrayList<>();
+        
+        for(int i = 0; i<this.collection.size(); i++)
+        {
+            Order orderStatus = collection.get(i);
+            
+            if(orderStatus.getOrderid().equals(orderID))
+            {
+                orderstatus.add(orderStatus);
+            }
+        }
+        return orderstatus;
     }
     
     
     public int GetTotalOrders() {
-        if (ol != null) {
-            return ol.size();
+        if (allOrders != null) {
+            return allOrders.size();
         } else {
             return 0;
         }
     }
 
+    public ArrayList<String> GetOrderIDsByUserID(String cusID) {
+    ArrayList<String> orderIDs = new ArrayList<>();
+
+        for (int i = 0; i < this.collection.size(); i++) {
+            Order order = collection.get(i);
+
+            if (order.getCustomerid().equals(cusID)) {
+                orderIDs.add(order.getOrderid());
+            }
+        }
+        return orderIDs;
+    }
+    
+    public String getVendorIDByOrderID(String orderID) {
+    for (int i = 0; i < this.collection.size(); i++) {
+        Order orderStatus = collection.get(i);
+
+        if (orderStatus.getOrderid().equals(orderID)) {
+            // Assuming there is a method in your Order class to get vendorID, replace it with the actual method
+            return orderStatus.getVendorid();
+        }
+    }
+    return null; // If no matching orderID is found
+}
+    
+    public void updateOrderStatusToCompleted(String orderID) {
+        try {
+            fileManager fm = new fileManager();
+            ArrayList<String[]> fileContent = fm.readFile(this.filePath);
+
+            // Identify and update the line with the selected order ID to "COMPLETED"
+            for (int i = 0; i < fileContent.size(); i++) {
+                String[] parts = fileContent.get(i);
+
+                // Assuming the order ID is at index 0 (adjust if it's at a different index)
+                if (parts.length > 0 && parts[0].equals(orderID)) {
+                    // Update the status to "COMPLETED"
+                    parts[3] = "COMPLETED";
+
+                    // If you need to update other fields, do it here
+
+                    // Reconstruct the line with the updated status
+                    fileContent.set(i, parts);
+                    break; // Exit the loop after updating the matching order ID
+                }
+            }
+
+            // Write the updated data back to the file
+            fm.updateFile(this.filePath, fileContent);
+
+            System.out.println("Order status updated to COMPLETED successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //somehow correct??
+    public ArrayList<Order> GetCompletedOrderByUserID(String cusID){
+        
+        ArrayList<Order> orderstatus = new ArrayList<>();
+        
+        for(Order orderStatus : this.collection)
+        {
+            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equals(OrderStatus.DELIVERED.name()))
+            {
+                orderstatus.add(orderStatus);
+            }
+        }
+       //System.out.println(orderstatus);
+        return orderstatus;
+    }
+    
+//    public Order GetOrderByOrderID(String orderID) {
+//    for (Order order : collection) {
+//        if (order.getOrderid().equals(orderID)) {
+//            return order;
+//        }
+//    }
+//    return null; // Return null if the order with the specified ID is not found
+//    }
+    
+    public static void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt";
+
+        try {
+            FileWriter fw = new FileWriter(filePath, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+            System.out.println("OrderMiddleMan.txt file cleared successfully.");
+        } catch (IOException exception) {
+            System.out.println("Exception caught while clearing OrderMiddleMan.txt file.");
+            exception.printStackTrace();
+        }
+    }
+//    public ArrayList<Order> GetCompletedOrderByUserID(String cusID) {
+//    ArrayList<Order> orderstatus = new ArrayList<>();
+//
+//    for (Order orderStatus : this.collection) {
+//        System.out.println("Order ID: " + orderStatus.getOrderid());
+//        System.out.println("Customer ID: " + cusID);
+//        System.out.println("Order Status: " + orderStatus.getOrderStatus());
+//
+//        if (orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("Delivered")) {
+//            orderstatus.add(orderStatus);
+//        }
+//    }
+//    System.out.println(orderstatus);
+//    return orderstatus;
+//    }
     
     
     public float CalculateTotalIncomeForToday(String userID) {
@@ -258,7 +404,7 @@ public class OrderHandler extends BaseHandler<Order>{
                 orderList.add(collection.get(i));
             }
         }
-        this.ol = orderList;
+        this.allOrders = orderList;
         return orderList;
 
     }

@@ -5,7 +5,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java_assignment.Enums.*;
 
-public class OrderSummary implements IDataContainer, Serializable{
+public class OrderMiddleMan implements IDataContainer, Serializable{
     
     private String orderIDforSummary;
     private String cusID;
@@ -20,7 +20,7 @@ public class OrderSummary implements IDataContainer, Serializable{
         this.orderIDforSummary = orderIDforSummary;
     }
     
-    public OrderSummary(){}
+    public OrderMiddleMan(){}
 
     public String getCusID() {
         return cusID;
@@ -58,27 +58,10 @@ public class OrderSummary implements IDataContainer, Serializable{
             return dataString;
     }
     
-    public void DeserializeData(String[] dataArray) {
-    if (dataArray.length >= 4) {
+    public void DeserializeData(String[] dataArray){
         this.orderIDforSummary = dataArray[0];
         this.cusID = dataArray[1];
         this.foodName = dataArray[2];
         this.foodPrice = dataArray[3];
-    } else {
-        // Handle the case where the array does not have enough elements
-        System.err.println("Error: Insufficient elements in dataArray for deserialization");
-        // You might throw an exception, log an error, or take other appropriate actions
     }
-}
-
-    
-    public String toString() {
-        // Return a string representation of the Order object in the desired format
-    return this.getOrderIDforSummary() + ";" + 
-            this.getCusID() + ";" +
-            this.getFoodName() + ";" +
-            this.getFoodPrice();
-            
-    }
-    
 }

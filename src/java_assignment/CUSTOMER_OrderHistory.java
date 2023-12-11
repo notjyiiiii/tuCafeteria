@@ -1,11 +1,83 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
 
-    public CUSTOMER_OrderHistory() {
+    private DefaultTableModel modelReorder = new DefaultTableModel();
+    private String[] columnName = {"Food","Price"};
+    private int row = -1;
+    private String cusID;
+    private String vendorID;
+    private String vendorName;
+    private String orderID;
+    private String food;
+    private String foodPrice;
+    
+    public CUSTOMER_OrderHistory(){}
+    
+    public CUSTOMER_OrderHistory(String cusID) {
+        
         initComponents();
+        this.cusID = cusID;
+        try {
+            //get completed items based on cusID
+            modelReorder.setColumnIdentifiers(columnName);
+            OrderHandler orderHandler = new OrderHandler("Order",Order.class);
+            ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(cusID);
+            
+            //from the completed items, get the orderID
+            for(Order completedOrder : completedOrders){
+                String OrderID = completedOrder.getOrderid();
+                this.orderID = OrderID;
+                String vendorID = completedOrder.getVendorid();
+                this.vendorID = vendorID;
+                String vendorName="";
+                if(vendorID=="VD001"){
+                    vendorName = "Western";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD002"){
+                    vendorName = "Chinese";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD003"){
+                    vendorName = "Malay";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD004"){
+                    vendorName = "Indian";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD005"){
+                    vendorName = "Korean";
+                    this.vendorName = vendorName;
+                }else if(vendorID=="VD006"){
+                    vendorName = "Japanese";
+                    this.vendorName = vendorName;
+                }
+                
+                //use the orderID from order to get food
+                OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
+                ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderByOrderID(OrderID);
+            
+                for (OrderSummary orderSummary : ordersummary) {
+                    this.food = orderSummary.getFoodName();
+                    this.foodPrice = orderSummary.getFoodPrice();
+                    modelReorder.addRow(new Object[]{orderSummary.getFoodName(), orderSummary.getFoodPrice()});
+                }
+            }
+            OrderHistory.setModel(modelReorder);
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -124,34 +196,33 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
-                                .addGap(271, 271, 271))))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
                         .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderHistoryBck, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReorder, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +237,7 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(topPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -178,17 +249,83 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnOrderHistoryBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckMouseClicked
-//        this.dispose();
-//        VendorOrdersPage vop = new VendorOrdersPage();
-//        vop.setVisible(true);
+        try {
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnOrderHistoryBckMouseClicked
 
     private void btnOrderHistoryBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderHistoryBckActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOrderHistoryBckActionPerformed
 
+    private String[][] getSelectedDataFromOrderHistory() {
+        int[] selectedRows = OrderHistory.getSelectedRows();
+        int colCount = modelReorder.getColumnCount();
+        String[][] orderData = new String[selectedRows.length][colCount];
+
+        for (int i = 0; i < selectedRows.length; i++) {
+            int selectedRow = selectedRows[i];
+            for (int col = 0; col < colCount; col++) {
+                orderData[i][col] = String.valueOf(modelReorder.getValueAt(selectedRow, col));
+            }
+        }
+
+        return orderData;
+    }
+    
     private void btnReorderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReorderMouseClicked
         // TODO add your handling code here:
+        try {
+        this.dispose();
+        OrderHandler orderHandlerGenerate = new OrderHandler();
+        String reorderID = orderHandlerGenerate.generateOrderID();
+
+        // Assuming orderData is available in your CUSTOMER_OrderHistory class
+        String[][] orderData = getSelectedDataFromOrderHistory();
+
+        // Loop through each row in orderData and write to OrderSummary
+        for (int i = 0; i < orderData.length; i++) {
+            String reorderedFood = orderData[i][0]; // Extract food name
+            double reorderedFoodPrice = Double.parseDouble(orderData[i][1]); // Extract food price
+
+            // Create an instance of OrderSummaryHandler
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+
+            // Call WriteOrderSummary to write the reordered item to OrderSummary
+            orderSummaryHandler.WriteOrderSummary(reorderID, cusID, reorderedFood, String.valueOf(reorderedFoodPrice));
+            System.out.println("Reordered item written to OrderSummary successfully.");
+        }
+
+        CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName, orderData);
+        System.out.println("\nView Menu's orderID, OrderSummary: " + reorderID);
+        reorder.setVisible(true);
+
+    } catch (IOException ex) {
+        Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+        
+//        //generate new orderID
+//        OrderHandler orderHandlerGenerate = new OrderHandler();
+//        String reorderID = orderHandlerGenerate.generateOrderID();
+//
+//
+//        String[][] orderData = getSelectedDataFromOrderHistory();
+//        
+//        this.dispose();
+//        CUSTOMER_ConfirmOrder reorder = new CUSTOMER_ConfirmOrder(reorderID, vendorID, vendorName,orderData);
+//        System.out.println("\nView Menu's orderID,OrderSummary: "+reorderID);
+//        reorder.setVisible(true);
+      
+         
     }//GEN-LAST:event_btnReorderMouseClicked
 
     private void btnReorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReorderActionPerformed

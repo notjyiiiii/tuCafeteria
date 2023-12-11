@@ -1,12 +1,21 @@
 package java_assignment;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java_assignment.Enums.OrderStatus;
 
 public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
@@ -22,93 +31,182 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private String[] columnName = {"Food","Price"};
     private String[][] itemsArray;
     private ButtonGroup OrderType = new ButtonGroup();
+    private LocalDateTime now;
     
     
     public CUSTOMER_ConfirmOrder() {
         initComponents();          
     }
     
-    public CUSTOMER_ConfirmOrder(String orderID,String vendorID, String vendorName ) {
+    public CUSTOMER_ConfirmOrder(String orderID,String vendorID, String vendorName,String[][] orderData ) {
         initComponents();
         
-        OrderType.add(RBdinein); 
-        OrderType.add(RBtakeaway); 
-        OrderType.add(RBdelivery); 
-        
-        try {
-            initComponents();
-            this.selFood = selFood;
-            this.selFoodDesc = selFoodDesc;
-            this.selFoodPrice = selFoodPrice;
-            this.vendorID = vendorID;
-            this.vendorName = vendorName;
-            this.orderID = orderID;
-            
-            System.out.println("\nBeing pass from menu in confirm order, writing to order_1 file: "+ this.orderID);
-            lb_Vname.setText(vendorName);
-            
-//        modelFood.setColumnIdentifiers(columnName);
-//        Object[] rowData = {selFood, selFoodPrice};
-//        modelFood.addRow(rowData);
-//        ViewOrder.setModel(modelFood);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
 
+        String formattedDateTime = now.format(formatter);
+        this.now = now;
+        this.orderID = orderID;
+        this.vendorID = vendorID;
+        this.vendorName = vendorName;
+        lb_Vname.setText(vendorName);
+        // Display the passed order data in ViewOrder model
+        displayOrderDataInViewOrder(orderData);
 
-        modelFood.setColumnIdentifiers(columnName);
+        // Populate other components or perform additional setup if needed
 
-        ViewOrder.setModel(modelFood);
-
-        modelFood.setColumnIdentifiers(columnName);
-
-        ViewOrder.setModel(modelFood);
-
-//        ViewOrder.getColumnModel().getColumn(0).setPreferredWidth(50);
-//        ViewOrder.getColumnModel().getColumn(1).setPreferredWidth(50);
-//        ViewOrder.getColumnModel().getColumn(2).setPreferredWidth(50);
-
-        OrderSummaryHandler ordersummaryHandler = new OrderSummaryHandler("OrderSummary",OrderSummary.class);
-        ArrayList<OrderSummary> ordersummary = ordersummaryHandler.GetCusOrderSummary(cusID);
-
-        double totalFoodPrice = 0.0;
-        
-        for (OrderSummary ordersummaryItem : ordersummary) {
-            modelFood.addRow(new Object[]{ordersummaryItem.getFoodName(), ordersummaryItem.getFoodPrice()});
-            totalFoodPrice += Double.parseDouble(ordersummaryItem.getFoodPrice());
-            
-            
-        }
-        //txtSubtotal.setText("");
-        System.out.println("Total price: "+totalFoodPrice);
-        txtSubtotal.setText(String.valueOf(totalFoodPrice));
-        
-                } catch (IOException ex) {
-                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-        
+        // Optional: Load customer credit if userid is not null
         if (Java_assignment.LoggedInUser.userid != null) {
             try {
                 CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
                 double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
-                
-                //txtAvailableCredit.setText("");
-                txtAvailableCredit.setText("RM: "+String.valueOf(x));
-                
-                System.out.println("\nAvailable credit: "+x);
-            } catch (IOException ex) {
-                Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                txtAvailableCredit.setText("RM: " + String.valueOf(String.format("%.2f", x)));
+                System.out.println("\nAvailable credit: " + x);
+            } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            // Handle the case where userid is null (perhaps display an error message)
+            System.err.println("Userid is null");
         }
-        else {
-        // Handle the case where userid is null (perhaps display an error message)
-        System.err.println("Userid is null");
-        }
+
         
     }
+    
+    
+    
+  private void displayOrderDataInViewOrder(String[][] orderData) {
+    DefaultTableModel newModelFood = new DefaultTableModel();
+    newModelFood.setColumnIdentifiers(columnName);
 
+    for (String[] order : orderData) {
+        newModelFood.addRow(order);
+    }
+
+    ViewOrder.setModel(newModelFood);
+
+    double totalFoodPrice = 0.0;
+
+    for (String[] orderItem : orderData) {
+        totalFoodPrice += Double.parseDouble(orderItem[1]); // Assuming price is in the second column
+    }
+
+    txtSubtotal.setText(String.valueOf(String.format("%.2f", totalFoodPrice)));
+}  
+    
+    
+//    public CUSTOMER_ConfirmOrder(String orderID,String vendorID, String vendorName ) {
+//        initComponents();
+//        
+//        OrderType.add(RBdinein); 
+//        OrderType.add(RBtakeaway); 
+//        OrderType.add(RBdelivery); 
+//        
+//        try {
+//            initComponents();
+//            this.selFood = selFood;
+//            this.selFoodDesc = selFoodDesc;
+//            this.selFoodPrice = selFoodPrice;
+//            this.vendorID = vendorID;
+//            this.vendorName = vendorName;
+//            this.orderID = orderID;
+//            
+//            LocalDateTime now = LocalDateTime.now();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+//
+//            String formattedDateTime = now.format(formatter);
+//
+//            // Store the LocalDateTime object directly
+//            this.now = now;
+//            
+//            
+//            System.out.println("\nBeing pass from menu in confirm order, writing to Order file: "+ this.orderID);
+//            lb_Vname.setText(vendorName);
+//            System.out.println(vendorName);
+//            
+//            
+//            
+//            
+////        modelFood.setColumnIdentifiers(columnName);
+////        Object[] rowData = {selFood, selFoodPrice};
+////        modelFood.addRow(rowData);
+////        ViewOrder.setModel(modelFood);
+//
+//
+//        modelFood.setColumnIdentifiers(columnName);
+//
+//        ViewOrder.setModel(modelFood);
+//
+//        modelFood.setColumnIdentifiers(columnName);
+//
+//        ViewOrder.setModel(modelFood);
+//
+////        ViewOrder.getColumnModel().getColumn(0).setPreferredWidth(50);
+////        ViewOrder.getColumnModel().getColumn(1).setPreferredWidth(50);
+////        ViewOrder.getColumnModel().getColumn(2).setPreferredWidth(50);
+//
+//        OrderMiddleManHandler ordermiddlemanHandler = new OrderMiddleManHandler("OrderMiddleMan",OrderMiddleMan.class);
+//        ArrayList<OrderMiddleMan> ordermiddleman = ordermiddlemanHandler.GetCusOrderSummary(cusID);
+//
+//        double totalFoodPrice = 0.0;
+//        
+//        DefaultTableModel newModelFood = new DefaultTableModel();
+//        newModelFood.setColumnIdentifiers(columnName);
+//        
+//        for (OrderMiddleMan ordermiddlemanItem : ordermiddleman) {
+//            modelFood.addRow(new Object[]{ordermiddlemanItem.getFoodName(), ordermiddlemanItem.getFoodPrice()});
+//            totalFoodPrice += Double.parseDouble(ordermiddlemanItem.getFoodPrice());
+//            
+//            
+//        }
+//        //txtSubtotal.setText("");
+//        ViewOrder.setModel(newModelFood);
+//        System.out.println("Total price: "+totalFoodPrice);
+//        txtSubtotal.setText(String.valueOf(String.format("%.2f",totalFoodPrice)));
+//        
+//                } catch (IOException ex) {
+//                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//        
+//        if (Java_assignment.LoggedInUser.userid != null) {
+//            try {
+//                CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
+//                double x = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
+//                
+//                //txtAvailableCredit.setText("");
+//                txtAvailableCredit.setText("RM: "+String.valueOf(String.format("%.2f",x)));
+//                
+//                System.out.println("\nAvailable credit: "+x);
+//            } catch (IOException ex) {
+//                Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
+//            } 
+//        }
+//        else {
+//        // Handle the case where userid is null (perhaps display an error message)
+//        System.err.println("Userid is null");
+//        }
+//        
+//    }
+
+    private void clearOrderMiddleManFile() {
+        String filePath = "OrderMiddleMan.txt"; // Update with your actual file path
+
+        try {
+            FileWriter fw = new FileWriter(filePath, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        } catch (Exception exception) {
+            System.out.println("Exception has been caught");
+        }
+    }
+    
     public CUSTOMER_ConfirmOrder(String[][] itemsArray) {
         initComponents();
 
@@ -143,7 +241,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         lb_checkout = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        lb_Vname = new javax.swing.JLabel();
+        lb_Vname = new javax.swing.JTextField();
         lb_checkout1 = new javax.swing.JLabel();
         lb_checkout3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -226,12 +324,8 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 189, 49));
         jPanel2.setForeground(new java.awt.Color(255, 189, 49));
 
-        lb_Vname.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
-        lb_Vname.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_VnameMouseClicked(evt);
-            }
-        });
+        lb_Vname.setEditable(false);
+        lb_Vname.setBackground(new java.awt.Color(242, 189, 49));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -239,15 +333,15 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lb_Vname, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lb_Vname, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         lb_checkout1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
@@ -504,24 +598,21 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void lb_quit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quit1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void OrderBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderBackMouseClicked
-//        this.dispose();
-//        VendorOrdersPage vop = new VendorOrdersPage();
-//        vop.setVisible(true);
+        this.dispose();
+        CUSTOMER_ViewMenu vop = new CUSTOMER_ViewMenu();
+        vop.setVisible(true);
     }//GEN-LAST:event_OrderBackMouseClicked
 
     private void OrderBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_OrderBackActionPerformed
-
-    private void lb_VnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_VnameMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_lb_VnameMouseClicked
 
     private void btnCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelOrderMouseClicked
         // TODO add your handling code here:
@@ -534,9 +625,17 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 //            cancel.setVisible(true);
 //
 //        }
-        this.dispose();
-        CUSTOMER_ViewMenu cancel = new CUSTOMER_ViewMenu();
-        cancel.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            this.dispose();
+            CUSTOMER_Main main = new CUSTOMER_Main();
+            main.setVisible(true);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_ViewVendorProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCancelOrderMouseClicked
 
     private void btnCancelOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelOrderActionPerformed
@@ -545,19 +644,23 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
     private void btnPlaceOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlaceOrderMouseClicked
         // TODO add your handling code here:
-        String orderStatus = "Pending";
+        
+        
+        
+        
+        
 //        String food = String.valueOf(modelFood.getValueAt(row, 0));
 //        String foodPrice = String.valueOf(modelFood.getValueAt(row, 1));
         
         String orderType = "";
         if(RBdinein.isSelected()){
-            orderType = "Dine-In";
+            orderType = "DINE_IN";
         }
         else if(RBtakeaway.isSelected()){
-            orderType = "Takeaway";
+            orderType = "PICK_UP";
         }
         else{
-            orderType = "Delivery";
+            orderType = "DELIVERY";
         }
         Object Location = comboLocation.getSelectedItem();
         
@@ -567,9 +670,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         String orderAmount = txtSubtotal.getText();
         String deliveryFees = DeliveryFeeCus.getText();
         String totalAmount = TotalCus.getText();
-        
+        String orderStatusString = "PENDING";
         //check enough credit or not
         try {
+                OrderStatus orderStatus = OrderStatus.valueOf(orderStatusString);
                 CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
                 double credit = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
                 
@@ -580,10 +684,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 }
                 else{
                     JOptionPane.showMessageDialog(this,"Order successfully!");
-                    double newcredit = credit - Double.parseDouble(totalAmount);
+                    //double newcredit = credit - Double.parseDouble(totalAmount);
                     //CustomerHandler customerHandler = new CustomerHandler();
                     // Call the updateCredit method to update the credit
-                    customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    //double updatedCredit = customerHandler.updateCredit(cusID, String.valueOf(newcredit));
+                    
                     // Print or use the updated credit as needed
                     
                     
@@ -591,13 +696,21 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 //                    OrderHandler orderHandlerGenerate = new OrderHandler();
 //                    String orderID = orderHandlerGenerate.generateOrderID();
 
-                    String[] orders = {orderStatus,orderType,String.valueOf(Location),orderAmount,deliveryFees,totalAmount};
+                    String[] orders = {orderStatus.toString(),orderType,String.valueOf(Location),orderAmount,deliveryFees,totalAmount};
 
                     OrderHandler orderHandler;
+                    
                     try{
-                        orderHandler = new OrderHandler();
-                        System.out.println(orderID +"before writing to order_1");
-                        orderHandler.WritePlaceOrder(orderID, cusID, vendorID, orders);
+                        Order datetime = new Order();
+                        //LocalDateTime orderDateTime = LocalDateTime.parse(formattedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
+                        datetime.setOrderDateTime(now);
+                        
+                        orderHandler = new OrderHandler("Order",Order.class);
+                        System.out.println(orderID +"before writing to order");
+                        
+                        
+                        
+                        orderHandler.WritePlaceOrder(orderID, cusID, vendorID, now,orders);
                         System.out.println("After writing order to file: "+ orderID);
 
                     }catch (IOException | ClassNotFoundException ex){
@@ -605,6 +718,11 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this,"Error writing review to file");
                     }
                     
+                    //String filePath = "OrderMiddleMan.txt"; // Update with your actual file path
+
+                     
+
+
                     
                     this.dispose();
                     CUSTOMER_OrderStatus orderstatus = new CUSTOMER_OrderStatus(orderID);
@@ -615,7 +733,12 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CUSTOMER_ConfirmOrder.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
+//        finally{
+//                System.out.println("Before calling orderMiddleMan.");
+//                clearOrderMiddleManFile();
+//                System.out.println("After calling orderMiddleMan.");
+//            }
         
         
         
@@ -711,7 +834,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lb_Vname;
+    private javax.swing.JTextField lb_Vname;
     private javax.swing.JLabel lb_checkout;
     private javax.swing.JLabel lb_checkout1;
     private javax.swing.JLabel lb_checkout2;

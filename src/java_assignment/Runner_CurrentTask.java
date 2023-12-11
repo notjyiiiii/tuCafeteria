@@ -433,7 +433,7 @@ public class Runner_CurrentTask extends javax.swing.JFrame {
                 
                 hdlr.updateOrderStatus(this.orderid, OrderStatus.DELIVERING);
             }
-            catch(IOException | ClassNotFoundException ex)
+            catch(IOException ex)
             {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error updating OrderStatus for Order.txt: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -457,7 +457,7 @@ public class Runner_CurrentTask extends javax.swing.JFrame {
                 
                 hdlr.updateOrderStatus(selectedTask.getOrderid(), OrderStatus.DELIVERED);
             }
-            catch(IOException | ClassNotFoundException ex)
+            catch(IOException ex)
             {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error updating OrderStatus for Order.txt: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
