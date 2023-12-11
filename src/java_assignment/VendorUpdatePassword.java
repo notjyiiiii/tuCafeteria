@@ -12,6 +12,7 @@ public class VendorUpdatePassword extends javax.swing.JFrame {
 
     public VendorUpdatePassword(Vendor vendor) {
         initComponents();
+        this.vendor= vendor;
     }
 
     @SuppressWarnings("unchecked")

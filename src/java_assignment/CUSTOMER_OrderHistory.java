@@ -139,7 +139,6 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
         );
 
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Search");
 
         OrderHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,6 +162,11 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
         jScrollPane1.setViewportView(OrderHistory);
 
         jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnOrderHistoryBck.setText("Back");
         btnOrderHistoryBck.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,6 +336,48 @@ public class CUSTOMER_OrderHistory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReorderActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+        String searchQuery = jTextField1.getText();
+        performSearch(searchQuery);
+
+        } catch (IOException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorMenuPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    private void performSearch(String query) throws IOException, ClassNotFoundException {
+        modelReorder.setRowCount(0);
+
+        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+        ArrayList<Order> completedOrders = orderHandler.GetCompletedOrderByUserID(cusID);
+
+        // Iterate through completed orders
+        for (Order doneso : completedOrders) {
+            String orderID = doneso.getOrderid();
+
+            // Use the orderID from order to get food
+            OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+            ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderByOrderID(orderID);
+
+            // Iterate through order summaries and add matching items to the table
+            for (OrderSummary orderSummary : ordersummary) {
+                this.food = orderSummary.getFoodName();
+                this.foodPrice = orderSummary.getFoodPrice();
+
+                // Check if any column contains the search query
+                if (food.toLowerCase().contains(query.toLowerCase()) ||
+                    foodPrice.toLowerCase().contains(query.toLowerCase())) {
+                    modelReorder.addRow(new Object[]{food, foodPrice});
+                }
+            }
+        }
+    }
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -270,7 +270,7 @@ public class OrderHandler extends BaseHandler<Order>{
         
         for(Order orderStatus : this.collection)
         {
-            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equals(OrderStatus.DELIVERED.name()))
+            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equals(OrderStatus.DELIVERED))
             {
                 orderstatus.add(orderStatus);
             }

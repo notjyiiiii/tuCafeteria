@@ -8,6 +8,9 @@
 384;VD001;CS003;Your order#O027 has been accepted! Your order is preparing...;2023-12-11T01:57:55.387961;Unread
 778;VD001;CS003;Your order#O017 has been declined :( It's sad...;2023-12-11T01:58:14.489707;Unread
 570;VD001;CS003;Your order#O027 has been accepted! Your order is preparing...;2023-12-11T05:00:41.034592;Unread
+104;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T12:22:52.785514;Unread
+986;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T13:56:20.879474;Unread
+691;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T13:59:01.699665;Unread
 003;CS006;VD001;ehhhhdsdshhhh;2023-12-09T23:25:55.755853;Read
 004;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
 005;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
@@ -19,11 +22,8 @@
 011;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
 012;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 013;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
-014;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
+014;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;Read
 015;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 016;CS006;VD001;An order has been placed! Please accept or cancel in 5 minutes;2023-12-09T23:25:55.755853;unread
 584;AD008;VD001;fixing notibug;2023-12-11T01:23:19.790853;Unread
 394;AD008;VD001;haaaaaaiiiiiiiii;2023-12-11T05:23:45.336005;Read
-104;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T12:22:52.785514;Unread;
-986;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T13:56:20.879474;Unread;
-691;VD001;CS006;Your order#ORD1 has been accepted! Your order is preparing...;2023-12-11T13:59:01.699665;Unread;

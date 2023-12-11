@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_assignment.Enums.OrderStatus;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class CUSTOMER_OrderStatus extends javax.swing.JFrame {
@@ -33,20 +35,17 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
 
     try {
         OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
 
         for (String orderID : orderIDs) {
             ArrayList<OrderSummary> ordersummary = orderSummaryHandler.GetOrderID(orderID);
-
-            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
             ArrayList<Order> orderStatusList = orderHandler.GetOrderStatusByOrderID(orderID);
 
             for (OrderSummary orderSummaryItem : ordersummary) {
-                // Find matching order status in orderStatusList
                 Optional<Order> matchingOrderStatus = orderStatusList.stream()
                         .filter(order -> order.getOrderid().equals(orderID))
                         .findFirst();
 
-                // Add data to the modelOrderStatus
                 if (matchingOrderStatus.isPresent()) {
                     OrderStatus orderStatus = matchingOrderStatus.get().getOrderStatus();
                     modelOrderStatus.addRow(new Object[]{
@@ -54,44 +53,7 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
                             orderSummaryItem.getFoodName(),
                             orderStatus
                     });
-
-                    if (OrderStatus.DELIVERED.equals(orderStatus)) {
-                        // Retrieve the order ID and vendor ID for delivered orders
-                        String deliveredOrderID = orderSummaryItem.getOrderIDforSummary();
-
-                        // Use OrderHandler to get the vendor ID for the delivered order
-                        Order deliveredOrder = orderHandler.GetOrderByOrderID(deliveredOrderID);
-
-                        // Assuming there is a method like getVendorID() in the Order class
-                        String vendorID = deliveredOrder.getVendorid(); // Replace with the actual method to get vendor ID
-
-                        // Use the retrieved values as needed
-                        System.out.println("Delivered Order ID: " + deliveredOrderID);
-                        System.out.println("Vendor ID: " + vendorID);
-
-                        // Prompt the user to write a review
-                        int confirmResult = JOptionPane.showConfirmDialog(
-                                this,
-                                "Your order has been delivered. Would you like to write a review?",
-                                "Write Review",
-                                JOptionPane.YES_NO_OPTION
-                        );
-
-                        if (confirmResult == JOptionPane.YES_OPTION) {
-                            // Open the review writing dialog or perform any other action
-                            // You can replace the following line with the code to open your review dialog
-                            this.dispose();
-                            CUSTOMER_Review review = new CUSTOMER_Review(deliveredOrderID);
-                            review.setVisible(true);
-
-                            // Update the order status to "COMPLETED" only when a review is confirmed
-                            Order sOrder = orderHandler.GetOrderByOrderID(orderID);
-                            sOrder.setOrderStatus(OrderStatus.COMPLETED);
-                            orderHandler.UpdateItem(sOrder, sOrder);
-                        }
-                    }
                 } else {
-                    // Handle the case where order status is not found (you can set a default value or leave it empty)
                     modelOrderStatus.addRow(new Object[]{
                             orderSummaryItem.getOrderIDforSummary(),
                             orderSummaryItem.getFoodName(),
@@ -103,7 +65,66 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
     } catch (IOException | ClassNotFoundException ex) {
         Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
     }
+
+    // Add a listener to the table to handle events when a row is selected
+    TOrderStatus.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = TOrderStatus.getSelectedRow();
+                if (selectedRow != -1) {
+                    String selectedOrderID = (String) TOrderStatus.getValueAt(selectedRow, 0);
+                    String selectedFoodName = (String) TOrderStatus.getValueAt(selectedRow, 1);
+                    OrderStatus selectedOrderStatus = (OrderStatus) TOrderStatus.getValueAt(selectedRow, 2);
+
+                    if (OrderStatus.DELIVERED.equals(selectedOrderStatus)) {
+                        handleDeliveredOrder(selectedOrderID, selectedFoodName);
+                    }
+                }
+            }
+        }
+    });
 }
+
+
+
+    private void handleDeliveredOrder(String orderID, String foodName) {
+        // Prompt the user to write a review
+        int confirmResult = JOptionPane.showConfirmDialog(
+                this,
+                "Your order has been delivered. Would you like to write a review for " + foodName + "?",
+                "Write Review",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmResult == JOptionPane.YES_OPTION) {
+            // Open the review writing dialog or perform any other action
+            // You can replace the following line with the code to open your review dialog
+            this.dispose();
+            CUSTOMER_Review review = new CUSTOMER_Review(orderID);
+            review.setVisible(true);
+
+            // Update the order status to "COMPLETED" only when a review is confirmed
+            try {
+                OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+
+                // Get the specific order with the correct orderID
+                Order deliveredOrder = orderHandler.GetOrderByOrderID(orderID);
+
+                // Assuming there is a method like getVendorID() in the Order class
+                String vendorID = deliveredOrder.getVendorid(); // Replace with the actual method to get vendor ID
+
+                // Update the order status to "COMPLETED"
+                deliveredOrder.setOrderStatus(OrderStatus.COMPLETED);
+
+                // Update the order in the database
+                orderHandler.UpdateItem(deliveredOrder, deliveredOrder);
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(CUSTOMER_OrderStatus.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 
 
 

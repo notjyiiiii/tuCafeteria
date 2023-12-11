@@ -21,51 +21,45 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     private LocalDateTime now;
     private String orderid;
     
-    public CUSTOMER_Review(String orderid){
-        try {
-            initComponents();
-            
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
-            String formattedDateTime = now.format(formatter);
-            this.now = now;
-            
-            modelReview.setColumnIdentifiers(columnName);
-            
-            ViewMenu.setModel(modelReview);
-            
-            
-            
-            ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
-            ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(30);
-            ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(200);
-            ViewMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
-            
-            ReviewHandler reviewHandler = new ReviewHandler();
-//        ArrayList<Review> reviews = reviewHandler.getReviewsForVendor(vendorID);
-//        
-//        for (Review review : reviews) {
-//            modelReview.addRow(new Object[]{review.getCustomerName(), review.getReview(), review.getRating()});
-//        }
+    public CUSTOMER_Review(String orderid) {
+    try {
+        initComponents();
 
-    ArrayList<Review> review = reviewHandler.GetReview(vendorID);
+        // Initialize the vendorID to null
+        this.vendorID = null;
 
-    for (Review reviewList : review) {
-        modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating(),reviewList.getReviewDateTime()});
+        // Get the order list for the given order ID
+        OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+        ArrayList<Order> orderList = orderHandler.GetOrderStatusByOrderID(orderid);
+
+        // Assuming you want the vendor ID from the first order in the list
+        if (!orderList.isEmpty()) {
+            this.vendorID = orderList.get(0).getVendorid();
+        }
+
+        // Set the orderid attribute
+        this.orderid = orderid;
+
+        // ... other code to initialize components ...
+
+        // Populate the review table
+        ReviewHandler reviewHandler = new ReviewHandler();
+        ArrayList<Review> review = reviewHandler.GetReview(vendorID);
+
+        for (Review reviewList : review) {
+            modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getRating(), reviewList.getReview(), reviewList.getReviewDateTime()});
+        }
+    } catch (IOException | ClassNotFoundException ex) {
+        Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
     }
-            } catch (IOException ex) {
-                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
+}
+
     
     
-    public CUSTOMER_Review(String vendorID,String vendorName,String orderID) throws IOException, ClassNotFoundException {
+    public CUSTOMER_Review(String vendorID,String vendorName) throws IOException, ClassNotFoundException {
         initComponents();
         this.vendorID = vendorID;
         this.vendorName = vendorName;
-        this.orderid = orderID;
         
         OrderSummaryHandler osh = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
         ArrayList<OrderSummary> newOrders = osh.GetCusOrderSummary(Java_assignment.LoggedInUser.userid);
@@ -205,6 +199,11 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
                 btnReviewBckMouseClicked(evt);
             }
         });
+        btnReviewBck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReviewBckActionPerformed(evt);
+            }
+        });
 
         btnWriteReview.setText("Write Review");
         btnWriteReview.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,21 +302,18 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btnReviewBckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReviewBckMouseClicked
-        
         try {
+            // TODO add your handling code here:
+            OrderHandler orderHandler = new OrderHandler("Order", Order.class);
+            ArrayList<String> orderIDs = orderHandler.GetOrderIDsByUserID(Java_assignment.LoggedInUser.userid);
+
             this.dispose();
-            CUSTOMER_ViewVendorProfile vdProfile = new CUSTOMER_ViewVendorProfile(vendorID,vendorName);
-            vdProfile.setVisible(true);
-            
-            
-            
-            } catch (IOException ex) {
-                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
+            CUSTOMER_OrderStatus orderStatus = new CUSTOMER_OrderStatus(orderIDs);
+            orderStatus.setVisible(true);
+
+        } catch (IOException | ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        
     }//GEN-LAST:event_btnReviewBckMouseClicked
     
     public void updateViewOrderTable(String food, String foodDesc, String foodPrice) {
@@ -338,28 +334,24 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     }//GEN-LAST:event_btnWriteReviewActionPerformed
 
     private void btnWriteReviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnWriteReviewMouseClicked
-        // TODO add your handling code here:
-        
-        
+        Logger.getLogger(CUSTOMER_Review.class.getName()).info("orderid: " + orderid);
+        Logger.getLogger(CUSTOMER_Review.class.getName()).info("vendorID: " + vendorID);
+
         String review = txtWriteReview.getText();
         String rating = String.valueOf(comboRating.getSelectedItem());
-        String[] reviews = {cusName,rating,review,String.valueOf(now)};
+        String[] reviews = {cusName, rating, review, String.valueOf(now)};
         modelReview.addRow(reviews);
-        
-        
+
         //write to file
         ReviewHandler reviewHandler;
         try {
             reviewHandler = new ReviewHandler();
-            reviewHandler.WriteReview(vendorID,orderid, reviews);
-            
-            
+            reviewHandler.WriteReview(vendorID, orderid, reviews);
         } catch (IOException | ClassNotFoundException ex) {
             // Handle exceptions as needed
             Logger.getLogger(CUSTOMER_Review.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Error writing review to file.");
         }
-        
     }//GEN-LAST:event_btnWriteReviewMouseClicked
 
     private void txtWriteReviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtWriteReviewMouseClicked
@@ -370,6 +362,10 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
     private void comboRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRatingActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboRatingActionPerformed
+
+    private void btnReviewBckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReviewBckActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReviewBckActionPerformed
 
     public static void main(String args[]) {
 
