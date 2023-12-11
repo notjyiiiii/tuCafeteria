@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java_assignment.Enums.OrderStatus;
 import javax.swing.table.DefaultTableModel;
 
 public class OrderHandler extends BaseHandler<Order>{
@@ -115,7 +116,7 @@ public class OrderHandler extends BaseHandler<Order>{
         newOrder.setVendorid(vendorID);
         newOrder.setOrderDateTime(orderDateTime); 
         
-        newOrder.setOrderStatus(values[0]);
+        newOrder.setOrderStatus(OrderStatus.valueOf(values[0]));
         newOrder.setOrderType(values[1]);
         newOrder.setDeliveryLocation(values[2]);
         newOrder.setOrderAmount(Double.parseDouble(values[3].replace("RM ", "")));
@@ -226,7 +227,7 @@ public class OrderHandler extends BaseHandler<Order>{
         
         for(Order orderStatus : this.collection)
         {
-            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equalsIgnoreCase("DELIVERED"))
+            if(orderStatus.getCustomerid().equals(cusID) && orderStatus.getOrderStatus().equals(OrderStatus.DELIVERED.name()))
             {
                 orderstatus.add(orderStatus);
             }

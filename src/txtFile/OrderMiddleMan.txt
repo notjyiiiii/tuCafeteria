@@ -10,3 +10,8 @@ ORD181;CS006;Fried Rice;0.0;
 ORD181;CS006;Mapo Tofu;0.0;
 ORD182;CS006;Kuih Bahulu;0.0;
 ORD182;CS006;Ayam Percik;0.0;
+ORD183;CS006;Kaya Toast;0.0;
+ORD183;CS006;Nasi Lemak;0.0;
+ORD184;CS002;Nasi Lemak;0.0;
+ORD185;CS006;Kuih Bahulu;0.0;
+ORD186;CS006;Nasi Kandar;0.0;

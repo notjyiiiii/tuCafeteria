@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_assignment.Enums.OrderStatus;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,7 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
         
         modelOrderStatus.setColumnIdentifiers(columnName);
 
-        OrderStatus.setModel(modelOrderStatus);
+        TOrderStatus.setModel(modelOrderStatus);
 
         try {
         OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
@@ -49,13 +50,13 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
 
                 // Add data to the modelOrderStatus
                 if (matchingOrderStatus.isPresent()) {
-                    String orderStatus = matchingOrderStatus.get().getOrderStatus();
+                    OrderStatus orderStatus = matchingOrderStatus.get().getOrderStatus();
                     modelOrderStatus.addRow(new Object[]{
                             orderSummaryItem.getOrderIDforSummary(),
                             orderSummaryItem.getFoodName(),
-                            matchingOrderStatus.get().getOrderStatus()
+                            orderStatus
                     });
-                    if ("DELIVERED".equals(orderStatus)) {
+                    if (OrderStatus.DELIVERED.equals(orderStatus)) {
                         // Prompt the user to write a review
                         int confirmResult = JOptionPane.showConfirmDialog(
                                 this,
@@ -68,21 +69,28 @@ public CUSTOMER_OrderStatus(ArrayList<String> orderIDs) {
                             // Open the review writing dialog or perform any other action
                             // You can replace the following line with the code to open your review dialog
                             
-                            
+                            this.dispose();
                             CUSTOMER_Review review = new CUSTOMER_Review();
                             review.setVisible(true);
+                            Order sOrder = orderHandler.GetOrderByOrderID(orderID);
+                            sOrder.setOrderStatus(OrderStatus.COMPLETED);
+                            orderHandler.UpdateItem(sOrder, sOrder);
                         }
                         
-                        if (confirmResult == JOptionPane.YES_OPTION) {
-                            // Open the review writing dialog (replace the following line with your code)
-                            // For demonstration, a simple message dialog is used
-                            JOptionPane.showMessageDialog(this, "Opening review writing dialog for order ID " + orderID);
-
-                            orderHandler.updateOrderStatusToCompleted(orderID);
-                            // After writing the review, update the order status to "COMPLETED"
-                            //matchingOrderStatus.get().setOrderStatus("COMPLETED");
-                            //orderHandler.UpdateItem(matchingOrderStatus.get(), matchingOrderStatus.get());
-                        }
+//                        if (confirmResult == JOptionPane.YES_OPTION) {
+//                            // Open the review writing dialog (replace the following line with your code)
+//                            // For demonstration, a simple message dialog is used
+//                            JOptionPane.showMessageDialog(this, "Opening review writing dialog for order ID " + orderID);
+//
+//                            
+//                            // After writing the review, update the order status to "COMPLETED"
+//                            //matchingOrderStatus.get().setOrderStatus("COMPLETED");
+//                            //orderHandler.UpdateItem(matchingOrderStatus.get(), matchingOrderStatus.get());
+//                        }
+                    } else {
+                        Order sOrder = orderHandler.GetOrderByOrderID(orderID);
+                        sOrder.setOrderStatus(OrderStatus.COMPLETED);
+                        orderHandler.UpdateItem(sOrder, sOrder);
                     }
                     
                     
@@ -107,7 +115,7 @@ public CUSTOMER_OrderStatus(String orderID) {
     initComponents();
     modelOrderStatus.setColumnIdentifiers(columnName);
 
-    OrderStatus.setModel(modelOrderStatus);
+    TOrderStatus.setModel(modelOrderStatus);
     
     try {
         OrderSummaryHandler orderSummaryHandler = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
@@ -140,10 +148,12 @@ public CUSTOMER_OrderStatus(String orderID) {
                 .filter(order -> order.getOrderid().equals(orderID))
                 .findFirst();
 
+        String orderStatusString = matchingOrderStatus.map(order -> order.getOrderStatus().toString()).orElse("Status Not Found");
+
         modelOrderStatus.addRow(new Object[]{
                 orderID,
                 foodNames.toString(),
-                matchingOrderStatus.map(Order::getOrderStatus).orElse("Status Not Found")
+                orderStatusString
         });
 
     } catch (IOException | ClassNotFoundException ex) {
@@ -162,7 +172,7 @@ public CUSTOMER_OrderStatus(String orderID) {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OrderStatus = new javax.swing.JTable();
+        TOrderStatus = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         btnOrderStatusBck = new javax.swing.JButton();
         btnCancelOrder = new javax.swing.JButton();
@@ -212,8 +222,8 @@ public CUSTOMER_OrderStatus(String orderID) {
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setText("Search");
 
-        OrderStatus.setModel(modelOrderStatus);
-        jScrollPane1.setViewportView(OrderStatus);
+        TOrderStatus.setModel(modelOrderStatus);
+        jScrollPane1.setViewportView(TOrderStatus);
 
         jButton3.setText("Search");
 
@@ -322,7 +332,7 @@ public CUSTOMER_OrderStatus(String orderID) {
         // TODO add your handling code here:
         try {
     // Step 1: Get the selected row from the JTable
-        int selectedRow = OrderStatus.getSelectedRow();
+        int selectedRow = TOrderStatus.getSelectedRow();
 
         if (selectedRow == -1) {
             // No row selected, handle accordingly
@@ -332,7 +342,7 @@ public CUSTOMER_OrderStatus(String orderID) {
         
 
         // Step 2: Get the order ID and status from the selected row
-        String orderID = (String) OrderStatus.getValueAt(selectedRow, 0);
+        String orderID = (String) TOrderStatus.getValueAt(selectedRow, 0);
 
         // Step 3: Update the JTable modelOrderStatus
         modelOrderStatus.setValueAt("CANCELLED", selectedRow, 2);
@@ -413,7 +423,7 @@ public CUSTOMER_OrderStatus(String orderID) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable OrderStatus;
+    private javax.swing.JTable TOrderStatus;
     private javax.swing.JButton btnCancelOrder;
     private javax.swing.JButton btnOrderStatusBck;
     private javax.swing.JButton jButton3;

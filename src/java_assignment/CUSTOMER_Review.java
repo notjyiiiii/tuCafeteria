@@ -33,8 +33,8 @@ public class CUSTOMER_Review extends javax.swing.JFrame {
             ViewMenu.setModel(modelReview);
             
             ViewMenu.getColumnModel().getColumn(0).setPreferredWidth(50);
-            ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(600);
-            ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(50);
+            ViewMenu.getColumnModel().getColumn(1).setPreferredWidth(30);
+            ViewMenu.getColumnModel().getColumn(2).setPreferredWidth(400);
             ViewMenu.getColumnModel().getColumn(3).setPreferredWidth(50);
             
             ReviewHandler reviewHandler = new ReviewHandler("Review",Review.class);

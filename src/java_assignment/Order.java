@@ -10,7 +10,7 @@ public class Order implements IDataContainer, Serializable{
     private String orderid;
     private String customerid;
     private String vendorid;
-    private String orderStatus;
+    private OrderStatus orderStatus;
     private String orderType;
     private LocalDateTime orderDateTime;
     private String deliveryLocation;
@@ -59,7 +59,7 @@ public class Order implements IDataContainer, Serializable{
         dataString[0] = this.orderid;
         dataString[1] = this.customerid;
         dataString[2] = this.vendorid;
-        dataString[3] = this.orderStatus;
+        dataString[3] = this.orderStatus.toString();
         dataString[4] = this.orderType;
         dataString[5] = (this.orderDateTime != null) ? this.orderDateTime.toString() : "NULL";
         dataString[6] = this.deliveryLocation;
@@ -127,7 +127,7 @@ public class Order implements IDataContainer, Serializable{
             this.orderid = dataArray[0];
             this.customerid = dataArray[1];
             this.vendorid = dataArray[2];
-            this.orderStatus = dataArray[3];
+            this.orderStatus = OrderStatus.valueOf(dataArray[3]);
             this.orderType = dataArray[4];
             if (!dataArray[5].equals("NULL")) {
                 this.orderDateTime = LocalDateTime.parse(dataArray[5]);
@@ -170,11 +170,11 @@ public class Order implements IDataContainer, Serializable{
         this.vendorid = vendorid;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 

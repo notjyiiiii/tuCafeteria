@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java_assignment.Enums.OrderStatus;
 
 public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 
@@ -48,7 +49,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         this.orderID = orderID;
         this.vendorID = vendorID;
         this.vendorName = vendorName;
-
+        lb_Vname.setText(vendorName);
         // Display the passed order data in ViewOrder model
         displayOrderDataInViewOrder(orderData);
 
@@ -636,10 +637,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
     private void btnPlaceOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlaceOrderMouseClicked
         // TODO add your handling code here:
         
-        clearOrderMiddleManFile();
         
         
-        String orderStatus = "PENDING";
+        
+        
 //        String food = String.valueOf(modelFood.getValueAt(row, 0));
 //        String foodPrice = String.valueOf(modelFood.getValueAt(row, 1));
         
@@ -661,9 +662,10 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
         String orderAmount = txtSubtotal.getText();
         String deliveryFees = DeliveryFeeCus.getText();
         String totalAmount = TotalCus.getText();
-        
+        String orderStatusString = "PENDING";
         //check enough credit or not
         try {
+                OrderStatus orderStatus = OrderStatus.valueOf(orderStatusString);
                 CustomerHandler customerHandler = new CustomerHandler("Customer", Customer.class);
                 double credit = customerHandler.getCredit(Java_assignment.LoggedInUser.userid);
                 
@@ -686,7 +688,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
 //                    OrderHandler orderHandlerGenerate = new OrderHandler();
 //                    String orderID = orderHandlerGenerate.generateOrderID();
 
-                    String[] orders = {orderStatus,orderType,String.valueOf(Location),orderAmount,deliveryFees,totalAmount};
+                    String[] orders = {orderStatus.toString(),orderType,String.valueOf(Location),orderAmount,deliveryFees,totalAmount};
 
                     OrderHandler orderHandler;
                     
@@ -713,7 +715,7 @@ public class CUSTOMER_ConfirmOrder extends javax.swing.JFrame {
                      
 
 
-                    clearOrderMiddleManFile();
+                    
                     this.dispose();
                     CUSTOMER_OrderStatus orderstatus = new CUSTOMER_OrderStatus(orderID);
                     orderstatus.setVisible(true);
