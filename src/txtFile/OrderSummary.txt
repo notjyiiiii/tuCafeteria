@@ -3,3 +3,4 @@ ORD183;CS006;Nasi Lemak;0.0;
 ORD184;CS002;Nasi Lemak;0.0;
 ORD185;CS006;Kuih Bahulu;0.0;
 ORD186;CS006;Nasi Kandar;0.0;
+ORD187;CS006;Kuih Bahulu;0.0;
