@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 public class CUSTOMER_Setting extends javax.swing.JFrame {
     
     private Vendor vendor;
+    private Customer customer;
 
     public CUSTOMER_Setting() {
         initComponents();
@@ -307,9 +308,15 @@ public class CUSTOMER_Setting extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutMouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
-        this.dispose();
-        CUSTOMER_Notification noti = new CUSTOMER_Notification();
-        noti.setVisible(true);
+        try {
+            this.dispose();
+            CUSTOMER_Notification noti = new CUSTOMER_Notification(customer);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_Setting.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_Setting.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_notiCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiCusActionPerformed

@@ -58,7 +58,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         btn_notiCus = new javax.swing.JButton();
         btn_orderHis = new javax.swing.JButton();
         btn_dashCus = new javax.swing.JButton();
-        btn_dashb1 = new javax.swing.JButton();
         btn_orderStat = new javax.swing.JButton();
         leftPanel2 = new javax.swing.JPanel();
         lb_cafeName2 = new javax.swing.JLabel();
@@ -329,13 +328,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
             }
         });
 
-        btn_dashb1.setText("TUCredit");
-        btn_dashb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_dashb1ActionPerformed(evt);
-            }
-        });
-
         btn_orderStat.setText("Order Status");
         btn_orderStat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -353,7 +345,7 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(85, 85, 85)
                 .addComponent(btn_notiCus)
                 .addGap(32, 32, 32)
                 .addComponent(btn_orderHis)
@@ -361,21 +353,18 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
                 .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(btn_orderStat)
-                .addGap(38, 38, 38)
-                .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(89, 89, 89))
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_notiCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_dashCus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_orderHis, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_dashb1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_orderStat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         leftPanel2.setBackground(new java.awt.Color(246, 246, 246));
@@ -492,9 +481,15 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_orderHisMouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
-        this.dispose();
-        CUSTOMER_Notification noti = new CUSTOMER_Notification();
-        noti.setVisible(true); 
+        try {
+            this.dispose();
+            CUSTOMER_Notification noti = new CUSTOMER_Notification(customer); 
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CUSTOMER_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_orderHisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orderHisActionPerformed
@@ -508,10 +503,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private void btn_dashCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashCusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_dashCusActionPerformed
-
-    private void btn_dashb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashb1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_dashb1ActionPerformed
 
     private void westernFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_westernFoodActionPerformed
         
@@ -695,7 +686,6 @@ public class CUSTOMER_Main extends javax.swing.JFrame {
     private java.awt.Button btn_Profile1;
     private java.awt.Button btn_Settings1;
     private javax.swing.JButton btn_dashCus;
-    private javax.swing.JButton btn_dashb1;
     private javax.swing.JButton btn_insights;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_notiCus;

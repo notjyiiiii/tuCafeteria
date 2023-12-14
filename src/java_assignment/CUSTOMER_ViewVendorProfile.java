@@ -11,6 +11,7 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     //private Vendor vendor;
     private String vendorName;
     private String vendorID;
+    private Customer customer;
     private VendorReviewPage reviewPage;
     private DefaultTableModel modelReview;
     
@@ -623,9 +624,15 @@ public class CUSTOMER_ViewVendorProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_notiCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_notiCusMouseClicked
-        this.dispose();
-        CUSTOMER_Notification noti = new CUSTOMER_Notification();
-        noti.setVisible(true);
+        try {
+            this.dispose();
+            CUSTOMER_Notification noti = new CUSTOMER_Notification(customer);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(CUSTOMER_Setting.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CUSTOMER_Setting.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_notiCusMouseClicked
 
     private void btn_orderHisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_orderHisMouseClicked

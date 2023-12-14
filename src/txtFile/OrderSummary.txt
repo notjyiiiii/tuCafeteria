@@ -29,3 +29,4 @@ ORD5;CS006;Kuih Bahulu;1.0;
 O011;CS006;Pickled Cucumber;1.0;
 ORD6;CS006;Pickled Cucumber;1.0;
 ORD5;CS006;Kuih Bahulu;1.0;
+ORD212;CS006;Kaya Toast;4.0;

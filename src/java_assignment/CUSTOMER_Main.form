@@ -366,7 +366,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                   <Component id="btn_notiCus" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btn_orderHis" min="-2" max="-2" attributes="0"/>
@@ -374,24 +374,21 @@
                   <Component id="btn_dashCus" min="-2" pref="94" max="-2" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Component id="btn_orderStat" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="btn_dashb1" min="-2" pref="93" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_notiCus" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                       <Component id="btn_dashCus" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                       <Component id="btn_orderHis" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="btn_dashb1" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                       <Component id="btn_orderStat" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -421,14 +418,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dashCusActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_dashb1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="TUCredit"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dashb1ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_orderStat">
