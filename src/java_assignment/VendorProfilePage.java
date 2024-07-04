@@ -1,16 +1,69 @@
 package java_assignment;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java_assignment.Enums.OperatingDay;
+import javax.swing.JTabbedPane;
+
 public class VendorProfilePage extends javax.swing.JFrame {
 
     private Vendor vendor;
+    //olo
     
-    public VendorProfilePage(Vendor vendor) {
+    public VendorProfilePage(Vendor vendor) throws IOException, ClassNotFoundException {
         initComponents();
-        this.vendor= vendor;
-        jLabel1.setText(vendor.getUsername());
-        jLabel2.setText(vendor.getUserid());
-        jLabel29.setText(vendor.getHP());
-        jLabel31.setText(vendor.getEmail());
+        
+        VendorHandler vendorHandler = new VendorHandler();
+        this.vendor = vendorHandler.GetVendorByVendorID(Java_assignment.LoggedInUser.userid);
+        
+        
+        jLabel1.setText(vendor.getVendorName());
+        jLabel2.setText(Java_assignment.LoggedInUser.userid);
+        jLabel29.setText(Java_assignment.LoggedInUser.hpnum);
+        jLabel31.setText(Java_assignment.LoggedInUser.email);
+        OrderHandler oh = new OrderHandler();      
+        Float income = oh.CalculateTotalIncome(Java_assignment.LoggedInUser.userid);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        String formattedIncome = "RM" + decimalFormat.format(income);
+        lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
+        
+        ReviewHandler rh = new ReviewHandler();
+        ArrayList<Review> reviews = rh.GetReview(vendor.getVendorid());
+
+        double averageRating = rh.GetAverageRating(vendor.getVendorid());
+        lbl_ratings.setText(String.valueOf(averageRating));
+        
+        int totalReviews = reviews.size();
+        jLabel8.setText(String.valueOf(totalReviews + " people"));
+        
+        if (!reviews.isEmpty()) {
+            Review firstReview = reviews.get(0);
+
+            jLabel23.setText(firstReview.getReview());
+            jLabel24.setText(firstReview.getCustomerName());
+            jLabel25.setText(firstReview.getRating().toString() + " stars");
+        } else {
+            jLabel23.setText("No reviews available");
+            jLabel24.setText("");
+            jLabel25.setText("");
+        }
+        
+        if (!reviews.isEmpty()) {
+            Review secondReview = reviews.get(1);
+
+            jLabel26.setText(secondReview.getReview());
+            jLabel27.setText(secondReview.getCustomerName());
+            jLabel28.setText(secondReview.getRating().toString() + " stars");
+        } else {
+            jLabel26.setText("No more reviews available");
+            jLabel27.setText("");
+            jLabel28.setText("");
+        }
+
+        readOperatingDaysAndTimes(Java_assignment.LoggedInUser.userid, "Vendor");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -32,7 +85,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbl_ratings = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -118,10 +171,25 @@ public class VendorProfilePage extends javax.swing.JFrame {
         bottomPanel.setBackground(new java.awt.Color(66, 33, 11));
 
         btn_noti.setText("Notification");
+        btn_noti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_notiActionPerformed(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
+        btn_orders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordersActionPerformed(evt);
+            }
+        });
 
         btn_dashb.setText("Dashboard");
+        btn_dashb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dashbActionPerformed(evt);
+            }
+        });
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,6 +238,11 @@ public class VendorProfilePage extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
 
         jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
         jLabel1.setText("Vendor Name");
@@ -182,8 +255,8 @@ public class VendorProfilePage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
         jLabel6.setText("Ratings");
 
-        jLabel7.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        jLabel7.setText("Ratings");
+        lbl_ratings.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
+        lbl_ratings.setText("Ratings");
 
         jLabel8.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         jLabel8.setText("How many people");
@@ -227,6 +300,11 @@ public class VendorProfilePage extends javax.swing.JFrame {
         );
 
         jButton4.setText("See All");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 189, 49));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -447,7 +525,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
                                     .addGroup(rightPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
+                                        .addComponent(lbl_ratings))
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -472,7 +550,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(lbl_ratings))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(rightPanelLayout.createSequentialGroup()
@@ -499,8 +577,18 @@ public class VendorProfilePage extends javax.swing.JFrame {
         lb_tuName1.setText("Tech");
 
         btn_Profile.setLabel("Profile");
+        btn_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfileActionPerformed(evt);
+            }
+        });
 
         btn_Settings.setLabel("Settings");
+        btn_Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SettingsActionPerformed(evt);
+            }
+        });
 
         lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -509,6 +597,11 @@ public class VendorProfilePage extends javax.swing.JFrame {
 
         btn_Credits.setActionCommand("Credits");
         btn_Credits.setLabel("Credits");
+        btn_Credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreditsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -583,17 +676,153 @@ public class VendorProfilePage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-//        this.dispose();
-//        VendorMenuPage vmenup = new VendorMenuPage();
-//        vmenup.setVisible(true);
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
+    private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(vendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_CreditsActionPerformed
+
+    private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
+        try {
+            this.dispose();
+            VendorProfilePage vpp = new VendorProfilePage(vendor);
+            vpp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ProfileActionPerformed
+
+    private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
+        this.dispose();
+        VendorSettingsPage vsp = new VendorSettingsPage(vendor);
+        vsp.setVisible(true);
+    }//GEN-LAST:event_btn_SettingsActionPerformed
+
+    private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(vendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_notiActionPerformed
+
+    private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ordersActionPerformed
+
+    private void btn_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashbActionPerformed
+        this.dispose();
+        VendorMainPage vmp = null;
+        try {
+            vmp = new VendorMainPage(vendor);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vmp.setVisible(true);
+    }//GEN-LAST:event_btn_dashbActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            this.dispose();
+            VendorEditProfile vep = new VendorEditProfile(vendor);
+            vep.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            this.dispose();
+            VendorInsightsPage vrp = new VendorInsightsPage(vendor);
+            vrp.setVisible(true);
+            // Set the selected index to the second tab (index 1)
+            vrp.getTabbedPane().setSelectedIndex(1);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void readOperatingDaysAndTimes(String userId, String filePath) throws ClassNotFoundException {
+        try {
+            VendorHandler vendorHandler = new VendorHandler();
+            ArrayList<OperatingDay> operatingDays = vendorHandler.GetVendorByVendorID(userId).getOperatingDays();
+
+
+            // Update labels based on operating days
+            updateLabel(jLabel10, OperatingDay.MONDAY);
+            updateLabel(jLabel12, OperatingDay.TUESDAY);
+            updateLabel(jLabel13, OperatingDay.WEDNESDAY);
+            updateLabel(jLabel15, OperatingDay.THURSDAY);
+            updateLabel(jLabel18, OperatingDay.FRIDAY);
+            updateLabel(jLabel20, OperatingDay.SATURDAY);
+            updateLabel(jLabel22, OperatingDay.SUNDAY);
+
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void updateLabel(javax.swing.JLabel label, OperatingDay day) {
+        if (vendor.getOperatingDays().contains(day)) {
+            label.setText("Open: " + vendor.getOperatingHours());
+        } else {
+            label.setText("Closed");
+        }
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -643,7 +872,6 @@ public class VendorProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -657,6 +885,7 @@ public class VendorProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel lb_quit1;
     private javax.swing.JLabel lb_tuName;
     private javax.swing.JLabel lb_tuName1;
+    private javax.swing.JLabel lbl_ratings;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel topPanel1;

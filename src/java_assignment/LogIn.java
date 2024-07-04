@@ -1,9 +1,12 @@
 package java_assignment;
 
+import java.awt.event.ItemEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,6 +20,9 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         setVisible(true);
+        
+        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +41,6 @@ public class LogIn extends javax.swing.JFrame {
         tf_userID = new javax.swing.JTextField();
         lb_pw = new javax.swing.JLabel();
         bt_logIn = new javax.swing.JButton();
-        lb_forgotpw = new javax.swing.JLabel();
         cb_showPw = new javax.swing.JCheckBox();
         pwf_pw = new javax.swing.JPasswordField();
 
@@ -107,13 +112,19 @@ public class LogIn extends javax.swing.JFrame {
                 bt_logInMouseClicked(evt);
             }
         });
-
-        lb_forgotpw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_forgotpw.setForeground(new java.awt.Color(0, 153, 255));
-        lb_forgotpw.setText("Forgot Password?");
+        bt_logIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_logInActionPerformed(evt);
+            }
+        });
 
         cb_showPw.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         cb_showPw.setText("Show Password");
+        cb_showPw.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_showPwItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
@@ -134,12 +145,7 @@ public class LogIn extends javax.swing.JFrame {
                             .addComponent(pwf_pw)))
                     .addGroup(bottomPanelLayout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(lb_forgotpw)
-                                .addGap(35, 35, 35)))))
+                        .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         bottomPanelLayout.setVerticalGroup(
@@ -163,9 +169,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addComponent(cb_showPw)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(bt_logIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_forgotpw)
-                .addGap(28, 28, 28))
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,42 +199,72 @@ public class LogIn extends javax.swing.JFrame {
         
         String password = pwf_pw.getText();
         String userid = tf_userID.getText();
-        
-        Users user = new Users(userid, password);
-        if(user.valid == false){
-            int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        
-        String userRole = user.getRole();
-        switch(userRole){
-            case "Vendor":
-                this.dispose(); 
-                Vendor v = new Vendor(userid, password);
-                //v.getDetails();
-                VendorMainPage vmp = new VendorMainPage(v);
-                vmp.setVisible(true);
-                break;
             
-            case "Customer":
-                this.dispose();
-                VendorRegister vr = new VendorRegister();
-                vr.setVisible(true);
-                break;
+        Login(userid, password);
             
-        }
     }//GEN-LAST:event_bt_logInMouseClicked
 
-    public static void main(String args[]) {
+    private void bt_logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_logInActionPerformed
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogIn().setVisible(true);
+    private void cb_showPwItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_showPwItemStateChanged
+         if (evt.getStateChange() == ItemEvent.SELECTED) {
+                    // If selected, set the echo char to 0 (show password)
+                    pwf_pw.setEchoChar((char) 0);
+                } else {
+                    // If not selected, set the echo char to '*'
+                    pwf_pw.setEchoChar('*');
+                }
+    }//GEN-LAST:event_cb_showPwItemStateChanged
+
+    private void Login(String userid, String password)
+    {
+        try {
+            UserHandler handler = new UserHandler("User", User.class);
+            User user = handler.ValidateUserCredential(userid, password);
+       
+            if(user==null){
+                int a = JOptionPane.showConfirmDialog(null, "Please enter valid UserID and Password.","Error", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
+                return;
             }
-        });
+            
+            Java_assignment.LoggedInUser = user;
+            
+            String userRole = user.getRole();
+            switch(userRole){
+                case "Vendor":
+                    this.dispose(); 
+                    VendorMainPage vmp = new VendorMainPage();
+                    vmp.setVisible(true);
+                    break;
+                    
+                case "Customer":
+                    this.dispose();
+                    CUSTOMER_Main vr = new CUSTOMER_Main();
+                    vr.setVisible(true);
+                    break;
+                    
+                case "Admin":
+                    this.dispose(); 
+                    AdmMainPage amp = new AdmMainPage();
+                    amp.setVisible(true);
+                    break;    
+                    
+                case "Runner":
+                    this.dispose();
+                    Runner_Dashboard rd = new Runner_Dashboard();
+                    rd.setVisible(true);
+                    break;
+                    
+                
+        }
+        } catch (IOException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,7 +272,6 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton bt_logIn;
     private javax.swing.JCheckBox cb_showPw;
     private javax.swing.JLabel lb_cafeName;
-    private javax.swing.JLabel lb_forgotpw;
     private javax.swing.JLabel lb_logoName;
     private javax.swing.JLabel lb_logoPic;
     private javax.swing.JLabel lb_motto;

@@ -2,27 +2,28 @@ package java_assignment;
 
 import java.io.*;
 import java.util.*;
+import java.io.FileWriter;
 
 public class fileManager {
     
     private final String userDirectory = "user.dir";
     private final String baseDirectory = "";
-    private final String configDirectory = "/src/java_assignment/Config.properties";
+    private final String configDirectory = "//src//java_assignment//Config.properties";
     private final String mainFolderPath, configFilePath;
-    private final String delimiter = ";";
-    private static boolean check;
     private String configVal;
-    private boolean append_to_file = false;
     
-    //all the paths
+    // all the paths
     public fileManager(){
         String currentDirectory = System.getProperty(userDirectory);
         mainFolderPath = currentDirectory+baseDirectory;
-//        System.out.println(mainFolderPath);
         configFilePath = mainFolderPath + configDirectory;
-//        System.out.println(configFilePath);
     }
     
+    public fileManager(String userid, String pw){
+        String currentDirectory = System.getProperty(userDirectory);
+        mainFolderPath = currentDirectory+baseDirectory;
+        configFilePath = mainFolderPath + configDirectory;
+    }
     
     //get config path's values
     public String getConfigVar(String configVar, boolean filePath){
@@ -43,6 +44,8 @@ public class fileManager {
         return configVal;
     }
     
+    
+    
     //read the data in the file
     public ArrayList<String[]> readFile (String filePath) {
         ArrayList<String[]> dataList = new ArrayList<String[]>();
@@ -61,13 +64,158 @@ public class fileManager {
         return dataList;
     }
     
+    
+    
     //write data into file
-    public void writeFile(String filePath, String data) {
-        try {
-            PrintWriter out = new PrintWriter(new FileWriter(filePath, append_to_file));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void writeFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileWriter fw = new FileWriter(filePath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            String textData = "";
+
+            for (String string: data)
+            {
+                textData += string;
+                textData += ";";
+            }
+           textData += "\n";
+            
+            
+            bw.write(textData);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    
+    
+    
+    
+    public void writeObjFile(String filePath, Object data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileOutputStream fos = new FileOutputStream(filePath);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+           
+//            System.out.println(filePath);
+            oos.writeObject(data);
+            bos.close();
+            oos.close();
+            fos.close();
+            
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    
+    
+    public Object readObjFile(String filePath) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filePath);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+
+        Object obj = ois.readObject();
+
+       return obj;
+       
+}
+
+    
+
+    public void updateFile(String filePath, String[] data) throws IOException { //if something goes wrong, io is input output (so like file
+        try{
+            FileWriter fw = new FileWriter(filePath, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            String textData = "";
+            for (String string: data)
+            {
+                textData += string;
+                //textData += ";";
+//                textData += "\n";
+            }
+           
+            
+            
+            bw.write(textData);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+    }  
+    
+//    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+//        try{
+//            FileWriter fw = new FileWriter(filePath, false);
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            
+//            String oldText = "";
+//            String newText = "";
+//
+//            FileReader fr = new FileReader(filePath);
+//            BufferedReader br = new BufferedReader(fr);
+//            
+//            String line = br.readLine();
+//             
+//            while (line != null) 
+//            {
+//                oldText += line + System.lineSeparator();
+//                line = br.readLine();
+//                
+//            for (String[] row: data)
+//            {
+//                for (String item: row)
+//                {
+//                    
+//                    newText += item;
+//                    newText += ";";
+//                }
+//                newText += "\n";
+//                
+//            }
+//            
+//            bw.write(newText);
+//            bw.close();
+//                }
+//            } catch (FileNotFoundException e){
+//            System.out.println(e);
+//        }
+//    }
+    
+    public void updateFile(String filePath, ArrayList<String[]> data) throws IOException{
+        try{
+            FileWriter fw = new FileWriter(filePath, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            
+            String textItem = "";
+            for (String[] row: data)
+            {
+                for (String item: row)
+                {
+                    
+                    textItem += item;
+                    textItem += ";";
+                }
+                textItem += "\n";
+                
+            }
+            
+            bw.write(textItem);
+            bw.close();
+            
+        } catch (FileNotFoundException e){
+            System.out.println(e);
         }
     }
     
-}
+}             

@@ -1,17 +1,60 @@
 package java_assignment;
 
+import java.awt.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java_assignment.Enums.OperatingDay;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+
 public class VendorEditProfile extends javax.swing.JFrame {
     
     private Vendor vendor;
+    private String userid;
 
-    public VendorEditProfile() {
+    public VendorEditProfile(Vendor vendor) throws IOException, ClassNotFoundException {
         initComponents();
+        this.vendor = vendor;
+        this.userid = Java_assignment.LoggedInUser.userid;
+        
+        btnGroup.add(jRadioButton1);
+        btnGroup.add(jRadioButton2);
+        btnGroup.add(jRadioButton3);
+        
+        jLabel1.setText(vendor.getVendorName());
+        jLabel2.setText(vendor.getVendorid());
+        lb_email1.setText(Java_assignment.LoggedInUser.getEmail());
+        jTextField1.setText(Java_assignment.LoggedInUser.getHpnum());
+        
+        
+        VendorHandler vendorHandler = new VendorHandler();
+        ArrayList<OperatingDay> operatingDays = vendorHandler.GetVendorByVendorID(userid).getOperatingDays();
+        updateCheckbox(jCheckBox1, OperatingDay.MONDAY, operatingDays);
+        updateCheckbox(jCheckBox2, OperatingDay.TUESDAY, operatingDays);
+        updateCheckbox(jCheckBox3, OperatingDay.WEDNESDAY, operatingDays);
+        updateCheckbox(jCheckBox6, OperatingDay.THURSDAY, operatingDays);
+        updateCheckbox(jCheckBox5, OperatingDay.FRIDAY, operatingDays);
+        updateCheckbox(jCheckBox4, OperatingDay.SATURDAY, operatingDays);
+        updateCheckbox(jCheckBox7, OperatingDay.SUNDAY, operatingDays);
+        
+        updateRadioButtons(vendor.getOperatingHours());
+    }
+    
+    private void updateCheckbox(javax.swing.JCheckBox checkBox, OperatingDay day, ArrayList<OperatingDay> operatingDays) {
+        System.out.println("Operating Days: " + operatingDays);
+        checkBox.setSelected(operatingDays.contains(day));
+        System.out.println("Day to Check: " + day);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup = new javax.swing.ButtonGroup();
         topPanel1 = new javax.swing.JPanel();
         lb_logoPic1 = new javax.swing.JLabel();
         lb_logoName1 = new javax.swing.JLabel();
@@ -97,10 +140,25 @@ public class VendorEditProfile extends javax.swing.JFrame {
         bottomPanel.setBackground(new java.awt.Color(66, 33, 11));
 
         btn_noti.setText("Notification");
+        btn_noti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_notiActionPerformed(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
+        btn_orders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordersActionPerformed(evt);
+            }
+        });
 
         btn_dashb.setText("Dashboard");
+        btn_dashb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dashbActionPerformed(evt);
+            }
+        });
 
         btn_insights.setText("Insights");
         btn_insights.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,6 +207,11 @@ public class VendorEditProfile extends javax.swing.JFrame {
         rightPanel.setBackground(new java.awt.Color(246, 246, 246));
 
         jButton3.setText("Save");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 0, 18)); // NOI18N
         jLabel1.setText("Vendor Name");
@@ -297,8 +360,18 @@ public class VendorEditProfile extends javax.swing.JFrame {
         lb_tuName1.setText("Tech");
 
         btn_Profile.setLabel("Profile");
+        btn_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfileActionPerformed(evt);
+            }
+        });
 
         btn_Settings.setLabel("Settings");
+        btn_Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SettingsActionPerformed(evt);
+            }
+        });
 
         lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -307,6 +380,11 @@ public class VendorEditProfile extends javax.swing.JFrame {
 
         btn_Credits.setActionCommand("Credits");
         btn_Credits.setLabel("Credits");
+        btn_Credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreditsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -379,18 +457,202 @@ public class VendorEditProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_insightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insightsMouseClicked
-        this.dispose();
-        VendorInsightsPage vip = new VendorInsightsPage(vendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_insightsMouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-        this.dispose();
-        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-        vmenup.setVisible(true);
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int confirmResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION);
 
+        if (confirmResult == JOptionPane.YES_OPTION) {
+        
+            try {
+                VendorHandler vendorHandler = new VendorHandler();
+                String selectedVendorId = Java_assignment.LoggedInUser.userid;
+                
+                Vendor selectedVendor = vendorHandler.GetVendorByVendorID(selectedVendorId);
+                
+                if (selectedVendor != null) {
+                    ArrayList<OperatingDay> newOperatingDays = new ArrayList<>();
+                    if (jCheckBox1.isSelected()) {
+                        newOperatingDays.add(OperatingDay.MONDAY);
+                    }
+                    if (jCheckBox2.isSelected()) {
+                        newOperatingDays.add(OperatingDay.TUESDAY);
+                    }
+                    if (jCheckBox3.isSelected()) {
+                        newOperatingDays.add(OperatingDay.WEDNESDAY);
+                    }
+                    if (jCheckBox6.isSelected()) {
+                        newOperatingDays.add(OperatingDay.THURSDAY);
+                    }
+                    if (jCheckBox5.isSelected()) {
+                        newOperatingDays.add(OperatingDay.FRIDAY);
+                    }
+                    if (jCheckBox4.isSelected()) {
+                        newOperatingDays.add(OperatingDay.SATURDAY);
+                    }
+                    if (jCheckBox7.isSelected()) {
+                        newOperatingDays.add(OperatingDay.SUNDAY);
+                    }
+                    
+                    selectedVendor.setOperatingDays(newOperatingDays);
+                    
+                    String newOperatingHours = "";
+                    ButtonModel selectedRadioButton = btnGroup.getSelection();
+                    
+                    if (selectedRadioButton != null) {
+                        if (selectedRadioButton.equals(jRadioButton1.getModel())) {
+                            newOperatingHours = "0800 - 1400";
+                        } else if (selectedRadioButton.equals(jRadioButton2.getModel())) {
+                            newOperatingHours = "0800 - 2000";
+                        } else if (selectedRadioButton.equals(jRadioButton3.getModel())) {
+                            newOperatingHours = "1400 - 2000";
+                        }
+                        
+                        selectedVendor.setOperatingHours(newOperatingHours);
+                        
+                        // Use a separate method to update the file without modifying UpdateItem
+                        updateFileWithoutModifyingUpdateItem(vendorHandler, selectedVendor, selectedVendorId);
+                        
+                        UserHandler uh = new UserHandler("User", User.class);
+                        ArrayList<User> userv = uh.LoadCollection("User", User.class);
+                        User selectedUser = uh.GetUserByUserID(Java_assignment.LoggedInUser.userid);
+
+                        if (selectedUser != null) {
+                            selectedUser.setHpnum(jTextField1.getText());
+
+                            uh.UpdateItem(selectedUser, selectedUser);
+
+                            JOptionPane.showMessageDialog(this, "Update successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
+        try {
+            this.dispose();
+            VendorCreditPage vcreditp = new VendorCreditPage(vendor);
+            vcreditp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_CreditsActionPerformed
+
+    private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
+        try {
+            this.dispose();
+            VendorProfilePage vpp = new VendorProfilePage(vendor);
+            vpp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+    }//GEN-LAST:event_btn_ProfileActionPerformed
+
+    private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
+        this.dispose();
+        VendorSettingsPage vsp = new VendorSettingsPage(vendor);
+        vsp.setVisible(true);
+    }//GEN-LAST:event_btn_SettingsActionPerformed
+
+    private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(vendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorEditProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_notiActionPerformed
+
+    private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ordersActionPerformed
+
+    private void btn_dashbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashbActionPerformed
+        this.dispose();
+        VendorMainPage vmp = null;
+        try {
+            vmp = new VendorMainPage(vendor);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vmp.setVisible(true);
+    }//GEN-LAST:event_btn_dashbActionPerformed
+   
+        
+        private void updateFileWithoutModifyingUpdateItem(VendorHandler vendorHandler, Vendor selectedVendor, String selectedVendorId) throws IOException {
+            ArrayList<Vendor> vendors = vendorHandler.collection;
+            for (Vendor vendor : vendors) {
+                if (vendor.getVendorid().equals(selectedVendorId)) {
+                    vendorHandler.updateOperatingDays(selectedVendorId, selectedVendor.getOperatingDays());
+                    break;
+                }
+            }
+        }
+        
+        private void updateRadioButtons(String operatingHours) {
+            String operatingHoursFromVendor = vendor.getOperatingHours();
+
+            // Assuming you have radio buttons named jRadioButtonOpen1 to jRadioButtonOpen4
+            // Adjust the condition based on your actual radio buttons
+            if (operatingHoursFromVendor.equals("0800 - 1400")) {
+                jRadioButton1.setSelected(true);
+            } else if (operatingHoursFromVendor.equals("0800 - 2000")) {
+                jRadioButton2.setSelected(true);
+            } else if (operatingHoursFromVendor.equals("1400 - 2000")) {
+                jRadioButton3.setSelected(true);
+            } else {
+                System.out.println("bruhhh");
+            }
+        }
+
+   
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -402,6 +664,7 @@ public class VendorEditProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
+    private javax.swing.ButtonGroup btnGroup;
     private java.awt.Button btn_Credits;
     private java.awt.Button btn_Profile;
     private java.awt.Button btn_Settings;

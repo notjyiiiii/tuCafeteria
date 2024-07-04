@@ -1,0 +1,7 @@
+L001;BlockAHub;Hub for deliveries on the 5th floor, block A
+L002;BlockBHub;Hub for deliveries on the 5th floor, block B
+L003;BlockDHub;Hub for deliveries on the 5th floor, block D
+L004;BlockEHub;Hub for deliveries on the 5th floor, block E
+L005;CafeteriaWest;Tables 1-10
+L006;CafeteriaEast;Tables 11-20
+L007;AtriumHub;Hub for deliveries on the 3rd floor atirum

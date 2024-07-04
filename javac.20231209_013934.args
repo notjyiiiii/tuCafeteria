@@ -1,0 +1,18 @@
+-d
+"C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\build\\classes"
+-classpath
+"C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\build\\classes"
+-sourcepath
+"C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\src"
+-target
+20
+-encoding
+UTF-8
+-g
+-processorpath
+"C:\\Users\\sharkie\\Downloads\\jcalendar_1.0.0.jar;C:\\Users\\User\\OneDrive - Asia Pacific University\\Desktop\\University Things\\Y2_Sem1\\Object Oriented Development with Java\\Assignment\\example.jar;C:\\Users\\User\\OneDrive - Asia Pacific University\\Desktop\\University Things\\Y2_Sem1\\Object Oriented Development with Java\\Assignment\\jcalendar_1.0.0.jar;C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\build\\empty"
+-s
+"C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\build\\generated-sources\\ap-source-output"
+-source
+20
+"C:\\Stuff\\uni stuff\\Y2S1\\OODJ\\Assignment\\tuCafeteria\\src\\java_assignment\\Java_assignment.java"

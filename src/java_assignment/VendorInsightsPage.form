@@ -198,11 +198,17 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Profile"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ProfileActionPerformed"/>
+          </Events>
         </Component>
         <Component class="java.awt.Button" name="btn_Settings">
           <Properties>
             <Property name="label" type="java.lang.String" value="Settings"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SettingsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_dailyEarningstxt">
           <Properties>
@@ -224,6 +230,9 @@
             <Property name="actionCommand" type="java.lang.String" value="Credits"/>
             <Property name="label" type="java.lang.String" value="Credits"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CreditsActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -309,7 +318,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="lb_service" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="139" max="32767" attributes="0"/>
+                          <EmptySpace pref="250" max="32767" attributes="0"/>
                           <Component id="lb_dailyEarnings" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lb_dailyEarningstxt1" min="-2" pref="52" max="-2" attributes="0"/>
@@ -326,13 +335,13 @@
                                   <Component id="lb_totalmenutxt1" min="-2" pref="52" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="105" max="-2" attributes="0"/>
-                              <EmptySpace pref="346" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="207" max="-2" attributes="0"/>
+                              <EmptySpace pref="244" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -403,7 +412,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Malayalam MN" size="13" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Total Orders (Daily)"/>
+                    <Property name="text" type="java.lang.String" value="Total Orders"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lb_totalmenutxt1">
@@ -430,23 +439,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" pref="403" max="-2" attributes="0"/>
-                                  <EmptySpace pref="34" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lb_month1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cb_month1" min="-2" pref="134" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lb_type1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cb_type1" min="-2" pref="144" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jScrollPane2" min="-2" pref="403" max="-2" attributes="0"/>
+                              <Component id="lb_month1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cb_star" min="-2" pref="134" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace pref="34" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -454,15 +451,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lb_type1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lb_month1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lb_month1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cb_month1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cb_type1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="cb_star" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="391" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -479,40 +470,22 @@
                     <Property name="text" type="java.lang.String" value="Stars"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cb_month1">
+                <Component class="javax.swing.JComboBox" name="cb_star">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
+                      <StringArray count="6">
+                        <StringItem index="0" value="Choose..."/>
+                        <StringItem index="1" value="1"/>
+                        <StringItem index="2" value="2"/>
+                        <StringItem index="3" value="3"/>
+                        <StringItem index="4" value="4"/>
+                        <StringItem index="5" value="5"/>
                       </StringArray>
                     </Property>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lb_type1">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Malayalam MN" size="13" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Month"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="cb_type1">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_starActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -525,16 +498,6 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="jTable2">
-                      <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="4">
-                            <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                            <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                          </Table>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -605,20 +568,24 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Malayalam MN" size="13" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Month"/>
+                    <Property name="text" type="java.lang.String" value="View by:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cb_month2">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
+                      <StringArray count="5">
+                        <StringItem index="0" value="Filter by..."/>
+                        <StringItem index="1" value="Daily"/>
+                        <StringItem index="2" value="Weekly"/>
+                        <StringItem index="3" value="Monthly"/>
+                        <StringItem index="4" value="Yearly"/>
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_month2ActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -742,6 +709,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Notification"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_notiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_orders">
           <Properties>
@@ -749,6 +719,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ordersMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ordersActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_dashb">
@@ -763,6 +734,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Insights"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_insightsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_menu">
           <Properties>

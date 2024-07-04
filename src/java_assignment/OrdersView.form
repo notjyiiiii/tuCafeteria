@@ -32,7 +32,8 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="topPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -112,49 +113,50 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="lb_userID4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lb_userID2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lb_userID1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                                      <Component id="lb_totalmenutxt2" min="-2" pref="230" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lb_totalmenutxt1" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lb_userID" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lb_userID3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lb_totalmenutxt" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                                              <Component id="lb_totalmenutxt4" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                                              <Component id="lb_userID5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lb_userID2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lb_userID1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lb_totalmenutxt2" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="lb_totalmenutxt5" min="-2" pref="232" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lb_userID" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lb_userID3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lb_amount" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="lb_userID5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lb_totalmenutxt4" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="lb_totalmenutxt7" min="-2" pref="232" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lb_userID8" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="118" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" pref="118" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lb_userID4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lb_userID6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox2" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
                               <Component id="lb_totalmenutxt3" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lb_userID6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBox2" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lb_userID7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lb_totalmenutxt6" alignment="0" min="-2" pref="232" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -171,9 +173,9 @@
                       <Component id="lb_userID2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="lb_totalmenutxt1" alignment="1" pref="41" max="32767" attributes="0"/>
-                      <Component id="jComboBox1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lb_totalmenutxt5" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="lb_totalmenutxt7" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -182,11 +184,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lb_totalmenutxt" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="lb_totalmenutxt2" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="lb_totalmenutxt4" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="lb_userID4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -194,20 +196,33 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="lb_userID5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lb_totalmenutxt4" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lb_amount" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lb_userID6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jComboBox2" pref="37" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="lb_userID6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jComboBox2" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="lb_userID7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lb_totalmenutxt6" min="-2" pref="41" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="lb_userID8" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="90" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -221,7 +236,7 @@
             <Property name="text" type="java.lang.String" value="Date:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_totalmenutxt">
+        <Component class="javax.swing.JLabel" name="lb_amount">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Malayalam MN" size="18" style="1"/>
@@ -234,28 +249,6 @@
               <Font name="Malayalam MN" size="13" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Time:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lb_totalmenutxt1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Malayalam MN" size="18" style="1"/>
-            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_userID2">
@@ -296,6 +289,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lb_totalmenutxt2">
@@ -320,21 +314,16 @@
             <Property name="text" type="java.lang.String" value="Amount:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lb_totalmenutxt4">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Malayalam MN" size="18" style="1"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="6">
+                <StringItem index="0" value="..."/>
+                <StringItem index="1" value="PENDING"/>
+                <StringItem index="2" value="PREPARING"/>
+                <StringItem index="3" value="AWAIT_PICK_UP"/>
+                <StringItem index="4" value="DELIVERING"/>
+                <StringItem index="5" value="DELIVERED"/>
               </StringArray>
             </Property>
           </Properties>
@@ -350,6 +339,61 @@
             <Property name="text" type="java.lang.String" value="Order Status:"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="lb_totalmenutxt5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="18" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lb_userID7">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Service:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lb_totalmenutxt6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="18" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lb_totalmenutxt4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="18" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lb_totalmenutxt7">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="18" style="1"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lb_userID8">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Malayalam MN" size="13" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Order Details"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTable1">
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

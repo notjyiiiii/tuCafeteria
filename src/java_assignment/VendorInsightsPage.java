@@ -1,15 +1,262 @@
 package java_assignment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTabbedPane;
+import javax.swing.table.DefaultTableModel;
+
 public class VendorInsightsPage extends javax.swing.JFrame {
 
     private String username;
     private String password;
     private Vendor vendor;
+    private JTabbedPane tabbedPane;
+    private DefaultTableModel modelReview = new DefaultTableModel();
+    private DefaultTableModel modelOverview = new DefaultTableModel();
+    private DefaultTableModel modelSummary = new DefaultTableModel();
+    private String[] columnName = {"Name", "Review", "Rating"};
+    private String[] columnNameforOv = {"ID", "Name", "Description", "Type", "Price"};
+    private String[] columnNameforSum = {"ID","Status","Service","Date Time","Amount"};
+    private int row=-1;
+    private String vendorID;
     
-    public VendorInsightsPage(Vendor v) {
+    public VendorInsightsPage(Vendor v) throws IOException, ClassNotFoundException {
         initComponents();
         setVisible(true);
         this.vendor = v;
+        this.vendorID = Java_assignment.LoggedInUser.userid;
+        
+         ratingTab();
+         overviewTab();
+         summaryTab();
+        
+    }
+    
+    public void ratingTab() throws IOException, ClassNotFoundException{
+       modelReview.setColumnIdentifiers(columnName);
+        
+        jTable2.setModel(modelReview);
+        
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(250);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(600);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
+        
+        ReviewHandler reviewHandler = new ReviewHandler();
+        ArrayList<Review> review = reviewHandler.GetReview(vendorID);
+        
+        for (Review reviewList : review) {
+            modelReview.addRow(new Object[]{reviewList.getCustomerName(), reviewList.getReview(), reviewList.getRating()});
+        } 
+    }
+    
+    public void overviewTab() throws IOException, ClassNotFoundException{
+        MenuHandler menuHandler = new MenuHandler("Menu", Menu.class);
+
+        menuHandler.GetVendorMenu(Java_assignment.LoggedInUser.userid); 
+        int totalMenus = menuHandler.GetTotalMenusForVendor();
+        
+        OrderHandler oh = new OrderHandler();      
+        Float incomeForToday = oh.CalculateTotalIncomeForToday(Java_assignment.LoggedInUser.userid);
+        Float income = oh.CalculateTotalIncome(Java_assignment.LoggedInUser.userid);
+        oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        int totalOrders = oh.GetTotalOrders();
+        System.out.println(totalOrders);
+        
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        String formattedDailyIncome = "RM" + decimalFormat.format(incomeForToday);
+        String formattedIncome = "RM" + decimalFormat.format(income);
+        lb_dailyEarningstxt.setText(String.valueOf(formattedIncome));
+        lb_dailyEarningstxt1.setText(String.valueOf(formattedDailyIncome));
+        lb_totalmenutxt1.setText(Integer.toString(totalOrders));
+        lb_totalmenutxt.setText(Integer.toString(totalMenus));
+        
+        modelOverview.setColumnIdentifiers(columnNameforOv);
+        
+        jTable4.setModel(modelOverview);
+        
+        jTable4.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jTable4.getColumnModel().getColumn(1).setPreferredWidth(200);
+        jTable4.getColumnModel().getColumn(2).setPreferredWidth(600);
+        jTable4.getColumnModel().getColumn(3).setPreferredWidth(200);
+        jTable4.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+        OrderSummaryHandler osh = new OrderSummaryHandler("OrderSummary", OrderSummary.class);
+        MenuHandler mh = new MenuHandler("Menu", Menu.class);
+        
+        List<String> userOrderIDs = oh.GetOrderIDbyVendorID();
+        List<OrderSummary> userOrders = osh.GetOrderByOrderIDs(userOrderIDs);
+        // get the food names from ordersummary
+        List<String> foodNames = userOrders.stream().map(OrderSummary::getFoodName).collect(Collectors.toList());
+        //System.out.println(foodNames);
+        List<Menu> menuList = mh.GetVendorMenu(vendorID);
+        Map<String, Menu> menuMap = menuList.stream().collect(Collectors.toMap(Menu::getItemName, Function.identity()));
+        Map<String, Long> foodOccurrences = Stream.concat(foodNames.stream(), menuList.stream().map(Menu::getItemName))
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        
+        List<String> uniqueFoodNames = foodOccurrences.entrySet().stream()
+        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toList());
+        
+        uniqueFoodNames.sort(Comparator.comparing(foodOccurrences::get).reversed());
+        
+        for (String foodName : uniqueFoodNames) {
+            Menu menu = menuMap.get(foodName);
+            if (menu != null) {
+                modelOverview.addRow(new Object[]{menu.getItemid(), menu.getItemName(), menu.getItemDesc(), menu.getItemType(), menu.getItemPrice()});
+            } 
+        }
+    }
+    
+    public void summaryTab() throws IOException, ClassNotFoundException{
+        modelSummary.setColumnIdentifiers(columnNameforSum);
+        jTable3.setModel(modelSummary);
+
+        OrderHandler oh = new OrderHandler();      
+        
+        jTable3.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTable3.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable3.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable3.getColumnModel().getColumn(3).setPreferredWidth(300);
+        jTable3.getColumnModel().getColumn(4).setPreferredWidth(80);
+        
+        
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+        populateComboBox1(order);
+        populateComboBox2(order);
+        
+        for (Order orderItem : order) {
+            modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+        }
+    }
+    
+    private void populateComboBox1(ArrayList<Order> order) {
+        Set<String> uniqueOrderTypes = new HashSet<>();
+
+        for (Order orderItem : order) {
+            uniqueOrderTypes.add(orderItem.getOrderType().toString());
+        }
+
+        String[] orderTypesArray = uniqueOrderTypes.toArray(new String[0]);
+
+        String[] comboBoxItems = new String[orderTypesArray.length + 1];
+        comboBoxItems[0] = "Filter by...";
+        System.arraycopy(orderTypesArray, 0, comboBoxItems, 1, orderTypesArray.length);
+
+        DefaultComboBoxModel<String> typeComboBoxModel = new DefaultComboBoxModel<>(comboBoxItems);
+        cb_type2.setModel(typeComboBoxModel);
+
+        // Add action listener to the combo box
+        cb_type2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (IOException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void populateComboBox2(ArrayList<Order> order) {
+        Set<String> uniqueOrderStatus = new HashSet<>();
+
+        for (Order orderItem : order) {
+            uniqueOrderStatus.add(orderItem.getOrderStatus().toString());
+        }
+
+        String[] orderStatusArray = uniqueOrderStatus.toArray(new String[0]);
+
+        String[] comboBoxItems = new String[orderStatusArray.length + 1];
+        comboBoxItems[0] = "Filter by...";
+        System.arraycopy(orderStatusArray, 0, comboBoxItems, 1, orderStatusArray.length);
+
+        DefaultComboBoxModel<String> statusComboBoxModel = new DefaultComboBoxModel<>(comboBoxItems);
+        cb_service2.setModel(statusComboBoxModel);
+
+        // Add action listener to the combo box
+        cb_service2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (IOException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VendorOrdersPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void updateTable() throws IOException, ClassNotFoundException {
+        String selectedOrderType = cb_type2.getSelectedItem().toString();
+        String selectedOrderStatus = cb_service2.getSelectedItem().toString();
+
+        // Filter the table based on selected values
+        modelSummary.setRowCount(0);
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+
+        for (Order orderItem : order) {
+            if (("Filter by...".equals(selectedOrderType) || orderItem.getOrderType().toString().equals(selectedOrderType)) &&
+                ("Filter by...".equals(selectedOrderStatus) || orderItem.getOrderStatus().toString().equals(selectedOrderStatus))) {
+                modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    
+    
+    private void updateReviewTable() throws IOException, ClassNotFoundException {
+        String selectedRating = (String) cb_star.getSelectedItem();
+
+        ArrayList<Review> filteredReviews = filterReviews(selectedRating);
+
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+
+        for (Review review : filteredReviews) {
+            Object[] rowData = { review.getCustomerName(), review.getReview(), review.getRating()};
+            model.addRow(rowData);
+        }
+    }
+    
+    private ArrayList<Review> filterReviews(String selectedRating) throws IOException, ClassNotFoundException {
+        ReviewHandler reviewHandler = new ReviewHandler();
+        ArrayList<Review> review = reviewHandler.GetReview(vendorID);
+        ArrayList<Review> filteredReviews = new ArrayList<>();
+
+        for (Review reviewList : review) {
+            if (("All".equals(selectedRating) || reviewList.getRating().equals(selectedRating))) {
+                filteredReviews.add(reviewList);
+            }
+        }
+
+        return filteredReviews;
+    }
+    
+    public JTabbedPane getTabbedPane() {
+        return tp_insights;
     }
 
     @SuppressWarnings("unchecked")
@@ -43,9 +290,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         lb_totalmenutxt1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lb_month1 = new javax.swing.JLabel();
-        cb_month1 = new javax.swing.JComboBox<>();
-        lb_type1 = new javax.swing.JLabel();
-        cb_type1 = new javax.swing.JComboBox<>();
+        cb_star = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -119,8 +364,18 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         lb_tuName1.setText("Tech");
 
         btn_Profile.setLabel("Profile");
+        btn_Profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfileActionPerformed(evt);
+            }
+        });
 
         btn_Settings.setLabel("Settings");
+        btn_Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SettingsActionPerformed(evt);
+            }
+        });
 
         lb_dailyEarningstxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -129,6 +384,11 @@ public class VendorInsightsPage extends javax.swing.JFrame {
 
         btn_Credits.setActionCommand("Credits");
         btn_Credits.setLabel("Credits");
+        btn_Credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreditsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -199,7 +459,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         lb_totalmenutxt.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
         lb_totalmenu1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_totalmenu1.setText("Total Orders (Daily)");
+        lb_totalmenu1.setText("Total Orders");
 
         lb_totalmenutxt1.setFont(new java.awt.Font("Malayalam MN", 1, 25)); // NOI18N
 
@@ -236,7 +496,7 @@ public class VendorInsightsPage extends javax.swing.JFrame {
             .addGroup(jp_overviewLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lb_service)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                 .addComponent(lb_dailyEarnings)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb_dailyEarningstxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,12 +510,12 @@ public class VendorInsightsPage extends javax.swing.JFrame {
                         .addComponent(lb_totalmenu1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lb_totalmenutxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(136, 136, 136))
+                .addGap(25, 25, 25))
             .addGroup(jp_overviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jp_overviewLayout.createSequentialGroup()
                     .addGap(48, 48, 48)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(346, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(244, Short.MAX_VALUE)))
         );
 
         tp_insights.addTab("Overview", jp_overview);
@@ -263,24 +523,13 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         lb_month1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_month1.setText("Stars");
 
-        cb_month1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lb_type1.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_type1.setText("Month");
-
-        cb_type1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        cb_star.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose...", "1", "2", "3", "4", "5" }));
+        cb_star.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_starActionPerformed(evt);
             }
-        ));
+        });
+
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -296,24 +545,16 @@ public class VendorInsightsPage extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_month1)
-                            .addComponent(cb_month1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_type1)
-                            .addComponent(cb_type1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(116, 116, 116))))
+                            .addComponent(cb_star, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(116, 303, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_type1)
-                    .addComponent(lb_month1))
+                .addComponent(lb_month1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_month1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_type1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cb_star, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -322,9 +563,14 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         tp_insights.addTab("Ratings", jPanel2);
 
         lb_month2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
-        lb_month2.setText("Month");
+        lb_month2.setText("View by:");
 
-        cb_month2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_month2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filter by...", "Daily", "Weekly", "Monthly", "Yearly" }));
+        cb_month2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_month2ActionPerformed(evt);
+            }
+        });
 
         lb_type2.setFont(new java.awt.Font("Malayalam MN", 0, 13)); // NOI18N
         lb_type2.setText("Type");
@@ -410,11 +656,21 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         bottomPanel.setBackground(new java.awt.Color(66, 33, 11));
 
         btn_noti.setText("Notification");
+        btn_noti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_notiActionPerformed(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
         btn_orders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_ordersMouseClicked(evt);
+            }
+        });
+        btn_orders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordersActionPerformed(evt);
             }
         });
 
@@ -426,6 +682,11 @@ public class VendorInsightsPage extends javax.swing.JFrame {
         });
 
         btn_insights.setText("Insights");
+        btn_insights.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_insightsActionPerformed(evt);
+            }
+        });
 
         btn_menu.setText("Menu");
         btn_menu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,23 +756,206 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_quit1MouseClicked
 
     private void btn_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseClicked
-        this.dispose();
-        VendorMenuPage vmenup = new VendorMenuPage(vendor);
-        vmenup.setVisible(true);
+        try {
+            this.dispose();
+            VendorMenuPage vmenup = new VendorMenuPage(vendor);
+            vmenup.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_menuMouseClicked
 
     private void btn_dashbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashbMouseClicked
-        this.dispose();
-        VendorMainPage vip = new VendorMainPage(vendor);
-        vip.setVisible(true);
+        try {
+            this.dispose();
+            VendorMainPage vip = new VendorMainPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_dashbMouseClicked
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
-        this.dispose();
-        VendorOrdersPage vop = new VendorOrdersPage();
-        vop.setVisible(true);
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_ordersMouseClicked
 
+    private void cb_starActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_starActionPerformed
+        try {
+            updateReviewTable();
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cb_starActionPerformed
+
+    private void btn_CreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreditsActionPerformed
+        try {
+            this.dispose();
+            VendorCreditPage vcp = new VendorCreditPage(vendor);
+            vcp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_CreditsActionPerformed
+
+    private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
+        try {
+            this.dispose();
+            VendorProfilePage vpp = new VendorProfilePage(vendor);
+            vpp.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ProfileActionPerformed
+
+    private void btn_SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SettingsActionPerformed
+        this.dispose();
+        VendorSettingsPage vsp = new VendorSettingsPage(vendor);
+        vsp.setVisible(true);
+    }//GEN-LAST:event_btn_SettingsActionPerformed
+
+    private void btn_notiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_notiActionPerformed
+        try {
+            this.dispose();
+            Notification_Page noti = new Notification_Page(vendor);
+            noti.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorInsightsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_notiActionPerformed
+
+    private void btn_ordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordersActionPerformed
+        try {
+            this.dispose();
+            VendorOrdersPage vop = new VendorOrdersPage(vendor);
+            vop.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_ordersActionPerformed
+
+    private void btn_insightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insightsActionPerformed
+        try {
+            this.dispose();
+            VendorInsightsPage vip = new VendorInsightsPage(vendor);
+            vip.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VendorProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_insightsActionPerformed
+
+    private void cb_month2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_month2ActionPerformed
+        try {
+            this.filterByDateRange();
+        } catch (IOException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cb_month2ActionPerformed
+
+    private void filterByDateRange() throws IOException, ClassNotFoundException {
+        String selectedViewBy = cb_month2.getSelectedItem().toString();
+        modelSummary.setRowCount(0);
+        OrderHandler oh = new OrderHandler();
+        ArrayList<Order> order = oh.GetOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+
+        switch (selectedViewBy) {
+            case "Daily":
+                ArrayList<Order> orderDaily = oh.GetTodayOrdersByVendorID(Java_assignment.LoggedInUser.userid);
+                populateTable(orderDaily);
+                break;
+            case "Weekly":
+                filterByWeekly(order);
+                break;
+            case "Monthly":
+                filterByMonthly(order);
+                break;
+            case "Yearly":
+                filterByYearly(order);
+                break;
+            default:
+                filterAllOrders(order, "Filter by...", "Filter by..."); // Add your default filter
+                break;
+        }
+    }
+
+    private void populateTable(ArrayList<Order> order) {
+        for (Order orderItem : order) {
+            modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+        }
+    }
+
+    // Helper method to filter orders by week
+    private void filterByWeekly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().with(DayOfWeek.MONDAY);
+        LocalDate endDate = LocalDate.now().with(DayOfWeek.SUNDAY);
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter orders by month
+    private void filterByMonthly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+        LocalDate endDate = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter orders by year
+    private void filterByYearly(ArrayList<Order> order) {
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        LocalDate endDate = LocalDate.now().withDayOfYear(LocalDate.now().lengthOfYear());
+        for (Order orderItem : order) {
+            LocalDate orderDate = orderItem.getOrderDateTime().toLocalDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+
+    // Helper method to filter all orders based on type and status
+    private void filterAllOrders(ArrayList<Order> order, String selectedOrderType, String selectedOrderStatus) {
+        for (Order orderItem : order) {
+            if (("Filter by...".equals(selectedOrderType) || orderItem.getOrderType().toString().equals(selectedOrderType)) &&
+                    ("Filter by...".equals(selectedOrderStatus) || orderItem.getOrderStatus().toString().equals(selectedOrderStatus))) {
+                modelSummary.addRow(new Object[]{orderItem.getOrderid(), orderItem.getOrderStatus(), orderItem.getOrderType(), orderItem.getOrderDateTime(), orderItem.getOrderAmount()});
+            }
+        }
+    }
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -531,10 +975,9 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_noti;
     private javax.swing.JButton btn_orders;
-    private javax.swing.JComboBox<String> cb_month1;
     private javax.swing.JComboBox<String> cb_month2;
     private javax.swing.JComboBox<String> cb_service2;
-    private javax.swing.JComboBox<String> cb_type1;
+    private javax.swing.JComboBox<String> cb_star;
     private javax.swing.JComboBox<String> cb_type2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -563,7 +1006,6 @@ public class VendorInsightsPage extends javax.swing.JFrame {
     private javax.swing.JLabel lb_totalmenutxt1;
     private javax.swing.JLabel lb_tuName;
     private javax.swing.JLabel lb_tuName1;
-    private javax.swing.JLabel lb_type1;
     private javax.swing.JLabel lb_type2;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
